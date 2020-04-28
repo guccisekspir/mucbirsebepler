@@ -8,3 +8,23 @@ class InitialAuthState extends AuthState {
   @override
   List<Object> get props => [];
 }
+
+
+class AuthLoadingState extends AuthState{
+
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+class AuthLoadedState extends AuthState{
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+class AuthErrorState extends AuthState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
