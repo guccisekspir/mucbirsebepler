@@ -19,10 +19,12 @@ class AuthLoadingState extends AuthState{
   List<Object> get props => null;
 }
 class AuthLoadedState extends AuthState{
-  User _user;
+  final User user;
+
+  AuthLoadedState({this.user});
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object> get props => [user];
 }
 class AuthErrorState extends AuthState{
   @override

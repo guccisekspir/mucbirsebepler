@@ -20,9 +20,12 @@ class AuthApiClient{
 
   Future<User> createWithEmailPass(String email,String password)async{
     AuthResult _authResult=await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-
     return _userFromFirebase(_authResult.user);
+  }
 
+  Future<User> loginWithEmailPass(String email,String password)async{
+    AuthResult _authResult=await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+    return _userFromFirebase(_authResult.user);
   }
 
 

@@ -1,8 +1,13 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:mucbirsebepler/data/authRepository.dart';
+import 'package:mucbirsebepler/locator.dart';
+import 'package:mucbirsebepler/model/user.dart';
 import './bloc.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  final AuthRepository _authRepository= getIt<AuthRepository>();
   @override
   AuthState get initialState => InitialAuthState();
 
@@ -10,6 +15,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
-    // TODO: Add Logic
+    if(event is EmailLogin){
+      yield AuthLoadingState();
+      try{
+        String email= event.email;
+        String password=event.password;
+
+        User user=await _authRepository.createWithEmailPass(email, password);
+
+        yield AuthLoadedState(user: user);
+
+
+      }catch(_){
+        yield AuthErrorState();
+        debugPrint(_.toString());
+      }
+    }
   }
 }
