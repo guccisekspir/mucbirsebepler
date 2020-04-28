@@ -9,7 +9,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool isLogged = true;
+  bool isLogged = false;
   @override
   Widget build(BuildContext context) {
     if(isLogged){
