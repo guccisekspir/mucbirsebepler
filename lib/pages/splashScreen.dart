@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/pages/homePage.dart';
 import 'package:mucbirsebepler/pages/loginPage.dart';
 
@@ -16,7 +18,9 @@ class _SplashScreenState extends State<SplashScreen> {
       return HomePage();
     }
     else{
-      return LoginPage();
+      return BlocProvider(
+          create: (context)=>AuthBloc(),
+          child: LoginPage());
     }
   }
 }

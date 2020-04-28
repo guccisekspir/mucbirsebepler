@@ -14,6 +14,13 @@ class AuthRepository{
 
   }
 
+  Future<User> loginWithEmailPass(String email,String password)async{
+    User user= await _authApiClient.loginWithEmailPass(email, password);
+
+    return user;
+
+  }
+
 
 
 

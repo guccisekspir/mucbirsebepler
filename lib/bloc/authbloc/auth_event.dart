@@ -8,7 +8,6 @@ abstract class AuthEvent extends Equatable {
 
 
 class EmailLogin extends AuthEvent{
-  AuthRepository _authRepository= getIt<AuthRepository>();
   final String email;
   final String password;
   EmailLogin({this.email, this.password});
@@ -19,7 +18,11 @@ class EmailLogin extends AuthEvent{
 }
 
 class EmailSign extends AuthEvent{
+  final String email;
+  final String password;
+
+  EmailSign({this.email, this.password});
   @override
-  List<Object> get props => null;
+  List<Object> get props => [email,password];
 
 }

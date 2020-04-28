@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 import 'customClipper.dart';
 
 class BezierContainer extends StatelessWidget {
-  const BezierContainer({Key key}) : super(key: key);
+  final bool kayitMi;
+
+  const BezierContainer({Key key,this.kayitMi}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Color color1=kayitMi?Colors.black87:Color(0xfffbb448);
+    Color color2=kayitMi?Colors.black:Color(0xffe46b10);
     return Container(
         child: Transform.rotate(
           angle: -pi / 3.5,
@@ -21,7 +25,7 @@ class BezierContainer extends StatelessWidget {
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Color(0xfffbb448),Color(0xffe46b10)]
+                      colors: [color1,color2]
                   )
               ),
             ),

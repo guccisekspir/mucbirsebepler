@@ -15,13 +15,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
-    if(event is EmailLogin){
+    if(event is EmailSign){
       yield AuthLoadingState();
       try{
         String email= event.email;
         String password=event.password;
 
         User user=await _authRepository.createWithEmailPass(email, password);
+
+        yield AuthLoadedState(user: user);
+
+
+      }catch(_){
+        yield AuthErrorState();
+        debugPrint(_.toString());
+      }
+    }
+    else if(event is EmailLogin){
+      yield AuthLoadingState();
+      try{
+        String email= event.email;
+        String password=event.password;
+
+        User user=await _authRepository.loginWithEmailPass(email, password);
 
         yield AuthLoadedState(user: user);
 

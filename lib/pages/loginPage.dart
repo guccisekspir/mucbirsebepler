@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_event.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_state.dart';
 import 'package:mucbirsebepler/pages/signUpPage.dart';
 
 import 'package:mucbirsebepler/widgets/bezierContainer.dart';
@@ -15,6 +19,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController _emailController;
+  TextEditingController _passwordController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _emailController= TextEditingController(text: "");
+    _passwordController= TextEditingController(text: "");
+  }
+
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -50,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 10,
           ),
           TextField(
+              controller: isPassword?_passwordController:_emailController,
               obscureText: isPassword,
               decoration: InputDecoration(
                   border: InputBorder.none,
@@ -60,28 +75,37 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.deepPurpleAccent.shade400,
-                offset: Offset(2, 4),
-                blurRadius: 3,
-                spreadRadius: 0.3)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0xfffbb448), Color(0xfff7892b)])),
-      child: Text(
-        'Giriş Yap',
-        style: TextStyle(fontSize: 20, color: Colors.white),
+  Widget _submitButton(AuthBloc authBloc) {
+    return GestureDetector(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(vertical: 15),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.deepPurpleAccent.shade400,
+                  offset: Offset(2, 2),
+                  blurRadius: 3,
+                  spreadRadius: 0.3)
+            ],
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+        child: Text(
+          'Giriş Yap',
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ),
       ),
+      onTap: ()async{
+
+        authBloc.add(EmailLogin(email: _emailController.text,password: _passwordController.text));
+
+        //TODO koyulan verileri gönder
+
+      },
     );
   }
 
@@ -176,8 +200,8 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Don\'t have an account ?',
-            style: TextStyle(color:Colors.deepPurpleAccent,fontSize: 13, fontWeight: FontWeight.w600),
+            'Hesabın yok mu ?',
+            style: TextStyle(color:Colors.deepPurpleAccent,fontSize: 15, fontWeight: FontWeight.w600),
           ),
           SizedBox(
             width: 10,
@@ -185,14 +209,15 @@ class _LoginPageState extends State<LoginPage> {
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SignUpPage()));
+                  MaterialPageRoute(builder: (context) => BlocProvider(create: (context)=>AuthBloc(),
+                      child: SignUpPage())));
             },
             child: Text(
-              'Register',
+              'Kaydol',
               style: TextStyle(
                   color: Color(0xfff79c4f),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
           )
         ],
@@ -224,69 +249,89 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Email id"),
-        _entryField("Password", isPassword: true),
+        _entryField("Email"),
+        _entryField("Şifre", isPassword: true),
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-              color: Colors.black,
-              height: MediaQuery.of(context).size.height,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+    final _authBloc= BlocProvider.of<AuthBloc>(context);
+    return BlocBuilder(
+      bloc:  _authBloc,
+      // ignore: missing_return
+      builder: (context,state){
+        if(state is InitialAuthState){
+          return Scaffold(
+              body: SingleChildScrollView(
+                  child: Container(
+                    color: Colors.black,
+                    height: MediaQuery.of(context).size.height,
+                    child: Stack(
                       children: <Widget>[
-                        Expanded(
-                          flex: 3,
-                          child: SizedBox(),
-                        ),
-                        _title(),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        _emailPasswordWidget(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        _submitButton(),
                         Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          alignment: Alignment.centerRight,
-                          child: Text('Forgot Password ?',
-                              style:
-                              TextStyle(fontSize: 14, color:Colors.deepPurpleAccent,fontWeight: FontWeight.w500)),
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Expanded(
+                                flex: 3,
+                                child: SizedBox(),
+                              ),
+                              _title(),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height/80,
+                              ),
+                              _emailPasswordWidget(),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              _submitButton(_authBloc),
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                alignment: Alignment.centerRight,
+                                child: Text('Şifreni mi Unuttun ?',
+                                    style:
+                                    TextStyle(fontSize: 14, color:Colors.deepPurpleAccent,fontWeight: FontWeight.w500)),
+                              ),
+                              _divider(),
+                              _facebookButton(),
+                              Expanded(
+                                flex: 2,
+                                child: SizedBox(),
+                              ),
+                            ],
+                          ),
                         ),
-                        _divider(),
-                        _facebookButton(),
-                        Expanded(
-                          flex: 2,
-                          child: SizedBox(),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: _createAccountLabel(),
                         ),
+                        Positioned(top: 40, left: 0, child: _backButton()),
+                        Positioned(
+                            top: -MediaQuery.of(context).size.height * .18,
+                            right: -MediaQuery.of(context).size.width * .4,
+                            child: BezierContainer(kayitMi: false,))
                       ],
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: _createAccountLabel(),
-                  ),
-                  Positioned(top: 40, left: 0, child: _backButton()),
-                  Positioned(
-                      top: -MediaQuery.of(context).size.height * .18,
-                      right: -MediaQuery.of(context).size.width * .4,
-                      child: BezierContainer())
-                ],
-              ),
-            )
-        )
+                  )
+              )
+          );  //LOGİN PAGE
+        }
+        if(state is AuthLoadingState){
+          return Center(child: CircularProgressIndicator(),);
+        }
+        if(state is AuthLoadedState){
+          return Center(child: Text(state.user.userID),);
+        }
+        if(state is AuthErrorState){
+          return Center(child: Text("Error"),);
+        }
+
+
+      },
     );
   }
 }
