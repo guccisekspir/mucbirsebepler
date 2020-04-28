@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:mucbirsebepler/model/user.dart';
 
 abstract class AuthState extends Equatable {
   const AuthState();
@@ -18,7 +19,7 @@ class AuthLoadingState extends AuthState{
   List<Object> get props => null;
 }
 class AuthLoadedState extends AuthState{
-
+  User _user;
   @override
   // TODO: implement props
   List<Object> get props => null;
