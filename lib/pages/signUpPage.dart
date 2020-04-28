@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
@@ -66,10 +67,14 @@ class _SignUpPageState extends State<SignUpPage> {
           TextField(
               controller: isPassword?_passwordController:_emailController,
               obscureText: isPassword,
+              cursorColor: Colors.deepOrange,
               keyboardType: isPassword?TextInputType.text:TextInputType.emailAddress,
               decoration: InputDecoration(
-                  border: InputBorder.none,
+                  suffixIcon: isPassword?FaIcon(FontAwesomeIcons.key):FaIcon(FontAwesomeIcons.at),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                   fillColor: Color(0xfff3f3f4),
+                  hoverColor: Colors.black,
+                  focusColor: Colors.black,
                   filled: true))
         ],
       ),
@@ -288,13 +293,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 height: 20,
                               ),
                               _submitButton(_authBloc),
-                              Container(
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                alignment: Alignment.centerRight,
-                                child: Text('Şifreni mi Unuttun ?',
-                                    style:
-                                    TextStyle(fontSize: 14, color:Colors.deepPurpleAccent,fontWeight: FontWeight.w500)),
-                              ),
                               _divider(),
                               _facebookButton(),
                               Expanded(
