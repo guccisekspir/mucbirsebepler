@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _facebookButton() {
+  Widget _facebookButton(AuthBloc authBloc) {
     return Container(
       height: 50,
       margin: EdgeInsets.symmetric(vertical: 20),
@@ -175,19 +175,24 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Expanded(
             flex: 5,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(5),
-                    topRight: Radius.circular(5)),
+            child: GestureDetector(
+              onTap: (){
+                authBloc.add(GoogleSign());
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(5),
+                      topRight: Radius.circular(5)),
+                ),
+                alignment: Alignment.center,
+                child: Text('Google ile Giriş Yap',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400)),
               ),
-              alignment: Alignment.center,
-              child: Text('Google ile Giriş Yap',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400)),
             ),
           ),
         ],
@@ -300,7 +305,7 @@ class _LoginPageState extends State<LoginPage> {
                                     TextStyle(fontSize: 14, color:Colors.deepPurpleAccent,fontWeight: FontWeight.w500)),
                               ),
                               _divider(),
-                              _facebookButton(),
+                              _facebookButton(_authBloc),
                               Expanded(
                                 flex: 2,
                                 child: SizedBox(),

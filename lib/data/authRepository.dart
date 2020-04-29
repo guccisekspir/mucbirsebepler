@@ -21,6 +21,13 @@ class AuthRepository{
 
   }
 
+  Future<User> googleSign()async{
+    User user= await _authApiClient.googleSign();
+
+    return user;
+
+  }
+
 
 
 

@@ -150,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _facebookButton() {
+  Widget _facebookButton(AuthBloc bloc) {
     return Container(
       height: 50,
       margin: EdgeInsets.symmetric(vertical: 20),
@@ -178,19 +178,24 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           Expanded(
             flex: 5,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(5),
-                    topRight: Radius.circular(5)),
+            child: GestureDetector(
+              onTap: (){
+                bloc.add(GoogleSign());
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(5),
+                      topRight: Radius.circular(5)),
+                ),
+                alignment: Alignment.center,
+                child: Text('Google ile Kaydol',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400)),
               ),
-              alignment: Alignment.center,
-              child: Text('Google ile Kaydol',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400)),
             ),
           ),
         ],
@@ -294,7 +299,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                               _submitButton(_authBloc),
                               _divider(),
-                              _facebookButton(),
+                              _facebookButton(_authBloc),
                               Expanded(
                                 flex: 2,
                                 child: SizedBox(),

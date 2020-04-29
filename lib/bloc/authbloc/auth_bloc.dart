@@ -47,5 +47,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         debugPrint(_.toString());
       }
     }
+    else if(event is GoogleSign){
+      yield AuthLoadingState();
+      try{
+
+        User user=await _authRepository.googleSign();
+
+        yield AuthLoadedState(user: user);
+
+
+      }catch(_){
+        yield AuthErrorState();
+        debugPrint(_.toString());
+      }
+    }
   }
 }

@@ -26,3 +26,10 @@ class EmailSign extends AuthEvent{
   List<Object> get props => [email,password];
 
 }
+
+class GoogleSign extends AuthEvent{
+
+  @override
+  List<Object> get props => null;
+
+}
