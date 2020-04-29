@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/locator.dart';
 import 'package:mucbirsebepler/pages/splashScreen.dart';
 
@@ -17,7 +19,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
-      home: SplashScreen(),
+      home: BlocProvider(
+          create: (context)=> AuthBloc(),
+          child: SplashScreen()),
     );
   }
 }
