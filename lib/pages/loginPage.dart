@@ -271,10 +271,81 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final _authBloc= BlocProvider.of<AuthBloc>(context);
+    final scaffoldKey= GlobalKey<ScaffoldState>();
     return Scaffold(
       body: BlocListener(
         bloc: _authBloc,
-        listener: (c),
+        listener: (context,state){
+          if(state is AuthErrorState){
+            final snackBar= SnackBar(
+              content: Text("Kullanıcı adı/şifre hatalı"),
+              backgroundColor: Colors.red,
+
+            );
+            Scaffold.of(context).showSnackBar(snackBar);
+
+          }
+
+        },
+        child: BlocBuilder(
+          bloc: _authBloc,
+          builder: (context,statee){
+            return SingleChildScrollView(
+                child: Container(
+                  color: Colors.black,
+                  height: MediaQuery.of(context).size.height,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 3,
+                              child: SizedBox(),
+                            ),
+                            _title(),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height/80,
+                            ),
+                            _emailPasswordWidget(),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            _submitButton(_authBloc),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              alignment: Alignment.centerRight,
+                              child: Text('Şifreni mi Unuttun ?',
+                                  style:
+                                  TextStyle(fontSize: 15, color:Colors.deepPurpleAccent,fontWeight: FontWeight.w500)),
+                            ),
+                            _divider(),
+                            _facebookButton(_authBloc),
+                            Expanded(
+                              flex: 2,
+                              child: SizedBox(),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: _createAccountLabel(),
+                      ),
+                      Positioned(top: 40, left: 0, child: _backButton()),
+                      Positioned(
+                          top: -MediaQuery.of(context).size.height * .23,
+                          right: -MediaQuery.of(context).size.width * .4,
+                          child: BezierContainer(kayitMi: false,))
+                    ],
+                  ),
+                )
+            );
+          },
+        ),
       ),
     );
   }
