@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:loading_animations/loading_animations.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_event.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_state.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
-import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/homePage.dart';
-import 'package:mucbirsebepler/pages/signUpPage.dart';
 
 import 'package:mucbirsebepler/widgets/bezierContainer.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -31,13 +26,15 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _passwordController;
   AuthBloc _authBloc;
   DataBaseBloc _dbBloc;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _emailController= TextEditingController(text: "");
-    _passwordController= TextEditingController(text: "");
+    _emailController = TextEditingController(text: "");
+    _passwordController = TextEditingController(text: "");
   }
+
   @override
   void dispose() {
     _authBloc.close();
@@ -75,19 +72,25 @@ class _SignUpPageState extends State<SignUpPage> {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(color:Colors.deepPurpleAccent,fontWeight: FontWeight.bold, fontSize: 15),
+            style: TextStyle(color: Colors.deepPurpleAccent,
+                fontWeight: FontWeight.bold,
+                fontSize: 15),
           ),
           SizedBox(
             height: 10,
           ),
           TextField(
-              controller: isPassword?_passwordController:_emailController,
+              controller: isPassword ? _passwordController : _emailController,
               obscureText: isPassword,
               cursorColor: Colors.deepOrange,
-              keyboardType: isPassword?TextInputType.text:TextInputType.emailAddress,
+              keyboardType: isPassword ? TextInputType.text : TextInputType
+                  .emailAddress,
               decoration: InputDecoration(
-                  suffixIcon: isPassword?FaIcon(FontAwesomeIcons.key):FaIcon(FontAwesomeIcons.at),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                  suffixIcon: isPassword
+                      ? FaIcon(FontAwesomeIcons.key)
+                      : FaIcon(FontAwesomeIcons.at),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20)),
                   fillColor: Color(0xfff3f3f4),
                   hoverColor: Colors.black,
                   focusColor: Colors.black,
@@ -100,7 +103,10 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _submitButton(AuthBloc authBloc, AuthState state) {
     return GestureDetector(
       child: Container(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
         padding: EdgeInsets.symmetric(vertical: 15),
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -115,15 +121,15 @@ class _SignUpPageState extends State<SignUpPage> {
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                colors: [Colors.black,Colors.black87])),
+                colors: [Colors.black, Colors.black87])),
         child: Text(
           'Kaydol',
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
-      onTap: ()async{
-
-        authBloc.add(EmailSign(email: _emailController.text,password: _passwordController.text));
+      onTap: () async {
+        authBloc.add(EmailSign(
+            email: _emailController.text, password: _passwordController.text));
 
 
         //TODO koyulan verileri gönder
@@ -149,7 +155,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
           ),
-          Text('ya da',style: TextStyle(color: Colors.deepPurpleAccent),),
+          Text('ya da', style: TextStyle(color: Colors.deepPurpleAccent),),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -196,7 +202,7 @@ class _SignUpPageState extends State<SignUpPage> {
           Expanded(
             flex: 5,
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 bloc.add(GoogleSign());
               },
               child: Container(
@@ -229,7 +235,9 @@ class _SignUpPageState extends State<SignUpPage> {
         children: <Widget>[
           Text(
             'Hesabın var mı ?',
-            style: TextStyle(color:Colors.deepPurpleAccent,fontSize: 15, fontWeight: FontWeight.w600),
+            style: TextStyle(color: Colors.deepPurpleAccent,
+                fontSize: 15,
+                fontWeight: FontWeight.w600),
           ),
           SizedBox(
             width: 10,
@@ -257,7 +265,10 @@ class _SignUpPageState extends State<SignUpPage> {
       text: TextSpan(
           text: 'Mücbir ',
           style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.display1,
+            textStyle: Theme
+                .of(context)
+                .textTheme
+                .display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
             color: Colors.black,
@@ -283,97 +294,86 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _authBloc = BlocProvider.of<AuthBloc>(context);
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    return Scaffold(
+      body: BlocListener(
+        bloc: _authBloc,
+        listener: (context, state) {
+          if (state is AuthErrorState) {
+            final snackBar = SnackBar(
+              content: Text("Kullanıcı adı/şifre hatalı"),
+              backgroundColor: Colors.red,
 
-    _authBloc= BlocProvider.of<AuthBloc>(context);
-    _dbBloc= BlocProvider.of<DataBaseBloc>(context);
-    final _scaffoldKey = GlobalKey<ScaffoldState>();
-
-
-
-
-    return BlocListener(
-
-      bloc: _authBloc,
-      listener: (BuildContext context, AuthState state) {
-        if (state is AuthLoadedState) {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(user: state.user,)));
-        }
-        if(state is AuthErrorState){
-          final snackBar= SnackBar(
-            content: Text("Kulanıcı oluşturulurken hata oldu"),
-            backgroundColor: Colors.red,
-
-          );
-          _scaffoldKey.currentState.showSnackBar(snackBar);
-        }
-      },
-
-
-      child: Scaffold(
-        key: _scaffoldKey,
-
-
-        body: BlocBuilder(
-          bloc:  _authBloc,
-          // ignore: missing_return
-          builder: (context,state){
-
-              return SingleChildScrollView(
-                  child: Container(
-                    color: Color(0xfffbb448),
-                    height: MediaQuery.of(context).size.height,
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                flex: 3,
-                                child: SizedBox(),
-                              ),
-                              _title(),
-                              SizedBox(
-                                height: MediaQuery.of(context).size.height/80,
-                              ),
-                              _emailPasswordWidget(),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              _submitButton(_authBloc,state),
-                              _divider(),
-                              _facebookButton(_authBloc),
-                              Expanded(
-                                flex: 2,
-                                child: SizedBox(),
-                              ),
-                            ],
-                          ),
+            );
+            Scaffold.of(context).showSnackBar(snackBar);
+          }
+        },
+        child: BlocBuilder(
+          bloc: _authBloc,
+          builder: (context, statee) {
+            return SingleChildScrollView(
+                child: Container(
+                  color: Color(0xfffbb448),
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 3,
+                              child: SizedBox(),
+                            ),
+                            _title(),
+                            SizedBox(
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height / 80,
+                            ),
+                            _emailPasswordWidget(),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            _submitButton(_authBloc, statee),
+                            _divider(),
+                            _facebookButton(_authBloc),
+                            Expanded(
+                              flex: 2,
+                              child: SizedBox(),
+                            ),
+                          ],
                         ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: _createAccountLabel(),
-                        ),
-                        Positioned(top: 40, left: 0, child: _backButton()),
-                        Positioned(
-                            top: -MediaQuery.of(context).size.height * .18,
-                            right: -MediaQuery.of(context).size.width * .4,
-                            child: BezierContainer(kayitMi: true,))
-                      ],
-                    ),
-                  )
-              );  //LOGİN PAGE
-
-
-
-
-
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: _createAccountLabel(),
+                      ),
+                      Positioned(top: 40, left: 0, child: _backButton()),
+                      Positioned(
+                          top: -MediaQuery
+                              .of(context)
+                              .size
+                              .height * .18,
+                          right: -MediaQuery
+                              .of(context)
+                              .size
+                              .width * .4,
+                          child: BezierContainer(kayitMi: true,))
+                    ],
+                  ),
+                )
+            );
           },
         ),
       ),
     );
   }
 }
-
