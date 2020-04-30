@@ -320,7 +320,7 @@ class _LoginPageState extends State<LoginPage> {
                               alignment: Alignment.centerRight,
                               child: Text('Şifreni mi Unuttun ?',
                                   style:
-                                  TextStyle(fontSize: 14, color:Colors.deepPurpleAccent,fontWeight: FontWeight.w500)),
+                                  TextStyle(fontSize: 15, color:Colors.deepPurpleAccent,fontWeight: FontWeight.w500)),
                             ),
                             _divider(),
                             _facebookButton(_authBloc),
