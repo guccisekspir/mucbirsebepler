@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_event.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_state.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
+import 'package:mucbirsebepler/pages/homePage.dart';
 import 'package:mucbirsebepler/pages/signUpPage.dart';
 
 import 'package:mucbirsebepler/widgets/bezierContainer.dart';
@@ -283,6 +285,14 @@ class _LoginPageState extends State<LoginPage> {
 
             );
             Scaffold.of(context).showSnackBar(snackBar);
+          }
+          if(state is AuthLoadingState){
+            LoadingBouncingGrid.square(borderColor: Colors.deepOrangeAccent,);
+          }
+          if(state is AuthLoadedState){
+            if(state.user!=null){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(user: state.user,)));
+            }
 
           }
 
