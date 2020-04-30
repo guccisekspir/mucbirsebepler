@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_event.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_state.dart';
@@ -296,17 +297,29 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     final _authBloc = BlocProvider.of<AuthBloc>(context);
     final scaffoldKey = GlobalKey<ScaffoldState>();
+    Widget widget=SizedBox(width: 0,height: 0,);
     return Scaffold(
       body: BlocListener(
         bloc: _authBloc,
         listener: (context, state) {
-          if (state is AuthErrorState) {
-            final snackBar = SnackBar(
+          if(state is AuthErrorState){
+            widget=SizedBox(width: 0,height: 0,);
+            final snackBar= SnackBar(
               content: Text("Kullanıcı adı/şifre hatalı"),
               backgroundColor: Colors.red,
 
             );
             Scaffold.of(context).showSnackBar(snackBar);
+          }
+          if(state is AuthLoadingState){
+            widget =LoadingBouncingGrid.square(borderColor: Colors.deepPurpleAccent,backgroundColor: Colors.deepPurpleAccent,);
+          }
+          if(state is AuthLoadedState){
+            widget=SizedBox(width: 0,height: 0,);
+            if(state.user!=null){
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage(user: state.user,)));
+            }
+
           }
         },
         child: BlocBuilder(
@@ -352,6 +365,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ],
                         ),
                       ),
+                      Center(child: widget,),
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: _createAccountLabel(),

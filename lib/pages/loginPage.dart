@@ -274,11 +274,13 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final _authBloc= BlocProvider.of<AuthBloc>(context);
     final scaffoldKey= GlobalKey<ScaffoldState>();
+    Widget widget=SizedBox(width: 0,height: 0,);
     return Scaffold(
       body: BlocListener(
         bloc: _authBloc,
         listener: (context,state){
           if(state is AuthErrorState){
+            widget=SizedBox(width: 0,height: 0,);
             final snackBar= SnackBar(
               content: Text("Kullanıcı adı/şifre hatalı"),
               backgroundColor: Colors.red,
@@ -287,11 +289,12 @@ class _LoginPageState extends State<LoginPage> {
             Scaffold.of(context).showSnackBar(snackBar);
           }
           if(state is AuthLoadingState){
-            LoadingBouncingGrid.square(borderColor: Colors.deepOrangeAccent,);
+            widget =LoadingBouncingGrid.square(borderColor: Colors.deepOrangeAccent,backgroundColor: Colors.deepOrangeAccent,);
           }
           if(state is AuthLoadedState){
+            widget=SizedBox(width: 0,height: 0,);
             if(state.user!=null){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(user: state.user,)));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage(user: state.user,)));
             }
 
           }
@@ -341,6 +344,7 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                       ),
+                      Center(child: widget),
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: _createAccountLabel(),
