@@ -11,6 +11,7 @@ class User {
   int seviye;
   bool isVerified;
   bool isFamous;
+  bool isFirst;
 
   User({@required this.userID, @required this.email});
 
@@ -26,6 +27,7 @@ class User {
       'seviye': seviye ?? 1,
       'isVerified': isVerified ?? false,
       'isFamous':isFamous?? false,
+      'isFirst':isFirst??true,
     };
   }
 
@@ -35,13 +37,14 @@ class User {
         userName = map['userName'],
         profilURL = map['profilURL'],
         createdAt = (map['createdAt'] as Timestamp).toDate(),
+        isFirst=map['isFirst'],
         seviye = map['seviye'];
 
   User.idveResim({@required this.userID, @required this.profilURL});
 
   @override
   String toString() {
-    return 'User{userID: $userID, email: $email, userName: $userName, profilURL: $profilURL, createdAt: $createdAt, seviye: $seviye, isVerified: $isVerified, isFamous: $isFamous}';
+    return 'User{userID: $userID, email: $email, userName: $userName, profilURL: $profilURL, createdAt: $createdAt, seviye: $seviye, isVerified: $isVerified, isFamous: $isFamous,isFirst: $isFirst';
   }
 
   String randomSayiUret() {

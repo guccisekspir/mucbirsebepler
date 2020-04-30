@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
 
 
@@ -17,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   _HomePageState(this._user);
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
 
         body: Container(child: Center(child: Text("Hoşgeldin${_user.userID}")),));

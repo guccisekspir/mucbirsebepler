@@ -38,8 +38,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   void dispose() {
-    _authBloc.close();
-    _dbBloc.close();
     super.dispose();
   }
 
@@ -296,7 +294,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final _authBloc = BlocProvider.of<AuthBloc>(context);
-    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final _dbBloc=BlocProvider.of<DataBaseBloc>(context);
     Widget widget=SizedBox(width: 0,height: 0,);
     return Scaffold(
       body: BlocListener(
@@ -317,6 +315,7 @@ class _SignUpPageState extends State<SignUpPage> {
           if(state is AuthLoadedState){
             widget=SizedBox(width: 0,height: 0,);
             if(state.user!=null){
+              _dbBloc.add(SaveUserDB(user: state.user));
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage(user: state.user,)));
             }
 

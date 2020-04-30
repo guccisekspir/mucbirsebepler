@@ -273,7 +273,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final _authBloc= BlocProvider.of<AuthBloc>(context);
-    final scaffoldKey= GlobalKey<ScaffoldState>();
     Widget widget=SizedBox(width: 0,height: 0,);
     return Scaffold(
       body: BlocListener(
@@ -294,7 +293,7 @@ class _LoginPageState extends State<LoginPage> {
           if(state is AuthLoadedState){
             widget=SizedBox(width: 0,height: 0,);
             if(state.user!=null){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage(user: state.user,)));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BlocProvider(create:(context)=>DataBaseBloc(),child: HomePage(user: state.user,))));
             }
 
           }
