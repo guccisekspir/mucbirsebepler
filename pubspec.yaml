@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^1.0.0
   font_awesome_flutter: ^8.8.1
   loading_animations: ^2.1.0
+  rflutter_alert: ^1.0.3
 
 dev_dependencies:
   flutter_test:

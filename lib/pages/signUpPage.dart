@@ -14,6 +14,7 @@ import 'package:mucbirsebepler/pages/homePage.dart';
 import 'package:mucbirsebepler/pages/signUpPage.dart';
 
 import 'package:mucbirsebepler/widgets/bezierContainer.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -96,7 +97,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _submitButton(AuthBloc authBloc) {
+  Widget _submitButton(AuthBloc authBloc, AuthState state) {
     return GestureDetector(
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -123,6 +124,7 @@ class _SignUpPageState extends State<SignUpPage> {
       onTap: ()async{
 
         authBloc.add(EmailSign(email: _emailController.text,password: _passwordController.text));
+
 
         //TODO koyulan verileri gönder
 
@@ -284,6 +286,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
     _authBloc= BlocProvider.of<AuthBloc>(context);
     _dbBloc= BlocProvider.of<DataBaseBloc>(context);
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
 
 
 
@@ -295,81 +298,82 @@ class _SignUpPageState extends State<SignUpPage> {
         if (state is AuthLoadedState) {
           Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(user: state.user,)));
         }
+        if(state is AuthErrorState){
+          final snackBar= SnackBar(
+            content: Text("Kulanıcı oluşturulurken hata oldu"),
+            backgroundColor: Colors.red,
+
+          );
+          _scaffoldKey.currentState.showSnackBar(snackBar);
+        }
       },
 
 
-      child: BlocBuilder(
-        bloc:  _authBloc,
-        // ignore: missing_return
-        builder: (context,state){
-          if(state is InitialAuthState){
-            return Scaffold(
-                body: SingleChildScrollView(
-                    child: Container(
-                      color: Color(0xfffbb448),
-                      height: MediaQuery.of(context).size.height,
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Expanded(
-                                  flex: 3,
-                                  child: SizedBox(),
-                                ),
-                                _title(),
-                                SizedBox(
-                                  height: MediaQuery.of(context).size.height/80,
-                                ),
-                                _emailPasswordWidget(),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                _submitButton(_authBloc),
-                                _divider(),
-                                _facebookButton(_authBloc),
-                                Expanded(
-                                  flex: 2,
-                                  child: SizedBox(),
-                                ),
-                              ],
-                            ),
+      child: Scaffold(
+        key: _scaffoldKey,
+
+
+        body: BlocBuilder(
+          bloc:  _authBloc,
+          // ignore: missing_return
+          builder: (context,state){
+
+              return SingleChildScrollView(
+                  child: Container(
+                    color: Color(0xfffbb448),
+                    height: MediaQuery.of(context).size.height,
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Expanded(
+                                flex: 3,
+                                child: SizedBox(),
+                              ),
+                              _title(),
+                              SizedBox(
+                                height: MediaQuery.of(context).size.height/80,
+                              ),
+                              _emailPasswordWidget(),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              _submitButton(_authBloc,state),
+                              _divider(),
+                              _facebookButton(_authBloc),
+                              Expanded(
+                                flex: 2,
+                                child: SizedBox(),
+                              ),
+                            ],
                           ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: _createAccountLabel(),
-                          ),
-                          Positioned(top: 40, left: 0, child: _backButton()),
-                          Positioned(
-                              top: -MediaQuery.of(context).size.height * .18,
-                              right: -MediaQuery.of(context).size.width * .4,
-                              child: BezierContainer(kayitMi: true,))
-                        ],
-                      ),
-                    )
-                )
-            );  //LOGİN PAGE
-          }
-          if(state is AuthLoadingState){
-
-            return CircularProgressIndicator();
-          }
-          if(state is AuthLoadedState) {
-            return Center(child: Text("Yönlendiriliyorsunuz"),);
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: _createAccountLabel(),
+                        ),
+                        Positioned(top: 40, left: 0, child: _backButton()),
+                        Positioned(
+                            top: -MediaQuery.of(context).size.height * .18,
+                            right: -MediaQuery.of(context).size.width * .4,
+                            child: BezierContainer(kayitMi: true,))
+                      ],
+                    ),
+                  )
+              );  //LOGİN PAGE
 
 
-          }
-          if(state is AuthErrorState){
-            return Center(child: Text("Error"),);
-          }
-          return Container(color: Colors.deepOrange,);
 
 
-        },
+
+          },
+        ),
       ),
     );
   }
 }
+
