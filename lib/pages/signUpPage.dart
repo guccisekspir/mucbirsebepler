@@ -315,8 +315,10 @@ class _SignUpPageState extends State<SignUpPage> {
           if(state is AuthLoadedState){
             widget=SizedBox(width: 0,height: 0,);
             if(state.user!=null){
-              _dbBloc.add(SaveUserDB(user: state.user));
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage(user: state.user,)));
+
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BlocProvider(
+                  create: (context)=>DataBaseBloc(),
+                  child: HomePage(user: state.user,))));
             }
 
           }
