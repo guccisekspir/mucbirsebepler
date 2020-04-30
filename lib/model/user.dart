@@ -8,8 +8,9 @@ class User {
   String userName;
   String profilURL;
   DateTime createdAt;
-  DateTime updatedAt;
   int seviye;
+  bool isVerified;
+  bool isFamous;
 
   User({@required this.userID, @required this.email});
 
@@ -22,8 +23,9 @@ class User {
       'profilURL': profilURL ??
           'https://emrealtunbilek.com/wp-content/uploads/2016/10/apple-icon-72x72.png',
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
-      'updatedAt': updatedAt ?? FieldValue.serverTimestamp(),
       'seviye': seviye ?? 1,
+      'isVerified': isVerified ?? false,
+      'isFamous':isFamous?? false,
     };
   }
 
@@ -33,14 +35,13 @@ class User {
         userName = map['userName'],
         profilURL = map['profilURL'],
         createdAt = (map['createdAt'] as Timestamp).toDate(),
-        updatedAt = (map['updatedAt'] as Timestamp).toDate(),
         seviye = map['seviye'];
 
   User.idveResim({@required this.userID, @required this.profilURL});
 
   @override
   String toString() {
-    return 'User{userID: $userID, email: $email, userName: $userName, profilURL: $profilURL, createdAt: $createdAt, updatedAt: $updatedAt, seviye: $seviye}';
+    return 'User{userID: $userID, email: $email, userName: $userName, profilURL: $profilURL, createdAt: $createdAt, seviye: $seviye, isVerified: $isVerified, isFamous: $isFamous}';
   }
 
   String randomSayiUret() {

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_event.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_state.dart';
+import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/pages/signUpPage.dart';
 
 import 'package:mucbirsebepler/widgets/bezierContainer.dart';
@@ -217,7 +218,11 @@ class _LoginPageState extends State<LoginPage> {
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BlocProvider(create: (context)=>AuthBloc(),
+                  MaterialPageRoute(builder: (context) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider<AuthBloc>(create: (context)=>AuthBloc(),),
+                        BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),)
+                      ],
                       child: SignUpPage())));
             },
             child: Text(
