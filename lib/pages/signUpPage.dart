@@ -11,6 +11,7 @@ import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/pages/homePage.dart';
 
 import 'package:mucbirsebepler/widgets/bezierContainer.dart';
+import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -24,8 +25,6 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _emailController;
   TextEditingController _passwordController;
-  AuthBloc _authBloc;
-  DataBaseBloc _dbBloc;
 
   @override
   void initState() {
@@ -38,27 +37,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   void dispose() {
     super.dispose();
-  }
-
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-            ),
-            Text('Back',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
-          ],
-        ),
-      ),
-    );
   }
 
   Widget _entryField(String title, {bool isPassword = false}) {
@@ -131,97 +109,6 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _divider() {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: <Widget>[
-          SizedBox(
-            width: 20,
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Divider(
-                color: Colors.deepPurpleAccent,
-                thickness: 1,
-              ),
-            ),
-          ),
-          Text(
-            'ya da',
-            style: TextStyle(color: Colors.deepPurpleAccent),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Divider(
-                color: Colors.deepPurpleAccent,
-                thickness: 1,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _facebookButton(AuthBloc bloc) {
-    return Container(
-      height: 50,
-      margin: EdgeInsets.symmetric(vertical: 20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(5),
-                    topLeft: Radius.circular(5)),
-              ),
-              alignment: Alignment.center,
-              child: Text('G',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w400)),
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: GestureDetector(
-              onTap: () {
-                bloc.add(GoogleSign());
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5),
-                      topRight: Radius.circular(5)),
-                ),
-                alignment: Alignment.center,
-                child: Text('Google ile Kaydol',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400)),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _createAccountLabel() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
@@ -260,17 +147,17 @@ class _SignUpPageState extends State<SignUpPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'MOB',
+          text: 'Mücbir',
           style: GoogleFonts.pressStart2p(
             textStyle: Theme.of(context).textTheme.display1,
-            fontSize: 25,
+            fontSize: 18,
             fontWeight: FontWeight.w700,
             color: Colors.black,
           ),
           children: [
             TextSpan(
-              text: 'SQUAD',
-              style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 25),
+              text: 'Sebepler',
+              style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 18),
             ),
           ]),
     );
@@ -288,7 +175,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final _authBloc = BlocProvider.of<AuthBloc>(context);
-    final _dbBloc = BlocProvider.of<DataBaseBloc>(context);
     Widget widget = SizedBox(
       width: 0,
       height: 0,
@@ -360,8 +246,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 20,
                         ),
                         _submitButton(_authBloc, statee),
-                        _divider(),
-                        _facebookButton(_authBloc),
+                        divider(),
+                        facebookButton(_authBloc),
                         Expanded(
                           flex: 2,
                           child: SizedBox(),
@@ -376,7 +262,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     alignment: Alignment.bottomCenter,
                     child: _createAccountLabel(),
                   ),
-                  Positioned(top: 40, left: 0, child: _backButton()),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: backButton(context),
+                  ),
                   Positioned(
                       top: -MediaQuery.of(context).size.height * .18,
                       right: -MediaQuery.of(context).size.width * .4,

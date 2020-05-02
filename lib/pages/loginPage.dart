@@ -173,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'MOB',
+          text: 'Mücbir ',
           style: GoogleFonts.pressStart2p(
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 25,
@@ -182,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           children: [
             TextSpan(
-              text: 'SQUAD',
+              text: 'Sebepler',
               style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 25),
             ),
           ]),
