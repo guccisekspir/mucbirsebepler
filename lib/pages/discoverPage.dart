@@ -11,6 +11,9 @@ class DiscoverPage extends StatefulWidget {
 class _DiscoverPageState extends State<DiscoverPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: Center(child: Text("Discover"),),);
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.deepPurpleAccent,),
+      body: Container(color: Colors.black,),
+    );
   }
 }

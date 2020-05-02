@@ -1,5 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -206,6 +207,8 @@ class _LoginPageState extends State<LoginPage> {
       height: 0,
     );
     return Scaffold(
+
+      resizeToAvoidBottomInset: false,
       body: BlocListener(
         bloc: _authBloc,
         listener: (context, state) {
@@ -283,9 +286,12 @@ class _LoginPageState extends State<LoginPage> {
           }
         },
         child: BlocBuilder(
+
           bloc: _authBloc,
           builder: (context, statee) {
+
             return SingleChildScrollView(
+              padding: EdgeInsets.all(0),
                 child: Container(
               color: Colors.black,
               height: MediaQuery.of(context).size.height,
