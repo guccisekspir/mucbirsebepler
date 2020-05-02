@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mucbirsebepler/model/user.dart';
 
-class Post {
+class Post{
   final User owner;
   final String title;
 
@@ -28,7 +28,7 @@ class Post {
       'youtubelink': youtubelink,
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
       'otherLink': otherLink,
-      'postID': postID,
+      'postID': postID ?? owner.userID+randomSayiUret();
       'liked': liked,
     };
   }
@@ -47,6 +47,11 @@ class Post {
   @override
   String toString() {
     return 'Post{owner: $owner, title: $title, description: $description, youtubelink: $youtubelink, otherLink: $otherLink, postID: $postID, liked: $liked, createdAt: $createdAt}';
+  }
+
+  String randomSayiUret() {
+    int rastgeleSayi = Random().nextInt(999999);
+    return rastgeleSayi.toString();
   }
 
 

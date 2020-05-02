@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 
 class DbApiClient {
@@ -21,6 +22,13 @@ class DbApiClient {
     }else return true;
 
 
+  }
+
+  Future<bool>savePost(Post post)async{
+    post.toMap();
+
+    DocumentSnapshot gelenPost= await _firestore.document("posts").get();
+    await _firestore.collection("posts").document(post.owner.toString()+post.postID.toString()).setData(post.toMap());
   }
 
 

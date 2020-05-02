@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
 
 class DiscoverPage extends StatefulWidget {
   @override
@@ -54,35 +55,8 @@ class _DiscoverPageState extends State<DiscoverPage> {
                         ))),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 1),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 1),
-                          child: Divider(
-                            color: Colors.deepPurpleAccent,
-                            thickness: 1,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "...",
-                        style: TextStyle(color: Colors.deepPurple),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 1),
-                          child: Divider(
-                            color: Colors.deepPurpleAccent,
-                            thickness: 1,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                lineDivider(),
+
               ],
             ),
           ),

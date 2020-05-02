@@ -101,6 +101,39 @@ Widget divider() {
   );
 }
 
+Widget lineDivider(){
+
+  Container(
+    margin: EdgeInsets.symmetric(vertical: 1),
+    child: Row(
+      children: <Widget>[
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 1),
+            child: Divider(
+              color: Colors.deepPurpleAccent,
+              thickness: 1,
+            ),
+          ),
+        ),
+        Text(
+          "...",
+          style: TextStyle(color: Colors.deepPurple),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 1),
+            child: Divider(
+              color: Colors.deepPurpleAccent,
+              thickness: 1,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 
 Widget facebookButton(AuthBloc authBloc) {
   return Container(
