@@ -33,3 +33,14 @@ class GoogleSign extends AuthEvent{
   List<Object> get props => null;
 
 }
+
+class ForgetPass extends AuthEvent{
+  final String email;
+
+  ForgetPass({this.email});
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+
+}

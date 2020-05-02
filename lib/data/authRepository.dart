@@ -28,6 +28,12 @@ class AuthRepository{
 
   }
 
+  Future<void> forgetPassword(String email)async{
+
+    await _authApiClient.forgetPassword(email);
+
+  }
+
 
 
 

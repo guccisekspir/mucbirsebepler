@@ -16,6 +16,13 @@ class AuthApiClient{
     }
   }
 
+  Future<void> forgetPassword(String email)async{
+
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+
+
+  }
+
 
 
 

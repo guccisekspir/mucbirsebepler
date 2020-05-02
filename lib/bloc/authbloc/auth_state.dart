@@ -31,3 +31,27 @@ class AuthErrorState extends AuthState{
   // TODO: implement props
   List<Object> get props => null;
 }
+
+class ForgetLoadingState extends AuthState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+class ForgetLoadedState extends AuthState{
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
+
+
+class ForgetErrorState extends AuthState{
+  final String errorMessage;
+
+  ForgetErrorState(this.errorMessage);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+
+}

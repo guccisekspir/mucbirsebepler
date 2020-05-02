@@ -7,7 +7,8 @@ import 'package:mucbirsebepler/model/user.dart';
 import './bloc.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository _authRepository= getIt<AuthRepository>();
+  final AuthRepository _authRepository = getIt<AuthRepository>();
+
   @override
   AuthState get initialState => InitialAuthState();
 
@@ -15,49 +16,49 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
-    if(event is EmailSign){
+    if (event is EmailSign) {
       yield AuthLoadingState();
-      try{
-        String email= event.email;
-        String password=event.password;
+      try {
+        String email = event.email;
+        String password = event.password;
 
-        User user=await _authRepository.createWithEmailPass(email, password);
+        User user = await _authRepository.createWithEmailPass(email, password);
 
         yield AuthLoadedState(user: user);
-
-
-      }catch(_){
+      } catch (_) {
         yield AuthErrorState();
         debugPrint(_.toString());
       }
-    }
-    else if(event is EmailLogin){
+    } else if (event is EmailLogin) {
       yield AuthLoadingState();
-      try{
-        String email= event.email;
-        String password=event.password;
+      try {
+        String email = event.email;
+        String password = event.password;
 
-        User user=await _authRepository.loginWithEmailPass(email, password);
+        User user = await _authRepository.loginWithEmailPass(email, password);
 
         yield AuthLoadedState(user: user);
-
-
-      }catch(_){
+      } catch (_) {
         yield AuthErrorState();
         debugPrint(_.toString());
       }
-    }
-    else if(event is GoogleSign){
+    } else if (event is GoogleSign) {
       yield AuthLoadingState();
-      try{
-
-        User user=await _authRepository.googleSign();
+      try {
+        User user = await _authRepository.googleSign();
 
         yield AuthLoadedState(user: user);
-
-
-      }catch(_){
+      } catch (_) {
         yield AuthErrorState();
+        debugPrint(_.toString());
+      }
+    } else if (event is ForgetPass) {
+      yield ForgetLoadingState();
+      try {
+        await _authRepository.forgetPassword(event.email);
+        yield ForgetLoadedState();
+      } catch (_) {
+        yield ForgetErrorState(_.toString());
         debugPrint(_.toString());
       }
     }

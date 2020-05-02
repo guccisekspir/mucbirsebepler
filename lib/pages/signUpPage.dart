@@ -22,7 +22,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-
   TextEditingController _emailController;
   TextEditingController _passwordController;
   AuthBloc _authBloc;
@@ -40,7 +39,6 @@ class _SignUpPageState extends State<SignUpPage> {
   void dispose() {
     super.dispose();
   }
-
 
   Widget _backButton() {
     return InkWell(
@@ -71,7 +69,8 @@ class _SignUpPageState extends State<SignUpPage> {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(color: Colors.deepPurpleAccent,
+            style: TextStyle(
+                color: Colors.deepPurpleAccent,
                 fontWeight: FontWeight.bold,
                 fontSize: 15),
           ),
@@ -82,8 +81,8 @@ class _SignUpPageState extends State<SignUpPage> {
               controller: isPassword ? _passwordController : _emailController,
               obscureText: isPassword,
               cursorColor: Colors.deepOrange,
-              keyboardType: isPassword ? TextInputType.text : TextInputType
-                  .emailAddress,
+              keyboardType:
+                  isPassword ? TextInputType.text : TextInputType.emailAddress,
               decoration: InputDecoration(
                   suffixIcon: isPassword
                       ? FaIcon(FontAwesomeIcons.key)
@@ -102,10 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _submitButton(AuthBloc authBloc, AuthState state) {
     return GestureDetector(
       child: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 15),
         alignment: Alignment.center,
         decoration: BoxDecoration(
@@ -130,9 +126,7 @@ class _SignUpPageState extends State<SignUpPage> {
         authBloc.add(EmailSign(
             email: _emailController.text, password: _passwordController.text));
 
-
         //TODO koyulan verileri gönder
-
       },
     );
   }
@@ -154,7 +148,10 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
           ),
-          Text('ya da', style: TextStyle(color: Colors.deepPurpleAccent),),
+          Text(
+            'ya da',
+            style: TextStyle(color: Colors.deepPurpleAccent),
+          ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -234,7 +231,8 @@ class _SignUpPageState extends State<SignUpPage> {
         children: <Widget>[
           Text(
             'Hesabın var mı ?',
-            style: TextStyle(color: Colors.deepPurpleAccent,
+            style: TextStyle(
+                color: Colors.deepPurpleAccent,
                 fontSize: 15,
                 fontWeight: FontWeight.w600),
           ),
@@ -262,22 +260,18 @@ class _SignUpPageState extends State<SignUpPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Mücbir ',
-          style: GoogleFonts.portLligatSans(
-            textStyle: Theme
-                .of(context)
-                .textTheme
-                .display1,
-            fontSize: 30,
+          text: 'MOB',
+          style: GoogleFonts.pressStart2p(
+            textStyle: Theme.of(context).textTheme.display1,
+            fontSize: 25,
             fontWeight: FontWeight.w700,
             color: Colors.black,
           ),
           children: [
             TextSpan(
-              text: 'Sebepler',
-              style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 30),
+              text: 'SQUAD',
+              style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 25),
             ),
-
           ]),
     );
   }
@@ -294,33 +288,48 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final _authBloc = BlocProvider.of<AuthBloc>(context);
-    final _dbBloc=BlocProvider.of<DataBaseBloc>(context);
-    Widget widget=SizedBox(width: 0,height: 0,);
+    final _dbBloc = BlocProvider.of<DataBaseBloc>(context);
+    Widget widget = SizedBox(
+      width: 0,
+      height: 0,
+    );
     return Scaffold(
       body: BlocListener(
         bloc: _authBloc,
         listener: (context, state) {
-          if(state is AuthErrorState){
-            widget=SizedBox(width: 0,height: 0,);
-            final snackBar= SnackBar(
+          if (state is AuthErrorState) {
+            widget = SizedBox(
+              width: 0,
+              height: 0,
+            );
+            final snackBar = SnackBar(
               content: Text("Kullanıcı adı/şifre hatalı"),
               backgroundColor: Colors.red,
-
             );
             Scaffold.of(context).showSnackBar(snackBar);
           }
-          if(state is AuthLoadingState){
-            widget =LoadingBouncingGrid.square(borderColor: Colors.deepPurpleAccent,backgroundColor: Colors.deepPurpleAccent,);
+          if (state is AuthLoadingState) {
+            widget = LoadingBouncingGrid.square(
+              borderColor: Colors.deepPurpleAccent,
+              backgroundColor: Colors.deepPurpleAccent,
+            );
           }
-          if(state is AuthLoadedState){
-            widget=SizedBox(width: 0,height: 0,);
-            if(state.user!=null){
-
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>BlocProvider(
-                  create: (context)=>DataBaseBloc(),
-                  child: HomePage(user: state.user,))));
+          if (state is AuthLoadedState) {
+            widget = SizedBox(
+              width: 0,
+              height: 0,
+            );
+            if (state.user != null) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                          create: (context) => DataBaseBloc(),
+                          child: HomePage(
+                            user: state.user,
+                          ))),
+                  (Route<dynamic> route) => false);
             }
-
           }
         },
         child: BlocBuilder(
@@ -328,64 +337,55 @@ class _SignUpPageState extends State<SignUpPage> {
           builder: (context, statee) {
             return SingleChildScrollView(
                 child: Container(
-                  color: Color(0xfffbb448),
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Expanded(
-                              flex: 3,
-                              child: SizedBox(),
-                            ),
-                            _title(),
-                            SizedBox(
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height / 80,
-                            ),
-                            _emailPasswordWidget(),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            _submitButton(_authBloc, statee),
-                            _divider(),
-                            _facebookButton(_authBloc),
-                            Expanded(
-                              flex: 2,
-                              child: SizedBox(),
-                            ),
-                          ],
+              color: Color(0xfffbb448),
+              height: MediaQuery.of(context).size.height,
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 3,
+                          child: SizedBox(),
                         ),
-                      ),
-                      Center(child: widget,),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: _createAccountLabel(),
-                      ),
-                      Positioned(top: 40, left: 0, child: _backButton()),
-                      Positioned(
-                          top: -MediaQuery
-                              .of(context)
-                              .size
-                              .height * .18,
-                          right: -MediaQuery
-                              .of(context)
-                              .size
-                              .width * .4,
-                          child: BezierContainer(kayitMi: true,))
-                    ],
+                        _title(),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 80,
+                        ),
+                        _emailPasswordWidget(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        _submitButton(_authBloc, statee),
+                        _divider(),
+                        _facebookButton(_authBloc),
+                        Expanded(
+                          flex: 2,
+                          child: SizedBox(),
+                        ),
+                      ],
+                    ),
                   ),
-                )
-            );
+                  Center(
+                    child: widget,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: _createAccountLabel(),
+                  ),
+                  Positioned(top: 40, left: 0, child: _backButton()),
+                  Positioned(
+                      top: -MediaQuery.of(context).size.height * .18,
+                      right: -MediaQuery.of(context).size.width * .4,
+                      child: BezierContainer(
+                        kayitMi: true,
+                      ))
+                ],
+              ),
+            ));
           },
         ),
       ),
