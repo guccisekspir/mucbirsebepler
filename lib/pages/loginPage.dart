@@ -12,6 +12,7 @@ import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/pages/homePage.dart';
 import 'package:mucbirsebepler/pages/signUpPage.dart';
 import 'package:mucbirsebepler/widgets/bezierContainer.dart';
+import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -40,28 +41,6 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController = TextEditingController(text: "");
     _secondEmailController = TextEditingController(text: "");
   }
-
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-            ),
-            Text('Back',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _entryField(String title,
       {bool isPassword = false, double opacity = 1.0}) {
     return Opacity(
@@ -103,6 +82,9 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+
+
+
   Widget _submitButton(AuthBloc authBloc) {
     return GestureDetector(
       child: Container(
@@ -139,96 +121,9 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _divider() {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: <Widget>[
-          SizedBox(
-            width: 20,
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Divider(
-                color: Colors.deepPurpleAccent,
-                thickness: 1,
-              ),
-            ),
-          ),
-          Text(
-            'ya da',
-            style: TextStyle(color: Colors.deepPurpleAccent),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Divider(
-                color: Colors.deepPurpleAccent,
-                thickness: 1,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _facebookButton(AuthBloc authBloc) {
-    return Container(
-      height: 50,
-      margin: EdgeInsets.symmetric(vertical: 20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.redAccent,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(5),
-                    topLeft: Radius.circular(5)),
-              ),
-              alignment: Alignment.center,
-              child: Text('G',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w400)),
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: GestureDetector(
-              onTap: () {
-                authBloc.add(GoogleSign());
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5),
-                      topRight: Radius.circular(5)),
-                ),
-                alignment: Alignment.center,
-                child: Text('Google ile Giriş Yap',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400)),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
+
 
   Widget _createAccountLabel() {
     return Container(
@@ -445,8 +340,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        _divider(),
-                        _facebookButton(_authBloc),
+                        divider(),
+                        facebookButton(_authBloc),
                         Expanded(
                           flex: 2,
                           child: SizedBox(),
@@ -459,7 +354,7 @@ class _LoginPageState extends State<LoginPage> {
                     alignment: Alignment.bottomCenter,
                     child: _createAccountLabel(),
                   ),
-                  Positioned(top: 40, left: 0, child: _backButton()),
+                  Positioned(top: 40, left: 0, child: backButton(context)),
                   Positioned(
                       top: -MediaQuery.of(context).size.height * .23,
                       right: -MediaQuery.of(context).size.width * .4,
