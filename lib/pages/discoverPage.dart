@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
+import 'package:mucbirsebepler/model/post.dart';
+import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
 
 class DiscoverPage extends StatefulWidget {
+  final User user;
+
+  const DiscoverPage({Key key, this.user}) : super(key: key);
   @override
   _DiscoverPageState createState() => _DiscoverPageState();
 }
 
 class _DiscoverPageState extends State<DiscoverPage> {
+  PostBloc _postBloc;
+  @override
+  void initState() {
+    Post kaydedilecekPost= Post(owner: widget.user,title: "title",description: "desc");
+    _postBloc=BlocProvider.of<PostBloc>(context);
+    _postBloc.add(SavePost(gelenPost: kaydedilecekPost));
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([]);
@@ -43,19 +59,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                 SizedBox(
                   height: 22,
                 ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text("En Popüler Haberler",
-                        style: GoogleFonts.righteous(
-                            textStyle: TextStyle(
-                          color: Colors.deepOrange,
-                          fontSize: 30,
-                        ))),
-                  ),
-                ),
-                lineDivider(),
+                Container(color: Colors.deepPurple,)
 
               ],
             ),

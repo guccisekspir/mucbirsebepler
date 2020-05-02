@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
+import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
+import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/bloc/navBarBloc.dart';
 import 'package:mucbirsebepler/pages/discoverPage.dart';
@@ -27,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   _HomePageState(this._user);
   @override
   void initState() {
+
     _databaseBloc = BlocProvider.of<DataBaseBloc>(context);
     _databaseBloc.add(SaveUserDB(user: _user));
     _bottomNavBarBloc = BottomNavBarBloc();
@@ -56,7 +59,9 @@ class _HomePageState extends State<HomePage> {
             case NavBarItem.TICK:
               return TickPage();
             case NavBarItem.HOME:
-              return DiscoverPage();
+              return BlocProvider(
+                  create: (context)=>PostBloc(),
+                  child: DiscoverPage(user: _user,));
           }
 
         },

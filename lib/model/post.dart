@@ -1,7 +1,9 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
+import 'user.dart';
 import 'package:mucbirsebepler/model/user.dart';
 
 class Post{
@@ -20,21 +22,23 @@ class Post{
       {@required this.owner, @required this.title, @required this.description, this.youtubelink, this.otherLink});
 
 
+
+
   Map<String, dynamic> toMap() {
     return {
-      'owner': owner,
+      'owner': owner.toMap(),
       'title': title,
       'description': description,
-      'youtubelink': youtubelink,
+      'youtubelink': youtubelink??"",
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
-      'otherLink': otherLink,
-      'postID': postID ?? owner.userID+randomSayiUret();
-      'liked': liked,
+      'otherLink': otherLink??"",
+      'postID': postID ?? owner.userID+randomSayiUret(),
+      'liked': liked??0,
     };
   }
 
   Post.fromMap(Map<String, dynamic> map)
-      : owner = map['owner'],
+      : owner = User.fromMap(map['owner']),
         title = map['title'],
         description = map['description'],
         youtubelink = map['youtubelink'],

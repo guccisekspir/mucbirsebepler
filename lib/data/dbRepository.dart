@@ -19,6 +19,10 @@ class DbRepository{
     return await _dbApiClient.savePost(post);
   }
 
+  Future<Post> getPost()async{
+    return await _dbApiClient.getPost();
+  }
+
 
 
 }
