@@ -180,6 +180,7 @@ class _SignUpPageState extends State<SignUpPage> {
       height: 0,
     );
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: BlocListener(
         bloc: _authBloc,
         listener: (context, state) {

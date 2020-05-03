@@ -35,8 +35,10 @@ class _PostPageState extends State<PostPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    var formKey= GlobalKey<FormState>();
 
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: Text(
@@ -58,6 +60,9 @@ class _PostPageState extends State<PostPage> {
         elevation: 20,
         isExtended: true,
         onPressed: () {
+          if(formKey.currentState.validate()){
+            debugPrint("Doğru bilgiler");
+          }
           //TODO Formla yapılcak
         },
       ),
@@ -72,59 +77,62 @@ class _PostPageState extends State<PostPage> {
               width: screenWidth,
               height: screenHeight,
               child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: entryField(
-                          title: "Haber Başlığı",
-                          textEditingController: headerController,
-                          faIcon: FaIcon(
-                            FontAwesomeIcons.horseHead,
-                            color: Colors.deepPurpleAccent,
-                            size: 30,
-                          )),
-                    ),
-                    lineDivider(),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                      child: entryField(
-                          title: "Haber İçeriği",
-                          textEditingController: descController,
-                          faIcon: FaIcon(
-                            FontAwesomeIcons.userNinja,
-                            color: Colors.deepPurpleAccent,
-                            size: 30,
-                          )),
-                    ),
-                    lineDivider(),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                      child: entryField(
-                          title: "Youtube Linki",
-                          textEditingController: youtubeController,
-                          faIcon: FaIcon(
-                            FontAwesomeIcons.youtube,
-                            color: Colors.deepPurpleAccent,
-                            size: 30,
-                          )),
-                    ),
-                    lineDivider(),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                      child: entryField(
-                          title: "Diğer Linkler",
-                          textEditingController: otherController,
-                          faIcon: FaIcon(
-                            FontAwesomeIcons.slack,
-                            color: Colors.deepPurpleAccent,
-                            size: 30,
-                          )),
-                    ),
-                  ],
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: entryField(
+                            title: "Haber Başlığı",
+                            textEditingController: headerController,
+                            faIcon: FaIcon(
+                              FontAwesomeIcons.horseHead,
+                              color: Colors.deepPurpleAccent,
+                              size: 30,
+                            )),
+                      ),
+                      lineDivider(),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                        child: entryField(
+                            title: "Haber İçeriği",
+                            textEditingController: descController,
+                            faIcon: FaIcon(
+                              FontAwesomeIcons.userNinja,
+                              color: Colors.deepPurpleAccent,
+                              size: 30,
+                            )),
+                      ),
+                      lineDivider(),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                        child: entryField(
+                            title: "Youtube Linki",
+                            textEditingController: youtubeController,
+                            faIcon: FaIcon(
+                              FontAwesomeIcons.youtube,
+                              color: Colors.deepPurpleAccent,
+                              size: 30,
+                            )),
+                      ),
+                      lineDivider(),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                        child: entryField(
+                            title: "Diğer Linkler",
+                            textEditingController: otherController,
+                            faIcon: FaIcon(
+                              FontAwesomeIcons.slack,
+                              color: Colors.deepPurpleAccent,
+                              size: 30,
+                            )),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

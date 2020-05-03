@@ -170,6 +170,20 @@ Widget entryField({String title,TextEditingController textEditingController,FaIc
           height: 10,
         ),
         TextFormField(
+            validator: (e){
+              String yazilacak;
+
+              if(title=="Haber Başlığı"){
+                if(e.isEmpty)yazilacak="Lütfen Başlığı giriniz";
+              }
+              if(title=="Haber İçeriği"){
+                if(e.isEmpty)yazilacak="Lütfen içeriği giriniz";
+              }
+              if(title=="Youtube Linki"){
+                if(e!=""&&!e.contains("youtube"))yazilacak="Lütfen sadece youtube linki giriniz";
+              }
+              return yazilacak;
+            },
           maxLines: null,
           style: GoogleFonts.roboto(color: Colors.deepPurple),
             controller: textEditingController,
@@ -181,6 +195,7 @@ Widget entryField({String title,TextEditingController textEditingController,FaIc
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
+                errorStyle: GoogleFonts.adventPro(fontSize: 15,color: Colors.black,fontWeight: FontWeight.bold),
                 fillColor: Colors.black,
                 filled: true))
       ],

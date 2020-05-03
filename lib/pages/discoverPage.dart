@@ -32,6 +32,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
     return PreferredSize(
       preferredSize: Size.fromHeight(50),
       child: Scaffold(
+        resizeToAvoidBottomPadding: false,
         floatingActionButton: FloatingActionButton(
           onPressed: (){},
           child: Icon(

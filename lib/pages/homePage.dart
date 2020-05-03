@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
     return BlocProvider(
       create: (context)=>PostBloc(),
       child: Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: StreamBuilder(   //bloc yapımızı seçimlerden haberdar etmek
           stream: _bottomNavBarBloc.itemStream,
           initialData: _bottomNavBarBloc.defaultItem,
