@@ -169,7 +169,7 @@ Widget entryField({String title,TextEditingController textEditingController,FaIc
         SizedBox(
           height: 10,
         ),
-        TextField(
+        TextFormField(
           maxLines: null,
           style: GoogleFonts.roboto(color: Colors.deepPurple),
             controller: textEditingController,

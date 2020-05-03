@@ -22,10 +22,10 @@ class _PostPageState extends State<PostPage> {
   @override
   void initState() {
     _postBloc = BlocProvider.of<PostBloc>(context);
-    headerController=TextEditingController(text: "");
-    descController=TextEditingController(text: "");
-    youtubeController=TextEditingController(text: "");
-    otherController=TextEditingController(text: "");
+    headerController = TextEditingController(text: "");
+    descController = TextEditingController(text: "");
+    youtubeController = TextEditingController(text: "");
+    otherController = TextEditingController(text: "");
 
     // TODO: implement initState
     super.initState();
@@ -37,17 +37,30 @@ class _PostPageState extends State<PostPage> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.deepPurple,
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
         title: Text(
-        "Mücbir Haber Paylaş",
-        style: GoogleFonts.pressStart2p(
-            fontSize: 15,
-            color: Colors.black,
-            wordSpacing: 1,
-            letterSpacing: 0,
-            fontWeight: FontWeight.bold),
-      ),),
-      floatingActionButton: FloatingActionButton(child: FaIcon(FontAwesomeIcons.solidShareSquare,color: Colors.black,),elevation: 20,isExtended: true,),
+          "Mücbir Haber Paylaş",
+          style: GoogleFonts.pressStart2p(
+              fontSize: 15,
+              color: Colors.black,
+              wordSpacing: 1,
+              letterSpacing: 0,
+              fontWeight: FontWeight.bold),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        child: FaIcon(
+          FontAwesomeIcons.solidShareSquare,
+          color: Colors.deepOrange,
+        ),
+        elevation: 20,
+        isExtended: true,
+        onPressed: () {
+          //TODO Formla yapılcak
+        },
+      ),
       body: BlocListener(
         bloc: _postBloc,
         listener: (context, PostState state) {},
@@ -61,28 +74,56 @@ class _PostPageState extends State<PostPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: entryField(title: "Haber Başlığı",textEditingController: headerController,faIcon: FaIcon(FontAwesomeIcons.horseHead,color: Colors.deepPurpleAccent,size: 30,)),
+                      child: entryField(
+                          title: "Haber Başlığı",
+                          textEditingController: headerController,
+                          faIcon: FaIcon(
+                            FontAwesomeIcons.horseHead,
+                            color: Colors.deepPurpleAccent,
+                            size: 30,
+                          )),
                     ),
                     lineDivider(),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                      child: entryField(title: "Haber İçeriği",textEditingController: descController,faIcon: FaIcon(FontAwesomeIcons.userNinja,color: Colors.deepPurpleAccent,size: 30,)),
+                      child: entryField(
+                          title: "Haber İçeriği",
+                          textEditingController: descController,
+                          faIcon: FaIcon(
+                            FontAwesomeIcons.userNinja,
+                            color: Colors.deepPurpleAccent,
+                            size: 30,
+                          )),
                     ),
                     lineDivider(),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                      child: entryField(title: "Youtube Linki",textEditingController: youtubeController,faIcon: FaIcon(FontAwesomeIcons.youtube,color: Colors.deepPurpleAccent,size: 30,)),
-              ),
+                      child: entryField(
+                          title: "Youtube Linki",
+                          textEditingController: youtubeController,
+                          faIcon: FaIcon(
+                            FontAwesomeIcons.youtube,
+                            color: Colors.deepPurpleAccent,
+                            size: 30,
+                          )),
+                    ),
                     lineDivider(),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                      child: entryField(title: "Diğer Linkler",textEditingController: otherController,faIcon: FaIcon(FontAwesomeIcons.slack,color: Colors.deepPurpleAccent,size: 30,)),
+                      child: entryField(
+                          title: "Diğer Linkler",
+                          textEditingController: otherController,
+                          faIcon: FaIcon(
+                            FontAwesomeIcons.slack,
+                            color: Colors.deepPurpleAccent,
+                            size: 30,
+                          )),
                     ),
-
-
                   ],
                 ),
               ),
