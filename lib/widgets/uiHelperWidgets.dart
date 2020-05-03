@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 
 
@@ -69,7 +70,7 @@ Widget divider() {
 
 Widget lineDivider(){
 
-  Container(
+  return Container(
     margin: EdgeInsets.symmetric(vertical: 1),
     child: Row(
       children: <Widget>[
@@ -163,17 +164,14 @@ Widget entryField({String title,TextEditingController textEditingController,FaIc
       children: <Widget>[
         Text(
           title,
-          style: TextStyle(
-              color: Colors.deepPurpleAccent,
-              fontWeight: FontWeight.bold,
-              fontSize: 15),
+          style: GoogleFonts.righteous(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 20),
         ),
         SizedBox(
           height: 10,
         ),
         TextField(
           maxLines: null,
-          style: TextStyle(color: Colors.deepPurpleAccent),
+          style: GoogleFonts.roboto(color: Colors.deepPurple),
             controller: textEditingController,
             cursorColor: Colors.deepPurpleAccent,
             keyboardType: TextInputType.text,
