@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
+import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
 
 class PostPage extends StatefulWidget {
   @override
@@ -12,10 +14,12 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   PostBloc _postBloc;
+  TextEditingController headerController;
 
   @override
   void initState() {
     _postBloc = BlocProvider.of<PostBloc>(context);
+    headerController=TextEditingController(text: "");
     // TODO: implement initState
     super.initState();
   }
@@ -55,6 +59,10 @@ class _PostPageState extends State<PostPage> {
                       ),
                     ),
                     SizedBox(height: 20,),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: entryField(title: "Haber Başlığı",textEditingController: headerController,faIcon: FaIcon(FontAwesomeIcons.horseHead,color: Colors.deepPurpleAccent,)),
+                    ),
 
                   ],
                 ),

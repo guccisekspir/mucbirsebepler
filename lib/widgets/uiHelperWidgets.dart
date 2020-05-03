@@ -26,40 +26,6 @@ Widget backButton(BuildContext context) {
 }
 
 
-Widget entryField(String title,
-    {double opacity = 1.0,TextEditingController controller}) {
-  return Opacity(
-    opacity: opacity,
-    child: Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(
-                color: Colors.deepPurpleAccent,
-                fontWeight: FontWeight.bold,
-                fontSize: 15),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TextField(
-              controller:controller,
-              cursorColor: Colors.deepOrange,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
-        ],
-      ),
-    ),
-  );
-}
 
 
 
@@ -183,6 +149,42 @@ Widget facebookButton(AuthBloc authBloc) {
             ),
           ),
         ),
+      ],
+    ),
+  );
+}
+
+
+Widget entryField({String title,TextEditingController textEditingController,FaIcon faIcon}) {
+  return Container(
+    margin: EdgeInsets.symmetric(vertical: 10),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          title,
+          style: TextStyle(
+              color: Colors.deepPurpleAccent,
+              fontWeight: FontWeight.bold,
+              fontSize: 15),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        TextField(
+          maxLines: null,
+          style: TextStyle(color: Colors.deepPurpleAccent),
+            controller: textEditingController,
+            cursorColor: Colors.deepPurpleAccent,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+
+                suffixIcon:faIcon,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                fillColor: Colors.black,
+                filled: true))
       ],
     ),
   );
