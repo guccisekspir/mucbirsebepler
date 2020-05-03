@@ -29,19 +29,19 @@ class PostErrorState extends PostState {
 
 //Post kaydetme stateleri
 
-class PostFetchingState extends PostState {
+class PostSavingState extends PostState {
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class PostFetchComplateState extends PostState {
+class PostSavedState extends PostState {
   @override
   // TODO: implement props
   List<Object> get props => null;
 }
 
-class PostFetchErrorState extends PostState {
+class PostSaveErrorState extends PostState {
   @override
   // TODO: implement props
   List<Object> get props => null;

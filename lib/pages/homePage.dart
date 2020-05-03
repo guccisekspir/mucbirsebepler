@@ -10,7 +10,7 @@ import 'package:mucbirsebepler/bloc/navBarBloc.dart';
 import 'package:mucbirsebepler/pages/discoverPage.dart';
 import 'package:mucbirsebepler/pages/profilePage.dart';
 import 'package:mucbirsebepler/pages/shopPage.dart';
-import 'package:mucbirsebepler/pages/tickPage.dart';
+import 'package:mucbirsebepler/pages/postPage.dart';
 
 class HomePage extends StatefulWidget {
   final User user;
@@ -45,50 +45,53 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     GlobalKey _curvedKey = GlobalKey();
-    return Scaffold(
-      body: StreamBuilder(   //bloc yapımızı seçimlerden haberdar etmek
-        stream: _bottomNavBarBloc.itemStream,
-        initialData: _bottomNavBarBloc.defaultItem,
-        // ignore: missing_return
-        builder: (BuildContext context,AsyncSnapshot<NavBarItem> snapshot){
-          switch(snapshot.data){
-            case NavBarItem.PROFILE:
-              return ProfilePage();
-            case NavBarItem.SHOP:
-              return ShopPage();
-            case NavBarItem.TICK:
-              return TickPage();
-            case NavBarItem.HOME:
-              return BlocProvider(
-                  create: (context)=>PostBloc(),
-                  child: DiscoverPage(user: _user,));
-          }
-
-        },
-      ),
-      bottomNavigationBar: SafeArea( //BottomNavBar'ı telefon ui'ı engellememesi için
-        child: StreamBuilder(  //blocdaki streami dinlemek
-            stream: _bottomNavBarBloc.itemStream,
-            initialData: _bottomNavBarBloc.defaultItem,
-            builder: (context, snapshot) {
-              return CurvedNavigationBar(
-                key: _curvedKey,
-                index: 0,
-                height: 50.0,
-                items: <Widget>[
-                  Icon(LineAwesomeIcons.home,color: Colors.deepOrange, size: 30),
-                  Icon(LineAwesomeIcons.newspaper_o,color: Colors.deepOrange, size: 30),
-                  Icon(LineAwesomeIcons.cart_arrow_down,color: Colors.deepOrange, size: 30),
-                  Icon(LineAwesomeIcons.user,color: Colors.deepOrange, size: 30),
-                ],
-                buttonBackgroundColor: Colors.deepPurple,
-                color: Colors.deepPurple,
-                backgroundColor: Colors.deepOrangeAccent,
-                onTap: (index){
-                  _bottomNavBarBloc.pickItem(index);
-                },
-              );
+    return BlocProvider(
+      create: (context)=>PostBloc(),
+      child: Scaffold(
+        body: StreamBuilder(   //bloc yapımızı seçimlerden haberdar etmek
+          stream: _bottomNavBarBloc.itemStream,
+          initialData: _bottomNavBarBloc.defaultItem,
+          // ignore: missing_return
+          builder: (BuildContext context,AsyncSnapshot<NavBarItem> snapshot){
+            switch(snapshot.data){
+              case NavBarItem.PROFILE:
+                return ProfilePage();
+              case NavBarItem.SHOP:
+                return ShopPage();
+              case NavBarItem.TICK:
+                return PostPage();
+              case NavBarItem.HOME:
+                return BlocProvider(
+                    create: (context)=>PostBloc(),
+                    child: DiscoverPage(user: _user,));
             }
+
+          },
+        ),
+        bottomNavigationBar: SafeArea( //BottomNavBar'ı telefon ui'ı engellememesi için
+          child: StreamBuilder(  //blocdaki streami dinlemek
+              stream: _bottomNavBarBloc.itemStream,
+              initialData: _bottomNavBarBloc.defaultItem,
+              builder: (context, snapshot) {
+                return CurvedNavigationBar(
+                  key: _curvedKey,
+                  index: 0,
+                  height: 50.0,
+                  items: <Widget>[
+                    Icon(LineAwesomeIcons.home,color: Colors.deepOrange, size: 30),
+                    Icon(LineAwesomeIcons.newspaper_o,color: Colors.deepOrange, size: 30),
+                    Icon(LineAwesomeIcons.cart_arrow_down,color: Colors.deepOrange, size: 30),
+                    Icon(LineAwesomeIcons.user,color: Colors.deepOrange, size: 30),
+                  ],
+                  buttonBackgroundColor: Colors.deepPurple,
+                  color: Colors.deepPurple,
+                  backgroundColor: Colors.deepOrangeAccent,
+                  onTap: (index){
+                    _bottomNavBarBloc.pickItem(index);
+                  },
+                );
+              }
+          ),
         ),
       ),
     );

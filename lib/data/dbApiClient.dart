@@ -35,6 +35,8 @@ class DbApiClient {
     Post gelenPost= Post.fromMap(gelen.data);
     debugPrint(gelenPost.toString());
 
+    return gelenPost;
+
   }
 
 

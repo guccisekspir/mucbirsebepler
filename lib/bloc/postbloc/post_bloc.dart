@@ -15,15 +15,15 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     PostEvent event,
   ) async* {
     if(event is SavePost){
-      yield PostFetchingState();
+      yield PostSavingState();
       try{
         await _dbRepository.savePost(event.gelenPost);
         await _dbRepository.getPost();
         debugPrint("bloc denemeye geldi");
-        yield PostFetchComplateState();
+        yield PostSavedState();
       }catch(_){
         debugPrint(_.toString());
-        yield PostFetchErrorState();
+        yield PostSaveErrorState();
       }
 
     }
