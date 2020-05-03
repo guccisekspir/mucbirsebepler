@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               case NavBarItem.SHOP:
                 return ShopPage();
               case NavBarItem.TICK:
-                return PostPage();
+                return PostPage(user: _user,);
               case NavBarItem.HOME:
                 return BlocProvider(
                     create: (context)=>PostBloc(),

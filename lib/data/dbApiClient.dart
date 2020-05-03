@@ -26,7 +26,7 @@ class DbApiClient {
   }
 
   Future<bool>savePost(Post post)async{ //TODO düzenlenecek
-    await _firestore.collection("posts").document("eben").setData(post.toMap());
+    await _firestore.collection("posts").document(post.postID).setData(post.toMap());
   }
 
   Future<Post>getPost()async{
