@@ -34,11 +34,14 @@ class _DiscoverPageState extends State<DiscoverPage> {
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         floatingActionButton: FloatingActionButton(
+
           onPressed: (){},
-          child: Icon(
-            LineAwesomeIcons.plus_circle,
-            size: 40,
-            color: Colors.black,
+          child: Center(
+            child: Icon(
+              LineAwesomeIcons.plus,
+              size: 40,
+              color: Colors.black,
+            ),
           ),
           backgroundColor: Colors.deepOrange,
         ),

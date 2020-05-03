@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
@@ -21,6 +22,34 @@ class _PostPageState extends State<PostPage> {
 
   @override
   void initState() {
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => showDialog(
+        context: context,
+        builder: (_) => FlareGiffyDialog(
+          cardBackgroundColor: Colors.black,
+          onlyOkButton: true,
+
+          flarePath: 'assets/minion.flr',
+          flareAnimation: 'Wave',
+          title: Text(
+                '        Haber Paylaşmaya  \n'
+                'Çalıştığınızı görüntülüyorum',
+            maxLines: null,
+
+            style: GoogleFonts.righteous(fontSize: 20,color: Colors.deepPurpleAccent),
+          ),
+          description: Text(
+            "Şimdilik video veya fotoğraf yükleyemiyoruz.:(\n"
+                " Lütfen içerikleri youtube veya farklı bir mecraya yükleyip bu formda belirtiniz.",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.righteous(color: Colors.deepOrange),
+          ),
+          entryAnimation: EntryAnimation.BOTTOM_LEFT,
+          onOkButtonPressed: () {
+            Navigator.of(context).pop();
+          },
+        )));
+
     _postBloc = BlocProvider.of<PostBloc>(context);
     headerController = TextEditingController(text: "");
     descController = TextEditingController(text: "");
@@ -68,7 +97,12 @@ class _PostPageState extends State<PostPage> {
       ),
       body: BlocListener(
         bloc: _postBloc,
-        listener: (context, PostState state) {},
+        listener: (context, PostState state) {
+          if(state is InitialPostState){
+            debugPrint("geldi");
+
+          }
+        },
         child: BlocBuilder(
           bloc: _postBloc,
           builder: (context, PostState state) {

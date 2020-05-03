@@ -59,6 +59,7 @@ flutter:
   assets:
     - assets/dialog.flr
     - assets/edis.png
+    - assets/minion.flr
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
