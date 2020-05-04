@@ -1,3 +1,4 @@
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -13,36 +14,59 @@ class DbApiClient {
     DocumentSnapshot gelenUser =
         await Firestore.instance.document("users/${user.userID}").get();
     debugPrint(gelenUser.toString());
-    if(gelenUser.data==null){
+    if (gelenUser.data == null) {
       await _firestore
           .collection("users")
           .document(user.userID)
           .setData(user.toMap());
       debugPrint(gelenUser.toString());
       return true;
-    }else return true;
-
-
+    } else
+      return true;
   }
 
-  Future<bool>savePost(Post post)async{ //TODO düzenlenecek
-    await _firestore.collection("posts").document(post.postID).setData(post.toMap());
+  Future<bool> savePost(Post post) async {
+    //TODO düzenlenecek
+
+    await _firestore
+        .collection("posts")
+        .document(post.postID)
+        .setData(post.toMap());
   }
 
-  Future<Post>getPost()async{
-    DocumentSnapshot gelen= await _firestore.collection("posts").document("eben").get();
+  Future<Post> getPost() async {
+    DocumentSnapshot gelen =
+        await _firestore.collection("posts").document().get();
 
-    Post gelenPost= Post.fromMap(gelen.data);
+    Post gelenPost = Post.fromMap(gelen.data);
     debugPrint(gelenPost.toString());
 
     return gelenPost;
-
   }
 
+  Future<List<Post>> getAllPost(Post lastFetched, int fetchLimit) async {
+    QuerySnapshot _querySnapshot;
+    List<Post> _postList = [];
+    if (lastFetched == null) {
+      _querySnapshot = await Firestore.instance
+          .collection("posts")
+          .orderBy("liked",descending: true)
+          .limit(fetchLimit)
+          .getDocuments();
+    } else {
+      _querySnapshot = await Firestore.instance
+          .collection("posts")
+          .orderBy("liked")
+          .startAfter([lastFetched.postID])
+          .limit(fetchLimit)
+          .getDocuments();
+    }
 
-
-
-
-
-
+    for (DocumentSnapshot documentSnapshot in _querySnapshot.documents) {
+      Post tekPost = Post.fromMap(documentSnapshot.data);
+      _postList.add(tekPost);
+      debugPrint(tekPost.toString());
+    }
+    return _postList;
+  }
 }

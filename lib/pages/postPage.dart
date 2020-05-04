@@ -112,8 +112,9 @@ class _PostPageState extends State<PostPage> {
                                 title: headerController.text,
                                 description: descController.text,
                                 youtubelink: youtubeController.text,
-                            otherLink: otherController.text);
+                                otherLink: otherController.text);
                             _postBloc.add(SavePost(gelenPost: gidecekPost));
+                            _postBloc.add(GetPost());
                           }
                         },
                         child: CircleAvatar(

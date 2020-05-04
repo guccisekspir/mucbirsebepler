@@ -27,5 +27,15 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       }
 
     }
+
+    if(event is GetPost){
+      yield PostLoadingState();
+      try{
+        await _dbRepository.getAllPost();
+        yield PostLoadedState();
+      }catch(_){
+        yield PostErrorState();
+      }
+    }
   }
 }

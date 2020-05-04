@@ -14,5 +14,13 @@ class SavePost extends PostEvent {
 
   @override
   // TODO: implement props
+  List<Object> get props => [gelenPost];
+}
+
+class GetPost extends PostEvent{
+  @override
+  // TODO: implement props
   List<Object> get props => null;
+
+
 }

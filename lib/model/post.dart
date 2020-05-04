@@ -18,6 +18,7 @@ class Post{
   int liked = 0;
   DateTime createdAt;
 
+
   Post(
       {@required this.owner, @required this.title, @required this.description, this.youtubelink, this.otherLink});
 
@@ -32,7 +33,7 @@ class Post{
       'youtubelink': youtubelink??"",
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
       'otherLink': otherLink??"",
-      'postID': postID ?? owner.userID+randomSayiUret(),
+      'postID': owner.userID+randomSayiUret(),
       'liked': liked??0,
     };
   }
