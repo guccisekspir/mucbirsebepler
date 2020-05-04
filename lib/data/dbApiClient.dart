@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -56,7 +57,7 @@ class DbApiClient {
     } else {
       _querySnapshot = await Firestore.instance
           .collection("posts")
-          .orderBy("liked")
+          .orderBy("liked",descending: true)
           .startAfter([lastFetched.postID])
           .limit(fetchLimit)
           .getDocuments();
