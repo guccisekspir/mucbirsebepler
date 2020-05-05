@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:loading_animations/loading_animations.dart';
@@ -44,8 +45,14 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    var height = MediaQuery
+        .of(context)
+        .size
+        .height;
     ScrollController _scrollController = ScrollController();
     SystemChrome.setEnabledSystemUIOverlays([]);
     return PreferredSize(
@@ -117,7 +124,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                           );
                           final snackBar = SnackBar(
                             content:
-                                Text("İnternet bağlantınızı kontrol ediniz"),
+                            Text("İnternet bağlantınızı kontrol ediniz"),
                             backgroundColor: Colors.red,
                           );
                           Scaffold.of(context).showSnackBar(snackBar);
@@ -133,37 +140,44 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   ],
 
                   child: BlocBuilder<PostBloc, PostState>(
-                      // ignore: missing_return
+                    // ignore: missing_return
                       builder: (context, state) {
-                    if (state is PostLoadingState) {
-                      return waitingWidget;
-                    }
-                    if (state is PostLoadedState) {
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: ListView.builder(
-                            controller: _scrollController,
-                            itemCount: state.listPost.length,
-                            shrinkWrap: true,
-                            itemBuilder: (contex, index) {
-                              return postContainer(
-                                  post: state.listPost[index],
-                                  width: width,
-                                  height: height);
-                            }),
-                      );
-                    }
-                    if (state is InitialPostState) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    if (state is PostErrorState) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  }),
+                        if (state is PostLoadingState) {
+                          return waitingWidget;
+                        }
+                        if (state is PostLoadedState) {
+                          return SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: AnimationLimiter(
+                              child: ListView.builder(
+                                  controller: _scrollController,
+                                  itemCount: state.listPost.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (contex, index) {
+                                    return AnimationConfiguration.staggeredList(
+                                        position: index,
+                                        duration: const Duration(milliseconds: 675),
+                                        child: FlipAnimation(
+                                          child: FadeInAnimation(
+                                            child: postContainer(
+                                                post: state.listPost[index],
+                                                width: width,
+                                                height: height),),));
+                                  }),
+                            ),
+                          );
+                        }
+                        if (state is InitialPostState) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if (state is PostErrorState) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      }),
                 )
               ],
             ),

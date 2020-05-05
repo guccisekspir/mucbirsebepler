@@ -40,6 +40,7 @@ dependencies:
   line_awesome_icons: ^1.0.4+2
   linear_gradient: ^0.1.12
   random_color: ^1.0.5
+  flutter_staggered_animations: ^0.1.2
 
 dev_dependencies:
   flutter_test:
