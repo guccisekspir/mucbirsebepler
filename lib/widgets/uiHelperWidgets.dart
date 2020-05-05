@@ -156,6 +156,36 @@ Widget facebookButton(AuthBloc authBloc) {
 }
 
 
+/*Widget postContainer(){
+
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: ClipRRect(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.elliptical(200,300),
+        topRight: Radius.circular(80),
+        bottomRight: Radius.circular(150.0),
+        bottomLeft: Radius.circular(20.0),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [Colors.deepPurpleAccent,Colors.deepOrange])
+        ),
+        width: width,
+        height: height / 5,
+        child: Stack(children: <Widget>[
+          Align(alignment: Alignment.topRight,child: Padding(padding: EdgeInsets.all(16),child: Text(widget.user.userID),),)
+
+        ],),
+      ),
+    ),
+  ),
+}*/
+
+
 Widget entryField({String title,TextEditingController textEditingController,FaIcon faIcon}) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 10),

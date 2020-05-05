@@ -20,10 +20,12 @@ class DbRepository{
 
   DbApiClient _dbApiClient= getIt<DbApiClient>();
 
-  Future<bool> saveUser(User user)async{
+  Future<User> saveUser(User user)async{
 
     return await _dbApiClient.saveUser(user);
   }
+
+
 
   Future<bool> savePost(Post post)async{
     return await _dbApiClient.savePost(post);

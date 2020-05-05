@@ -21,8 +21,7 @@ class User {
       'email': email,
       'userName':
       userName ?? email.substring(0, email.indexOf('@')) + randomSayiUret(),
-      'profilURL': profilURL ??
-          'https://mob832.com/wp-content/uploads/2019/12/mob-logo-ss-e1576505894400.png',
+      'profilURL': profilURL ?? 'https://emrealtunbilek.com/wp-content/uploads/2016/10/apple-icon-72x72.png',
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
       'seviye': seviye ?? 1,
       'isVerified': isVerified ?? false,

@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_state.dart';
+import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
@@ -21,13 +23,14 @@ class DiscoverPage extends StatefulWidget {
 
 class _DiscoverPageState extends State<DiscoverPage> {
   PostBloc _postBloc;
+  DataBaseBloc _dataBaseBloc;
+  User finalUser;
 
   @override
   void initState() {
-    Post kaydedilecekPost =
-        Post(owner: widget.user, title: "title", description: "desc");
+    debugPrint(widget.user.profilURL);
     _postBloc = BlocProvider.of<PostBloc>(context);
-    _postBloc.add(SavePost(gelenPost: kaydedilecekPost));
+    _postBloc.add(GetUser(userID: widget.user.userID));
     // TODO: implement initState
     super.initState();
   }
@@ -79,27 +82,28 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   ),
                 ),
                 SizedBox(height: 60,),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.elliptical(200,300),
-                      topRight: Radius.circular(80),
-                      bottomRight: Radius.circular(150.0),
-                      bottomLeft: Radius.circular(20.0),
+
+                MultiBlocListener(
+                  listeners: [
+                    BlocListener<DataBaseBloc,DataBaseState>(
+                      listener: (context,state){
+                        if(state is DataBaseLoadedState){
+                          finalUser= state.user;
+                        }
+                      },
                     ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight,
-                            colors: [Colors.deepPurpleAccent,Colors.deepOrange])
-                      ),
-                      width: width,
-                      height: height / 5,
-                    ),
-                  ),
-                ),
+
+                    BlocListener<PostBloc,PostState>(
+                      listener: (context,state){
+
+                      },
+                    )
+
+
+                  ],
+                )
+
+
 
               ],
             ),
@@ -108,4 +112,6 @@ class _DiscoverPageState extends State<DiscoverPage> {
       ),
     );
   }
+
+
 }

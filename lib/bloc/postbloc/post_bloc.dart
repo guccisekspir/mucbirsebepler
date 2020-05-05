@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mucbirsebepler/data/dbRepository.dart';
 import 'package:mucbirsebepler/locator.dart';
+import 'package:mucbirsebepler/model/post.dart';
 import './bloc.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {
@@ -31,8 +32,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     if(event is GetPost){
       yield PostLoadingState();
       try{
-        await _dbRepository.getAllPost();
-        yield PostLoadedState();
+        List<Post> lisPost=await _dbRepository.getAllPost();
+        yield PostLoadedState(listPost: lisPost);
       }catch(_){
         yield PostErrorState();
       }

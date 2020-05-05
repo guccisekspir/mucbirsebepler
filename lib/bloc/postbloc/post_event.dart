@@ -24,3 +24,12 @@ class GetPost extends PostEvent{
 
 
 }
+
+class GetUser extends PostEvent{
+  final String userID;
+
+  GetUser({this.userID});
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}

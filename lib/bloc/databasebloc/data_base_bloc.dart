@@ -23,11 +23,8 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
         //repodan al
 
         User gelenUser= event.user;
-        bool isOk= await dbRepository.saveUser(gelenUser);
-        if(isOk) yield DataBaseLoadedState(isOK: isOk);
-        else yield DataBaseErrorState();
-
-
+        User kaydedilenUser= await dbRepository.saveUser(gelenUser);
+        yield DataBaseLoadedState(user: kaydedilenUser);
       }catch(_){
         debugPrint(_);
         yield DataBaseErrorState();

@@ -16,12 +16,12 @@ class DataBaseLoadingState extends DataBaseState{
   List<Object> get props => null;
 }
 class DataBaseLoadedState extends DataBaseState{
-  final bool isOK;
+  final User user;
 
-  DataBaseLoadedState({this.isOK});
+  DataBaseLoadedState({this.user});
   @override
   // TODO: implement props
-  List<Object> get props => [isOK];
+  List<Object> get props => [user];
 }
 class DataBaseErrorState extends DataBaseState{
   @override

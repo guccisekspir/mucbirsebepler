@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:mucbirsebepler/model/post.dart';
 
 abstract class PostState extends Equatable {
   const PostState();
@@ -16,9 +17,12 @@ class PostLoadingState extends PostState {
 }
 
 class PostLoadedState extends PostState {
+  final List<Post> listPost;
+
+  PostLoadedState({this.listPost});
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object> get props => [listPost];
 }
 
 class PostErrorState extends PostState {
