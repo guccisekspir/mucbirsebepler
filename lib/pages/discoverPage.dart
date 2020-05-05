@@ -27,10 +27,12 @@ class _DiscoverPageState extends State<DiscoverPage> {
   PostBloc _postBloc;
   DataBaseBloc _dataBaseBloc;
   User finalUser;
+  bool ilkMi=true;
   Widget waitingWidget = SizedBox(
     height: 0,
     width: 0,
   );
+  List<Post> postList=[];
 
   @override
   void initState() {
@@ -41,6 +43,13 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
     // TODO: implement initState
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    postList=[];
+    super.dispose();
   }
 
   @override
@@ -60,7 +69,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            _postBloc.add(GetMorePost());
+          },
           child: Center(
             child: Icon(
               LineAwesomeIcons.plus,
@@ -105,7 +116,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                       listener: (context, state) {
                         if (state is DataBaseLoadedState) {
                           finalUser = state.user;
-                          _postBloc.add(GetPost());
+                          ilkMi=true;
                         }
                       },
                     ),
@@ -142,25 +153,32 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   child: BlocBuilder<PostBloc, PostState>(
                     // ignore: missing_return
                       builder: (context, state) {
+                        if(state is InitialPostState){
+                          if(ilkMi)_postBloc.add(GetPost());
+                          ilkMi=false;
+
+                        }
                         if (state is PostLoadingState) {
                           return waitingWidget;
                         }
                         if (state is PostLoadedState) {
+
+                          postList=state.listPost;
                           return SingleChildScrollView(
                             scrollDirection: Axis.vertical,
                             child: AnimationLimiter(
                               child: ListView.builder(
                                   controller: _scrollController,
-                                  itemCount: state.listPost.length,
+                                  itemCount: postList.length,
                                   shrinkWrap: true,
                                   itemBuilder: (contex, index) {
                                     return AnimationConfiguration.staggeredList(
                                         position: index,
-                                        duration: const Duration(milliseconds: 675),
-                                        child: FlipAnimation(
+                                        duration: const Duration(milliseconds: 875),
+                                        child: ScaleAnimation(
                                           child: FadeInAnimation(
                                             child: postContainer(
-                                                post: state.listPost[index],
+                                                post: postList[index],
                                                 width: width,
                                                 height: height),),));
                                   }),

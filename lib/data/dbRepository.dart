@@ -9,8 +9,9 @@ import 'package:mucbirsebepler/model/user.dart';
 class DbRepository{
   List<Post> _postList;
   Post _lastFetchedPost;
-  static final postLimitNumber=5;
+  static final postLimitNumber=3;
   bool hasMore=true;
+  bool istendiMi=true;
 
   DbRepository(){
     _postList=[];
@@ -43,6 +44,9 @@ class DbRepository{
 
     if(_postList.length>0){
       _lastFetchedPost=_postList.last;
+      if(istendiMi){
+        return _postList;
+      }
     }
 
     List<Post> gelenList = await _dbApiClient.getAllPost(_lastFetchedPost,postLimitNumber);
@@ -50,7 +54,9 @@ class DbRepository{
     _postList.addAll(gelenList);
     if(gelenList.length>postLimitNumber) hasMore=false; //Burada çekilen son liste sayısı belirlediğimiz limitten küçükse bir daha çağırılmamasını sağlıyoruz
 
-    return _postList;
+    List<Post> _gideceklist=_postList;
+    return _gideceklist;
+
 
 
 
@@ -58,6 +64,7 @@ class DbRepository{
   }
 
   Future<List<Post>> getMorePost()async{
+    istendiMi=false;
     if(hasMore) return await getAllPost(lastPost: _lastFetchedPost);
 
   }

@@ -8,7 +8,6 @@ class DbApiClient {
   final Firestore _firestore = Firestore.instance;
 
   Future<User> saveUser(User user) async {
-    debugPrint("apiye geliyo");
     DocumentSnapshot gelenUser =
         await Firestore.instance.document("users/${user.userID}").get();
     debugPrint(gelenUser.toString());
