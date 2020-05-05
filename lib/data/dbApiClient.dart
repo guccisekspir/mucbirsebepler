@@ -6,6 +6,8 @@ import 'package:mucbirsebepler/model/user.dart';
 
 class DbApiClient {
   final Firestore _firestore = Firestore.instance;
+  QuerySnapshot _querySnapshot;
+  var lastDocument;
 
   Future<User> saveUser(User user) async {
     DocumentSnapshot gelenUser =
@@ -54,24 +56,28 @@ class DbApiClient {
   }
 
   Future<List<Post>> getAllPost(Post lastFetched, int fetchLimit) async {
-    QuerySnapshot _querySnapshot;
+
     List<Post> _postList = [];
     if (lastFetched == null) {
+      debugPrint("nulla giriyo");
       _querySnapshot = await Firestore.instance
           .collection("posts")
           .orderBy("liked", descending: true)
           .limit(fetchLimit)
           .getDocuments();
     } else {
+      debugPrint("else girioy"+lastFetched.postID);
       _querySnapshot = await Firestore.instance
           .collection("posts")
           .orderBy("liked", descending: true)
-          .startAfter([lastFetched.postID])
+          .startAfterDocument(lastDocument)
           .limit(fetchLimit)
           .getDocuments();
     }
+    lastDocument = _querySnapshot.documents[_querySnapshot.documents.length - 1];
 
     for (DocumentSnapshot documentSnapshot in _querySnapshot.documents) {
+
       Post tekPost = Post.fromMap(documentSnapshot.data);
       _postList.add(tekPost);
     }
