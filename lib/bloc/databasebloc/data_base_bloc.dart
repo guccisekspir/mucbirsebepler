@@ -38,7 +38,7 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
         //repodan al
 
         String gelenUser= event.userID;
-        User kaydedilenUser= await dbRepository.getUser(gelenUser));
+        User kaydedilenUser= await dbRepository.getUser(gelenUser);
         yield DataBaseLoadedState(user: kaydedilenUser);
       }catch(_){
         debugPrint(_);

@@ -17,8 +17,6 @@ class DbApiClient {
           .collection("users")
           .document(user.userID)
           .setData(user.toMap());
-      debugPrint(gelenUser.toString());
-
       Map<String, dynamic> _okunanUserBilgileriMap = gelenUser.data;
       User okunanUser = User.fromMap(_okunanUserBilgileriMap);
       return okunanUser;
@@ -52,7 +50,6 @@ class DbApiClient {
         await _firestore.collection("posts").document().get();
 
     Post gelenPost = Post.fromMap(gelen.data);
-    debugPrint(gelenPost.toString());
 
     return gelenPost;
   }
@@ -78,7 +75,6 @@ class DbApiClient {
     for (DocumentSnapshot documentSnapshot in _querySnapshot.documents) {
       Post tekPost = Post.fromMap(documentSnapshot.data);
       _postList.add(tekPost);
-      debugPrint(tekPost.toString());
     }
     return _postList;
   }

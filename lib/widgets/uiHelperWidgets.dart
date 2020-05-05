@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
+import 'package:mucbirsebepler/model/post.dart';
+import 'package:mucbirsebepler/model/user.dart';
 
 
 
@@ -156,7 +158,7 @@ Widget facebookButton(AuthBloc authBloc) {
 }
 
 
-/*Widget postContainer(){
+Widget postContainer({Post post,double width,double height}){
 
   return Padding(
     padding: const EdgeInsets.all(8.0),
@@ -177,13 +179,13 @@ Widget facebookButton(AuthBloc authBloc) {
         width: width,
         height: height / 5,
         child: Stack(children: <Widget>[
-          Align(alignment: Alignment.topRight,child: Padding(padding: EdgeInsets.all(16),child: Text(widget.user.userID),),)
+          Align(alignment: Alignment.topRight,child: Padding(padding: EdgeInsets.all(16),child: Text(post.postID),),)
 
         ],),
       ),
     ),
-  ),
-}*/
+  );
+}
 
 
 Widget entryField({String title,TextEditingController textEditingController,FaIcon faIcon}) {
