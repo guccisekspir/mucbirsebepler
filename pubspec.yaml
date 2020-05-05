@@ -38,6 +38,8 @@ dependencies:
   flare_flutter: ^2.0.3
   curved_navigation_bar: ^0.3.2
   line_awesome_icons: ^1.0.4+2
+  linear_gradient: ^0.1.12
+  random_color: ^1.0.5
 
 dev_dependencies:
   flutter_test:

@@ -1,9 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:linear_gradient/linear_gradient.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
+import 'package:mucbirsebepler/util/colors.dart';
 import 'package:mucbirsebepler/model/user.dart';
+import 'package:random_color/random_color.dart';
 
 
 
@@ -157,6 +162,9 @@ Widget facebookButton(AuthBloc authBloc) {
   );
 }
 
+List<Color> colorCombination = LinearGradientStyle.getColorCombination(
+    gradientType: LinearGradientStyle.GRADIENT_TYPE_ROYAL);
+
 
 Widget postContainer({Post post,double width,double height}){
 
@@ -171,11 +179,9 @@ Widget postContainer({Post post,double width,double height}){
       ),
       child: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                colors: [Colors.deepPurpleAccent,Colors.deepOrange])
-        ),
+            gradient: LinearGradientStyle.linearGradient(
+                orientation: LinearGradientStyle.ORIENTATION_HORIZONTAL,
+                gradientType: Random().nextInt(200))),
         width: width,
         height: height / 5,
         child: Stack(children: <Widget>[
@@ -186,6 +192,9 @@ Widget postContainer({Post post,double width,double height}){
     ),
   );
 }
+
+
+
 
 
 Widget entryField({String title,TextEditingController textEditingController,FaIcon faIcon}) {
