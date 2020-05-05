@@ -31,5 +31,20 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
 
       }
     }
+
+    if(event is GetUserr){
+      yield DataBaseLoadingState();
+      try{
+        //repodan al
+
+        String gelenUser= event.userID;
+        User kaydedilenUser= await dbRepository.getUser(gelenUser));
+        yield DataBaseLoadedState(user: kaydedilenUser);
+      }catch(_){
+        debugPrint(_);
+        yield DataBaseErrorState();
+
+      }
+    }
   }
 }

@@ -25,6 +25,10 @@ class DbRepository{
     return await _dbApiClient.saveUser(user);
   }
 
+  Future<User>getUser(String userID)async{
+    return await _dbApiClient.getUser(userID);
+  }
+
 
 
   Future<bool> savePost(Post post)async{

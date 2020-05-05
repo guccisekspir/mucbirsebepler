@@ -5,12 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_state.dart';
-import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
+import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 
 class DiscoverPage extends StatefulWidget {
   final User user;
@@ -25,12 +26,15 @@ class _DiscoverPageState extends State<DiscoverPage> {
   PostBloc _postBloc;
   DataBaseBloc _dataBaseBloc;
   User finalUser;
+  Widget waitingWidget=SizedBox(height: 0,width: 0,);
 
   @override
   void initState() {
     debugPrint(widget.user.profilURL);
     _postBloc = BlocProvider.of<PostBloc>(context);
-    _postBloc.add(GetUser(userID: widget.user.userID));
+    _dataBaseBloc=BlocProvider.of<DataBaseBloc>(context);
+    _dataBaseBloc.add(GetUserr(userID: widget.user.userID));
+
     // TODO: implement initState
     super.initState();
   }
@@ -89,18 +93,33 @@ class _DiscoverPageState extends State<DiscoverPage> {
                       listener: (context,state){
                         if(state is DataBaseLoadedState){
                           finalUser= state.user;
+                          _postBloc.add(GetPost());
                         }
                       },
                     ),
 
                     BlocListener<PostBloc,PostState>(
                       listener: (context,state){
+                        if(state is PostLoadingState){
+                          waitingWidget= LoadingBouncingGrid.square(
+                            borderColor: Colors.deepPurple,
+                            backgroundColor: Colors.deepPurple,
+                          );
+                        }
 
                       },
                     )
 
 
                   ],
+                  // ignore: missing_return
+                  child: BlocBuilder<PostBloc,PostState>(builder: (context,state){
+                    if(state is PostLoadingState){
+                      return waitingWidget;
+                    }
+
+
+                  }),
                 )
 
 

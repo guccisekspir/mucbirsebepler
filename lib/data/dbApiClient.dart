@@ -29,6 +29,15 @@ class DbApiClient {
   }
 
 
+  Future<User>getUser(String userID) async{
+    DocumentSnapshot gelenUser =
+    await Firestore.instance.document("users/$userID").get();
+    User okunanUser = User.fromMap(gelenUser.data);
+    return okunanUser;
+
+  }
+
+
   Future<bool> savePost(Post post) async {
     //TODO düzenlenecek
 
@@ -73,4 +82,6 @@ class DbApiClient {
     }
     return _postList;
   }
+
+
 }

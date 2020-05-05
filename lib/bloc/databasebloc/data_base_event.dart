@@ -16,3 +16,12 @@ class SaveUserDB extends DataBaseEvent{
 
 
 }
+
+class GetUserr extends DataBaseEvent{
+final String userID;
+
+GetUserr({this.userID});
+@override
+// TODO: implement props
+List<Object> get props => [userID];
+}
