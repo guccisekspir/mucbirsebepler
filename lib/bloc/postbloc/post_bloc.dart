@@ -46,6 +46,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         yield PostLoadedState(listPost: listPost);
 
       }catch(_){
+        debugPrint(_.toString());
         yield PostErrorState();
       }
     }

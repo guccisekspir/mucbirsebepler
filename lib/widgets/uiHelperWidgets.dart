@@ -182,7 +182,14 @@ Widget postContainer({Post post,double width,double height}){
         width: width,
         height: height / 5,
         child: Stack(children: <Widget>[
-          Align(alignment: Alignment.topRight,child: Padding(padding: EdgeInsets.all(16),child: Text(post.owner.userName),),)
+          Align(alignment: Alignment.topRight,child: Padding(padding: EdgeInsets.all(8),child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Text(post.owner.userName),
+              CircleAvatar(backgroundImage: NetworkImage(post.owner.profilURL,),backgroundColor: Colors.black,),
+
+            ],
+          ),),)
 
         ],),
       ),

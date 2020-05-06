@@ -156,6 +156,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                         if(state is InitialPostState){
                           if(ilkMi)_postBloc.add(GetPost());
                           ilkMi=false;
+                          return CircularProgressIndicator(backgroundColor: Colors.blue,);
 
                         }
                         if (state is PostLoadingState) {
@@ -183,11 +184,6 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                                 height: height),),));
                                   }),
                             ),
-                          );
-                        }
-                        if (state is InitialPostState) {
-                          return Center(
-                            child: CircularProgressIndicator(),
                           );
                         }
                         if (state is PostErrorState) {

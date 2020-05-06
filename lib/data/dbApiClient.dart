@@ -78,6 +78,7 @@ class DbApiClient {
     }
     lastDocument = _querySnapshot.documents[_querySnapshot.documents.length - 1];
 
+
     for (DocumentSnapshot documentSnapshot in _querySnapshot.documents) {
 
       Post tekPost = Post.fromMap(documentSnapshot.data);
