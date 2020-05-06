@@ -28,6 +28,8 @@ class DbApiClient {
   }
 
 
+
+
   Future<User>getUser(String userID) async{
     DocumentSnapshot gelenUser =
     await Firestore.instance.document("users/$userID").get();

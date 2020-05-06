@@ -20,7 +20,9 @@ class Post{
 
 
   Post(
-      {@required this.owner, @required this.title, @required this.description, this.youtubelink, this.otherLink});
+      {@required this.owner, @required this.title, @required this.description, this.youtubelink, this.otherLink}){
+    debugPrint(owner.toString());
+  }
 
 
 

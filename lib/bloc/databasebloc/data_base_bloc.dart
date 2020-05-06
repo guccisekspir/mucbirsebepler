@@ -41,7 +41,7 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
         User kaydedilenUser= await dbRepository.getUser(gelenUser);
         yield DataBaseLoadedState(user: kaydedilenUser);
       }catch(_){
-        debugPrint(_);
+        debugPrint(_.toString());
         yield DataBaseErrorState();
 
       }

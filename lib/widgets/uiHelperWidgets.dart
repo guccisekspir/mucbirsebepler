@@ -6,9 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:linear_gradient/linear_gradient.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
-import 'package:mucbirsebepler/util/colors.dart';
-import 'package:mucbirsebepler/model/user.dart';
-import 'package:random_color/random_color.dart';
 
 
 
@@ -185,7 +182,7 @@ Widget postContainer({Post post,double width,double height}){
         width: width,
         height: height / 5,
         child: Stack(children: <Widget>[
-          Align(alignment: Alignment.topRight,child: Padding(padding: EdgeInsets.all(16),child: Text(post.postID),),)
+          Align(alignment: Alignment.topRight,child: Padding(padding: EdgeInsets.all(16),child: Text(post.owner.userName),),)
 
         ],),
       ),

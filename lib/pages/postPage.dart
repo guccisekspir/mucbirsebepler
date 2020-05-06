@@ -21,6 +21,8 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   PostBloc _postBloc;
+  DataBaseBloc _dataBaseBloc;
+  User cekilenUser;
   TextEditingController headerController;
   TextEditingController descController;
   TextEditingController youtubeController;
@@ -55,6 +57,8 @@ class _PostPageState extends State<PostPage> {
             )));
 
     _postBloc = BlocProvider.of<PostBloc>(context);
+    _dataBaseBloc= BlocProvider.of<DataBaseBloc>(context);
+    _dataBaseBloc.add(GetUserr(userID: widget.user.userID));
     headerController = TextEditingController(text: "");
     descController = TextEditingController(text: "");
     youtubeController = TextEditingController(text: "");
@@ -84,112 +88,129 @@ class _PostPageState extends State<PostPage> {
               fontWeight: FontWeight.bold),
         ),
       ),
-      body: BlocListener(
-        bloc: _postBloc,
-        listener: (context, PostState state) {
-          if (state is InitialPostState) {
-            debugPrint("geldi");
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<PostBloc,PostState>(listener: (context,state){
+
+
+          },),
+          BlocListener<DataBaseBloc,DataBaseState>(listener: (context,state){
+            if(state is DataBaseLoadedState){
+              setState(() {
+                cekilenUser=state.user;
+              });
+
+            }
+
+
+          },)
+
+        ],
         child: BlocBuilder(
           bloc: _postBloc,
+          // ignore: missing_return
           builder: (context, PostState state) {
-            return Container(
-              color: Colors.deepOrangeAccent,
-              width: screenWidth,
-              height: screenHeight,
-              child: Stack(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          if (formKey.currentState.validate()) {
-                            Post gidecekPost = Post(
-                                owner: widget.user,
-                                title: headerController.text,
-                                description: descController.text,
-                                youtubelink: youtubeController.text,
-                                otherLink: otherController.text);
-                            _postBloc.add(SavePost(gelenPost: gidecekPost));
-                            _postBloc.add(GetPost());
-                          }
-                        },
-                        child: CircleAvatar(
-                            radius: 30,
-                            backgroundColor: Colors.black,
-                            child: Icon(
-                              FontAwesomeIcons.plus,
-                              size: 30,
-                              color: Colors.red,
-                            )),
+            if(cekilenUser==null){
+              return Center(child: CircularProgressIndicator(),);
+            }
+            else{
+              return Container(
+                color: Colors.deepOrangeAccent,
+                width: screenWidth,
+                height: screenHeight,
+                child: Stack(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: GestureDetector(
+                          onTap: () {
+                            if (formKey.currentState.validate()) {
+                              Post gidecekPost = Post(
+                                  owner: cekilenUser,
+                                  title: headerController.text,
+                                  description: descController.text,
+                                  youtubelink: youtubeController.text,
+                                  otherLink: otherController.text);
+                              _postBloc.add(SavePost(gelenPost: gidecekPost));
+                              _postBloc.add(GetPost());
+                            }
+                          },
+                          child: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.black,
+                              child: Icon(
+                                FontAwesomeIcons.plus,
+                                size: 30,
+                                color: Colors.red,
+                              )),
+                        ),
                       ),
                     ),
-                  ),
-                  SingleChildScrollView(
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: entryField(
-                                title: "Haber Başlığı",
-                                textEditingController: headerController,
-                                faIcon: FaIcon(
-                                  FontAwesomeIcons.horseHead,
-                                  color: Colors.deepPurpleAccent,
-                                  size: 30,
-                                )),
-                          ),
-                          lineDivider(),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                            child: entryField(
-                                title: "Haber İçeriği",
-                                textEditingController: descController,
-                                faIcon: FaIcon(
-                                  FontAwesomeIcons.userNinja,
-                                  color: Colors.deepPurpleAccent,
-                                  size: 30,
-                                )),
-                          ),
-                          lineDivider(),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                            child: entryField(
-                                title: "Youtube Linki",
-                                textEditingController: youtubeController,
-                                faIcon: FaIcon(
-                                  FontAwesomeIcons.youtube,
-                                  color: Colors.deepPurpleAccent,
-                                  size: 30,
-                                )),
-                          ),
-                          lineDivider(),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                            child: entryField(
-                                title: "Diğer Linkler",
-                                textEditingController: otherController,
-                                faIcon: FaIcon(
-                                  FontAwesomeIcons.slack,
-                                  color: Colors.deepPurpleAccent,
-                                  size: 30,
-                                )),
-                          ),
-                        ],
+                    SingleChildScrollView(
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: entryField(
+                                  title: "Haber Başlığı",
+                                  textEditingController: headerController,
+                                  faIcon: FaIcon(
+                                    FontAwesomeIcons.horseHead,
+                                    color: Colors.deepPurpleAccent,
+                                    size: 30,
+                                  )),
+                            ),
+                            lineDivider(),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                              child: entryField(
+                                  title: "Haber İçeriği",
+                                  textEditingController: descController,
+                                  faIcon: FaIcon(
+                                    FontAwesomeIcons.userNinja,
+                                    color: Colors.deepPurpleAccent,
+                                    size: 30,
+                                  )),
+                            ),
+                            lineDivider(),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                              child: entryField(
+                                  title: "Youtube Linki",
+                                  textEditingController: youtubeController,
+                                  faIcon: FaIcon(
+                                    FontAwesomeIcons.youtube,
+                                    color: Colors.deepPurpleAccent,
+                                    size: 30,
+                                  )),
+                            ),
+                            lineDivider(),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                              child: entryField(
+                                  title: "Diğer Linkler",
+                                  textEditingController: otherController,
+                                  faIcon: FaIcon(
+                                    FontAwesomeIcons.slack,
+                                    color: Colors.deepPurpleAccent,
+                                    size: 30,
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            );
+                  ],
+                ),
+              );
+            }
           },
         ),
       ),
