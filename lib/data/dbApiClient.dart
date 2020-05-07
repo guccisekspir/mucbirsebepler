@@ -76,7 +76,10 @@ class DbApiClient {
           .limit(fetchLimit)
           .getDocuments();
     }
-    lastDocument = _querySnapshot.documents[_querySnapshot.documents.length - 1];
+    if(_querySnapshot.documents.length!=0){
+      lastDocument = _querySnapshot.documents[_querySnapshot.documents.length - 1];
+    }
+
 
 
     for (DocumentSnapshot documentSnapshot in _querySnapshot.documents) {

@@ -27,15 +27,18 @@ class _DiscoverPageState extends State<DiscoverPage> {
   PostBloc _postBloc;
   DataBaseBloc _dataBaseBloc;
   User finalUser;
-  bool ilkMi=true;
+  bool hasMore = false;
+  ScrollController _scrollController;
   Widget waitingWidget = SizedBox(
     height: 0,
     width: 0,
   );
-  List<Post> postList=[];
+  List<Post> postList = [];
 
   @override
   void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(_listeScrollListener);
     debugPrint(widget.user.profilURL);
     _postBloc = BlocProvider.of<PostBloc>(context);
     _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
@@ -48,21 +51,15 @@ class _DiscoverPageState extends State<DiscoverPage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    postList=[];
+    postList = [];
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery
-        .of(context)
-        .size
-        .width;
-    var height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    ScrollController _scrollController = ScrollController();
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+
     return PreferredSize(
       preferredSize: Size.fromHeight(50),
       child: Scaffold(
@@ -70,6 +67,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             _postBloc.add(GetMorePost());
+            hasMore = true;
           },
           child: Center(
             child: Icon(
@@ -106,26 +104,26 @@ class _DiscoverPageState extends State<DiscoverPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
                 MultiBlocListener(
                   listeners: [
                     BlocListener<DataBaseBloc, DataBaseState>(
                       listener: (context, state) {
                         if (state is DataBaseLoadedState) {
                           finalUser = state.user;
-                          ilkMi=true;
                         }
                       },
                     ),
                     BlocListener<PostBloc, PostState>(
                       listener: (context, state) {
                         if (state is PostLoadingState) {
-                          waitingWidget = LoadingBouncingGrid.square(
-                            borderColor: Colors.deepPurple,
-                            backgroundColor: Colors.deepPurple,
-                          );
+                          if (!hasMore) {
+                            waitingWidget = Center(
+                              child: LoadingBouncingGrid.square(
+                                borderColor: Colors.deepPurple,
+                                backgroundColor: Colors.deepPurple,
+                              ),
+                            );
+                          }
                         }
                         if (state is PostErrorState) {
                           waitingWidget = SizedBox(
@@ -134,12 +132,13 @@ class _DiscoverPageState extends State<DiscoverPage> {
                           );
                           final snackBar = SnackBar(
                             content:
-                            Text("İnternet bağlantınızı kontrol ediniz"),
+                                Text("İnternet bağlantınızı kontrol ediniz"),
                             backgroundColor: Colors.red,
                           );
                           Scaffold.of(context).showSnackBar(snackBar);
                         }
                         if (state is PostLoadedState) {
+                          hasMore = false;
                           waitingWidget = SizedBox(
                             height: 0,
                             width: 0,
@@ -148,48 +147,55 @@ class _DiscoverPageState extends State<DiscoverPage> {
                       },
                     )
                   ],
-
                   child: BlocBuilder<PostBloc, PostState>(
-                    // ignore: missing_return
+                      // ignore: missing_return
                       builder: (context, state) {
-                        if(state is InitialPostState){
-                          _postBloc.add(GetPost());
-                          return CircularProgressIndicator(backgroundColor: Colors.blue,);
-
-                        }
-                        if (state is PostLoadingState) {
-                          return waitingWidget;
-                        }
-                        if (state is PostLoadedState) {
-
-                          postList=state.listPost;
-                          return SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: AnimationLimiter(
-                              child: ListView.builder(
-                                  controller: _scrollController,
-                                  itemCount: postList.length,
-                                  shrinkWrap: true,
-                                  itemBuilder: (contex, index) {
-                                    return AnimationConfiguration.staggeredList(
-                                        position: index,
-                                        duration: const Duration(milliseconds: 875),
-                                        child: ScaleAnimation(
-                                          child: FadeInAnimation(
-                                            child: postContainer(
-                                                post: postList[index],
-                                                width: width,
-                                                height: height,context:context),),));
-                                  }),
-                            ),
-                          );
-                        }
-                        if (state is PostErrorState) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      }),
+                    if (state is InitialPostState) {
+                      _postBloc.add(GetPost());
+                      return CircularProgressIndicator(
+                        backgroundColor: Colors.blue,
+                      );
+                    }
+                    if (state is PostLoadingState) {
+                      return Center(child: waitingWidget);
+                    }
+                    if (state is PostLoadedState) {
+                      if (!hasMore) {
+                        postList = state.listPost;
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: AnimationLimiter(
+                            child: ListView.builder(
+                                controller: _scrollController,
+                                itemCount: hasMore
+                                    ? postList.length + 1
+                                    : postList.length,
+                                shrinkWrap: true,
+                                itemBuilder: (contex, index) {
+                                  return AnimationConfiguration.staggeredList(
+                                      position: index,
+                                      duration:
+                                          const Duration(milliseconds: 875),
+                                      child: ScaleAnimation(
+                                        child: FadeInAnimation(
+                                          child: postContainer(
+                                              post: postList[index],
+                                              width: width,
+                                              height: height,
+                                              context: context),
+                                        ),
+                                      ));
+                                }),
+                          ),
+                        );
+                      }
+                    }
+                    if (state is PostErrorState) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
                 )
               ],
             ),
@@ -197,5 +203,14 @@ class _DiscoverPageState extends State<DiscoverPage> {
         ),
       ),
     );
+  }
+
+  void _listeScrollListener() {
+    if (_scrollController.offset <=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      debugPrint("Listenin en altındayız");
+      _postBloc.add(GetMorePost());
+    }
   }
 }
