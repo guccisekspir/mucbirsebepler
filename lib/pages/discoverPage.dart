@@ -181,7 +181,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                             child: postContainer(
                                                 post: postList[index],
                                                 width: width,
-                                                height: height),),));
+                                                height: height,context:context),),));
                                   }),
                             ),
                           );

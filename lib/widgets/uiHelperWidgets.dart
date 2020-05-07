@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_reactive_button/flutter_reactive_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:linear_gradient/linear_gradient.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
@@ -151,11 +152,12 @@ Widget facebookButton(AuthBloc authBloc) {
     ),
   );
 }
-
+BuildContext gelenContext;
 List<Color> colorCombination = LinearGradientStyle.getColorCombination(
     gradientType: LinearGradientStyle.GRADIENT_TYPE_ROYAL);
 
-Widget postContainer({Post post, double width, double height}) {
+Widget postContainer({Post post, double width, double height,BuildContext context}) {
+  gelenContext=context;
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Stack(
@@ -239,7 +241,7 @@ Widget postContainer({Post post, double width, double height}) {
                   ),
                 ),
                 Positioned(
-                  top: 150,
+                  bottom: 5,
                   left: 30,
                   child: buton,
                 )
@@ -331,35 +333,17 @@ List<Widget> badgeleriGetir(){
 }
 
 String facebook;
+MaterialColor likeBackground=Colors.red;
 
 Widget buton = ReactiveButton(
   containerAbove: false,
-  child: Container(
-    decoration: BoxDecoration(
-      border: Border.all(
-        color: Colors.black,
-        width: 1.0,
-      ),
-      color: Colors.white,
-    ),
-    width: 80.0,
-    height: 40.0,
-    child: Center(
-      child: facebook == null
-          ? Text('click')
-          : Image.asset(
-        'assets/edis.png',
-        width: 32.0,
-        height: 32.0,
-      ),
-    ),
-  ),
+  child: CircleAvatar(backgroundColor: likeBackground,child: Icon(LineAwesomeIcons.heart_o,size: 30,)),
   icons: _facebook, //_flags,
   onTap: () {
-    print('TAP');
+    Scaffold.of(gelenContext).showSnackBar(SnackBar(content: Text("Lütfen Basılı tutunuz"),backgroundColor: Colors.deepPurple,duration: Duration(milliseconds: 500),));
   },
   onSelected: (ReactiveIconDefinition button) {
-    facebook=button.code;
+    likeBackground=Colors.deepPurple;
     debugPrint(button.code);
   },
   iconWidth: 32.0,
@@ -369,24 +353,24 @@ Widget buton = ReactiveButton(
 
 List<ReactiveIconDefinition> _facebook = <ReactiveIconDefinition>[
   ReactiveIconDefinition(
-    assetIcon: 'assets/edis.png',
-    code: 'like',
-  ),
-  ReactiveIconDefinition(
     assetIcon: 'assets/j.gif',
-    code: 'haha',
+    code: 'j',
   ),
   ReactiveIconDefinition(
     assetIcon: 'assets/veri.gif',
-    code: 'love',
+    code: 'tik',
   ),
   ReactiveIconDefinition(
     assetIcon: 'assets/lg.gif',
-    code: 'sad',
+    code: 'lgbt',
   ),
   ReactiveIconDefinition(
     assetIcon: 'assets/garnit.gif',
-    code: 'wow',
+    code: 'garnit',
+  ),
+  ReactiveIconDefinition(
+    assetIcon: 'assets/edis.png',
+    code: 'edis',
   ),
 ];
 
