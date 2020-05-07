@@ -9,6 +9,7 @@ import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:linear_gradient/linear_gradient.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
+import 'package:mucbirsebepler/pages/profilePage.dart';
 
 Widget backButton(BuildContext context) {
   return InkWell(
@@ -210,11 +211,16 @@ Widget postContainer(
                           ),
                           Align(
                               alignment: Alignment.topRight,
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                  post.owner.profilURL,
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage(gelenUser: post.owner,)));
+                                },
+                                child: CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                    post.owner.profilURL,
+                                  ),
+                                  backgroundColor: Colors.black,
                                 ),
-                                backgroundColor: Colors.black,
                               )),
                         ],
                       ),
