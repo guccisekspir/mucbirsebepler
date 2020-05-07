@@ -41,6 +41,7 @@ dependencies:
   linear_gradient: ^0.1.12
   random_color: ^1.0.5
   flutter_staggered_animations: ^0.1.2
+  flutter_reactive_button: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,10 @@ flutter:
     - assets/dialog.flr
     - assets/edis.png
     - assets/minion.flr
+    - assets/j.gif
+    - assets/veri.gif
+    - assets/lg.gif
+    - assets/garnit.gif
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
