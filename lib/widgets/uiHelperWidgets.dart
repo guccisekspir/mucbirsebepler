@@ -7,8 +7,6 @@ import 'package:linear_gradient/linear_gradient.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
 
-
-
 Widget backButton(BuildContext context) {
   return InkWell(
     onTap: () {
@@ -29,10 +27,6 @@ Widget backButton(BuildContext context) {
     ),
   );
 }
-
-
-
-
 
 Widget divider() {
   return Container(
@@ -72,8 +66,7 @@ Widget divider() {
   );
 }
 
-Widget lineDivider(){
-
+Widget lineDivider() {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 1),
     child: Row(
@@ -105,7 +98,6 @@ Widget lineDivider(){
   );
 }
 
-
 Widget facebookButton(AuthBloc authBloc) {
   return Container(
     height: 50,
@@ -121,8 +113,7 @@ Widget facebookButton(AuthBloc authBloc) {
             decoration: BoxDecoration(
               color: Colors.redAccent,
               borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(5),
-                  topLeft: Radius.circular(5)),
+                  bottomLeft: Radius.circular(5), topLeft: Radius.circular(5)),
             ),
             alignment: Alignment.center,
             child: Text('G',
@@ -162,46 +153,102 @@ Widget facebookButton(AuthBloc authBloc) {
 List<Color> colorCombination = LinearGradientStyle.getColorCombination(
     gradientType: LinearGradientStyle.GRADIENT_TYPE_ROYAL);
 
-
-Widget postContainer({Post post,double width,double height}){
-
+Widget postContainer({Post post, double width, double height}) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
-    child: ClipRRect(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.elliptical(200,300),
-        topRight: Radius.circular(80),
-        bottomRight: Radius.circular(150.0),
-        bottomLeft: Radius.circular(20.0),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradientStyle.linearGradient(
-                orientation: LinearGradientStyle.ORIENTATION_HORIZONTAL,
-                gradientType: Random().nextInt(200))),
-        width: width,
-        height: height / 5,
-        child: Stack(children: <Widget>[
-          Align(alignment: Alignment.topRight,child: Padding(padding: EdgeInsets.all(8),child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Text(post.owner.userName),
-              CircleAvatar(backgroundImage: NetworkImage(post.owner.profilURL,),backgroundColor: Colors.black,),
+    child: Stack(
+      children: <Widget>[
 
-            ],
-          ),),)
+        ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.elliptical(200, 300),
+            topRight: Radius.circular(80),
+            bottomRight: Radius.circular(150.0),
+            bottomLeft: Radius.circular(20.0),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradientStyle.linearGradient(
+                    orientation: LinearGradientStyle.ORIENTATION_HORIZONTAL,
+                    gradientType: Random().nextInt(200))),
+            width: width,
+            height: height / 4,
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                post.owner.userName,
+                                style: GoogleFonts.righteous(fontSize: 15),
+                              ),
+                              Text(
+                                "Tarafından paylaşıldı",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 10, fontWeight: FontWeight.w300),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Align(
+                              alignment: Alignment.topRight,
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                  post.owner.profilURL,
+                                ),
+                                backgroundColor: Colors.black,
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top:80,
+                  left: 30,
+                  child: Container(
+                    child: Text(
+                      post.title,
+                      style: GoogleFonts.fredokaOne(fontSize: 16),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 100,
+                  left: 30,
+                  child: Container(
+                    width: width/1.5,
+                    child: Text(
+                      post.description.length>60?post.description.substring(0,60):post.description,
+                      style: GoogleFonts.roboto(fontSize: 14),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Align(alignment: Alignment.topCenter,child: CircleAvatar(backgroundImage: NetworkImage(post.owner.profilURL),),),
+      ],
 
-        ],),
-      ),
     ),
   );
 }
 
-
-
-
-
-Widget entryField({String title,TextEditingController textEditingController,FaIcon faIcon}) {
+Widget entryField(
+    {String title,
+    TextEditingController textEditingController,
+    FaIcon faIcon}) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 10),
     child: Column(
@@ -209,38 +256,44 @@ Widget entryField({String title,TextEditingController textEditingController,FaIc
       children: <Widget>[
         Text(
           title,
-          style: GoogleFonts.righteous(color: Colors.deepPurple,fontWeight: FontWeight.bold,fontSize: 20),
+          style: GoogleFonts.righteous(
+              color: Colors.deepPurple,
+              fontWeight: FontWeight.bold,
+              fontSize: 20),
         ),
         SizedBox(
           height: 10,
         ),
         TextFormField(
-            validator: (e){
+            validator: (e) {
               String yazilacak;
 
-              if(title=="Haber Başlığı"){
-                if(e.isEmpty)yazilacak="Lütfen Başlığı giriniz";
+              if (title == "Haber Başlığı") {
+                if (e.isEmpty) yazilacak = "Lütfen Başlığı giriniz";
               }
-              if(title=="Haber İçeriği"){
-                if(e.isEmpty)yazilacak="Lütfen içeriği giriniz";
+              if (title == "Haber İçeriği") {
+                if (e.isEmpty) yazilacak = "Lütfen içeriği giriniz";
               }
-              if(title=="Youtube Linki"){
-                if(e!=""&&!e.contains("youtube"))yazilacak="Lütfen sadece youtube linki giriniz";
+              if (title == "Youtube Linki") {
+                if (e != "" && !e.contains("youtube"))
+                  yazilacak = "Lütfen sadece youtube linki giriniz";
               }
               return yazilacak;
             },
-          maxLines: null,
-          style: GoogleFonts.roboto(color: Colors.deepPurple),
+            maxLines: null,
+            style: GoogleFonts.roboto(color: Colors.deepPurple),
             controller: textEditingController,
             cursorColor: Colors.deepPurpleAccent,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-
-                suffixIcon:faIcon,
+                suffixIcon: faIcon,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                errorStyle: GoogleFonts.adventPro(fontSize: 15,color: Colors.black,fontWeight: FontWeight.bold),
+                errorStyle: GoogleFonts.adventPro(
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
                 fillColor: Colors.black,
                 filled: true))
       ],
