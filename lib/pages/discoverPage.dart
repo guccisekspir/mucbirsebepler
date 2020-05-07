@@ -63,7 +63,6 @@ class _DiscoverPageState extends State<DiscoverPage> {
         .size
         .height;
     ScrollController _scrollController = ScrollController();
-    SystemChrome.setEnabledSystemUIOverlays([]);
     return PreferredSize(
       preferredSize: Size.fromHeight(50),
       child: Scaffold(

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_button/flutter_reactive_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,7 +9,6 @@ import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:linear_gradient/linear_gradient.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
-
 
 Widget backButton(BuildContext context) {
   return InkWell(
@@ -152,17 +152,18 @@ Widget facebookButton(AuthBloc authBloc) {
     ),
   );
 }
+
 BuildContext gelenContext;
 List<Color> colorCombination = LinearGradientStyle.getColorCombination(
     gradientType: LinearGradientStyle.GRADIENT_TYPE_ROYAL);
 
-Widget postContainer({Post post, double width, double height,BuildContext context}) {
-  gelenContext=context;
+Widget postContainer(
+    {Post post, double width, double height, BuildContext context}) {
+  gelenContext = context;
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Stack(
       children: <Widget>[
-
         ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.elliptical(200, 300),
@@ -188,8 +189,9 @@ Widget postContainer({Post post, double width, double height,BuildContext contex
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          Row(children: badgeleriGetir(),),
-
+                          Row(
+                            children: badgeleriGetir(),
+                          ),
                           Column(
                             children: <Widget>[
                               Text(
@@ -220,7 +222,7 @@ Widget postContainer({Post post, double width, double height,BuildContext contex
                   ),
                 ),
                 Positioned(
-                  top:80,
+                  top: 80,
                   left: 30,
                   child: Container(
                     child: Text(
@@ -233,10 +235,23 @@ Widget postContainer({Post post, double width, double height,BuildContext contex
                   top: 100,
                   left: 30,
                   child: Container(
-                    width: width/1.5,
-                    child: Text(
-                      post.description.length>60?post.description.substring(0,60):post.description,
-                      style: GoogleFonts.roboto(fontSize: 14),
+                    width: width / 1.5,
+                    child: RichText(
+                      text: TextSpan(
+                        text: post.description.length > 60
+                            ? post.description.substring(0, 50)+" "
+                            : post.description+" ",
+                        style: GoogleFonts.roboto(fontSize: 14,color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(
+                              recognizer:  TapGestureRecognizer()..onTap=(){
+
+                              },
+                              text: 'Daha fazlasını gör',
+                              style: TextStyle(fontWeight: FontWeight.bold,decoration: TextDecoration.underline)),
+
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -249,9 +264,7 @@ Widget postContainer({Post post, double width, double height,BuildContext contex
             ),
           ),
         ),
-
       ],
-
     ),
   );
 }
@@ -312,44 +325,76 @@ Widget entryField(
   );
 }
 
-List<Widget> badgeleriGetir(){
-  List<Widget> liste=[];
+List<Widget> badgeleriGetir() {
+  List<Widget> liste = [];
   liste.add(Padding(
     padding: const EdgeInsets.all(2.0),
-    child: Align(alignment: Alignment.topRight,
-        child: CircleAvatar(child: Center(child: Icon(FontAwesomeIcons.star,size: 16,)),radius: 16,)),
+    child: Align(
+        alignment: Alignment.topRight,
+        child: CircleAvatar(
+          child: Center(
+              child: Icon(
+            FontAwesomeIcons.star,
+            size: 16,
+          )),
+          radius: 16,
+        )),
   ));
   liste.add(Padding(
     padding: const EdgeInsets.all(2.0),
-    child: Align(alignment: Alignment.topRight,
-        child: CircleAvatar(child: Center(child: Icon(FontAwesomeIcons.star,size: 16,)),radius: 16,)),
+    child: Align(
+        alignment: Alignment.topRight,
+        child: CircleAvatar(
+          child: Center(
+              child: Icon(
+            FontAwesomeIcons.star,
+            size: 16,
+          )),
+          radius: 16,
+        )),
   ));
   liste.add(Padding(
     padding: const EdgeInsets.all(2.0),
-    child: Align(alignment: Alignment.topRight,
-        child: CircleAvatar(child: Center(child: Icon(FontAwesomeIcons.star,size: 16,)),radius: 16,)),
+    child: Align(
+        alignment: Alignment.topRight,
+        child: CircleAvatar(
+          child: Center(
+              child: Icon(
+            FontAwesomeIcons.star,
+            size: 16,
+          )),
+          radius: 16,
+        )),
   ));
   return liste;
 }
 
 String facebook;
-MaterialColor likeBackground=Colors.red;
+MaterialColor likeBackground = Colors.red;
 
 Widget buton = ReactiveButton(
   containerAbove: false,
-  child: CircleAvatar(backgroundColor: likeBackground,child: Icon(LineAwesomeIcons.heart_o,size: 30,)),
-  icons: _facebook, //_flags,
+  child: CircleAvatar(
+      backgroundColor: likeBackground,
+      child: Icon(
+        LineAwesomeIcons.heart_o,
+        size: 30,
+      )),
+  icons: _facebook,
+  //_flags,
   onTap: () {
-    Scaffold.of(gelenContext).showSnackBar(SnackBar(content: Text("Lütfen Basılı tutunuz"),backgroundColor: Colors.deepPurple,duration: Duration(milliseconds: 500),));
+    Scaffold.of(gelenContext).showSnackBar(SnackBar(
+      content: Text("Lütfen Basılı tutunuz"),
+      backgroundColor: Colors.deepPurple,
+      duration: Duration(milliseconds: 500),
+    ));
   },
   onSelected: (ReactiveIconDefinition button) {
-    likeBackground=Colors.deepPurple;
+    likeBackground = Colors.deepPurple;
     debugPrint(button.code);
   },
   iconWidth: 32.0,
 );
-
-
 
 List<ReactiveIconDefinition> _facebook = <ReactiveIconDefinition>[
   ReactiveIconDefinition(
@@ -373,5 +418,3 @@ List<ReactiveIconDefinition> _facebook = <ReactiveIconDefinition>[
     code: 'edis',
   ),
 ];
-
-
