@@ -175,7 +175,7 @@ Widget postContainer(
             decoration: BoxDecoration(
                 gradient: LinearGradientStyle.linearGradient(
                     orientation: LinearGradientStyle.ORIENTATION_HORIZONTAL,
-                    gradientType: Random().nextInt(200))),
+                    gradientType: Random().nextInt(20))),
             width: width,
             height: height / 4,
             child: Stack(
@@ -238,9 +238,9 @@ Widget postContainer(
                     width: width / 1.5,
                     child: RichText(
                       text: TextSpan(
-                        text: post.description.length > 60
-                            ? post.description.substring(0, 50)+" "
-                            : post.description+" ",
+                        text: post.description.length > 50
+                            ? post.description.substring(0,50)+"... "
+                            : post.description+"... ",
                         style: GoogleFonts.roboto(fontSize: 14,color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(

@@ -35,6 +35,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         listPost=await _dbRepository.getAllPost();
         yield PostLoadedState(listPost: listPost);
       }catch(_){
+        debugPrint("getpost "+_.toString());
         yield PostErrorState();
       }
     }

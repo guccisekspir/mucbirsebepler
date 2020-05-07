@@ -153,8 +153,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                     // ignore: missing_return
                       builder: (context, state) {
                         if(state is InitialPostState){
-                          if(ilkMi)_postBloc.add(GetPost());
-                          ilkMi=false;
+                          _postBloc.add(GetPost());
                           return CircularProgressIndicator(backgroundColor: Colors.blue,);
 
                         }
