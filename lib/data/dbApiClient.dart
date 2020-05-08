@@ -13,7 +13,6 @@ class DbApiClient {
   Future<User> saveUser(User user) async {
     DocumentSnapshot gelenUser =
         await Firestore.instance.document("users/${user.userID}").get();
-    debugPrint(gelenUser.toString());
     if (gelenUser.data == null) {
       await _firestore
           .collection("users")
@@ -45,8 +44,6 @@ class DbApiClient {
 
     var userMap = post.toMap();
     var postID =userMap['postID'];
-    debugPrint("buraya elyiooo "+userMap.toString());
-    debugPrint("Burayadaaa "+ postID);
     try{
       await _firestore
           .collection("posts")
@@ -60,19 +57,19 @@ class DbApiClient {
 
   }
 
-  Future<Post> getPost() async {
-    DocumentSnapshot gelen =
-        await _firestore.collection("posts").document().get();
 
-    Post gelenPost = Post.fromMap(gelen.data);
-
-    return gelenPost;
-  }
 
   Future<void> likePost(String postID)async{
 
+    _firestore.collection("posts").document(postID).updateData({"liked":FieldValue.increment(1)});
 
 
+
+  }
+
+  Stream<DocumentSnapshot> getLikes(String postID){
+
+    return _firestore.collection("posts").document(postID).snapshots();
   }
 
   Future<List<Post>> getAllPost(Post lastFetched, int fetchLimit) async {

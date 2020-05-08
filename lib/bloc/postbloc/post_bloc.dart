@@ -20,7 +20,6 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       yield PostSavingState();
       try{
         await _dbRepository.savePost(event.gelenPost);
-        await _dbRepository.getPost();
         debugPrint("bloc denemeye geldi");
         yield PostSavedState();
       }catch(_){
@@ -49,6 +48,16 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       }catch(_){
         debugPrint(_.toString());
         yield PostErrorState();
+      }
+    }
+    if(event is GetLikes){
+      yield StreamingState();
+      try{
+        Stream stream = _dbRepository.getlikes(event.postID);
+        yield StreamedState(stream: stream);
+
+      }catch(_){
+        yield StreamErrorState();
       }
     }
 

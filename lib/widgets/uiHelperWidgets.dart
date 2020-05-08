@@ -271,7 +271,30 @@ Widget postContainer(
                   left: 30,
                   child: Row(
                     children: <Widget>[
-                      buton,
+                    ReactiveButton(
+                    containerAbove: false,
+                    child: CircleAvatar(
+                        backgroundColor: likeBackground,
+                        child: Icon(
+                          LineAwesomeIcons.heart_o,
+                          size: 30,
+                        )),
+                    icons: _facebook,
+                    //_flags,
+                    onTap: () {
+                      Scaffold.of(gelenContext).showSnackBar(SnackBar(
+                        content: Text("Lütfen Basılı tutunuz"),
+                        backgroundColor: Colors.deepPurple,
+                        duration: Duration(milliseconds: 500),
+                      ));
+                    },
+                    onSelected: (ReactiveIconDefinition button) {
+                      gelenBloc.add(LikePost(postID:post.postID));
+
+
+                    },
+                    iconWidth: 32.0,
+                  ),
                       SizedBox(width: 5,),
                       Text(post.liked.toString()+" Kere Beğenildi!",style: GoogleFonts.righteous(fontSize: 20),),
                     ],
@@ -389,30 +412,7 @@ List<Widget> badgeleriGetir() {
 String facebook;
 MaterialColor likeBackground = Colors.red;
 
-Widget buton = ReactiveButton(
-  containerAbove: false,
-  child: CircleAvatar(
-      backgroundColor: likeBackground,
-      child: Icon(
-        LineAwesomeIcons.heart_o,
-        size: 30,
-      )),
-  icons: _facebook,
-  //_flags,
-  onTap: () {
-    Scaffold.of(gelenContext).showSnackBar(SnackBar(
-      content: Text("Lütfen Basılı tutunuz"),
-      backgroundColor: Colors.deepPurple,
-      duration: Duration(milliseconds: 500),
-    ));
-  },
-  onSelected: (ReactiveIconDefinition button) {
-    gelenBloc.add(LikePost(postID:gelenPost.postID));
 
-
-  },
-  iconWidth: 32.0,
-);
 
 List<ReactiveIconDefinition> _facebook = <ReactiveIconDefinition>[
   ReactiveIconDefinition(

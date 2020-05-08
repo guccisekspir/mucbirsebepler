@@ -25,6 +25,17 @@ class GetPost extends PostEvent{
 
 }
 
+class GetLikes extends PostEvent{
+  final String postID;
+
+  GetLikes(this.postID);
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
+
+
+}
+
 class GetMorePost extends PostEvent{
   @override
   // TODO: implement props

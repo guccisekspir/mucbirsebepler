@@ -1,6 +1,7 @@
 
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mucbirsebepler/data/dbApiClient.dart';
 import 'package:mucbirsebepler/locator.dart';
 import 'package:mucbirsebepler/model/post.dart';
@@ -36,9 +37,7 @@ class DbRepository{
     return await _dbApiClient.savePost(post);
   }
 
-  Future<Post> getPost()async{
-    return await _dbApiClient.getPost();
-  }
+
 
   Future<List<Post>> getAllPost({Post lastPost})async{
 
@@ -72,6 +71,12 @@ class DbRepository{
   Future<void> likePost(String postID)async{
 
     return await _dbApiClient.likePost(postID);
+  }
+
+  Stream<DocumentSnapshot> getlikes(String postID){
+
+    return _dbApiClient.getLikes(postID);
+
   }
 
   Future<Null> refresh() async {

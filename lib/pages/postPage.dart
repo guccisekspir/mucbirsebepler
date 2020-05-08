@@ -92,6 +92,58 @@ class _PostPageState extends State<PostPage> {
         listeners: [
           BlocListener<PostBloc,PostState>(listener: (context,state){
 
+            if(state is PostSavedState){
+
+              showDialog( //TODO bunu uihelpera ekle
+                  context: context,
+                  builder: (_) => FlareGiffyDialog(
+                    onlyOkButton: true,
+                    flarePath: 'assets/dialog.flr',
+                    flareAnimation: 'jump',
+                    title: Text(
+                      'Postun uzayın derinliklerine gönderildi',
+                      style: TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.w600),
+                    ),
+                    description: Text(
+                      "Şaka şaka. Postun yayınlandı tospik",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    entryAnimation: EntryAnimation.TOP_RIGHT,
+                    onOkButtonPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ));
+
+            }
+
+            if(state is PostSaveErrorState){
+
+              showDialog(
+                  context: context,
+                  builder: (_) => FlareGiffyDialog(
+                    onlyOkButton: true,
+                    flarePath: 'assets/dialog.flr',
+                    flareAnimation: 'jump',
+                    title: Text(
+                      'Bir şeyler ters gitti Tospik',
+                      style: TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.w600),
+                    ),
+                    description: Text(
+                      "Daha sonra tekrar deneyebilir misin ? ",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(),
+                    ),
+                    entryAnimation: EntryAnimation.TOP_RIGHT,
+                    onOkButtonPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ));
+
+            }
+
 
           },),
           BlocListener<DataBaseBloc,DataBaseState>(listener: (context,state){
@@ -186,10 +238,6 @@ class _PostPageState extends State<PostPage> {
                         alignment: Alignment.bottomRight,
                         child: GestureDetector(
                           onTap: () {
-                            debugPrint(headerController.text);
-                            debugPrint(descController.text);
-                            debugPrint(youtubeController.text);
-                            debugPrint(cekilenUser.toString());
                             if (formKey.currentState.validate()) {
                               Post gidecekPost = Post(
                                   owner: cekilenUser,

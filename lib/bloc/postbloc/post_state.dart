@@ -50,3 +50,28 @@ class PostSaveErrorState extends PostState {
   // TODO: implement props
   List<Object> get props => null;
 }
+
+class StreamingState extends PostState{
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
+
+
+}
+class StreamedState extends PostState{
+  final Stream stream;
+
+  StreamedState({this.stream});
+  @override
+  // TODO: implement props
+  List<Object> get props => [stream];
+
+
+}
+class StreamErrorState extends PostState{
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
+
+
+}
