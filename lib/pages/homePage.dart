@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
@@ -45,8 +46,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     GlobalKey _curvedKey = GlobalKey();
-    return BlocProvider(
-      create: (context)=>PostBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<PostBloc>(create: (context)=>PostBloc(),),
+        BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),)
+
+      ],
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         body: StreamBuilder(   //bloc yapımızı seçimlerden haberdar etmek
@@ -56,7 +61,7 @@ class _HomePageState extends State<HomePage> {
           builder: (BuildContext context,AsyncSnapshot<NavBarItem> snapshot){
             switch(snapshot.data){
               case NavBarItem.PROFILE:
-                return ProfilePage();
+                return ProfilePage(gelenUser: _user,);
               case NavBarItem.SHOP:
                 return ShopPage();
               case NavBarItem.TICK:

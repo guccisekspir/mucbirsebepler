@@ -79,7 +79,7 @@ class _PostPageState extends State<PostPage> {
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: Text(
-          "Mücbir Haber Paylaş",
+          "Mücbir İddia Paylaş",
           style: GoogleFonts.pressStart2p(
               fontSize: 15,
               color: Colors.black,
