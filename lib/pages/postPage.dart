@@ -120,34 +120,7 @@ class _PostPageState extends State<PostPage> {
                 height: screenHeight,
                 child: Stack(
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: GestureDetector(
-                          onTap: () {
-                            if (formKey.currentState.validate()) {
-                              Post gidecekPost = Post(
-                                  owner: cekilenUser,
-                                  title: headerController.text,
-                                  description: descController.text,
-                                  youtubelink: youtubeController.text,
-                                  otherLink: otherController.text);
-                              _postBloc.add(SavePost(gelenPost: gidecekPost));
-                              _postBloc.add(GetPost());
-                            }
-                          },
-                          child: CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.black,
-                              child: Icon(
-                                FontAwesomeIcons.plus,
-                                size: 30,
-                                color: Colors.red,
-                              )),
-                        ),
-                      ),
-                    ),
+
                     SingleChildScrollView(
                       child: Form(
                         key: formKey,
@@ -204,6 +177,34 @@ class _PostPageState extends State<PostPage> {
                                   )),
                             ),
                           ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: GestureDetector(
+                          onTap: () {
+                            if (formKey.currentState.validate()) {
+                              Post gidecekPost = Post(
+                                  owner: cekilenUser,
+                                  title: headerController.text,
+                                  description: descController.text,
+                                  youtubelink: youtubeController.text,
+                                  otherLink: otherController.text);
+                              _postBloc.add(SavePost(gelenPost: gidecekPost));
+                              _postBloc.add(GetPost());
+                            }
+                          },
+                          child: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.black,
+                              child: Icon(
+                                FontAwesomeIcons.plus,
+                                size: 30,
+                                color: Colors.red,
+                              )),
                         ),
                       ),
                     ),

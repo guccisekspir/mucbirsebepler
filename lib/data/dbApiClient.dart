@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 
@@ -41,6 +42,7 @@ class DbApiClient {
 
   Future<bool> savePost(Post post) async {
     //TODO düzenlenecek
+    debugPrint("post id is "+post.postID);
 
     await _firestore
         .collection("posts")
@@ -55,6 +57,12 @@ class DbApiClient {
     Post gelenPost = Post.fromMap(gelen.data);
 
     return gelenPost;
+  }
+
+  Future<void> likePost(String postID)async{
+
+
+
   }
 
   Future<List<Post>> getAllPost(Post lastFetched, int fetchLimit) async {
@@ -89,6 +97,8 @@ class DbApiClient {
     }
     return _postList;
   }
+
+
 
 
 }

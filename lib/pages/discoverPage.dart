@@ -179,6 +179,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       child: ScaleAnimation(
                                         child: FadeInAnimation(
                                           child: postContainer(
+                                              bloc: _postBloc,
                                               post: postList[index],
                                               width: width,
                                               height: height,

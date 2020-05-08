@@ -69,6 +69,11 @@ class DbRepository{
 
   }
 
+  Future<void> likePost(String postID)async{
+
+    return await _dbApiClient.likePost(postID);
+  }
+
   Future<Null> refresh() async {
     hasMore = true;
     _lastFetchedPost = null;

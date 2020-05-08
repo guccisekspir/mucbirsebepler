@@ -51,5 +51,9 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         yield PostErrorState();
       }
     }
+
+    if(event is LikePost){
+      await _dbRepository.likePost(event.postID);
+    }
   }
 }

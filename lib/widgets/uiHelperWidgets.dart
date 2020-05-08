@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:linear_gradient/linear_gradient.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
+import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/pages/profilePage.dart';
 
@@ -157,10 +158,14 @@ Widget facebookButton(AuthBloc authBloc) {
 BuildContext gelenContext;
 List<Color> colorCombination = LinearGradientStyle.getColorCombination(
     gradientType: LinearGradientStyle.GRADIENT_TYPE_ROYAL);
+PostBloc gelenBloc;
+Post gelenPost;
 
 Widget postContainer(
-    {Post post, double width, double height, BuildContext context}) {
+    {Post post, double width, double height, BuildContext context,bloc}) {
   gelenContext = context;
+  gelenBloc=bloc;
+  gelenPost=post;
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Stack(
@@ -264,7 +269,13 @@ Widget postContainer(
                 Positioned(
                   bottom: 5,
                   left: 30,
-                  child: buton,
+                  child: Row(
+                    children: <Widget>[
+                      buton,
+                      SizedBox(width: 5,),
+                      Text(post.liked.toString()+" Kere Beğenildi!",style: GoogleFonts.righteous(fontSize: 20),),
+                    ],
+                  ),
                 )
               ],
             ),
@@ -396,8 +407,9 @@ Widget buton = ReactiveButton(
     ));
   },
   onSelected: (ReactiveIconDefinition button) {
-    likeBackground = Colors.deepPurple;
-    debugPrint(button.code);
+    gelenBloc.add(LikePost(postID:gelenPost.postID));
+
+
   },
   iconWidth: 32.0,
 );

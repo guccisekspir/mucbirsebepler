@@ -32,3 +32,13 @@ class GetMorePost extends PostEvent{
 
 
 }
+
+class LikePost extends PostEvent{
+  final String postID;
+
+  LikePost({this.postID});
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
+
+}
