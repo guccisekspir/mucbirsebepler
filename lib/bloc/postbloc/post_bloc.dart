@@ -24,7 +24,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         debugPrint("bloc denemeye geldi");
         yield PostSavedState();
       }catch(_){
-        debugPrint(_.toString());
+        debugPrint("savede hata "+_.toString());
         yield PostSaveErrorState();
       }
 

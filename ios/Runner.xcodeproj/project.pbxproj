@@ -15,6 +15,7 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		B031E1DE0CB77BB1153BB5D1 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E898D835645EF66657A71DA /* Pods_Runner.framework */; };
+		FC190FDA2B8BB7E9F91720FB /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4C2D1924659B0400D6FD0D /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +37,32 @@
 		1B962A7AA3C55F2CEE1A09DD /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		2E898D835645EF66657A71DA /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		4B4C2CE724659B0400D6FD0D /* absl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = absl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CE924659B0400D6FD0D /* AppAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CEB24659B0400D6FD0D /* cloud_firestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = cloud_firestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CED24659B0400D6FD0D /* FBLPromises.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBLPromises.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CEF24659B0400D6FD0D /* firebase_auth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = firebase_auth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CF124659B0400D6FD0D /* firebase_core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = firebase_core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CF324659B0400D6FD0D /* firebase_storage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = firebase_storage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CF524659B0400D6FD0D /* FirebaseAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CF724659B0400D6FD0D /* FirebaseCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CF924659B0400D6FD0D /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseCoreDiagnostics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CFB24659B0400D6FD0D /* FirebaseFirestore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseFirestore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CFD24659B0400D6FD0D /* FirebaseInstallations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseInstallations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2CFF24659B0400D6FD0D /* FirebaseStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FirebaseStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D0124659B0400D6FD0D /* google_sign_in.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = google_sign_in.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D0324659B0400D6FD0D /* GoogleDataTransport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D0524659B0400D6FD0D /* GoogleDataTransportCCTSupport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleDataTransportCCTSupport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D0724659B0400D6FD0D /* GoogleUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D0924659B0400D6FD0D /* grpc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = grpc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D0B24659B0400D6FD0D /* grpcpp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = grpcpp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D0D24659B0400D6FD0D /* GTMAppAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GTMAppAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D0F24659B0400D6FD0D /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GTMSessionFetcher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D1124659B0400D6FD0D /* leveldb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = leveldb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D1324659B0400D6FD0D /* nanopb.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = nanopb.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D1524659B0400D6FD0D /* openssl_grpc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = openssl_grpc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D1724659B0400D6FD0D /* path_provider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = path_provider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B4C2D1924659B0400D6FD0D /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BF3015C245DD152001D1F6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7294FAB6B9E0724387DF7297 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -57,6 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B031E1DE0CB77BB1153BB5D1 /* Pods_Runner.framework in Frameworks */,
+				FC190FDA2B8BB7E9F91720FB /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +94,32 @@
 		30B98CC2A07612B50B92FAE8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4B4C2CE724659B0400D6FD0D /* absl.framework */,
+				4B4C2CE924659B0400D6FD0D /* AppAuth.framework */,
+				4B4C2CEB24659B0400D6FD0D /* cloud_firestore.framework */,
+				4B4C2CED24659B0400D6FD0D /* FBLPromises.framework */,
+				4B4C2CEF24659B0400D6FD0D /* firebase_auth.framework */,
+				4B4C2CF124659B0400D6FD0D /* firebase_core.framework */,
+				4B4C2CF324659B0400D6FD0D /* firebase_storage.framework */,
+				4B4C2CF524659B0400D6FD0D /* FirebaseAuth.framework */,
+				4B4C2CF724659B0400D6FD0D /* FirebaseCore.framework */,
+				4B4C2CF924659B0400D6FD0D /* FirebaseCoreDiagnostics.framework */,
+				4B4C2CFB24659B0400D6FD0D /* FirebaseFirestore.framework */,
+				4B4C2CFD24659B0400D6FD0D /* FirebaseInstallations.framework */,
+				4B4C2CFF24659B0400D6FD0D /* FirebaseStorage.framework */,
+				4B4C2D0124659B0400D6FD0D /* google_sign_in.framework */,
+				4B4C2D0324659B0400D6FD0D /* GoogleDataTransport.framework */,
+				4B4C2D0524659B0400D6FD0D /* GoogleDataTransportCCTSupport.framework */,
+				4B4C2D0724659B0400D6FD0D /* GoogleUtilities.framework */,
+				4B4C2D0924659B0400D6FD0D /* grpc.framework */,
+				4B4C2D0B24659B0400D6FD0D /* grpcpp.framework */,
+				4B4C2D0D24659B0400D6FD0D /* GTMAppAuth.framework */,
+				4B4C2D0F24659B0400D6FD0D /* GTMSessionFetcher.framework */,
+				4B4C2D1124659B0400D6FD0D /* leveldb.framework */,
+				4B4C2D1324659B0400D6FD0D /* nanopb.framework */,
+				4B4C2D1524659B0400D6FD0D /* openssl_grpc.framework */,
+				4B4C2D1724659B0400D6FD0D /* path_provider.framework */,
+				4B4C2D1924659B0400D6FD0D /* Pods_Runner.framework */,
 				2E898D835645EF66657A71DA /* Pods_Runner.framework */,
 			);
 			name = Frameworks;
@@ -132,7 +186,6 @@
 				7294FAB6B9E0724387DF7297 /* Pods-Runner.release.xcconfig */,
 				1B962A7AA3C55F2CEE1A09DD /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -327,7 +380,6 @@
 /* Begin XCBuildConfiguration section */
 		249021D3217E4FDB00AE95B9 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -404,7 +456,6 @@
 		};
 		97C147031CF9000F007C117D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -460,7 +511,6 @@
 		};
 		97C147041CF9000F007C117D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

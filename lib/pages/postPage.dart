@@ -186,6 +186,10 @@ class _PostPageState extends State<PostPage> {
                         alignment: Alignment.bottomRight,
                         child: GestureDetector(
                           onTap: () {
+                            debugPrint(headerController.text);
+                            debugPrint(descController.text);
+                            debugPrint(youtubeController.text);
+                            debugPrint(cekilenUser.toString());
                             if (formKey.currentState.validate()) {
                               Post gidecekPost = Post(
                                   owner: cekilenUser,

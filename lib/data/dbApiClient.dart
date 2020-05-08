@@ -42,12 +42,22 @@ class DbApiClient {
 
   Future<bool> savePost(Post post) async {
     //TODO düzenlenecek
-    debugPrint("post id is "+post.postID);
 
-    await _firestore
-        .collection("posts")
-        .document(post.postID)
-        .setData(post.toMap());
+    var userMap = post.toMap();
+    var postID =userMap['postID'];
+    debugPrint("buraya elyiooo "+userMap.toString());
+    debugPrint("Burayadaaa "+ postID);
+    try{
+      await _firestore
+          .collection("posts")
+          .document(postID)
+          .setData(userMap);
+      debugPrint("deniyo");
+
+    }catch(_){
+      debugPrint("bu dhata "+_.toString());
+    }
+
   }
 
   Future<Post> getPost() async {

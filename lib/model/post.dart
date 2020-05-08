@@ -28,6 +28,7 @@ class Post{
 
 
   Map<String, dynamic> toMap() {
+    debugPrint("maapp "+owner.toMap().toString());
     return {
       'owner': owner.toMap(),
       'title': title,
