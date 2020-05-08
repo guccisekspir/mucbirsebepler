@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_button/flutter_reactive_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -158,14 +160,15 @@ Widget facebookButton(AuthBloc authBloc) {
 BuildContext gelenContext;
 List<Color> colorCombination = LinearGradientStyle.getColorCombination(
     gradientType: LinearGradientStyle.GRADIENT_TYPE_ROYAL);
-PostBloc gelenBloc;
+
 Post gelenPost;
 
 Widget postContainer(
     {Post post, double width, double height, BuildContext context,bloc}) {
   gelenContext = context;
-  gelenBloc=bloc;
+  PostBloc gelenBloc=bloc;
   gelenPost=post;
+
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Stack(
@@ -296,7 +299,12 @@ Widget postContainer(
                     iconWidth: 32.0,
                   ),
                       SizedBox(width: 5,),
-                      Text(post.liked.toString()+" Kere Beğenildi!",style: GoogleFonts.righteous(fontSize: 20),),
+                      StreamBuilder(
+                        stream: Firestore.instance.collection("posts").document(post.postID).snapshots(),
+                        builder: (context,snapshot){
+                          return Text(snapshot.data["liked"].toString()+" Kere Beğenildi",style: GoogleFonts.righteous(),);
+                        },
+                      )
                     ],
                   ),
                 )
