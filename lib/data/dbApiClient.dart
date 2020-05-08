@@ -67,10 +67,6 @@ class DbApiClient {
 
   }
 
-  Stream<DocumentSnapshot> getLikes(String postID){
-
-    return _firestore.collection("posts").document(postID).snapshots();
-  }
 
   Future<List<Post>> getAllPost(Post lastFetched, int fetchLimit) async {
 

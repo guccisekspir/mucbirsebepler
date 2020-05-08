@@ -73,11 +73,7 @@ class DbRepository{
     return await _dbApiClient.likePost(postID);
   }
 
-  Stream<DocumentSnapshot> getlikes(String postID){
 
-    return _dbApiClient.getLikes(postID);
-
-  }
 
   Future<Null> refresh() async {
     hasMore = true;

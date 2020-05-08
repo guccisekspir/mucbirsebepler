@@ -50,16 +50,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         yield PostErrorState();
       }
     }
-    if(event is GetLikes){
-      yield StreamingState();
-      try{
-        Stream stream = _dbRepository.getlikes(event.postID);
-        yield StreamedState(stream: stream);
 
-      }catch(_){
-        yield StreamErrorState();
-      }
-    }
 
     if(event is LikePost){
       await _dbRepository.likePost(event.postID);
