@@ -164,10 +164,10 @@ List<Color> colorCombination = LinearGradientStyle.getColorCombination(
 Post gelenPost;
 
 Widget postContainer(
-    {Post post, double width, double height, BuildContext context,bloc}) {
+    {Post post, double width, double height, BuildContext context, bloc}) {
   gelenContext = context;
-  PostBloc gelenBloc=bloc;
-  gelenPost=post;
+  PostBloc gelenBloc = bloc;
+  gelenPost = post;
 
   return Padding(
     padding: const EdgeInsets.all(8.0),
@@ -220,8 +220,13 @@ Widget postContainer(
                           Align(
                               alignment: Alignment.topRight,
                               child: GestureDetector(
-                                onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage(gelenUser: post.owner,)));
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ProfilePage(
+                                                gelenUser: post.owner,
+                                              )));
                                 },
                                 child: CircleAvatar(
                                   backgroundImage: NetworkImage(
@@ -241,7 +246,7 @@ Widget postContainer(
                   child: Container(
                     child: Text(
                       post.title,
-                      style: GoogleFonts.fredokaOne(fontSize: 16),
+                      style: GoogleFonts.abrilFatface(fontSize: 16),
                     ),
                   ),
                 ),
@@ -253,17 +258,17 @@ Widget postContainer(
                     child: RichText(
                       text: TextSpan(
                         text: post.description.length > 50
-                            ? post.description.substring(0,50)+"... "
-                            : post.description+"... ",
-                        style: GoogleFonts.roboto(fontSize: 14,color: Colors.black),
+                            ? post.description.substring(0, 50) + "... "
+                            : post.description + "... ",
+                        style: GoogleFonts.roboto(
+                            fontSize: 14, color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(
-                              recognizer:  TapGestureRecognizer()..onTap=(){
-
-                              },
+                              recognizer: TapGestureRecognizer()..onTap = () {},
                               text: 'Daha fazlasını gör',
-                              style: TextStyle(fontWeight: FontWeight.bold,decoration: TextDecoration.underline)),
-
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline)),
                         ],
                       ),
                     ),
@@ -274,35 +279,42 @@ Widget postContainer(
                   left: 30,
                   child: Row(
                     children: <Widget>[
-                    ReactiveButton(
-                    containerAbove: false,
-                    child: CircleAvatar(
-                        backgroundColor: likeBackground,
-                        child: Icon(
-                          LineAwesomeIcons.heart_o,
-                          size: 30,
-                        )),
-                    icons: _facebook,
-                    //_flags,
-                    onTap: () {
-                      Scaffold.of(gelenContext).showSnackBar(SnackBar(
-                        content: Text("Lütfen Basılı tutunuz"),
-                        backgroundColor: Colors.deepPurple,
-                        duration: Duration(milliseconds: 500),
-                      ));
-                    },
-                    onSelected: (ReactiveIconDefinition button) {
-                      gelenBloc.add(LikePost(postID:post.postID));
-
-
-                    },
-                    iconWidth: 32.0,
-                  ),
-                      SizedBox(width: 5,),
+                      ReactiveButton(
+                        containerAbove: false,
+                        child: CircleAvatar(
+                            backgroundColor: likeBackground,
+                            child: Icon(
+                              LineAwesomeIcons.heart_o,
+                              size: 30,
+                            )),
+                        icons: _facebook,
+                        //_flags,
+                        onTap: () {
+                          Scaffold.of(gelenContext).showSnackBar(SnackBar(
+                            content: Text("Lütfen Basılı tutunuz"),
+                            backgroundColor: Colors.deepPurple,
+                            duration: Duration(milliseconds: 500),
+                          ));
+                        },
+                        onSelected: (ReactiveIconDefinition button) {
+                          gelenBloc.add(LikePost(postID: post.postID));
+                        },
+                        iconWidth: 32.0,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
                       StreamBuilder(
-                        stream: Firestore.instance.collection("posts").document(post.postID).snapshots(),
-                        builder: (context,snapshot){
-                          return Text(snapshot.data["liked"].toString()+" Kere Beğenildi",style: GoogleFonts.righteous(),);
+                        stream: Firestore.instance
+                            .collection("posts")
+                            .document(post.postID)
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.data["liked"].toString() +
+                                " Kere Beğenildi",
+                            style: GoogleFonts.righteous(fontSize: 17),
+                          );
                         },
                       )
                     ],
@@ -419,8 +431,6 @@ List<Widget> badgeleriGetir() {
 
 String facebook;
 MaterialColor likeBackground = Colors.red;
-
-
 
 List<ReactiveIconDefinition> _facebook = <ReactiveIconDefinition>[
   ReactiveIconDefinition(
