@@ -72,14 +72,12 @@ class DbApiClient {
 
     List<Post> _postList = [];
     if (lastFetched == null) {
-      debugPrint("nulla giriyo");
       _querySnapshot = await Firestore.instance
           .collection("posts")
           .orderBy("liked", descending: true)
           .limit(fetchLimit)
           .getDocuments();
     } else {
-      debugPrint("else girioy"+lastFetched.postID);
       _querySnapshot = await Firestore.instance
           .collection("posts")
           .orderBy("liked", descending: true)
