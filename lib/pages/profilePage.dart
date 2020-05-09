@@ -104,19 +104,21 @@ class _ProfilePageState extends State<ProfilePage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 60),
                       child: Expanded(
-                        child: GridView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                            itemCount: 4,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              childAspectRatio: 3.2,
-                              mainAxisSpacing: 0,
-                              crossAxisSpacing: 5,
-                              crossAxisCount: 2
+                        child: Container(
+                          child: GridView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                              itemCount: 4,
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                childAspectRatio: 3.2,
+                                mainAxisSpacing: 0,
+                                crossAxisSpacing: 5,
+                                crossAxisCount: 2
 
-                            ), itemBuilder: (context,index){
-                          return BadgeMaker(index,gelenUser);
-                        }),
+                              ), itemBuilder: (context,index){
+                            return BadgeMaker(index,gelenUser);
+                          }),
+                        ),
                       ),
                     )
                   ],
@@ -137,14 +139,14 @@ Widget BadgeMaker(int index,User gelenUser){
     child: Container(
 
       decoration: BoxDecoration(
-          color: Colors.red,
+          color: Colors.deepPurpleAccent,
         borderRadius: BorderRadius.circular(20)
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-        CircleAvatar(child: Icon(Icons.star,size: 10,),radius: 10,),
-        Text("Ayın Muhabiri $index ",style: GoogleFonts.righteous(fontSize: 10),)
+        CircleAvatar(child: Icon(Icons.star,size: 10,color: Colors.deepPurpleAccent,),radius: 10,backgroundColor: Colors.deepOrangeAccent,),
+        Text(" Ayın Muhabiri $index ",style: GoogleFonts.righteous(fontSize: 10),)
       ],),
     ),
   );
