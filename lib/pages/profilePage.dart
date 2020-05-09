@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:loading_animations/loading_animations.dart';
@@ -9,6 +10,8 @@ import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/postPage.dart';
 import 'package:mucbirsebepler/pages/profileEditPage.dart';
+import 'package:mucbirsebepler/widgets/profileHelper.dart';
+import 'package:mucbirsebepler/widgets/randomGradient.dart';
 
 class ProfilePage extends StatefulWidget {
   final User gelenUser;
@@ -36,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
       resizeToAvoidBottomPadding: false,
       resizeToAvoidBottomInset: false,
       body: Container(
-        color: Colors.limeAccent,
+        color: Colors.black,
         child: BlocListener(
           bloc: _dataBaseBloc,
           listener: (context, state) {},
@@ -63,15 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Center(
                         child: SafeArea(
-                      child: CircleAvatar(
-                        backgroundColor: Colors.deepPurple,
-                        radius: 95,
-                        child: CircleAvatar(
-                          backgroundImage: NetworkImage(gelenUser.profilURL),
-                          radius: 80,
-                          backgroundColor: Theme.of(context).accentColor,
-                        ),
-                      ),
+                      child: profilePicture(gelenUser.profilURL,context)
                     )),
                     Align(
                       alignment: Alignment.centerRight,
@@ -79,18 +74,19 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
                         child: RaisedButton(
                           elevation: 15,
-                          onPressed: (){
-
-                            WidgetsBinding.instance.addPostFrameCallback((_){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileEditPage(editingUser: gelenUser,)));
+                          onPressed: () {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ProfileEditPage(
+                                            editingUser: gelenUser,
+                                          )));
                             });
-
                           },
                           child: Text("Profili düzenle"),
                           shape: RoundedRectangleBorder(
-
                             borderRadius: BorderRadius.circular(10),
-
                           ),
                         ),
                       ),
@@ -98,29 +94,30 @@ class _ProfilePageState extends State<ProfilePage> {
                     Center(
                       child: Text(
                         gelenUser.userName,
-                        style: GoogleFonts.righteous(fontSize: 25),
+                        style: GoogleFonts.righteous(fontSize: 25,color: Theme.of(context).accentColor),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 60),
-                      child: Expanded(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 60),
                         child: Container(
                           child: GridView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
                               itemCount: 4,
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 3.2,
-                                mainAxisSpacing: 0,
-                                crossAxisSpacing: 5,
-                                crossAxisCount: 2
-
-                              ), itemBuilder: (context,index){
-                            return BadgeMaker(index,gelenUser);
-                          }),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      childAspectRatio: 3.2,
+                                      mainAxisSpacing: 0,
+                                      crossAxisSpacing: 5,
+                                      crossAxisCount: 2),
+                              itemBuilder: (context, index) {
+                                return badgeMaker(index, gelenUser);
+                              }),
                         ),
                       ),
-                    )
+                    ),
+
                   ],
                 );
               }
@@ -132,23 +129,5 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-Widget BadgeMaker(int index,User gelenUser){
 
-  return FittedBox(
 
-    child: Container(
-
-      decoration: BoxDecoration(
-          color: Colors.deepPurpleAccent,
-        borderRadius: BorderRadius.circular(20)
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-        CircleAvatar(child: Icon(Icons.star,size: 10,color: Colors.deepPurpleAccent,),radius: 10,backgroundColor: Colors.deepOrangeAccent,),
-        Text(" Ayın Muhabiri $index ",style: GoogleFonts.righteous(fontSize: 10),)
-      ],),
-    ),
-  );
-
-}

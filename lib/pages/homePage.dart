@@ -89,14 +89,14 @@ class _HomePageState extends State<HomePage> {
                   index: 0,
                   height: 50.0,
                   items: <Widget>[
-                    Icon(LineAwesomeIcons.home,color: Colors.deepOrange, size: 30),
-                    Icon(LineAwesomeIcons.newspaper_o,color: Colors.deepOrange, size: 30),
-                    Icon(LineAwesomeIcons.cart_arrow_down,color: Colors.deepOrange, size: 30),
-                    Icon(LineAwesomeIcons.user,color: Colors.deepOrange, size: 30),
+                    Icon(LineAwesomeIcons.home,color: Theme.of(context).primaryColor, size: 30),
+                    Icon(LineAwesomeIcons.newspaper_o,color: Theme.of(context).primaryColor, size: 30),
+                    Icon(LineAwesomeIcons.cart_arrow_down,color: Theme.of(context).primaryColor, size: 30),
+                    Icon(LineAwesomeIcons.user,color: Theme.of(context).primaryColor, size: 30),
                   ],
-                  buttonBackgroundColor: Colors.deepPurple,
-                  color: Colors.deepPurple,
-                  backgroundColor: Colors.deepOrangeAccent,
+                  buttonBackgroundColor: Theme.of(context).accentColor,
+                  color: Theme.of(context).accentColor,
+                  backgroundColor: Theme.of(context).primaryColor,
                   onTap: (index){
                     _bottomNavBarBloc.pickItem(index);
                   },

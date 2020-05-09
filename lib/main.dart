@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Mücbir Sebepler',
       theme: ThemeData(
-        accentColor: Colors.lime,
-        primarySwatch: Colors.deepOrange,
+        accentColor: Colors.limeAccent,
+        primaryColor: Colors.black,
       ),
       home: BlocProvider(
           create: (context)=> AuthBloc(),

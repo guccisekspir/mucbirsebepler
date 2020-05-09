@@ -90,7 +90,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                     bottomLeft: Radius.circular(100.0),
                   ),
                   child: Container(
-                    color: Colors.deepPurpleAccent,
+                    color: Theme.of(context).accentColor,
                     width: width,
                     height: height / 7,
                     child: Align(
