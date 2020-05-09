@@ -242,7 +242,7 @@ Widget postContainer(
                 ),
                 Positioned(
                   top: 80,
-                  left: 30,
+                  left: 40,
                   child: Container(
                     child: Text(
                       post.title,
@@ -252,13 +252,13 @@ Widget postContainer(
                 ),
                 Positioned(
                   top: 100,
-                  left: 30,
+                  left: 40,
                   child: Container(
                     width: width / 1.5,
                     child: RichText(
                       text: TextSpan(
-                        text: post.description.length > 50
-                            ? post.description.substring(0, 50) + "... "
+                        text: post.description.length > 60
+                            ? post.description.substring(0, 60) + "... "
                             : post.description + "... ",
                         style: GoogleFonts.roboto(
                             fontSize: 14, color: Colors.black),

@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Mücbir Sebepler',
       theme: ThemeData(
+        accentColor: Colors.lime,
         primarySwatch: Colors.deepOrange,
       ),
       home: BlocProvider(
