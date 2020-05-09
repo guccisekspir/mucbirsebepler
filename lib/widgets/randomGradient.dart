@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 LinearGradient randomGradient(){
   return LinearGradient(
-      colors: gradientColorsList[Random().nextInt(20)]
+      colors: gradientColorsList[Random().nextInt(gradientColorsList.length-1)]
   );
 }
 
@@ -29,7 +29,6 @@ List<List<Color>> gradientColorsList=[
   [Color(0xFFa8ff78),Color(0xff78ffd6)],
   [Color(0xFFbc4e9c),Color(0xfff80759)],
   [Color(0xFF11998e),Color(0xff38ef7d)],
-  [Color(0xFFFC5C7D),Color(0xff6A82FB)],
   [Color(0xFFCAC531),Color(0xffF3F9A7)],
   [Color(0xFFff9966),Color(0xffff5e62)],
   [Color(0xFF7F00FF),Color(0xffE100FF)],
@@ -38,8 +37,6 @@ List<List<Color>> gradientColorsList=[
   [Color(0xFFDCE35B),Color(0xff45B649)],
   [Color(0xFFee0979),Color(0xffff6a00)],
   [Color(0xFFf4c4f3),Color(0xfffc67fa)],
-
-
 ];
 
 

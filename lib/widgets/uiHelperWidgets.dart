@@ -310,11 +310,18 @@ Widget postContainer(
                             .document(post.postID)
                             .snapshots(),
                         builder: (context, snapshot) {
-                          return Text(
-                            snapshot.data["liked"].toString() +
-                                " Kere Beğenildi",
+                          if(snapshot.hasData){
+                            return Text(
+                              snapshot.data["liked"].toString() +
+                                  " Kere Beğenildi",
+                              style: GoogleFonts.righteous(fontSize: 17),
+                            );
+                          }
+                          else return Text(
+                                "X Kere Beğenildi",
                             style: GoogleFonts.righteous(fontSize: 17),
                           );
+
                         },
                       )
                     ],
