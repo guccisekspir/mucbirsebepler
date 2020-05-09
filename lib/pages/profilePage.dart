@@ -12,6 +12,7 @@ import 'package:mucbirsebepler/pages/postPage.dart';
 import 'package:mucbirsebepler/pages/profileEditPage.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
+import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
 
 class ProfilePage extends StatefulWidget {
   final User gelenUser;
@@ -128,7 +129,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: GoogleFonts.righteous(
                                 color: Theme.of(context).accentColor,fontSize: 25),
                           ),
-                        ))
+                        )),
+                    lineDivider(),
                   ],
                 );
               }

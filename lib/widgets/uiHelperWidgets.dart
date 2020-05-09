@@ -83,20 +83,20 @@ Widget lineDivider() {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 1),
             child: Divider(
-              color: Colors.deepPurpleAccent,
+              color: Colors.limeAccent,
               thickness: 1,
             ),
           ),
         ),
         Text(
           "...",
-          style: TextStyle(color: Colors.deepPurple),
+          style: TextStyle(color: Colors.limeAccent),
         ),
         Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 1),
             child: Divider(
-              color: Colors.deepPurpleAccent,
+              color: Colors.limeAccent,
               thickness: 1,
             ),
           ),
