@@ -47,7 +47,8 @@ class _ProfilePageState extends State<ProfilePage> {
             bloc: _dataBaseBloc,
             // ignore: missing_return
             builder: (context, state) {
-              if (state is DataBaseLoadingState) {
+              if (state is DataBaseLoadingState ||
+                  state is InitialDataBaseState) {
                 return Center(
                   child: LoadingBouncingGrid.square(
                     borderColor: Colors.deepPurple,
@@ -66,8 +67,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Center(
                         child: SafeArea(
-                      child: profilePicture(gelenUser.profilURL,context)
-                    )),
+                            child:
+                                profilePicture(gelenUser.profilURL, context))),
                     Align(
                       alignment: Alignment.centerRight,
                       child: Padding(
@@ -94,10 +95,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     Center(
                       child: Text(
                         gelenUser.userName,
-                        style: GoogleFonts.righteous(fontSize: 25,color: Theme.of(context).accentColor),
+                        style: GoogleFonts.righteous(
+                            fontSize: 25, color: Theme.of(context).accentColor),
                       ),
                     ),
-                    Expanded(
+                    Flexible(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 60),
                         child: Container(
@@ -117,7 +119,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ),
-
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            "Popüler İddiaları",
+                            style: GoogleFonts.righteous(
+                                color: Theme.of(context).accentColor,fontSize: 25),
+                          ),
+                        ))
                   ],
                 );
               }
@@ -128,6 +139,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-
-
