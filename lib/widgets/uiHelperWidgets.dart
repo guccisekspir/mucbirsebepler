@@ -13,6 +13,7 @@ import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/pages/profilePage.dart';
+import 'package:mucbirsebepler/widgets/randomGradient.dart';
 
 Widget backButton(BuildContext context) {
   return InkWell(
@@ -182,9 +183,8 @@ Widget postContainer(
           ),
           child: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradientStyle.linearGradient(
-                    orientation: LinearGradientStyle.ORIENTATION_HORIZONTAL,
-                    gradientType: Random().nextInt(20))),
+                gradient: randomGradient()
+            ),
             width: width,
             height: height / 4,
             child: Stack(
