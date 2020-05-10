@@ -30,7 +30,9 @@ class DbApiClient {
   Future<User> getUser(String userID) async {
     DocumentSnapshot gelenUser =
         await Firestore.instance.document("users/$userID").get();
+    debugPrint("gelenuserr"+gelenUser.data.toString());
     User okunanUser = User.fromMap(gelenUser.data);
+    okunanUser.roller=gelenUser.data['roller'];
     return okunanUser;
   }
 
@@ -91,7 +93,7 @@ class DbApiClient {
         .collection("users")
         .document(userID)
         .collection("posts")
-        .orderBy("liked", descending: true).limit(2)
+        .orderBy("liked", descending: false).limit(2)
         .getDocuments();
     for (DocumentSnapshot documentSnapshot in _querySnapshotss.documents) {
       Post tekPost = Post.fromMap(documentSnapshot.data);

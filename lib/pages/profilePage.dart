@@ -121,7 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: GridView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
-                                itemCount: 4,
+                                itemCount: getBadgeNumbers(gelenUser.roller),
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         childAspectRatio: 3.2,
@@ -156,17 +156,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                 if(state is PostLoadingState){
                                   return Center(child: CircularProgressIndicator(),);
                                 }
-                                if(state is PostErrorState){
+                                else if(state is PostErrorState){
                                   var snackbar= SnackBar(content: Text("Bir hata oluştu tospik. Tekrar dener misin ?"),backgroundColor: Colors.red,);
                                   Scaffold.of(context).showSnackBar(snackbar);
                                 }
-                                if(state is PostLoadedState){
+                                else if(state is PostLoadedState){
                                   List<Post> listPost=state.listPost;
                                   if(listPost.length!=0){
                                     return AnimationLimiter(
                                       child: ListView.builder(
                                           padding: EdgeInsets.all(0),
-                                          itemCount: listPost.length,
+                                          itemCount: 1,
                                           shrinkWrap: true,
                                           itemBuilder: (contex, index) {
                                             return AnimationConfiguration.staggeredList(
@@ -193,7 +193,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(16.0),
                                           child: Text(
-                                            "Henüz paylaştığın bi iddian yok tospik.",
+                                            "Henüz paylaştığın bi iddian yok tospik."+gelenUser.roller['gMatik'].toString(),
                                             style: GoogleFonts.righteous(
                                                 color: Colors.redAccent,
                                                 fontSize: 25),
@@ -201,6 +201,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         )),
                                   );
                                 }
+                                else return Center(child: CircularProgressIndicator(),);
                               },
                             ),
                           ),
@@ -216,4 +217,16 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+}
+
+
+int getBadgeNumbers(Map gelenMap){
+  int counter=0;
+  for(bool i in gelenMap.values){
+    if(i){
+      counter++;
+    }
+
+  }
+  return counter;
 }

@@ -12,6 +12,8 @@ class User {
   bool isVerified;
   bool isFamous;
   bool isFirst;
+  Map<String,dynamic> roller={"aym":false,"acM":false,"matik":false,"gMatik":false,"destekci":false};
+
 
   User({@required this.userID, @required this.email});
 
@@ -27,6 +29,7 @@ class User {
       'isVerified': isVerified ?? false,
       'isFamous':isFamous?? false,
       'isFirst':isFirst??true,
+      'roller':roller
     };
   }
 
