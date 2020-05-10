@@ -40,16 +40,6 @@ class DbApiClient {
     var userMap = post.toMap();
     var postID = userMap['postID'];
     try {
-      await _firestore
-          .collection("users")
-          .document(post.owner.userID)
-          .collection("posts")
-          .document(postID)
-          .setData(userMap);
-    } catch (_) {
-      debugPrint("user savelenirken hata " + _.toString());
-    }
-    try {
       await _firestore.collection("posts").document(postID).setData(userMap);
       debugPrint("deniyo");
     } catch (_) {
@@ -91,6 +81,4 @@ class DbApiClient {
     }
     return _postList;
   }
-
-
 }
