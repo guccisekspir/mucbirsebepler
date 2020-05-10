@@ -51,6 +51,17 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       }
     }
 
+    if(event is GetUserPopulars){
+      yield PostLoadingState();
+      try{
+        var listePost= await _dbRepository.getUserPosts(event.userID);
+        yield PostLoadedState(listPost: listePost);
+
+      }catch(_){
+        debugPrint("getuserda hata "+_.toString());
+      }
+    }
+
 
     if(event is LikePost){
       await _dbRepository.likePost(event.postID);

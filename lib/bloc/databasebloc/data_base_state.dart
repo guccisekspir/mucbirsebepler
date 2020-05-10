@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 
 abstract class DataBaseState extends Equatable {
@@ -28,4 +29,5 @@ class DataBaseErrorState extends DataBaseState{
   // TODO: implement props
   List<Object> get props => null;
 }
+
 
