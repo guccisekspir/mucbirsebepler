@@ -27,49 +27,44 @@ class DbApiClient {
     }
   }
 
-
-
-
-  Future<User>getUser(String userID) async{
+  Future<User> getUser(String userID) async {
     DocumentSnapshot gelenUser =
-    await Firestore.instance.document("users/$userID").get();
+        await Firestore.instance.document("users/$userID").get();
     User okunanUser = User.fromMap(gelenUser.data);
     return okunanUser;
-
   }
-
 
   Future<bool> savePost(Post post) async {
     //TODO düzenlenecek
 
     var userMap = post.toMap();
-    var postID =userMap['postID'];
-    try{
+    var postID = userMap['postID'];
+    try {
       await _firestore
+          .collection("users")
+          .document(post.owner.userID)
           .collection("posts")
           .document(postID)
           .setData(userMap);
-      debugPrint("deniyo");
-
-    }catch(_){
-      debugPrint("bu dhata "+_.toString());
+    } catch (_) {
+      debugPrint("user savelenirken hata " + _.toString());
     }
-
+    try {
+      await _firestore.collection("posts").document(postID).setData(userMap);
+      debugPrint("deniyo");
+    } catch (_) {
+      debugPrint("bu dhata " + _.toString());
+    }
   }
 
-
-
-  Future<void> likePost(String postID)async{
-
-    _firestore.collection("posts").document(postID).updateData({"liked":FieldValue.increment(1)});
-
-
-
+  Future<void> likePost(String postID) async {
+    _firestore
+        .collection("posts")
+        .document(postID)
+        .updateData({"liked": FieldValue.increment(1)});
   }
-
 
   Future<List<Post>> getAllPost(Post lastFetched, int fetchLimit) async {
-
     List<Post> _postList = [];
     if (lastFetched == null) {
       _querySnapshot = await Firestore.instance
@@ -85,21 +80,17 @@ class DbApiClient {
           .limit(fetchLimit)
           .getDocuments();
     }
-    if(_querySnapshot.documents.length!=0){
-      lastDocument = _querySnapshot.documents[_querySnapshot.documents.length - 1];
+    if (_querySnapshot.documents.length != 0) {
+      lastDocument =
+          _querySnapshot.documents[_querySnapshot.documents.length - 1];
     }
 
-
-
     for (DocumentSnapshot documentSnapshot in _querySnapshot.documents) {
-
       Post tekPost = Post.fromMap(documentSnapshot.data);
       _postList.add(tekPost);
     }
     return _postList;
   }
-
-
 
 
 }

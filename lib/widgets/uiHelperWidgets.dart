@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_button/flutter_reactive_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -348,7 +349,7 @@ Widget entryField(
         Text(
           title,
           style: GoogleFonts.righteous(
-              color: Colors.deepPurple,
+              color: Colors.deepOrange,
               fontWeight: FontWeight.bold,
               fontSize: 20),
         ),
@@ -372,20 +373,35 @@ Widget entryField(
               return yazilacak;
             },
             maxLines: null,
-            style: GoogleFonts.roboto(color: Colors.deepPurple),
+            style: GoogleFonts.roboto(color: Colors.limeAccent),
             controller: textEditingController,
-            cursorColor: Colors.deepPurpleAccent,
+            cursorColor: Colors.limeAccent,
             keyboardType: TextInputType.text,
+            maxLength: title=="Haber Başlığı"?35:200,
             decoration: InputDecoration(
+              counterStyle: TextStyle(color: Colors.limeAccent),
+                hoverColor: Colors.limeAccent,
+                focusColor: Colors.limeAccent,
+
                 suffixIcon: faIcon,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.limeAccent),
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.lime),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: Colors.lime)
+
+                ),
+                fillColor: Colors.white12,
                 errorStyle: GoogleFonts.adventPro(
                     fontSize: 15,
-                    color: Colors.black,
+                    color: Colors.limeAccent,
                     fontWeight: FontWeight.bold),
-                fillColor: Colors.black,
                 filled: true))
       ],
     ),

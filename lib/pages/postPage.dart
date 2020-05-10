@@ -77,7 +77,7 @@ class _PostPageState extends State<PostPage> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Theme.of(context).accentColor,
         title: Text(
           "Mücbir İddia Paylaş",
           style: GoogleFonts.pressStart2p(
@@ -167,7 +167,7 @@ class _PostPageState extends State<PostPage> {
             }
             else{
               return Container(
-                color: Colors.deepOrangeAccent,
+                color: Colors.black,
                 width: screenWidth,
                 height: screenHeight,
                 child: Stack(
@@ -188,7 +188,7 @@ class _PostPageState extends State<PostPage> {
                                   textEditingController: headerController,
                                   faIcon: FaIcon(
                                     FontAwesomeIcons.horseHead,
-                                    color: Colors.deepPurpleAccent,
+                                    color: Colors.deepOrange,
                                     size: 30,
                                   )),
                             ),
@@ -200,7 +200,7 @@ class _PostPageState extends State<PostPage> {
                                   textEditingController: descController,
                                   faIcon: FaIcon(
                                     FontAwesomeIcons.userNinja,
-                                    color: Colors.deepPurpleAccent,
+                                    color: Colors.deepOrange,
                                     size: 30,
                                   )),
                             ),
@@ -212,7 +212,7 @@ class _PostPageState extends State<PostPage> {
                                   textEditingController: youtubeController,
                                   faIcon: FaIcon(
                                     FontAwesomeIcons.youtube,
-                                    color: Colors.deepPurpleAccent,
+                                    color: Colors.deepOrange,
                                     size: 30,
                                   )),
                             ),
@@ -224,7 +224,7 @@ class _PostPageState extends State<PostPage> {
                                   textEditingController: otherController,
                                   faIcon: FaIcon(
                                     FontAwesomeIcons.slack,
-                                    color: Colors.deepPurpleAccent,
+                                    color: Colors.deepOrange,
                                     size: 30,
                                   )),
                             ),
@@ -251,11 +251,11 @@ class _PostPageState extends State<PostPage> {
                           },
                           child: CircleAvatar(
                               radius: 30,
-                              backgroundColor: Colors.black,
+                              backgroundColor: Colors.deepOrange,
                               child: Icon(
                                 FontAwesomeIcons.plus,
                                 size: 30,
-                                color: Colors.red,
+                                color: Colors.black,
                               )),
                         ),
                       ),

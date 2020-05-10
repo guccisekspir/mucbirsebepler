@@ -62,6 +62,12 @@ class DbRepository{
 
   }
 
+
+  Future<List<Post>> getUserPosts({String userID})async{
+
+    return await _dbApiClient.getUserPosts(userID);
+  }
+
   Future<List<Post>> getMorePost()async{
     istendiMi=false;
     if(hasMore) return await getAllPost(lastPost: _lastFetchedPost);
