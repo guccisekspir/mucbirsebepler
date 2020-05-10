@@ -148,7 +148,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         SingleChildScrollView(
                           controller: _SscrollController,
                           child: Container(
-                            height: MediaQuery.of(context).size.height/2.8,
+                            height: MediaQuery.of(context).size.height/3,
                             child: BlocBuilder(
                               bloc: _postBloc,
                               // ignore: missing_return
