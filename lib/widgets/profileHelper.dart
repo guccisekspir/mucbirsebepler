@@ -18,6 +18,37 @@ Widget profilePicture(String url,BuildContext context){
   );
 }
 
+Widget profilePicturew(String url,BuildContext context){
+  return Container(
+    child: Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+
+          width: 160,
+          height: 160,
+          decoration: BoxDecoration(
+            gradient: randomGradient(),
+              color: Colors.limeAccent,
+            shape: BoxShape.circle
+          ),
+        ),
+      ),
+      Align(
+        alignment: Alignment.bottomCenter,
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(url),
+          radius: 70,  //TODO radiusları mediaquerye göre yap
+          backgroundColor: Theme.of(context).accentColor,
+        ),
+      ),
+    ],),
+  );
+}
+
 
 
 Widget badgeMaker(int index, User gelenUser) {

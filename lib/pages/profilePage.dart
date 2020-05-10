@@ -84,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Center(
                             child: SafeArea(
                                 child:
-                                    profilePicture(gelenUser.profilURL, context))),
+                                    profilePicturew(gelenUser.profilURL, context))),
                         Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
@@ -148,7 +148,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         SingleChildScrollView(
                           controller: _SscrollController,
                           child: Container(
-                            height: MediaQuery.of(context).size.height/2.5,
+                            height: MediaQuery.of(context).size.height/2.8,
                             child: BlocBuilder(
                               bloc: _postBloc,
                               // ignore: missing_return
@@ -166,7 +166,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     return AnimationLimiter(
                                       child: ListView.builder(
                                           padding: EdgeInsets.all(0),
-                                          itemCount: 1,
+                                          itemCount: 3,
                                           shrinkWrap: true,
                                           itemBuilder: (contex, index) {
                                             return AnimationConfiguration.staggeredList(

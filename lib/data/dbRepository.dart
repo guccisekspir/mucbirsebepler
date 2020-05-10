@@ -7,7 +7,7 @@ import 'package:mucbirsebepler/model/user.dart';
 class DbRepository {
   List<Post> _postList;
   Post _lastFetchedPost;
-  static final postLimitNumber = 3;
+  static final postLimitNumber = 4;
   bool hasMore = true;
   bool istendiMi = true;
 

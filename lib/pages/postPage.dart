@@ -42,11 +42,11 @@ class _PostPageState extends State<PostPage> {
                 'Çalıştığınızı görüntülüyorum',
                 maxLines: null,
                 style: GoogleFonts.righteous(
-                    fontSize: 20, color: Colors.deepPurpleAccent),
+                    fontSize: 13, color: Colors.deepPurpleAccent),
               ),
               description: Text(
-                "Şimdilik video veya fotoğraf yükleyemiyoruz.:(\n"
-                " Lütfen içerikleri youtube veya farklı bir mecraya yükleyip bu formda belirtiniz.",
+                "Şimdilik video veya fotoğraf yükleyemiyoruz.\n"
+                " Lütfen içerikleri youtube veya farklı yere yükleyip burada belirtiniz.",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.righteous(color: Colors.deepOrange),
               ),
