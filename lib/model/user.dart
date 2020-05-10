@@ -9,11 +9,16 @@ class User {
   String profilURL;
   DateTime createdAt;
   int seviye;
-  bool isVerified;
-  bool isFamous;
+  bool isGmatik;
+  bool isMatik;
   bool isFirst;
-  Map<String,dynamic> roller={"aym":false,"acM":false,"matik":false,"gMatik":false,"destekci":false};
+  Map<String,dynamic> roller={"aym":false,"acM":false,"destekci":false,"yerlestirici":false,"popular":false};
 
+
+  @override
+  String toString() {
+    return 'User{userID: $userID, email: $email, userName: $userName, profilURL: $profilURL, createdAt: $createdAt, seviye: $seviye, isGmatik: $isGmatik, isMatik: $isMatik, isFirst: $isFirst, roller: $roller}';
+  }
 
   User({@required this.userID, @required this.email});
 
@@ -26,8 +31,8 @@ class User {
       'profilURL': profilURL ?? 'https://emrealtunbilek.com/wp-content/uploads/2016/10/apple-icon-72x72.png',
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
       'seviye': seviye ?? 1,
-      'isVerified': isVerified ?? false,
-      'isFamous':isFamous?? false,
+      'isGmatik': isGmatik ?? false,
+      'isMatik':isMatik?? false,
       'isFirst':isFirst??true,
       'roller':roller
     };
@@ -39,15 +44,14 @@ class User {
         userName = map['userName'],
         profilURL = map['profilURL'],
         createdAt = (map['createdAt'] as Timestamp).toDate(),
+        isGmatik=map['isGmatik'],
+        isMatik=map['isMatik'],
         isFirst=map['isFirst'],
         seviye = map['seviye'];
 
   User.idveResim({@required this.userID, @required this.profilURL});
 
-  @override
-  String toString() {
-    return 'User{userID: $userID, email: $email, userName: $userName, profilURL: $profilURL, createdAt: $createdAt, seviye: $seviye, isVerified: $isVerified, isFamous: $isFamous,isFirst: $isFirst';
-  }
+
 
   String randomSayiUret() {
     int rastgeleSayi = Random().nextInt(999);
