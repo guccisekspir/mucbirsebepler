@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:mucbirsebepler/model/user.dart';
+import 'package:mucbirsebepler/util/badgeNames.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
 
 Widget profilePicture(String url,BuildContext context){
@@ -28,20 +29,9 @@ Widget badgeMaker(int index, User gelenUser) {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          CircleAvatar(
-              backgroundColor: Colors.limeAccent,
-              radius: 12,
-              child: CircleAvatar(
-                child: FaIcon(
-                  LineAwesomeIcons.xing,
-                  size: 14,
-                  color: Colors.limeAccent,
-                ),
-                radius: 8,
-                backgroundColor: Colors.black,
-              )),
+          badgeIcons[index],
           Text(
-            " Ayın Muhabiri $index ",
+            badgeNames[index],
             style:
             GoogleFonts.righteous(fontSize: 10, color: Colors.black),
           )

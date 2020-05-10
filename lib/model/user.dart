@@ -12,7 +12,7 @@ class User {
   bool isGmatik;
   bool isMatik;
   bool isFirst;
-  Map<String,dynamic> roller={"aym":false,"acM":false,"destekci":false,"yerlestirici":false,"popular":false};
+  Map<String,dynamic> roller={"aym":false,"acM":false,"destekci":false,"yerlestirici":false,"popular":false,"tospik":true};
 
 
   @override
