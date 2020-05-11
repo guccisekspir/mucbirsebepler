@@ -172,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
       text: TextSpan(
           text: 'Mücbir ',
           style: GoogleFonts.pressStart2p(
-            textStyle: Theme.of(context).textTheme.display1,
+            textStyle: Theme.of(context).textTheme.headline4,
             fontSize: 25,
             fontWeight: FontWeight.w700,
             color: Color(0xffe46b10),

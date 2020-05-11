@@ -17,6 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   bool isLogged = false;
   @override
   Widget build(BuildContext context) {
+    // ignore: close_sinks
     AuthBloc _authBloc=BlocProvider.of<AuthBloc>(context);
 
     // ignore: missing_return

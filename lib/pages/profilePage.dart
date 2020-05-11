@@ -23,13 +23,13 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   DataBaseBloc _dataBaseBloc;
   PostBloc _postBloc;
-  ScrollController _FscrollController;
-  ScrollController _SscrollController;
+  ScrollController _fScrollController;
+  ScrollController _sScrollController;
 
   @override
   void initState() {
-    _FscrollController = ScrollController();
-    _SscrollController = ScrollController();
+    _fScrollController = ScrollController();
+    _sScrollController = ScrollController();
     _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
     _postBloc = BlocProvider.of<PostBloc>(context);
     _postBloc.add(GetUserPopulars(widget.gelenUser.userID));
@@ -44,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
       resizeToAvoidBottomPadding: false,
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-        controller: _FscrollController,
+        controller: _fScrollController,
         padding: EdgeInsets.all(0),
         child: ConstrainedBox(
           constraints: BoxConstraints.tightFor(
@@ -145,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             )),
                         lineDivider(),
                         SingleChildScrollView(
-                          controller: _SscrollController,
+                          controller: _sScrollController,
                           child: Container(
                             height: MediaQuery.of(context).size.height / 3,
                             child: BlocBuilder(
