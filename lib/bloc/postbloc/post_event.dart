@@ -13,13 +13,11 @@ class SavePost extends PostEvent {
   SavePost({this.gelenPost});
 
   @override
-  // TODO: implement props
   List<Object> get props => [gelenPost];
 }
 
 class GetPost extends PostEvent{
   @override
-  // TODO: implement props
   List<Object> get props => null;
 
 
@@ -28,7 +26,6 @@ class GetPost extends PostEvent{
 
 class GetMorePost extends PostEvent{
   @override
-  // TODO: implement props
   List<Object> get props => null;
 
 
@@ -39,7 +36,6 @@ class LikePost extends PostEvent{
 
   LikePost({this.postID});
   @override
-  // TODO: implement props
   List<Object> get props => throw UnimplementedError();
 
 }
@@ -49,7 +45,6 @@ class GetUserPopulars extends  PostEvent{
 
   GetUserPopulars(this.userID);
   @override
-  // TODO: implement props
   List<Object> get props => [userID];
 
 

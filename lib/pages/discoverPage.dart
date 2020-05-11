@@ -44,13 +44,11 @@ class _DiscoverPageState extends State<DiscoverPage> {
     _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
     _dataBaseBloc.add(GetUserr(userID: widget.user.userID));
 
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     postList = [];
     super.dispose();
   }

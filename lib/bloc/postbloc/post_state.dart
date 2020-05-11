@@ -12,7 +12,6 @@ class InitialPostState extends PostState {
 //Post Getirme Stateleri
 class PostLoadingState extends PostState {
   @override
-  // TODO: implement props
   List<Object> get props => null;
 }
 
@@ -21,13 +20,11 @@ class PostLoadedState extends PostState {
 
   PostLoadedState({this.listPost});
   @override
-  // TODO: implement props
   List<Object> get props => [listPost];
 }
 
 class PostErrorState extends PostState {
   @override
-  // TODO: implement props
   List<Object> get props => null;
 }
 
@@ -35,43 +32,16 @@ class PostErrorState extends PostState {
 
 class PostSavingState extends PostState {
   @override
-  // TODO: implement props
   List<Object> get props => null;
 }
 
 class PostSavedState extends PostState {
   @override
-  // TODO: implement props
   List<Object> get props => null;
 }
 
 class PostSaveErrorState extends PostState {
   @override
-  // TODO: implement props
   List<Object> get props => null;
 }
 
-class StreamingState extends PostState{
-  @override
-  // TODO: implement props
-  List<Object> get props => throw UnimplementedError();
-
-
-}
-class StreamedState extends PostState{
-  final Stream stream;
-
-  StreamedState({this.stream});
-  @override
-  // TODO: implement props
-  List<Object> get props => [stream];
-
-
-}
-class StreamErrorState extends PostState{
-  @override
-  // TODO: implement props
-  List<Object> get props => throw UnimplementedError();
-
-
-}

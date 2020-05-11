@@ -64,7 +64,6 @@ class _PostPageState extends State<PostPage> {
     youtubeController = TextEditingController(text: "");
     otherController = TextEditingController(text: "");
 
-    // TODO: implement initState
     super.initState();
   }
 

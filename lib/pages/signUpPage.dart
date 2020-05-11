@@ -28,7 +28,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _emailController = TextEditingController(text: "");
     _passwordController = TextEditingController(text: "");
@@ -104,7 +103,6 @@ class _SignUpPageState extends State<SignUpPage> {
         authBloc.add(EmailSign(
             email: _emailController.text, password: _passwordController.text));
 
-        //TODO koyulan verileri gönder
       },
     );
   }

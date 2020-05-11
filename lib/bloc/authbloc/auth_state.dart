@@ -15,7 +15,6 @@ class AuthLoadingState extends AuthState{
 
 
   @override
-  // TODO: implement props
   List<Object> get props => null;
 }
 class AuthLoadedState extends AuthState{
@@ -23,24 +22,20 @@ class AuthLoadedState extends AuthState{
 
   AuthLoadedState({this.user});
   @override
-  // TODO: implement props
   List<Object> get props => [user];
 }
 class AuthErrorState extends AuthState{
   @override
-  // TODO: implement props
   List<Object> get props => null;
 }
 
 class ForgetLoadingState extends AuthState{
   @override
-  // TODO: implement props
   List<Object> get props => null;
 }
 
 class ForgetLoadedState extends AuthState{
   @override
-  // TODO: implement props
   List<Object> get props => null;
 }
 
@@ -51,7 +46,6 @@ class ForgetErrorState extends AuthState{
   ForgetErrorState(this.errorMessage);
 
   @override
-  // TODO: implement props
   List<Object> get props => null;
 
 }

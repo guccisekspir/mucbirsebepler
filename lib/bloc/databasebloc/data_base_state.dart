@@ -13,7 +13,7 @@ class InitialDataBaseState extends DataBaseState {
 
 class DataBaseLoadingState extends DataBaseState{
   @override
-  // TODO: implement props
+
   List<Object> get props => null;
 }
 class DataBaseLoadedState extends DataBaseState{
@@ -21,12 +21,12 @@ class DataBaseLoadedState extends DataBaseState{
 
   DataBaseLoadedState({this.user});
   @override
-  // TODO: implement props
+
   List<Object> get props => [user];
 }
 class DataBaseErrorState extends DataBaseState{
   @override
-  // TODO: implement props
+
   List<Object> get props => null;
 }
 

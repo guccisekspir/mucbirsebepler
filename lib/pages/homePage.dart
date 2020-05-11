@@ -38,7 +38,6 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   void dispose() {
-    // TODO: implement dispose
     _bottomNavBarBloc.close();
     super.dispose();
   }

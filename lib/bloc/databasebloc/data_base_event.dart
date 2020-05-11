@@ -11,7 +11,6 @@ class SaveUserDB extends DataBaseEvent{
 
   SaveUserDB({this.user});
   @override
-  // TODO: implement props
   List<Object> get props => [user];
 
 
@@ -22,7 +21,7 @@ final String userID;
 
 GetUserr({this.userID});
 @override
-// TODO: implement props
+
 List<Object> get props => [userID];
 }
 

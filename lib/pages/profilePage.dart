@@ -40,7 +40,6 @@ class _ProfilePageState extends State<ProfilePage> {
     _postBloc.add(GetUserPopulars(widget.gelenUser.userID));
     _dataBaseBloc.add(GetUserr(userID: widget.gelenUser.userID));
 
-    // TODO: implement initState
     super.initState();
   }
 
