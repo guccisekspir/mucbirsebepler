@@ -242,6 +242,5 @@ List<String> getBadgeNumbers(Map gelenMap) {
       rolleri.add(i.key);
     }
   }
-  debugPrint("rolleri : "+rolleri.toString());
   return rolleri;
 }

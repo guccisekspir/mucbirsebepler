@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/profilePage.dart';
 import 'package:mucbirsebepler/util/badgeNames.dart';
+import 'package:mucbirsebepler/widgets/profileHelper.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
 
 Widget backButton(BuildContext context) {
@@ -164,171 +166,218 @@ List<Color> colorCombination = LinearGradientStyle.getColorCombination(
 
 Post gelenPost;
 
+Widget postCoontainer(
+    {Post post,
+      double width,
+      double height,
+      BuildContext context,
+      bloc,
+      User gelenUser}
+    ){
+
+  return OpenContainer(
+    closedColor: Colors.transparent,
+    openColor: Colors.white12,
+    transitionType: ContainerTransitionType.fade,
+    closedBuilder: (BuildContext context,VoidCallback voidCallBack){
+      return postContainer(post: post,width: width,height: height,context: context,bloc: bloc,gelenUser: gelenUser,voidCallback: voidCallBack);
+    },
+    openBuilder: (BuildContext context,VoidCallback voidCallBack){
+      return Container(
+        decoration: BoxDecoration(
+          gradient: randomGradient()
+        ),
+        height: 200,
+        child: Column(children: [
+          SizedBox(height: 15,),
+          Align(
+            alignment: Alignment.topLeft,
+            child: FlatButton(child: CircleAvatar(
+                backgroundColor: Colors.deepPurpleAccent,
+                child: Icon(Icons.arrow_back)),onPressed: (){
+              Navigator.pop(context);
+            },),
+          ),
+          profilePicture(gelenUser.profilURL,context),
+
+        ],)
+
+      );
+    },
+
+
+  );
+}
+
+
 Widget postContainer(
-    {Post post, double width, double height, BuildContext context, bloc,User gelenUser}) {
+    {Post post,
+    double width,
+    double height,
+    BuildContext context,
+    bloc,
+    User gelenUser,VoidCallback voidCallback}) {
   gelenContext = context;
   PostBloc gelenBloc = bloc;
   gelenPost = post;
 
   return Padding(
     padding: const EdgeInsets.all(8.0),
-    child: Stack(
-      children: <Widget>[
-        ClipRRect(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.elliptical(200, 300),
-            topRight: Radius.circular(80),
-            bottomRight: Radius.circular(150.0),
-            bottomLeft: Radius.circular(20.0),
-          ),
-          child: Container(
-            decoration: BoxDecoration(gradient: randomGradient()),
-            width: width,
-            height: height / 4,
-            child: Stack(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Row(
-                            children: badgeleriGetir(gelenUser.roller),
-                          ),
-                          Column(
-                            children: <Widget>[
-                              Text(
-                               gelenUser.userName,
-                                style: GoogleFonts.righteous(fontSize: 15),
-                              ),
-                              Text(
-                                "Tarafından paylaşıldı",
-                                style: GoogleFonts.roboto(
-                                    fontSize: 10, fontWeight: FontWeight.w300),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Align(
-                              alignment: Alignment.topRight,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ProfilePage(
-                                                gelenUser: gelenUser,
-                                              )));
-                                },
-                                child: CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                    gelenUser.profilURL,
-                                  ),
-                                  backgroundColor: Colors.black,
+    child: GestureDetector(
+      onTap: voidCallback,
+      child: Stack(
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.elliptical(200, 300),
+              topRight: Radius.circular(80),
+              bottomRight: Radius.circular(150.0),
+              bottomLeft: Radius.circular(20.0),
+            ),
+            child: Container(
+              decoration: BoxDecoration(gradient: randomGradient()),
+              width: width,
+              height: height / 4,
+              child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Row(
+                              children: badgeleriGetir(gelenUser.roller),
+                            ),
+                            Column(
+                              children: <Widget>[
+                                Text(
+                                  gelenUser.userName,
+                                  style: GoogleFonts.righteous(fontSize: 15),
                                 ),
+                                Text(
+                                  "Tarafından paylaşıldı",
+                                  style: GoogleFonts.roboto(
+                                      fontSize: 10, fontWeight: FontWeight.w300),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Align(
+                                alignment: Alignment.topRight,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    debugPrint("bas");
+                                  },
+                                  child: CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                      gelenUser.profilURL,
+                                    ),
+                                    backgroundColor: Colors.black,
+                                  ),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 80,
+                    left: 40,
+                    child: Container(
+                      child: Text(
+                        post.title,
+                        style: GoogleFonts.abrilFatface(fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 100,
+                    left: 40,
+                    child: Container(
+                      width: width / 1.5,
+                      child: RichText(
+                        text: TextSpan(
+                          text: post.description.length > 60
+                              ? post.description.substring(0, 60) + "... "
+                              : post.description + "... ",
+                          style: GoogleFonts.roboto(
+                              fontSize: 14, color: Colors.black),
+                          children: <TextSpan>[
+                            TextSpan(
+                                recognizer: TapGestureRecognizer()..onTap = () {},
+                                text: 'Daha fazlasını gör',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 5,
+                    left: 30,
+                    child: Row(
+                      children: <Widget>[
+                        ReactiveButton(
+                          containerAbove: false,
+                          child: CircleAvatar(
+                              backgroundColor: likeBackground,
+                              child: Icon(
+                                LineAwesomeIcons.heart_o,
+                                size: 30,
                               )),
-                        ],
-                      ),
+                          icons: _facebook,
+                          //_flags,
+                          onTap: () {
+                            Scaffold.of(gelenContext).showSnackBar(SnackBar(
+                              content: Text("Lütfen Basılı tutunuz"),
+                              backgroundColor: Colors.deepPurple,
+                              duration: Duration(milliseconds: 500),
+                            ));
+                          },
+                          onSelected: (ReactiveIconDefinition button) {
+                            gelenBloc.add(LikePost(postID: post.postID));
+                          },
+                          iconWidth: 32.0,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        StreamBuilder(
+                          stream: Firestore.instance
+                              .collection("posts")
+                              .document(post.postID)
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(
+                                snapshot.data["liked"].toString() +
+                                    " Kere Beğenildi",
+                                style: GoogleFonts.righteous(fontSize: 17),
+                              );
+                            } else
+                              return Text(
+                                "X Kere Beğenildi",
+                                style: GoogleFonts.righteous(fontSize: 17),
+                              );
+                          },
+                        )
+                      ],
                     ),
-                  ),
-                ),
-                Positioned(
-                  top: 80,
-                  left: 40,
-                  child: Container(
-                    child: Text(
-                      post.title,
-                      style: GoogleFonts.abrilFatface(fontSize: 16),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 100,
-                  left: 40,
-                  child: Container(
-                    width: width / 1.5,
-                    child: RichText(
-                      text: TextSpan(
-                        text: post.description.length > 60
-                            ? post.description.substring(0, 60) + "... "
-                            : post.description + "... ",
-                        style: GoogleFonts.roboto(
-                            fontSize: 14, color: Colors.black),
-                        children: <TextSpan>[
-                          TextSpan(
-                              recognizer: TapGestureRecognizer()..onTap = () {},
-                              text: 'Daha fazlasını gör',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 5,
-                  left: 30,
-                  child: Row(
-                    children: <Widget>[
-                      ReactiveButton(
-                        containerAbove: false,
-                        child: CircleAvatar(
-                            backgroundColor: likeBackground,
-                            child: Icon(
-                              LineAwesomeIcons.heart_o,
-                              size: 30,
-                            )),
-                        icons: _facebook,
-                        //_flags,
-                        onTap: () {
-                          Scaffold.of(gelenContext).showSnackBar(SnackBar(
-                            content: Text("Lütfen Basılı tutunuz"),
-                            backgroundColor: Colors.deepPurple,
-                            duration: Duration(milliseconds: 500),
-                          ));
-                        },
-                        onSelected: (ReactiveIconDefinition button) {
-                          gelenBloc.add(LikePost(postID: post.postID));
-                        },
-                        iconWidth: 32.0,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      StreamBuilder(
-                        stream: Firestore.instance
-                            .collection("posts")
-                            .document(post.postID)
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text(
-                              snapshot.data["liked"].toString() +
-                                  " Kere Beğenildi",
-                              style: GoogleFonts.righteous(fontSize: 17),
-                            );
-                          } else
-                            return Text(
-                              "X Kere Beğenildi",
-                              style: GoogleFonts.righteous(fontSize: 17),
-                            );
-                        },
-                      )
-                    ],
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }
@@ -402,7 +451,6 @@ Widget entryField(
 }
 
 List<String> getBadgeNumberss(Map gelenMap) {
-  debugPrint(gelenMap.toString());
   List<String> rolleri = [];
   for (var i in gelenMap.entries) {
     if (i.value) {
@@ -416,20 +464,19 @@ List<Widget> badgeleriGetir(Map rollerMap) {
   List<Widget> badgeListe = [];
   List<String> roller = getBadgeNumberss(rollerMap);
   List<int> indexler = [];
-  for(int j=0;j< firebaseBadgeNames.length;j++){
+  for (int j = 0; j < firebaseBadgeNames.length; j++) {
     for (int i = 0; i < roller.length; i++) {
       if (firebaseBadgeNames[j] == roller[i]) {
         indexler.add(j);
       }
     }
-
   }
-
 
   for (int i = 0; i < indexler.length; i++) {
     badgeListe.add(Padding(
       padding: const EdgeInsets.all(2.0),
-      child: Align(alignment:Alignment.topRight,child: badgeIcons[indexler[i]]),
+      child:
+          Align(alignment: Alignment.topRight, child: badgeIcons[indexler[i]]),
     ));
   }
 

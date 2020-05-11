@@ -174,7 +174,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                           const Duration(milliseconds: 875),
                                       child: ScaleAnimation(
                                         child: FadeInAnimation(
-                                          child: postContainer(
+                                          child: postCoontainer(
                                             gelenUser: finalUser,
                                               bloc: _postBloc,
                                               post: postList[index],
