@@ -28,10 +28,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    _FscrollController=ScrollController();
-    _SscrollController=ScrollController();
+    _FscrollController = ScrollController();
+    _SscrollController = ScrollController();
     _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
-    _postBloc= BlocProvider.of<PostBloc>(context);
+    _postBloc = BlocProvider.of<PostBloc>(context);
     _postBloc.add(GetUserPopulars(widget.gelenUser.userID));
     _dataBaseBloc.add(GetUserr(userID: widget.gelenUser.userID));
 
@@ -47,7 +47,8 @@ class _ProfilePageState extends State<ProfilePage> {
         controller: _FscrollController,
         padding: EdgeInsets.all(0),
         child: ConstrainedBox(
-          constraints: BoxConstraints.tightFor(height: MediaQuery.of(context).size.height),
+          constraints: BoxConstraints.tightFor(
+              height: MediaQuery.of(context).size.height),
           child: Container(
             color: Colors.black,
             child: BlocListener(
@@ -67,7 +68,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     );
                   } else if (state is DataBaseErrorState) {
                     final snackBar = SnackBar(
-                      content: Text("Tospik internetinde bi sıkıntı var galiba"),
+                      content:
+                          Text("Tospik internetinde bi sıkıntı var galiba"),
                       backgroundColor: Colors.red,
                     );
                     Scaffold.of(context).showSnackBar(snackBar);
@@ -77,8 +79,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Center(
                             child: SafeArea(
-                                child:
-                                    profilePicturew(gelenUser.profilURL, context))),
+                                child: profilePicturew(
+                                    gelenUser.profilURL, context))),
                         Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
@@ -86,7 +88,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: RaisedButton(
                               elevation: 15,
                               onPressed: () {
-                                WidgetsBinding.instance.addPostFrameCallback((_) {
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -106,7 +109,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Text(
                             gelenUser.userName,
                             style: GoogleFonts.righteous(
-                                fontSize: 25, color: Theme.of(context).accentColor),
+                                fontSize: 25,
+                                color: Theme.of(context).accentColor),
                           ),
                         ),
                         Padding(
@@ -115,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: GridView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
-                                itemCount: getBadgeNumbers(gelenUser.roller),
+                                itemCount: getBadgeNumbers(gelenUser.roller).length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         childAspectRatio: 3.2,
@@ -123,7 +127,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                         crossAxisSpacing: 5,
                                         crossAxisCount: 2),
                                 itemBuilder: (context, index) {
-                                  return badgeMaker(index, gelenUser);
+                                  List<String> roller=getBadgeNumbers(gelenUser.roller);
+                                  return badgeMaker(index, gelenUser,roller[index]);
                                 }),
                           ),
                         ),
@@ -142,60 +147,76 @@ class _ProfilePageState extends State<ProfilePage> {
                         SingleChildScrollView(
                           controller: _SscrollController,
                           child: Container(
-                            height: MediaQuery.of(context).size.height/3,
+                            height: MediaQuery.of(context).size.height / 3,
                             child: BlocBuilder(
                               bloc: _postBloc,
                               // ignore: missing_return
-                              builder: (context,state){
-                                if(state is PostLoadingState){
-                                  return Center(child: CircularProgressIndicator(),);
-                                }
-                                else if(state is PostErrorState){
-                                  var snackbar= SnackBar(content: Text("Bir hata oluştu tospik. Tekrar dener misin ?"),backgroundColor: Colors.red,);
+                              builder: (context, state) {
+                                if (state is PostLoadingState) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else if (state is PostErrorState) {
+                                  var snackbar = SnackBar(
+                                    content: Text(
+                                        "Bir hata oluştu tospik. Tekrar dener misin ?"),
+                                    backgroundColor: Colors.red,
+                                  );
                                   Scaffold.of(context).showSnackBar(snackbar);
-                                }
-                                else if(state is PostLoadedState){
-                                  List<Post> listPost=state.listPost;
-                                  if(listPost.length!=0){
+                                } else if (state is PostLoadedState) {
+                                  List<Post> listPost = state.listPost;
+                                  if (listPost.length != 0) {
                                     return AnimationLimiter(
                                       child: ListView.builder(
                                           padding: EdgeInsets.all(0),
-                                          itemCount: 3,
+                                          itemCount: listPost.length,
                                           shrinkWrap: true,
                                           itemBuilder: (contex, index) {
-                                            return AnimationConfiguration.staggeredList(
-                                                position: index,
-                                                duration:
-                                                const Duration(milliseconds: 875),
-                                                child: ScaleAnimation(
-                                                  child: FadeInAnimation(
-                                                    child: postContainer(
-                                                        bloc: _postBloc,
-                                                        post: listPost[index],
-                                                        width: MediaQuery.of(context).size.width,
-                                                        height: MediaQuery.of(context).size.height,
-                                                        context: context),
-                                                  ),
-                                                ));
+                                            return AnimationConfiguration
+                                                .staggeredList(
+                                                    position: index,
+                                                    duration: const Duration(
+                                                        milliseconds: 875),
+                                                    child: ScaleAnimation(
+                                                      child: FadeInAnimation(
+                                                        child: postContainer(
+                                                            bloc: _postBloc,
+                                                            post:
+                                                                listPost[index],
+                                                            width:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            height:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height,
+                                                            context: context),
+                                                      ),
+                                                    ));
                                           }),
                                     );
-                                  }
-                                  else return  Container(
-                                    color: Colors.black,
-                                    child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Text(
-                                            "Henüz paylaştığın bi iddian yok tospik."+gelenUser.roller['gMatik'].toString(),
-                                            style: GoogleFonts.righteous(
-                                                color: Colors.redAccent,
-                                                fontSize: 25),
-                                          ),
-                                        )),
+                                  } else
+                                    return Container(
+                                      color: Colors.black,
+                                      child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Text(
+                                              "Henüz paylaştığın bi iddian yok tospik.",
+                                              style: GoogleFonts.righteous(
+                                                  color: Colors.redAccent,
+                                                  fontSize: 25),
+                                            ),
+                                          )),
+                                    );
+                                } else
+                                  return Center(
+                                    child: CircularProgressIndicator(),
                                   );
-                                }
-                                else return Center(child: CircularProgressIndicator(),);
                               },
                             ),
                           ),
@@ -213,14 +234,15 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-
-int getBadgeNumbers(Map gelenMap){
-  int counter=0;
-  for(bool i in gelenMap.values){
-    if(i){
+List<String> getBadgeNumbers(Map gelenMap) {
+  int counter = 0;
+  List<String> rolleri=[];
+  for (var i in gelenMap.entries) {
+    if (i.value) {
       counter++;
+      rolleri.add(i.key);
     }
-
   }
-  return counter;
+  debugPrint("rolleri : "+rolleri.toString());
+  return rolleri;
 }

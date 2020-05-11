@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 
+
+List<String> firebaseBadgeNames=[
+  "aym",
+  "acM",
+  "destekci",
+  "yerlestirici",
+  "popular",
+  "tospik"
+];
+
 List<String> badgeNames=[
   " Ayın Muhabiri ",
   " Acar Muhabir ",

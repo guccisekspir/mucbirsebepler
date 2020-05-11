@@ -49,7 +49,17 @@ Widget profilePicturew(String url,BuildContext context){
 
 
 
-Widget badgeMaker(int index, User gelenUser) {
+Widget badgeMaker(int index, User gelenUser,String rol) {
+
+  int buldugumindex;
+  for(int i =0;i<firebaseBadgeNames.length;i++){
+    if(firebaseBadgeNames[i]==rol){
+      buldugumindex=i;
+      break;
+    }
+  }
+
+
   return FittedBox(
     child: Container(
       decoration: BoxDecoration(
@@ -58,9 +68,9 @@ Widget badgeMaker(int index, User gelenUser) {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          badgeIcons[index],
+          badgeIcons[buldugumindex],
           Text(
-            badgeNames[index],
+            badgeNames[buldugumindex],
             style:
             GoogleFonts.righteous(fontSize: 10, color: Colors.black),
           )
