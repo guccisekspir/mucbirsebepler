@@ -253,12 +253,12 @@ Widget postContainer(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Row(
-                              children: badgeleriGetir(gelenUser.roller),
+                              children: badgeleriGetir(post.owner.roller),
                             ),
                             Column(
                               children: <Widget>[
                                 Text(
-                                  gelenUser.userName,
+                                  post.owner.userName,
                                   style: GoogleFonts.righteous(fontSize: 15),
                                 ),
                                 Text(
@@ -279,7 +279,7 @@ Widget postContainer(
                                   },
                                   child: CircleAvatar(
                                     backgroundImage: NetworkImage(
-                                      gelenUser.profilURL,
+                                      post.owner.profilURL,
                                     ),
                                     backgroundColor: Colors.black,
                                   ),

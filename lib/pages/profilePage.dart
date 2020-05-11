@@ -177,7 +177,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           itemCount: listPost.length,
                                           shrinkWrap: true,
                                           itemBuilder: (contex, index) {
-                                            LinearGradient linear=randomGradient();
+                                            LinearGradient linear =
+                                                randomGradient();
                                             return AnimationConfiguration
                                                 .staggeredList(
                                                     position: index,
@@ -186,8 +187,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     child: ScaleAnimation(
                                                       child: FadeInAnimation(
                                                         child: postCoontainer(
-
-                                                            gelenUser: gelenUser,
+                                                            gelenUser:
+                                                                gelenUser,
                                                             bloc: _postBloc,
                                                             post:
                                                                 listPost[index],

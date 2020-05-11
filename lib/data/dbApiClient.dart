@@ -78,6 +78,7 @@ class DbApiClient {
 
     for (DocumentSnapshot documentSnapshot in _querySnapshot.documents) {
       Post tekPost = Post.fromMap(documentSnapshot.data);
+      debugPrint("dondurulen post owner "+tekPost.owner.toString());
       _postList.add(tekPost);
     }
     return _postList;

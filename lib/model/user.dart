@@ -47,7 +47,8 @@ class User {
         isGmatik=map['isGmatik'],
         isMatik=map['isMatik'],
         isFirst=map['isFirst'],
-        seviye = map['seviye'];
+        seviye = map['seviye'],
+        roller=map['roller'];
 
   User.idveResim({@required this.userID, @required this.profilURL});
 
