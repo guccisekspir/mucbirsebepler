@@ -63,7 +63,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
 
     if(event is LikePost){
-      await _dbRepository.likePost(event.postID);
+      await _dbRepository.likePost(event.postID,event.userID);
     }
   }
 }

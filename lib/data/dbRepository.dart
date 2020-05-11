@@ -59,8 +59,8 @@ class DbRepository {
     return await _dbApiClient.getUserPopular(userID);
   }
 
-  Future<void> likePost(String postID) async {
-    return await _dbApiClient.likePost(postID);
+  Future<void> likePost(String postID,String userID) async {
+    return await _dbApiClient.likePost(postID,userID);
   }
 
   Future<Null> refresh() async {

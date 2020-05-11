@@ -346,7 +346,7 @@ Widget postContainer(
                             ));
                           },
                           onSelected: (ReactiveIconDefinition button) {
-                            gelenBloc.add(LikePost(postID: post.postID));
+                            gelenBloc.add(LikePost(postID: post.postID,userID: gelenUser.userID));
                           },
                           iconWidth: 32.0,
                         ),

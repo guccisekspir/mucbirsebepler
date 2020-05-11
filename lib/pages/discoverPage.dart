@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'dart:wasm';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
   DataBaseBloc _dataBaseBloc;
   User finalUser;
   bool hasMore = false;
+  bool yuklendiMi=false;
   ScrollController _scrollController;
   Widget waitingWidget = SizedBox(
     height: 0,
@@ -105,6 +107,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
                     BlocListener<DataBaseBloc, DataBaseState>(
                       listener: (context, state) {
                         if (state is DataBaseLoadedState) {
+                          setState(() {
+                            yuklendiMi=true;
+                          });
                           finalUser = state.user;
                         }
                       },
@@ -156,7 +161,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                       return Center(child: waitingWidget);
                     }
                     if (state is PostLoadedState) {
-                      if (!hasMore) {
+                      if (!hasMore&& yuklendiMi) {
                         postList = state.listPost;
                         return SingleChildScrollView(
                           scrollDirection: Axis.vertical,
@@ -187,6 +192,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                           ),
                         );
                       }
+                      else return Center(child: CircularProgressIndicator(),);
                     }
                     if (state is PostErrorState) {
                       return Center(

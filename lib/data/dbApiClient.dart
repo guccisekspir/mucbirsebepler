@@ -47,11 +47,22 @@ class DbApiClient {
     }
   }
 
-  Future<void> likePost(String postID) async {
-    _firestore
-        .collection("posts")
-        .document(postID)
-        .updateData({"liked": FieldValue.increment(1)});
+  Future<void> likePost(String postID,String userID) async {
+    DocumentSnapshot likedDocument;
+
+
+
+
+    likedDocument = await _firestore.collection("posts").document(postID).collection("likedBy").document(userID).get();
+
+    if(likedDocument.data==null){
+      _firestore
+          .collection("posts")
+          .document(postID)
+          .updateData({"liked": FieldValue.increment(1)});
+      _firestore.collection("posts").document(postID).collection("likedBy").document(userID).setData({"eben":true});
+    }
+
 
   }
 
