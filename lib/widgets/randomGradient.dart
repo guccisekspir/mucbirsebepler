@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 
 LinearGradient randomGradient(){
   return LinearGradient(
+    begin: Alignment.bottomLeft,
+      end: Alignment.topRight,
       colors: gradientColorsList[Random().nextInt(gradientColorsList.length-1)]
   );
 }

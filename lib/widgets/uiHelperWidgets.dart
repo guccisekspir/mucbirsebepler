@@ -174,29 +174,32 @@ Widget postCoontainer(
       bloc,
       User gelenUser}
     ){
-
+  LinearGradient closedGradient=randomGradient();
   return OpenContainer(
     closedColor: Colors.transparent,
     openColor: Colors.white12,
     transitionType: ContainerTransitionType.fade,
     closedBuilder: (BuildContext context,VoidCallback voidCallBack){
-      return postContainer(post: post,width: width,height: height,context: context,bloc: bloc,gelenUser: gelenUser,voidCallback: voidCallBack);
+      return postContainer(post: post,width: width,height: height,context: context,bloc: bloc,gelenUser: gelenUser,voidCallback: voidCallBack,linearGradient: closedGradient);
     },
     openBuilder: (BuildContext context,VoidCallback voidCallBack){
       return Container(
         decoration: BoxDecoration(
-          gradient: randomGradient()
+          gradient: closedGradient
         ),
-        height: 200,
+        height: 100,
         child: Column(children: [
-          SizedBox(height: 15,),
-          Align(
-            alignment: Alignment.topLeft,
-            child: FlatButton(child: CircleAvatar(
-                backgroundColor: Colors.deepPurpleAccent,
-                child: Icon(Icons.arrow_back)),onPressed: (){
-              Navigator.pop(context);
-            },),
+          SafeArea(
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: FlatButton(
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundColor: Colors.black,
+                  child: Icon(Icons.arrow_back,size: 25,color: Colors.limeAccent,)),onPressed: (){
+                Navigator.pop(context);
+              },),
+            ),
           ),
           profilePicture(gelenUser.profilURL,context),
 
@@ -216,7 +219,7 @@ Widget postContainer(
     double height,
     BuildContext context,
     bloc,
-    User gelenUser,VoidCallback voidCallback}) {
+    User gelenUser,VoidCallback voidCallback,LinearGradient linearGradient}) {
   gelenContext = context;
   PostBloc gelenBloc = bloc;
   gelenPost = post;
@@ -235,7 +238,7 @@ Widget postContainer(
               bottomLeft: Radius.circular(20.0),
             ),
             child: Container(
-              decoration: BoxDecoration(gradient: randomGradient()),
+              decoration: BoxDecoration(gradient: linearGradient),
               width: width,
               height: height / 4,
               child: Stack(
