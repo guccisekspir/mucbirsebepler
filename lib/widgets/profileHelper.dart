@@ -60,6 +60,8 @@ Widget badgeMaker(int index, User gelenUser,String rol) {
   }
 
 
+
+
   return FittedBox(
     child: Container(
       decoration: BoxDecoration(

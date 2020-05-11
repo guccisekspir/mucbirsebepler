@@ -234,12 +234,11 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
+
 List<String> getBadgeNumbers(Map gelenMap) {
-  int counter = 0;
   List<String> rolleri=[];
   for (var i in gelenMap.entries) {
     if (i.value) {
-      counter++;
       rolleri.add(i.key);
     }
   }

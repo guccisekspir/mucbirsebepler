@@ -175,6 +175,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                                       child: ScaleAnimation(
                                         child: FadeInAnimation(
                                           child: postContainer(
+                                            gelenUser: finalUser,
                                               bloc: _postBloc,
                                               post: postList[index],
                                               width: width,

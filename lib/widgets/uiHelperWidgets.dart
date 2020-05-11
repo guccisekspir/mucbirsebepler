@@ -10,7 +10,9 @@ import 'package:linear_gradient/linear_gradient.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
+import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/profilePage.dart';
+import 'package:mucbirsebepler/util/badgeNames.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
 
 Widget backButton(BuildContext context) {
@@ -163,7 +165,7 @@ List<Color> colorCombination = LinearGradientStyle.getColorCombination(
 Post gelenPost;
 
 Widget postContainer(
-    {Post post, double width, double height, BuildContext context, bloc}) {
+    {Post post, double width, double height, BuildContext context, bloc,User gelenUser}) {
   gelenContext = context;
   PostBloc gelenBloc = bloc;
   gelenPost = post;
@@ -180,9 +182,7 @@ Widget postContainer(
             bottomLeft: Radius.circular(20.0),
           ),
           child: Container(
-            decoration: BoxDecoration(
-                gradient: randomGradient()
-            ),
+            decoration: BoxDecoration(gradient: randomGradient()),
             width: width,
             height: height / 4,
             child: Stack(
@@ -197,12 +197,12 @@ Widget postContainer(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           Row(
-                            children: badgeleriGetir(),
+                            children: badgeleriGetir(gelenUser.roller),
                           ),
                           Column(
                             children: <Widget>[
                               Text(
-                                post.owner.userName,
+                               gelenUser.userName,
                                 style: GoogleFonts.righteous(fontSize: 15),
                               ),
                               Text(
@@ -223,12 +223,12 @@ Widget postContainer(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => ProfilePage(
-                                                gelenUser: post.owner,
+                                                gelenUser: gelenUser,
                                               )));
                                 },
                                 child: CircleAvatar(
                                   backgroundImage: NetworkImage(
-                                    post.owner.profilURL,
+                                    gelenUser.profilURL,
                                   ),
                                   backgroundColor: Colors.black,
                                 ),
@@ -308,18 +308,17 @@ Widget postContainer(
                             .document(post.postID)
                             .snapshots(),
                         builder: (context, snapshot) {
-                          if(snapshot.hasData){
+                          if (snapshot.hasData) {
                             return Text(
                               snapshot.data["liked"].toString() +
                                   " Kere Beğenildi",
                               style: GoogleFonts.righteous(fontSize: 17),
                             );
-                          }
-                          else return Text(
-                                "X Kere Beğenildi",
-                            style: GoogleFonts.righteous(fontSize: 17),
-                          );
-
+                          } else
+                            return Text(
+                              "X Kere Beğenildi",
+                              style: GoogleFonts.righteous(fontSize: 17),
+                            );
                         },
                       )
                     ],
@@ -374,12 +373,11 @@ Widget entryField(
             controller: textEditingController,
             cursorColor: Colors.limeAccent,
             keyboardType: TextInputType.text,
-            maxLength: title=="Haber Başlığı"?35:200,
+            maxLength: title == "Haber Başlığı" ? 35 : 200,
             decoration: InputDecoration(
-              counterStyle: TextStyle(color: Colors.limeAccent),
+                counterStyle: TextStyle(color: Colors.limeAccent),
                 hoverColor: Colors.limeAccent,
                 focusColor: Colors.limeAccent,
-
                 suffixIcon: faIcon,
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.limeAccent),
@@ -390,10 +388,8 @@ Widget entryField(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Colors.lime)
-
-                ),
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.lime)),
                 fillColor: Colors.white12,
                 errorStyle: GoogleFonts.adventPro(
                     fontSize: 15,
@@ -405,48 +401,39 @@ Widget entryField(
   );
 }
 
-List<Widget> badgeleriGetir() {
-  List<Widget> liste = [];
-  liste.add(Padding(
-    padding: const EdgeInsets.all(2.0),
-    child: Align(
-        alignment: Alignment.topRight,
-        child: CircleAvatar(
-          child: Center(
-              child: Icon(
-            FontAwesomeIcons.star,
-            size: 16,
-          )),
-          radius: 16,
-        )),
-  ));
-  liste.add(Padding(
-    padding: const EdgeInsets.all(2.0),
-    child: Align(
-        alignment: Alignment.topRight,
-        child: CircleAvatar(
-          child: Center(
-              child: Icon(
-            FontAwesomeIcons.star,
-            size: 16,
-          )),
-          radius: 16,
-        )),
-  ));
-  liste.add(Padding(
-    padding: const EdgeInsets.all(2.0),
-    child: Align(
-        alignment: Alignment.topRight,
-        child: CircleAvatar(
-          child: Center(
-              child: Icon(
-            FontAwesomeIcons.star,
-            size: 16,
-          )),
-          radius: 16,
-        )),
-  ));
-  return liste;
+List<String> getBadgeNumberss(Map gelenMap) {
+  debugPrint(gelenMap.toString());
+  List<String> rolleri = [];
+  for (var i in gelenMap.entries) {
+    if (i.value) {
+      rolleri.add(i.key);
+    }
+  }
+  return rolleri;
+}
+
+List<Widget> badgeleriGetir(Map rollerMap) {
+  List<Widget> badgeListe = [];
+  List<String> roller = getBadgeNumberss(rollerMap);
+  List<int> indexler = [];
+  for(int j=0;j< firebaseBadgeNames.length;j++){
+    for (int i = 0; i < roller.length; i++) {
+      if (firebaseBadgeNames[j] == roller[i]) {
+        indexler.add(j);
+      }
+    }
+
+  }
+
+
+  for (int i = 0; i < indexler.length; i++) {
+    badgeListe.add(Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Align(alignment:Alignment.topRight,child: badgeIcons[indexler[i]]),
+    ));
+  }
+
+  return badgeListe;
 }
 
 String facebook;
