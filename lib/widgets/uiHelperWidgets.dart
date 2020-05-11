@@ -175,6 +175,7 @@ Widget postCoontainer(
     ){
   LinearGradient closedGradient=randomGradient();
   return OpenContainer(
+    transitionDuration: Duration(milliseconds: 800),
     closedColor: Colors.transparent,
     openColor: Colors.white12,
     transitionType: ContainerTransitionType.fade,
@@ -195,7 +196,7 @@ Widget postCoontainer(
                 child: CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.black,
-                  child: Icon(Icons.arrow_back,size: 25,color: Colors.limeAccent,)),onPressed: (){
+                  child: Icon(Icons.arrow_back,size: 30,color: Colors.limeAccent,)),onPressed: (){
                 Navigator.pop(context);
               },),
             ),

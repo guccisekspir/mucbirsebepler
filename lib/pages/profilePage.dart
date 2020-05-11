@@ -9,7 +9,9 @@ import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/profileEditPage.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
+import 'package:mucbirsebepler/widgets/randomGradient.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
+import 'package:random_color/random_color.dart';
 
 class ProfilePage extends StatefulWidget {
   final User gelenUser;
@@ -119,7 +121,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: GridView.builder(
                                 padding: EdgeInsets.zero,
                                 shrinkWrap: true,
-                                itemCount: getBadgeNumbers(gelenUser.roller).length,
+                                itemCount:
+                                    getBadgeNumbers(gelenUser.roller).length,
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         childAspectRatio: 3.2,
@@ -127,8 +130,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                         crossAxisSpacing: 5,
                                         crossAxisCount: 2),
                                 itemBuilder: (context, index) {
-                                  List<String> roller=getBadgeNumbers(gelenUser.roller);
-                                  return badgeMaker(index, gelenUser,roller[index]);
+                                  List<String> roller =
+                                      getBadgeNumbers(gelenUser.roller);
+                                  return badgeMaker(
+                                      index, gelenUser, roller[index]);
                                 }),
                           ),
                         ),
@@ -172,6 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           itemCount: listPost.length,
                                           shrinkWrap: true,
                                           itemBuilder: (contex, index) {
+                                            LinearGradient linear=randomGradient();
                                             return AnimationConfiguration
                                                 .staggeredList(
                                                     position: index,
@@ -179,7 +185,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         milliseconds: 875),
                                                     child: ScaleAnimation(
                                                       child: FadeInAnimation(
-                                                        child: postContainer(
+                                                        child: postCoontainer(
+
+                                                            gelenUser: gelenUser,
                                                             bloc: _postBloc,
                                                             post:
                                                                 listPost[index],
@@ -234,9 +242,8 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-
 List<String> getBadgeNumbers(Map gelenMap) {
-  List<String> rolleri=[];
+  List<String> rolleri = [];
   for (var i in gelenMap.entries) {
     if (i.value) {
       rolleri.add(i.key);
