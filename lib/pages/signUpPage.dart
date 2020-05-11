@@ -147,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
       text: TextSpan(
           text: 'Mücbir',
           style: GoogleFonts.pressStart2p(
-            textStyle: Theme.of(context).textTheme.display1,
+            textStyle: Theme.of(context).textTheme.headline4,
             fontSize: 18,
             fontWeight: FontWeight.w700,
             color: Colors.black,

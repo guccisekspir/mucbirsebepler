@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:mucbirsebepler/data/authRepository.dart';
-import 'package:mucbirsebepler/locator.dart';
+
 
 abstract class AuthEvent extends Equatable {
   const AuthEvent();

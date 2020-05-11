@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mucbirsebepler/data/dbApiClient.dart';
 import 'package:mucbirsebepler/locator.dart';
 import 'package:mucbirsebepler/model/post.dart';

@@ -1,4 +1,3 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +26,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailController;
   TextEditingController _passwordController;
-  TextEditingController _secondEmailController;
   String butonText = "Giriş Yap";
   String textfieldText = "Şifre";
   String sifreniUnuttun = "Şifrenizi mi unuttunuz ?";
@@ -39,7 +37,6 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     _emailController = TextEditingController(text: "");
     _passwordController = TextEditingController(text: "");
-    _secondEmailController = TextEditingController(text: "");
   }
   Widget _entryField(String title,
       {bool isPassword = false, double opacity = 1.0}) {

@@ -1,10 +1,8 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mucbirsebepler/data/dbRepository.dart';
 import 'package:mucbirsebepler/locator.dart';
-import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import './bloc.dart';
 

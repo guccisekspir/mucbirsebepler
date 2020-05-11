@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:loading_animations/loading_animations.dart';
-import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
-import 'package:mucbirsebepler/pages/postPage.dart';
 import 'package:mucbirsebepler/pages/profileEditPage.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
-import 'package:mucbirsebepler/widgets/randomGradient.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
 
 class ProfilePage extends StatefulWidget {
