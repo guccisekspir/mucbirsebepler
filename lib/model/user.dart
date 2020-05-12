@@ -28,7 +28,7 @@ class User {
       'email': email,
       'userName':
       userName ?? email.substring(0, email.indexOf('@')) + randomSayiUret(),
-      'profilURL': profilURL ?? 'https://emrealtunbilek.com/wp-content/uploads/2016/10/apple-icon-72x72.png',
+      'profilURL': profilURL ?? 'https://scontent-iad3-1.cdninstagram.com/v/t51.2885-19/93015989_334674204174771_8234711126986719232_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_ohc=768rEmsjt9QAX85AVxd&oh=15d0af9622c40769173994595367f79b&oe=5EE5599D',
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
       'seviye': seviye ?? 1,
       'isGmatik': isGmatik ?? false,

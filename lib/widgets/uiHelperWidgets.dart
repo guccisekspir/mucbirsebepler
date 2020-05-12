@@ -581,7 +581,7 @@ Widget entryField(
                     if(!e.contains("https"))
                     yazilacak = "Lütfen sadece youtube linki giriniz";
                 } else {
-                  if(!e.contains("https://")) yazilacak="Lütfen https:// ekleyin";
+                  if(!e.contains("https://")&& e!="") yazilacak="Lütfen https:// ekleyin";
                 }
               }
               return yazilacak;
@@ -591,7 +591,7 @@ Widget entryField(
             controller: textEditingController,
             cursorColor: Colors.limeAccent,
             keyboardType: TextInputType.text,
-            maxLength: title == "Haber Başlığı" ? 35 : 200,
+            maxLength: title == "Haber Başlığı(Zorunlu)" ? 35 : 200,
             decoration: InputDecoration(
                 counterStyle: TextStyle(color: Colors.limeAccent),
                 hoverColor: Colors.limeAccent,

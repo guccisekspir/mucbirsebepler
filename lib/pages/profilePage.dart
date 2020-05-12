@@ -126,7 +126,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         childAspectRatio: 3.2,
-                                        mainAxisSpacing: 0,
+                                        mainAxisSpacing: 4,
                                         crossAxisSpacing: 5,
                                         crossAxisCount: 2),
                                 itemBuilder: (context, index) {
@@ -177,8 +177,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                           itemCount: listPost.length,
                                           shrinkWrap: true,
                                           itemBuilder: (contex, index) {
-                                            LinearGradient linear =
-                                                randomGradient();
                                             return AnimationConfiguration
                                                 .staggeredList(
                                                     position: index,
@@ -190,18 +188,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             gelenUser:
                                                                 gelenUser,
                                                             bloc: _postBloc,
-                                                            post:
-                                                                listPost[index],
-                                                            width:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                            height:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .height,
+                                                            post: listPost[index],
+                                                            width: MediaQuery.of(context).size.width,
+                                                            height: MediaQuery.of(context).size.height,
                                                             context: context),
                                                       ),
                                                     ));

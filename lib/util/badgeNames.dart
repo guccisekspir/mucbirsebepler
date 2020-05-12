@@ -23,7 +23,7 @@ List<String> badgeNames=[
 List<Widget> badgeIcons=[
 
   CircleAvatar(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
         backgroundImage: AssetImage('assets/icon/ayin.png'),
@@ -32,7 +32,7 @@ List<Widget> badgeIcons=[
       )),
 
   CircleAvatar(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
         backgroundImage: AssetImage('assets/icon/acar.png'),
@@ -40,7 +40,7 @@ List<Widget> badgeIcons=[
         backgroundColor: Colors.limeAccent,
       )),
   CircleAvatar(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
         backgroundImage: AssetImage('assets/icon/destek.png',),
@@ -49,7 +49,7 @@ List<Widget> badgeIcons=[
         backgroundColor: Colors.limeAccent,
       )),
   CircleAvatar(
-      backgroundColor: Colors.black,
+      backgroundColor:Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
         backgroundImage: AssetImage('assets/icon/yerles.png'),
@@ -57,7 +57,7 @@ List<Widget> badgeIcons=[
         backgroundColor: Colors.limeAccent,
       )),
   CircleAvatar(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
 
@@ -66,7 +66,7 @@ List<Widget> badgeIcons=[
         backgroundColor: Colors.limeAccent,
       )),
   CircleAvatar(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
         backgroundImage: AssetImage('assets/icon/tospik.png'),
