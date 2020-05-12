@@ -15,6 +15,8 @@ import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/util/badgeNames.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 Widget backButton(BuildContext context) {
   return InkWell(
@@ -167,78 +169,197 @@ Post gelenPost;
 
 Widget postCoontainer(
     {Post post,
-      double width,
-      double height,
-      BuildContext context,
-      bloc,
-      User gelenUser}
-    ){
-  LinearGradient closedGradient=randomGradient();
+    double width,
+    double height,
+    BuildContext context,
+    bloc,
+    User gelenUser}) {
+  bool youtubeVarMi = post.youtubelink != "";
+  bool linkVarMi = post.otherLink != "";
+  YoutubePlayerController _controller;
+  String videoID = YoutubePlayer.convertUrlToId("https://" + post.youtubelink);
+  if (youtubeVarMi) {
+    _controller = YoutubePlayerController(
+      initialVideoId: videoID,
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: true,
+      ),
+    );
+  }
+  LinearGradient closedGradient = randomGradient();
   return OpenContainer(
     transitionDuration: Duration(milliseconds: 800),
     closedColor: Colors.transparent,
     openColor: Colors.white12,
     transitionType: ContainerTransitionType.fade,
-    closedBuilder: (BuildContext context,VoidCallback voidCallBack){
-      return postContainer(post: post,width: width,height: height,context: context,bloc: bloc,gelenUser: gelenUser,voidCallback: voidCallBack,linearGradient: closedGradient);
+    closedBuilder: (BuildContext context, VoidCallback voidCallBack) {
+      return postContainer(
+          post: post,
+          width: width,
+          height: height,
+          context: context,
+          bloc: bloc,
+          gelenUser: gelenUser,
+          voidCallback: voidCallBack,
+          linearGradient: closedGradient);
     },
-    openBuilder: (BuildContext context,VoidCallback voidCallBack){
-      return detailContainer(context:context,gelenUser:gelenUser,linearGradient:closedGradient,gelenPost: post);
+    openBuilder: (BuildContext context, VoidCallback voidCallBack) {
+      return detailContainer(
+          context: context,
+          gelenUser: gelenUser,
+          linearGradient: closedGradient,
+          gelenPost: post,
+          controller: _controller,
+          youtubeVarMi: youtubeVarMi,
+          linkVarMi: linkVarMi);
     },
-
-
   );
 }
 
-
-Widget detailContainer({BuildContext context,User gelenUser,LinearGradient linearGradient,Post gelenPost}){
-
+Widget detailContainer(
+    {BuildContext context,
+    User gelenUser,
+    LinearGradient linearGradient,
+    Post gelenPost,
+    bool youtubeVarMi,
+    YoutubePlayerController controller,
+    bool linkVarMi}) {
   return Container(
-      decoration: BoxDecoration(
-          gradient: linearGradient
-      ),
+      decoration: BoxDecoration(gradient: linearGradient),
       height: 100,
-      child: Column(
-        children: [
-        SafeArea(
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: FlatButton(
-              child: CircleAvatar(
-                  radius: 25,
-                  backgroundColor: Colors.black,
-                  child: Icon(Icons.arrow_back,size: 30,color: Colors.limeAccent,)),onPressed: (){
-              Navigator.pop(context);
-            },),
-          ),
-        ),
-        profilePicture(gelenUser.profilURL,context),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(50, 25, 0, 5),
-          child: Column(
-            children: [
-              Align(alignment:Alignment.centerLeft,child: Text("Haber Başlığı",style: GoogleFonts.anton(fontSize: 15,fontWeight: FontWeight.w100,color: Colors.black),)),
-              SizedBox(height: 5,),
-              Align(alignment:Alignment.centerLeft,child: Text(gelenPost.title,style: GoogleFonts.righteous(fontSize: 20,fontWeight: FontWeight.bold),)),
-            ],
-          ),
-        ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(50, 25, 60, 5),
-            child: Column(
-              children: [
-                Align(alignment:Alignment.centerLeft,child: Text("Haber İçeriği",style: GoogleFonts.anton(fontSize: 15,fontWeight: FontWeight.w100,color: Colors.black),)),
-                SizedBox(height: 5,),
-                Align(alignment:Alignment.centerLeft,child: Text(gelenPost.description,style: GoogleFonts.righteous(fontSize: 15,fontWeight: FontWeight.w100),)),
-              ],
+      child: SingleChildScrollView(
+        controller: ScrollController(),
+        child: Column(
+          children: [
+            SafeArea(
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: FlatButton(
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Colors.black,
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 30,
+                        color: Colors.limeAccent,
+                      )),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
             ),
-          ),
-
-      ],)
-
-  );
+            profilePicture(gelenUser.profilURL, context),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(50, 25, 0, 5),
+              child: Column(
+                children: [
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Haber Başlığı",
+                        style: GoogleFonts.anton(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w100,
+                            color: Colors.black),
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        gelenPost.title,
+                        style: GoogleFonts.righteous(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      )),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(50, 25, 60, 5),
+              child: Column(
+                children: [
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Haber İçeriği",
+                        style: GoogleFonts.anton(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w100,
+                            color: Colors.black),
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        gelenPost.description,
+                        style: GoogleFonts.righteous(
+                            fontSize: 15, fontWeight: FontWeight.w100),
+                      )),
+                ],
+              ),
+            ),
+            linkVarMi
+                ? Padding(
+                    padding: const EdgeInsets.fromLTRB(50, 25, 60, 5),
+                    child: Column(
+                      children: [
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Linkler",
+                              style: GoogleFonts.anton(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.black),
+                            )),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: RaisedButton(
+                              child: Text("Diğer linkler"),
+                              onPressed: () async {
+                                String url = gelenPost.otherLink;
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not launch $url';
+                                }
+                              },
+                            )),
+                      ],
+                    ),
+                  )
+                : SizedBox(
+                    width: 0,
+                    height: 0,
+                  ),
+            youtubeVarMi
+                ? Container(
+                    width: MediaQuery.of(context).size.width / 1.2,
+                    height: MediaQuery.of(context).size.height / 3,
+                    child: YoutubePlayer(
+                      controller: controller,
+                      showVideoProgressIndicator: true,
+                      progressColors: ProgressBarColors(
+                          playedColor: Colors.limeAccent,
+                          bufferedColor: Colors.cyan),
+                    ),
+                  )
+                : SizedBox(
+                    width: 0,
+                    height: 0,
+                  ),
+          ],
+        ),
+      ));
 }
-
 
 Widget postContainer(
     {Post post,
@@ -246,7 +367,9 @@ Widget postContainer(
     double height,
     BuildContext context,
     bloc,
-    User gelenUser,VoidCallback voidCallback,LinearGradient linearGradient}) {
+    User gelenUser,
+    VoidCallback voidCallback,
+    LinearGradient linearGradient}) {
   gelenContext = context;
   PostBloc gelenBloc = bloc;
   gelenPost = post;
@@ -291,7 +414,8 @@ Widget postContainer(
                                 Text(
                                   "Tarafından paylaşıldı",
                                   style: GoogleFonts.roboto(
-                                      fontSize: 10, fontWeight: FontWeight.w300),
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w300),
                                 )
                               ],
                             ),
@@ -340,7 +464,8 @@ Widget postContainer(
                               fontSize: 14, color: Colors.black),
                           children: <TextSpan>[
                             TextSpan(
-                                recognizer: TapGestureRecognizer()..onTap = () {},
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {},
                                 text: 'Daha fazlasını gör',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -373,7 +498,8 @@ Widget postContainer(
                             ));
                           },
                           onSelected: (ReactiveIconDefinition button) {
-                            gelenBloc.add(LikePost(postID: post.postID,userID: gelenUser.userID));
+                            gelenBloc.add(LikePost(
+                                postID: post.postID, userID: gelenUser.userID));
                           },
                           iconWidth: 32.0,
                         ),
@@ -442,8 +568,10 @@ Widget entryField(
                 if (e.isEmpty) yazilacak = "Lütfen içeriği giriniz";
               }
               if (title == "Youtube Linki") {
-                if (e != "" && !e.contains("youtube"))
-                  yazilacak = "Lütfen sadece youtube linki giriniz";
+                if (e != "" && !e.contains("youtube")) {
+                  if (!e.contains("youtu.be"))
+                    yazilacak = "Lütfen sadece youtube linki giriniz";
+                }
               }
               return yazilacak;
             },
