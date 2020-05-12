@@ -26,6 +26,7 @@ class _PostPageState extends State<PostPage> {
   TextEditingController descController;
   TextEditingController youtubeController;
   TextEditingController otherController;
+  var formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -71,7 +72,7 @@ class _PostPageState extends State<PostPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    var formKey = GlobalKey<FormState>();
+
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
