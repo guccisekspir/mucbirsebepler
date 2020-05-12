@@ -174,16 +174,24 @@ Widget postCoontainer(
     BuildContext context,
     bloc,
     User gelenUser}) {
-  bool youtubeVarMi = post.youtubelink != "";
-  bool linkVarMi = post.otherLink != "";
+  bool youtubeVarMi=false;
+  bool linkVarMi=false;
+  youtubeVarMi = post.youtubelink != "";
+  linkVarMi = post.otherLink != "";
   YoutubePlayerController _controller;
-  String videoID = YoutubePlayer.convertUrlToId("https://" + post.youtubelink);
+
   if (youtubeVarMi) {
+    String videoID = YoutubePlayer.convertUrlToId(post.youtubelink);
+    if(videoID==null){
+      videoID="4YKpBYo61Cs";
+    }
     _controller = YoutubePlayerController(
+
       initialVideoId: videoID,
       flags: YoutubePlayerFlags(
-        autoPlay: true,
-        mute: true,
+        hideThumbnail: true,
+        autoPlay: false,
+        mute: false,
       ),
     );
   }
@@ -561,16 +569,19 @@ Widget entryField(
             validator: (e) {
               String yazilacak;
 
-              if (title == "Haber Başlığı") {
+              if (title == "Haber Başlığı(Zorunlu)") {
                 if (e.isEmpty) yazilacak = "Lütfen Başlığı giriniz";
               }
-              if (title == "Haber İçeriği") {
+              if (title == "Haber İçeriği(Zorunlu)") {
                 if (e.isEmpty) yazilacak = "Lütfen içeriği giriniz";
               }
               if (title == "Youtube Linki") {
                 if (e != "" && !e.contains("youtube")) {
                   if (!e.contains("youtu.be"))
+                    if(!e.contains("https"))
                     yazilacak = "Lütfen sadece youtube linki giriniz";
+                } else {
+                  if(!e.contains("https://")) yazilacak="Lütfen https:// ekleyin";
                 }
               }
               return yazilacak;

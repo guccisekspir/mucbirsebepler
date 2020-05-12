@@ -179,7 +179,7 @@ class _PostPageState extends State<PostPage> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: entryField(
-                                  title: "Haber Başlığı",
+                                  title: "Haber Başlığı(Zorunlu)",
                                   textEditingController: headerController,
                                   faIcon: FaIcon(
                                     FontAwesomeIcons.horseHead,
@@ -191,7 +191,7 @@ class _PostPageState extends State<PostPage> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                               child: entryField(
-                                  title: "Haber İçeriği",
+                                  title: "Haber İçeriği(Zorunlu)",
                                   textEditingController: descController,
                                   faIcon: FaIcon(
                                     FontAwesomeIcons.userNinja,
