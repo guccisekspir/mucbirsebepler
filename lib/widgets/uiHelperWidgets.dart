@@ -183,31 +183,58 @@ Widget postCoontainer(
       return postContainer(post: post,width: width,height: height,context: context,bloc: bloc,gelenUser: gelenUser,voidCallback: voidCallBack,linearGradient: closedGradient);
     },
     openBuilder: (BuildContext context,VoidCallback voidCallBack){
-      return Container(
-        decoration: BoxDecoration(
-          gradient: closedGradient
-        ),
-        height: 100,
-        child: Column(children: [
-          SafeArea(
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: FlatButton(
-                child: CircleAvatar(
+      return detailContainer(context:context,gelenUser:gelenUser,linearGradient:closedGradient,gelenPost: post);
+    },
+
+
+  );
+}
+
+
+Widget detailContainer({BuildContext context,User gelenUser,LinearGradient linearGradient,Post gelenPost}){
+
+  return Container(
+      decoration: BoxDecoration(
+          gradient: linearGradient
+      ),
+      height: 100,
+      child: Column(
+        children: [
+        SafeArea(
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: FlatButton(
+              child: CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.black,
                   child: Icon(Icons.arrow_back,size: 30,color: Colors.limeAccent,)),onPressed: (){
-                Navigator.pop(context);
-              },),
+              Navigator.pop(context);
+            },),
+          ),
+        ),
+        profilePicture(gelenUser.profilURL,context),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(50, 25, 0, 5),
+          child: Column(
+            children: [
+              Align(alignment:Alignment.centerLeft,child: Text("Haber Başlığı",style: GoogleFonts.anton(fontSize: 15,fontWeight: FontWeight.w100,color: Colors.black),)),
+              SizedBox(height: 5,),
+              Align(alignment:Alignment.centerLeft,child: Text(gelenPost.title,style: GoogleFonts.righteous(fontSize: 20,fontWeight: FontWeight.bold),)),
+            ],
+          ),
+        ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(50, 25, 60, 5),
+            child: Column(
+              children: [
+                Align(alignment:Alignment.centerLeft,child: Text("Haber İçeriği",style: GoogleFonts.anton(fontSize: 15,fontWeight: FontWeight.w100,color: Colors.black),)),
+                SizedBox(height: 5,),
+                Align(alignment:Alignment.centerLeft,child: Text(gelenPost.description,style: GoogleFonts.righteous(fontSize: 15,fontWeight: FontWeight.w100),)),
+              ],
             ),
           ),
-          profilePicture(gelenUser.profilURL,context),
 
-        ],)
-
-      );
-    },
-
+      ],)
 
   );
 }

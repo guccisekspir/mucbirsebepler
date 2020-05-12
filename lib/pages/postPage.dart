@@ -22,10 +22,10 @@ class _PostPageState extends State<PostPage> {
   PostBloc _postBloc;
   DataBaseBloc _dataBaseBloc;
   User cekilenUser;
-  TextEditingController headerController;
-  TextEditingController descController;
-  TextEditingController youtubeController;
-  TextEditingController otherController;
+  TextEditingController headerController = TextEditingController(text: "");
+  TextEditingController descController = TextEditingController(text: "");
+  TextEditingController youtubeController = TextEditingController(text: "");
+  TextEditingController otherController = TextEditingController(text: "");
 
   @override
   void initState() {
@@ -58,10 +58,7 @@ class _PostPageState extends State<PostPage> {
     _postBloc = BlocProvider.of<PostBloc>(context);
     _dataBaseBloc= BlocProvider.of<DataBaseBloc>(context);
     _dataBaseBloc.add(GetUserr(userID: widget.user.userID));
-    headerController = TextEditingController(text: "");
-    descController = TextEditingController(text: "");
-    youtubeController = TextEditingController(text: "");
-    otherController = TextEditingController(text: "");
+
 
     super.initState();
   }

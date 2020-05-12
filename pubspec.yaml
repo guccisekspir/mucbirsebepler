@@ -43,6 +43,8 @@ dependencies:
   flutter_staggered_animations: ^0.1.2
   flutter_reactive_button: ^1.1.0
   animations: ^1.0.0+5
+  youtube_player_flutter: ^6.1.1
+  flutter_linkify: ^3.1.3
 
 dev_dependencies:
   flutter_test:

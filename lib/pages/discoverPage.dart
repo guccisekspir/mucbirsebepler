@@ -39,7 +39,6 @@ class _DiscoverPageState extends State<DiscoverPage> {
   void initState() {
     _scrollController = ScrollController();
     _scrollController.addListener(_listeScrollListener);
-    debugPrint(widget.user.profilURL);
     _postBloc = BlocProvider.of<PostBloc>(context);
     _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
     _dataBaseBloc.add(GetUserr(userID: widget.user.userID));
@@ -213,7 +212,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
     if (_scrollController.offset <=
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
-      debugPrint("Listenin en altındayız");
+
       _postBloc.add(GetMorePost());
     }
   }
