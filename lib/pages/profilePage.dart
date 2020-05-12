@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Center(
                             child: SafeArea(
                                 child: profilePicturew(
-                                    gelenUser.profilURL, context))),
+                                    gelenUser, context))),
                         Align(
                           alignment: Alignment.centerRight,
                           child: Padding(

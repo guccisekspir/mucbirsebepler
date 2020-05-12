@@ -17,6 +17,7 @@ import 'package:mucbirsebepler/widgets/profileHelper.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'dart:io';
 
 Widget backButton(BuildContext context) {
   return InkWell(
@@ -174,19 +175,18 @@ Widget postCoontainer(
     BuildContext context,
     bloc,
     User gelenUser}) {
-  bool youtubeVarMi=false;
-  bool linkVarMi=false;
+  bool youtubeVarMi = false;
+  bool linkVarMi = false;
   youtubeVarMi = post.youtubelink != "";
   linkVarMi = post.otherLink != "";
   YoutubePlayerController _controller;
 
   if (youtubeVarMi) {
     String videoID = YoutubePlayer.convertUrlToId(post.youtubelink);
-    if(videoID==null){
-      videoID="4YKpBYo61Cs";
+    if (videoID == null) {
+      videoID = "4YKpBYo61Cs";
     }
     _controller = YoutubePlayerController(
-
       initialVideoId: videoID,
       flags: YoutubePlayerFlags(
         hideThumbnail: true,
@@ -260,7 +260,15 @@ Widget detailContainer(
             ),
             profilePicture(gelenUser.profilURL, context),
             Padding(
-              padding: const EdgeInsets.fromLTRB(50, 25, 0, 5),
+              padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
+              child: Text(
+                gelenUser.userName + " iddiası",
+                style: GoogleFonts.righteous(
+                    fontSize: 17, fontWeight: FontWeight.normal),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(50, 10, 0, 5),
               child: Column(
                 children: [
                   Align(
@@ -364,6 +372,7 @@ Widget detailContainer(
                     width: 0,
                     height: 0,
                   ),
+            SizedBox(height: 30,)
           ],
         ),
       ));
@@ -577,11 +586,11 @@ Widget entryField(
               }
               if (title == "Youtube Linki") {
                 if (e != "" && !e.contains("youtube")) {
-                  if (!e.contains("youtu.be"))
-                    if(!e.contains("https"))
+                  if (!e.contains("youtu.be")) if (!e.contains("https"))
                     yazilacak = "Lütfen sadece youtube linki giriniz";
                 } else {
-                  if(!e.contains("https://")&& e!="") yazilacak="Lütfen https:// ekleyin";
+                  if (!e.contains("https://") && e != "")
+                    yazilacak = "Lütfen https:// ekleyin";
                 }
               }
               return yazilacak;

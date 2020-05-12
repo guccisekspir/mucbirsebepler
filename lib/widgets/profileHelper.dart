@@ -16,7 +16,7 @@ Widget profilePicture(String url,BuildContext context){
   );
 }
 
-Widget profilePicturew(String url,BuildContext context){
+Widget profilePicturew(User user,BuildContext context){
   return Container(
     child: Stack(
       alignment: AlignmentDirectional.center,
@@ -38,7 +38,7 @@ Widget profilePicturew(String url,BuildContext context){
       Align(
         alignment: Alignment.bottomCenter,
         child: CircleAvatar(
-          backgroundImage: NetworkImage(url),
+          backgroundImage: NetworkImage(user.profilURL),
           radius: 70,  //TODO radiusları mediaquerye göre yap
           backgroundColor: Theme.of(context).accentColor,
         ),

@@ -22,38 +22,42 @@ class _PostPageState extends State<PostPage> {
   PostBloc _postBloc;
   DataBaseBloc _dataBaseBloc;
   User cekilenUser;
-  TextEditingController headerController = TextEditingController(text: "");
-  TextEditingController descController = TextEditingController(text: "");
-  TextEditingController youtubeController = TextEditingController(text: "");
-  TextEditingController otherController = TextEditingController(text: "");
+  TextEditingController headerController;
+  TextEditingController descController;
+  TextEditingController youtubeController;
+  TextEditingController otherController;
 
   @override
   void initState() {
+    headerController = TextEditingController();
+    descController = TextEditingController();
+    youtubeController = TextEditingController();
+    otherController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
         context: context,
         builder: (_) => FlareGiffyDialog(
-              cardBackgroundColor: Colors.black,
-              onlyOkButton: true,
-              flarePath: 'assets/minion.flr',
-              flareAnimation: 'Wave',
-              title: Text(
-                '        Haber Paylaşmaya  \n'
+          cardBackgroundColor: Colors.black,
+          onlyOkButton: true,
+          flarePath: 'assets/minion.flr',
+          flareAnimation: 'Wave',
+          title: Text(
+            '        Haber Paylaşmaya  \n'
                 'Çalıştığınızı görüntülüyorum',
-                maxLines: null,
-                style: GoogleFonts.righteous(
-                    fontSize: 13, color: Colors.deepPurpleAccent),
-              ),
-              description: Text(
-                "Şimdilik video veya fotoğraf yükleyemiyoruz.\n"
+            maxLines: null,
+            style: GoogleFonts.righteous(
+                fontSize: 13, color: Colors.deepPurpleAccent),
+          ),
+          description: Text(
+            "Şimdilik video veya fotoğraf yükleyemiyoruz.\n"
                 " Lütfen içerikleri youtube veya farklı yere yükleyip burada belirtiniz.",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.righteous(color: Colors.deepOrange),
-              ),
-              entryAnimation: EntryAnimation.BOTTOM_LEFT,
-              onOkButtonPressed: () {
-                Navigator.of(context).pop();
-              },
-            )));
+            textAlign: TextAlign.center,
+            style: GoogleFonts.righteous(color: Colors.deepOrange),
+          ),
+          entryAnimation: EntryAnimation.BOTTOM_LEFT,
+          onOkButtonPressed: () {
+            Navigator.of(context).pop();
+          },
+        )));
 
     _postBloc = BlocProvider.of<PostBloc>(context);
     _dataBaseBloc= BlocProvider.of<DataBaseBloc>(context);
@@ -153,114 +157,103 @@ class _PostPageState extends State<PostPage> {
           },)
 
         ],
-        child: BlocBuilder(
-          bloc: _postBloc,
-          // ignore: missing_return
-          builder: (context, PostState state) {
-            if(cekilenUser==null){
-              return Center(child: CircularProgressIndicator(),);
-            }
-            else{
-              return Container(
-                color: Colors.black,
-                width: screenWidth,
-                height: screenHeight,
-                child: Stack(
-                  children: <Widget>[
+        child: cekilenUser!=null?Container(
+          color: Colors.black,
+          width: screenWidth,
+          height: screenHeight,
+          child: Stack(
+            children: <Widget>[
 
-                    SingleChildScrollView(
-                      child: Form(
-                        key: formKey,
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: entryField(
-                                  title: "Haber Başlığı(Zorunlu)",
-                                  textEditingController: headerController,
-                                  faIcon: FaIcon(
-                                    FontAwesomeIcons.horseHead,
-                                    color: Colors.deepOrange,
-                                    size: 30,
-                                  )),
-                            ),
-                            lineDivider(),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                              child: entryField(
-                                  title: "Haber İçeriği(Zorunlu)",
-                                  textEditingController: descController,
-                                  faIcon: FaIcon(
-                                    FontAwesomeIcons.userNinja,
-                                    color: Colors.deepOrange,
-                                    size: 30,
-                                  )),
-                            ),
-                            lineDivider(),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                              child: entryField(
-                                  title: "Youtube Linki",
-                                  textEditingController: youtubeController,
-                                  faIcon: FaIcon(
-                                    FontAwesomeIcons.youtube,
-                                    color: Colors.deepOrange,
-                                    size: 30,
-                                  )),
-                            ),
-                            lineDivider(),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                              child: entryField(
-                                  title: "Diğer Linkler",
-                                  textEditingController: otherController,
-                                  faIcon: FaIcon(
-                                    FontAwesomeIcons.slack,
-                                    color: Colors.deepOrange,
-                                    size: 30,
-                                  )),
-                            ),
-                          ],
-                        ),
+              SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: GestureDetector(
-                          onTap: () {
-                            if (formKey.currentState.validate()) {
-                              Post gidecekPost = Post(
-                                  owner: cekilenUser,
-                                  title: headerController.text,
-                                  description: descController.text,
-                                  youtubelink: youtubeController.text,
-                                  otherLink: otherController.text);
-                              _postBloc.add(SavePost(gelenPost: gidecekPost));
-                              _postBloc.add(GetPost());
-                            }
-                          },
-                          child: CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.deepOrange,
-                              child: Icon(
-                                FontAwesomeIcons.plus,
-                                size: 30,
-                                color: Colors.black,
-                              )),
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: entryField(
+                            title: "Haber Başlığı(Zorunlu)",
+                            textEditingController: headerController,
+                            faIcon: FaIcon(
+                              FontAwesomeIcons.horseHead,
+                              color: Colors.deepOrange,
+                              size: 30,
+                            )),
                       ),
-                    ),
-                  ],
+                      lineDivider(),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                        child: entryField(
+                            title: "Haber İçeriği(Zorunlu)",
+                            textEditingController: descController,
+                            faIcon: FaIcon(
+                              FontAwesomeIcons.userNinja,
+                              color: Colors.deepOrange,
+                              size: 30,
+                            )),
+                      ),
+                      lineDivider(),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                        child: entryField(
+                            title: "Youtube Linki",
+                            textEditingController: youtubeController,
+                            faIcon: FaIcon(
+                              FontAwesomeIcons.youtube,
+                              color: Colors.deepOrange,
+                              size: 30,
+                            )),
+                      ),
+                      lineDivider(),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                        child: entryField(
+                            title: "Diğer Linkler",
+                            textEditingController: otherController,
+                            faIcon: FaIcon(
+                              FontAwesomeIcons.slack,
+                              color: Colors.deepOrange,
+                              size: 30,
+                            )),
+                      ),
+                    ],
+                  ),
                 ),
-              );
-            }
-          },
-        ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: GestureDetector(
+                    onTap: () {
+                      if (formKey.currentState.validate()) {
+                        Post gidecekPost = Post(
+                            owner: cekilenUser,
+                            title: headerController.text,
+                            description: descController.text,
+                            youtubelink: youtubeController.text,
+                            otherLink: otherController.text);
+                        _postBloc.add(SavePost(gelenPost: gidecekPost));
+                        _postBloc.add(GetPost());
+                      }
+                    },
+                    child: CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.deepOrange,
+                        child: Icon(
+                          FontAwesomeIcons.plus,
+                          size: 30,
+                          color: Colors.black,
+                        )),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ):Center(child: CircularProgressIndicator(),),
       ),
     );
   }
