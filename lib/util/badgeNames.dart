@@ -26,7 +26,7 @@ List<Widget> badgeIcons=[
       backgroundColor: Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
-        backgroundImage: AssetImage('assets/icon/ayin.png'),
+        child: Image.asset('assets/icon/ayin.png',fit: BoxFit.contain,),
         radius: 14,
         backgroundColor: Colors.limeAccent,
       )),
@@ -35,7 +35,7 @@ List<Widget> badgeIcons=[
       backgroundColor: Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
-        backgroundImage: AssetImage('assets/icon/acar.png'),
+        child: Image.asset('assets/icon/acar.png',fit: BoxFit.contain,),
         radius: 14,
         backgroundColor: Colors.limeAccent,
       )),
@@ -43,8 +43,7 @@ List<Widget> badgeIcons=[
       backgroundColor: Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
-        backgroundImage: AssetImage('assets/icon/destek.png',),
-
+        child: Image.asset('assets/icon/destek.png',fit: BoxFit.contain,),
         radius: 14,
         backgroundColor: Colors.limeAccent,
       )),
@@ -52,7 +51,7 @@ List<Widget> badgeIcons=[
       backgroundColor:Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
-        backgroundImage: AssetImage('assets/icon/yerles.png'),
+        child: Image.asset('assets/icon/yerles.png',fit: BoxFit.contain,),
         radius: 14,
         backgroundColor: Colors.limeAccent,
       )),
@@ -60,8 +59,7 @@ List<Widget> badgeIcons=[
       backgroundColor: Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
-
-        backgroundImage: AssetImage('assets/icon/popular.png'),
+        child: Image.asset('assets/icon/popular.png',fit: BoxFit.contain,),
         radius: 14,
         backgroundColor: Colors.limeAccent,
       )),
@@ -69,7 +67,7 @@ List<Widget> badgeIcons=[
       backgroundColor: Colors.pinkAccent,
       radius: 17,
       child: CircleAvatar(
-        backgroundImage: AssetImage('assets/icon/tospik.png'),
+        child: Image.asset('assets/icon/tospik.png',fit: BoxFit.contain,),
         radius: 14,
         backgroundColor: Colors.limeAccent,
       )),

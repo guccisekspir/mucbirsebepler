@@ -82,6 +82,8 @@ Widget profilePicturew(User user,BuildContext context,{LinearGradient linearGrad
 
 
 Widget badgeMaker(int index, User gelenUser,String rol) {
+  LinearGradient randomGradientt=randomGradient();
+
 
   int buldugumindex;
   for(int i =0;i<firebaseBadgeNames.length;i++){
@@ -97,7 +99,7 @@ Widget badgeMaker(int index, User gelenUser,String rol) {
   return FittedBox(
     child: Container(
       decoration: BoxDecoration(
-          gradient: randomGradient(),
+          gradient: randomGradientt,
           borderRadius: BorderRadius.circular(20)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
