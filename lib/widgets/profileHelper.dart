@@ -16,7 +16,13 @@ Widget profilePicture(String url,BuildContext context){
   );
 }
 
-Widget profilePicturew(User user,BuildContext context){
+Widget profilePicturew(User user,BuildContext context,{LinearGradient linearGradient}){
+  LinearGradient gradient=randomGradient();
+  if(linearGradient!=null){
+    gradient=linearGradient;
+
+  }
+
   return Stack(
     alignment: AlignmentDirectional.topCenter,
 
@@ -32,7 +38,7 @@ Widget profilePicturew(User user,BuildContext context){
                 width: 160,
                 height: 160,
                 decoration: BoxDecoration(
-                    gradient: randomGradient(),
+                    gradient: gradient,
                     color: Colors.limeAccent,
                     shape: BoxShape.circle
                 ),

@@ -180,7 +180,7 @@ Widget postCoontainer(
   youtubeVarMi = post.youtubelink != "";
   linkVarMi = post.otherLink != "";
   YoutubePlayerController _controller;
-
+  LinearGradient openedGradient= randomGradient();
   if (youtubeVarMi) {
     String videoID = YoutubePlayer.convertUrlToId(post.youtubelink);
     if (videoID == null) {
@@ -196,6 +196,7 @@ Widget postCoontainer(
     );
   }
   LinearGradient closedGradient = randomGradient();
+
   return OpenContainer(
     transitionDuration: Duration(milliseconds: 800),
     closedColor: Colors.transparent,
@@ -214,6 +215,7 @@ Widget postCoontainer(
     },
     openBuilder: (BuildContext context, VoidCallback voidCallBack) {
       return detailContainer(
+        linearGradientt: openedGradient,
           context: context,
           gelenUser: gelenUser,
           linearGradient: closedGradient,
@@ -229,6 +231,7 @@ Widget detailContainer(
     {BuildContext context,
     User gelenUser,
     LinearGradient linearGradient,
+      LinearGradient linearGradientt,
     Post gelenPost,
     bool youtubeVarMi,
     YoutubePlayerController controller,
@@ -258,7 +261,7 @@ Widget detailContainer(
                 ),
               ),
             ),
-            profilePicturew(gelenUser, context),
+            profilePicturew(gelenPost.owner, context,linearGradient: linearGradientt),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Container(
@@ -283,7 +286,7 @@ Widget detailContainer(
             Padding(
               padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
               child: Text(
-                gelenUser.userName + " iddiası",
+                gelenPost.owner.userName + " iddiası",
                 style: GoogleFonts.righteous(
                     fontSize: 17, fontWeight: FontWeight.normal),
               ),

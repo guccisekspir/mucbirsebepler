@@ -92,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               gelenUser.liked.toString()+
                               " Kere Beğenildi",
                               gradient: randomGradient(),
-                              style: GoogleFonts.righteous(fontSize: 20),
+                              style: GoogleFonts.righteous(fontSize: 20,fontWeight: FontWeight.bold),
 
                             ),
                             SizedBox(width: 6,),
