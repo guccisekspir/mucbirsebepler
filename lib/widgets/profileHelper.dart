@@ -46,23 +46,29 @@ Widget profilePicturew(User user,BuildContext context){
                 backgroundColor: Theme.of(context).accentColor,
               ),
             ),
-
-
           ],),
       ),
       user.isGmatik?Align(
         alignment: Alignment.topCenter,
-        child: Container(
-            width: 60,
-            height: 60,
-            child: Image.asset("assets/renkli.gif",fit: BoxFit.fill,)),
-      ):Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-                width: 40,
-                height: 40,
-                child: Image.asset("assets/renksiz.gif",fit: BoxFit.fill,)),
-      )
+        child: Padding(
+          padding: const EdgeInsets.only(left: 130),
+          child: Container(
+              width: 60,
+              height: 60,
+              child: Image.asset("assets/renkli.gif",fit: BoxFit.fill,)),
+        ),
+      ):SizedBox(height: 0,width: 0,),
+      user.isMatik?Padding(
+        padding: const EdgeInsets.only(left: 130),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+              width: 60,
+              height: 60,
+              child: Image.asset("assets/renksiz.gif",fit: BoxFit.fill,)),
+        ),
+      ):SizedBox(height: 0,width: 0,),
+
     ],
   );
 }
