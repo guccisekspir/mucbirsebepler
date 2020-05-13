@@ -18,7 +18,7 @@ Widget profilePicture(String url,BuildContext context){
 
 Widget profilePicturew(User user,BuildContext context){
   return Stack(
-    alignment: AlignmentDirectional.topStart,
+    alignment: AlignmentDirectional.topCenter,
 
     children: [
       Container(
@@ -51,16 +51,13 @@ Widget profilePicturew(User user,BuildContext context){
           ],),
       ),
       user.isGmatik?Align(
-        alignment: Alignment.bottomRight,
-        child: Padding(
-          padding: const EdgeInsets.only(right: 100),
-          child: Container(
-              width: 60,
-              height: 60,
-              child: Image.asset("assets/renkli.gif",fit: BoxFit.fill,)),
-        ),
-      ):Align(
         alignment: Alignment.topCenter,
+        child: Container(
+            width: 60,
+            height: 60,
+            child: Image.asset("assets/renkli.gif",fit: BoxFit.fill,)),
+      ):Align(
+        alignment: Alignment.bottomCenter,
         child: Container(
                 width: 40,
                 height: 40,
