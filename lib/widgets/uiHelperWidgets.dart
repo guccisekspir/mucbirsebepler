@@ -258,7 +258,28 @@ Widget detailContainer(
                 ),
               ),
             ),
-            profilePicture(gelenUser.profilURL, context),
+            profilePicturew(gelenUser, context),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 60),
+              child: Container(
+                child: GridView.builder(
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemCount: getBadgeNumbers(gelenPost.owner.roller).length,
+                    gridDelegate:
+                    SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 3.2,
+                        mainAxisSpacing: 4,
+                        crossAxisSpacing: 5,
+                        crossAxisCount: 2),
+                    itemBuilder: (context, index) {
+                      List<String> roller =
+                      getBadgeNumbers(gelenPost.owner.roller);
+                      return badgeMaker(
+                          index, gelenPost.owner, roller[index]);
+                    }),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
               child: Text(
@@ -339,7 +360,7 @@ Widget detailContainer(
                         Align(
                             alignment: Alignment.centerLeft,
                             child: RaisedButton(
-                              child: Text("Diğer linkler"),
+                              child: Text(gelenPost.otherLink),
                               onPressed: () async {
                                 String url = gelenPost.otherLink;
                                 if (await canLaunch(url)) {
@@ -516,7 +537,7 @@ Widget postContainer(
                           },
                           onSelected: (ReactiveIconDefinition button) {
                             gelenBloc.add(LikePost(
-                                postID: post.postID, userID: gelenUser.userID));
+                                postID: post.postID, userID: gelenUser.userID,ownerUserID: post.owner.userID));
                           },
                           iconWidth: 32.0,
                         ),
@@ -660,6 +681,17 @@ List<Widget> badgeleriGetir(Map rollerMap) {
 
   return badgeListe;
 }
+
+List<String> getBadgeNumbers(Map gelenMap) {
+  List<String> rolleri = [];
+  for (var i in gelenMap.entries) {
+    if (i.value) {
+      rolleri.add(i.key);
+    }
+  }
+  return rolleri;
+}
+
 
 String facebook;
 MaterialColor likeBackground = Colors.red;

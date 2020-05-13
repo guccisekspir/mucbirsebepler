@@ -12,6 +12,7 @@ class User {
   bool isGmatik;
   bool isMatik;
   bool isFirst;
+  int liked;
   Map<String,dynamic> roller={"aym":false,"acM":false,"destekci":false,"yerlestirici":false,"popular":false,"tospik":true};
 
 
@@ -34,7 +35,8 @@ class User {
       'isGmatik': isGmatik ?? false,
       'isMatik':isMatik?? false,
       'isFirst':isFirst??true,
-      'roller':roller
+      'roller':roller,
+      'liked':liked??0
     };
   }
 
@@ -48,7 +50,8 @@ class User {
         isMatik=map['isMatik'],
         isFirst=map['isFirst'],
         seviye = map['seviye'],
-        roller=map['roller'];
+        roller=map['roller'],
+        liked=map['liked'];
 
   User.idveResim({@required this.userID, @required this.profilURL});
 

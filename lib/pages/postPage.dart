@@ -30,10 +30,10 @@ class _PostPageState extends State<PostPage> {
 
   @override
   void initState() {
-    headerController = TextEditingController();
-    descController = TextEditingController();
-    youtubeController = TextEditingController();
-    otherController = TextEditingController();
+    headerController = TextEditingController(text: "");
+    descController = TextEditingController(text: "");
+    youtubeController = TextEditingController(text: "");
+    otherController = TextEditingController(text: "");
     WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
         context: context,
         builder: (_) => FlareGiffyDialog(

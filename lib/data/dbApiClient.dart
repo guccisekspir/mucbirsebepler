@@ -47,7 +47,7 @@ class DbApiClient {
     }
   }
 
-  Future<void> likePost(String postID,String userID) async {
+  Future<void> likePost(String postID,String userID,String ownerUserID) async {
     DocumentSnapshot likedDocument;
 
 
@@ -56,6 +56,8 @@ class DbApiClient {
     likedDocument = await _firestore.collection("posts").document(postID).collection("likedBy").document(userID).get();
 
     if(likedDocument.data==null){
+      _firestore.collection("users").document(ownerUserID).updateData({"liked":FieldValue.increment(1)});
+
       _firestore
           .collection("posts")
           .document(postID)
