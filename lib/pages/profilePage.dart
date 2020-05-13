@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gradient_text/gradient_text.dart';
 import 'package:loading_animations/loading_animations.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
@@ -83,29 +84,41 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: SafeArea(
                                 child: profilePicturew(
                                     gelenUser, context))),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-                            child: RaisedButton(
-                              elevation: 15,
-                              onPressed: () {
-                                WidgetsBinding.instance
-                                    .addPostFrameCallback((_) {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ProfileEditPage(
-                                                editingUser: gelenUser,
-                                              )));
-                                });
-                              },
-                              child: Text("Profili düzenle"),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+
+                            GradientText(
+                              gelenUser.liked.toString()+
+                              " Kere Beğenildi",
+                              gradient: randomGradient(),
+                              style: GoogleFonts.righteous(fontSize: 20),
+
+                            ),
+                            SizedBox(width: 6,),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                              child: RaisedButton(
+                                elevation: 15,
+                                onPressed: () {
+                                  WidgetsBinding.instance
+                                      .addPostFrameCallback((_) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ProfileEditPage(
+                                                  editingUser: gelenUser,
+                                                )));
+                                  });
+                                },
+                                child: Text("Profili düzenle"),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
                             ),
-                          ),
+
+                          ],
                         ),
                         Center(
                           child: Text(
