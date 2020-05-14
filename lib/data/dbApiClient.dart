@@ -29,7 +29,7 @@ class DbApiClient {
     DocumentSnapshot gelenUser =
         await Firestore.instance.document("users/$userID").get();
     User okunanUser = User.fromMap(gelenUser.data);
-    okunanUser.roller=gelenUser.data['roller'];
+    okunanUser.roller = gelenUser.data['roller'];
     return okunanUser;
   }
 
@@ -40,32 +40,46 @@ class DbApiClient {
     var postID = userMap['postID'];
     try {
       await _firestore.collection("posts").document(postID).setData(userMap);
-      await _firestore.collection("users").document(post.owner.userID).collection("posts").document(postID).setData(userMap);
+      await _firestore
+          .collection("users")
+          .document(post.owner.userID)
+          .collection("posts")
+          .document(postID)
+          .setData(userMap);
       debugPrint("deniyo");
     } catch (_) {
       debugPrint("bu dhata " + _.toString());
     }
   }
 
-  Future<void> likePost(String postID,String userID,String ownerUserID) async {
+  Future<void> likePost(
+      String postID, String userID, String ownerUserID) async {
     DocumentSnapshot likedDocument;
 
+    likedDocument = await _firestore
+        .collection("posts")
+        .document(postID)
+        .collection("likedBy")
+        .document(userID)
+        .get();
 
-
-
-    likedDocument = await _firestore.collection("posts").document(postID).collection("likedBy").document(userID).get();
-
-    if(likedDocument.data==null){
-      _firestore.collection("users").document(ownerUserID).updateData({"liked":FieldValue.increment(1)});
+    if (likedDocument.data == null) {
+      _firestore
+          .collection("users")
+          .document(ownerUserID)
+          .updateData({"liked": FieldValue.increment(1)});
 
       _firestore
           .collection("posts")
           .document(postID)
           .updateData({"liked": FieldValue.increment(1)});
-      _firestore.collection("posts").document(postID).collection("likedBy").document(userID).setData({"eben":true});
+      _firestore
+          .collection("posts")
+          .document(postID)
+          .collection("likedBy")
+          .document(userID)
+          .setData({"eben": true});
     }
-
-
   }
 
   Future<List<Post>> getAllPost(Post lastFetched, int fetchLimit) async {
@@ -98,12 +112,13 @@ class DbApiClient {
 
   Future<List<Post>> getUserPopular(String userID) async {
     QuerySnapshot _querySnapshotss;
-    List<Post> _mostPopular=[];
-    _querySnapshotss= await Firestore.instance
+    List<Post> _mostPopular = [];
+    _querySnapshotss = await Firestore.instance
         .collection("users")
         .document(userID)
         .collection("posts")
-        .orderBy("liked", descending: false).limit(3)
+        .orderBy("liked", descending: false)
+        .limit(3)
         .getDocuments();
     for (DocumentSnapshot documentSnapshot in _querySnapshotss.documents) {
       Post tekPost = Post.fromMap(documentSnapshot.data);
@@ -111,6 +126,5 @@ class DbApiClient {
     }
 
     return _mostPopular;
-
   }
 }

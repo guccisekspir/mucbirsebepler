@@ -12,7 +12,6 @@ import 'package:mucbirsebepler/pages/profileEditPage.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
-import 'package:random_color/random_color.dart';
 
 class ProfilePage extends StatefulWidget {
   final User gelenUser;

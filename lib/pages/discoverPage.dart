@@ -1,6 +1,4 @@
 import 'dart:ui';
-import 'dart:wasm';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';

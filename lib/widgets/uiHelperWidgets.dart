@@ -17,7 +17,6 @@ import 'package:mucbirsebepler/widgets/profileHelper.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'dart:io';
 
 Widget backButton(BuildContext context) {
   return InkWell(
@@ -524,7 +523,7 @@ Widget postContainer(
                         ReactiveButton(
                           containerAbove: false,
                           child: CircleAvatar(
-                              backgroundColor: likeBackground,
+                              backgroundColor: Colors.red,
                               child: Icon(
                                 LineAwesomeIcons.heart_o,
                                 size: 30,
@@ -696,8 +695,6 @@ List<String> getBadgeNumbers(Map gelenMap) {
 }
 
 
-String facebook;
-MaterialColor likeBackground = Colors.red;
 
 List<ReactiveIconDefinition> _facebook = <ReactiveIconDefinition>[
   ReactiveIconDefinition(
