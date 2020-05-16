@@ -18,6 +18,7 @@ class _ShopPageState extends State<ShopPage> {
   List<ProductDetails> _products = [];
   List<PurchaseDetails> _purchases = [];
   StreamSubscription _subscription;
+  String alindiMi="";
 
   @override
   void initState() {
@@ -44,6 +45,7 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
           color: Colors.black,
@@ -80,7 +82,7 @@ class _ShopPageState extends State<ShopPage> {
                     bottomLeft: Radius.circular(20.0),
                   ),
                   child: Container(
-                    height: height / 3.5,
+                    height: height / 3.2,
                     color: Colors.pinkAccent,
                     child: Column(
                       children: [
@@ -90,9 +92,9 @@ class _ShopPageState extends State<ShopPage> {
                               children: [
                                 Align(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 70,top: 15),
+                                    padding: const EdgeInsets.only(left: 85,top: 25),
                                     child: Text(
-                                      "Gradient Tik",
+                                      "Gradient Tik"+alindiMi,
                                       style: GoogleFonts.righteous(
                                           fontWeight: FontWeight.bold,
                                           fontSize:height / 35,
@@ -102,7 +104,7 @@ class _ShopPageState extends State<ShopPage> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 50,right: 10),
+                                  padding: const EdgeInsets.only(left: 75,right: 10),
                                   child: Text(
                                     "Gradient Tikli olarak hem Bartu ve Melikşah'a öncelikli olarak gözüküp hem de bize destek verebilirsin",
                                     style: GoogleFonts.roboto(
@@ -124,6 +126,164 @@ class _ShopPageState extends State<ShopPage> {
                                           width: height / 10,
                                           height: height / 10,
                                           child: Image.asset("assets/renkli.gif",fit: BoxFit.fill,),
+                                        ),
+                                        SizedBox(width: 30,),
+                                        RaisedButton(
+                                          elevation: 10,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(Radius.circular(10))
+                                          ),
+                                          color: Colors.limeAccent,
+                                          onPressed: (){
+
+                                            _buyProduct(_products[1]);
+                                          },
+                                          child: Text("Satın Al "+_products[1].price+" ₺",style: GoogleFonts.bangers(fontSize: 26),),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+
+                              ],
+                            )),
+
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15,),
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.elliptical(200, 300),
+                    topRight: Radius.circular(80),
+                    bottomRight: Radius.circular(150.0),
+                    bottomLeft: Radius.circular(20.0),
+                  ),
+                  child: Container(
+                    height: height / 3.5,
+                    color: Colors.cyanAccent,
+                    child: Column(
+                      children: [
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Align(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 85,top: 20),
+                                    child: Text(
+                                      "MaTik",
+                                      style: GoogleFonts.righteous(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize:height / 35,
+                                          letterSpacing: 1.5),
+                                    ),
+                                  ),
+                                  alignment: Alignment.centerLeft,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 72,right: 10),
+                                  child: Text(
+                                    "Yeter artık Instagram! MATİK'li olmak artık çok kolay",
+                                    style: GoogleFonts.roboto(
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: height / 40,
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 50,top: 5),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.symmetric(vertical: BorderSide(color: Colors.cyan,width: 4.0),horizontal: BorderSide(color: Colors.deepPurpleAccent,width: 4.0))
+                                          ),
+                                          width: height / 10,
+                                          height: height / 10,
+                                          child: Image.asset("assets/renksiz.gif",fit: BoxFit.fill,),
+                                        ),
+                                        SizedBox(width: 15,),
+                                        RaisedButton(
+                                          elevation: 10,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(Radius.circular(10))
+                                          ),
+                                          color: Colors.limeAccent,
+                                          onPressed: (){
+
+                                            _buyProduct(_products[2]);
+                                          },
+                                          child: Text("Satın Al "+_products[2].price+" ₺",style: GoogleFonts.bangers(fontSize: 26),),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )
+
+                              ],
+                            )),
+
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15,),
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.elliptical(200, 300),
+                    topRight: Radius.circular(80),
+                    bottomRight: Radius.circular(150.0),
+                    bottomLeft: Radius.circular(20.0),
+                  ),
+                  child: Container(
+                    height: height / 3.5,
+                    color: Colors.orangeAccent,
+                    child: Column(
+                      children: [
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Align(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 90,top: 10),
+                                    child: Text(
+                                      "Destekçi Rozeti",
+                                      style: GoogleFonts.righteous(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize:height / 35,
+                                          letterSpacing: 1.5),
+                                    ),
+                                  ),
+                                  alignment: Alignment.centerLeft,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 88,right: 10),
+                                  child: Text(
+                                    "Hem destekçi rozetine sahip olup hem de bana kahve ısmarlayabilirsiniz <3",
+                                    style: GoogleFonts.roboto(
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: height / 40,
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 50,top: 5),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.symmetric(vertical: BorderSide(color: Colors.cyan,width: 4.0),horizontal: BorderSide(color: Colors.deepPurpleAccent,width: 4.0))
+                                          ),
+                                          width: height / 10,
+                                          height: height / 10,
+                                          child: Image.asset("assets/icon/destek.png",fit: BoxFit.fill,),
                                         ),
                                         SizedBox(width: 30,),
                                         RaisedButton(
@@ -160,164 +320,6 @@ class _ShopPageState extends State<ShopPage> {
                   ),
                   child: Container(
                     height: height / 3.5,
-                    color: Colors.cyanAccent,
-                    child: Column(
-                      children: [
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              children: [
-                                Align(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 80,top: 20),
-                                    child: Text(
-                                      "MaTik",
-                                      style: GoogleFonts.righteous(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize:height / 35,
-                                          letterSpacing: 1.5),
-                                    ),
-                                  ),
-                                  alignment: Alignment.centerLeft,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 70,right: 10),
-                                  child: Text(
-                                    "Yeter artık Instagram! MATİK'li olmak artık çok kolay",
-                                    style: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: height / 40,
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 50,top: 5),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.symmetric(vertical: BorderSide(color: Colors.cyan,width: 4.0),horizontal: BorderSide(color: Colors.deepPurpleAccent,width: 4.0))
-                                          ),
-                                          width: height / 10,
-                                          height: height / 10,
-                                          child: Image.asset("assets/renksiz.gif",fit: BoxFit.fill,),
-                                        ),
-                                        SizedBox(width: 15,),
-                                        RaisedButton(
-                                          elevation: 10,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(10))
-                                          ),
-                                          color: Colors.limeAccent,
-                                          onPressed: (){
-
-                                            _buyProduct(_products[1]);
-                                          },
-                                          child: Text("Satın Al "+_products[1].price+" ₺",style: GoogleFonts.bangers(fontSize: 26),),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            )),
-
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 15,),
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.elliptical(200, 300),
-                    topRight: Radius.circular(80),
-                    bottomRight: Radius.circular(150.0),
-                    bottomLeft: Radius.circular(20.0),
-                  ),
-                  child: Container(
-                    height: height / 3.5,
-                    color: Colors.orangeAccent,
-                    child: Column(
-                      children: [
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              children: [
-                                Align(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 80,top: 10),
-                                    child: Text(
-                                      "Destekçi Rozeti",
-                                      style: GoogleFonts.righteous(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize:height / 35,
-                                          letterSpacing: 1.5),
-                                    ),
-                                  ),
-                                  alignment: Alignment.centerLeft,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 80,right: 10),
-                                  child: Text(
-                                    "Hem destekçi rozetine sahip olup hem de bana kahve ısmarlayabilirsiniz <3",
-                                    style: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: height / 40,
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 50,top: 5),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.symmetric(vertical: BorderSide(color: Colors.cyan,width: 4.0),horizontal: BorderSide(color: Colors.deepPurpleAccent,width: 4.0))
-                                          ),
-                                          width: height / 10,
-                                          height: height / 10,
-                                          child: Image.asset("assets/icon/destek.png",fit: BoxFit.fill,),
-                                        ),
-                                        SizedBox(width: 30,),
-                                        RaisedButton(
-                                          elevation: 10,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(10))
-                                          ),
-                                          color: Colors.limeAccent,
-                                          onPressed: (){
-
-                                            _buyProduct(_products[2]);
-                                          },
-                                          child: Text("Satın Al "+_products[2].price+" ₺",style: GoogleFonts.bangers(fontSize: 26),),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-
-                              ],
-                            )),
-
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 15,),
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.elliptical(200, 300),
-                    topRight: Radius.circular(80),
-                    bottomRight: Radius.circular(150.0),
-                    bottomLeft: Radius.circular(20.0),
-                  ),
-                  child: Container(
-                    height: height / 3.5,
                     color: Colors.redAccent,
                     child: Column(
                       children: [
@@ -327,7 +329,7 @@ class _ShopPageState extends State<ShopPage> {
                               children: [
                                 Align(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 80,top: 10),
+                                    padding: const EdgeInsets.only(left: 88,top: 10),
                                     child: Text(
                                       "Ürün Yerleştirmecisi",
                                       style: GoogleFonts.righteous(
@@ -339,7 +341,7 @@ class _ShopPageState extends State<ShopPage> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 80,right: 10),
+                                  padding: const EdgeInsets.only(left: 83,right: 10),
                                   child: Text(
                                     "Hem yerleştirme rozetine sahip olup hem de ürün yerleştirebilirsiniz <3",
                                     style: GoogleFonts.roboto(
@@ -443,13 +445,20 @@ class _ShopPageState extends State<ShopPage> {
     // TODO serverside verification & record consumable in the database
 
     if (purchase != null && purchase.status == PurchaseStatus.purchased) {
+      setState(() {
+        alindiMi=" Alindi";
+      });
+      debugPrint("aa");
       Scaffold.of(context).showSnackBar(SnackBar(content: Text("Gradient aldın"),));
     }
     else if (purchase != null && purchase2.status == PurchaseStatus.purchased) {
+      debugPrint("aa");
       Scaffold.of(context).showSnackBar(SnackBar(content: Text("Mavi aldın"),));    }
     else if (purchase != null && purchase3.status == PurchaseStatus.purchased) {
+      debugPrint("aa");
       Scaffold.of(context).showSnackBar(SnackBar(content: Text("Destek aldın"),));    }
     else if (purchase != null && purchase4.status == PurchaseStatus.purchased) {
+      debugPrint("aa");
       Scaffold.of(context).showSnackBar(SnackBar(content: Text("Urun aldın"),));    }
   }
 
