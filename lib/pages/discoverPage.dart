@@ -78,6 +78,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
           width: width,
           height: height,
           child: SingleChildScrollView(
+            padding: EdgeInsets.zero,
             child: Column(
               children: <Widget>[
                 ClipRRect(
@@ -161,9 +162,11 @@ class _DiscoverPageState extends State<DiscoverPage> {
                       if (!hasMore&& yuklendiMi) {
                         postList = state.listPost;
                         return SingleChildScrollView(
+                          padding: EdgeInsets.zero,
                           scrollDirection: Axis.vertical,
                           child: AnimationLimiter(
                             child: ListView.builder(
+                              padding: EdgeInsets.zero,
                                 controller: _scrollController,
                                 itemCount: hasMore
                                     ? postList.length + 1
