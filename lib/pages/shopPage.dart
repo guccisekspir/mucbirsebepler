@@ -442,12 +442,21 @@ class _ShopPageState extends State<ShopPage> {
 
   void _verifyPurchase() {
     PurchaseDetails purchase = _hasPurchased('gradient_tik');
+    PurchaseDetails purchase2 = _hasPurchased('mavi_tik');
+    PurchaseDetails purchase3 = _hasPurchased('destek_badge');
+    PurchaseDetails purchase4 = _hasPurchased('urun_yerlestirme');
 
     // TODO serverside verification & record consumable in the database
 
     if (purchase != null && purchase.status == PurchaseStatus.purchased) {
-      debugPrint("gradient aldi");
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Gradient aldın"),));
     }
+    else if (purchase != null && purchase2.status == PurchaseStatus.purchased) {
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Mavi aldın"),));    }
+    else if (purchase != null && purchase3.status == PurchaseStatus.purchased) {
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Destek aldın"),));    }
+    else if (purchase != null && purchase4.status == PurchaseStatus.purchased) {
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Urun aldın"),));    }
   }
 
   void _buyProduct(ProductDetails prod) {
