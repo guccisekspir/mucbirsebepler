@@ -69,4 +69,9 @@ class DbRepository {
     _postList = [];
     getAllPost(lastPost: _lastFetchedPost);
   }
+
+  Future<void> changeUsername(String userID,String newUsername)async{
+
+    return await _dbApiClient.changeUsername(userID,newUsername);
+  }
 }

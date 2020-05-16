@@ -46,6 +46,17 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
       }
     }
 
+    if(event is ChangeUsername){
+      yield DataBaseLoadingState();
+      try{
+        await dbRepository.changeUsername(event.userID, event.newUsername);
+        yield DataBaseLoadedState();
+      }catch(_){
+        debugPrint(_.toString());
+        yield DataBaseErrorState();
+      }
+    }
+
 
   }
 }

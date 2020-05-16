@@ -25,6 +25,18 @@ GetUserr({this.userID});
 List<Object> get props => [userID];
 }
 
+class ChangeUsername extends DataBaseEvent{
+  final String userID;
+  final String newUsername;
+
+  ChangeUsername({this.userID, this.newUsername});
+  @override
+  // TODO: implement props
+  List<Object> get props => [userID,newUsername];
+
+
+}
+
 
 
 

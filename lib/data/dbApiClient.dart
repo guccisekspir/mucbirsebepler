@@ -33,6 +33,14 @@ class DbApiClient {
     return okunanUser;
   }
 
+  Future<void> changeUsername(String userID,String newUsername)async{
+
+    await _firestore.collection("users").document(userID).updateData({'userName':newUsername});
+
+
+
+  }
+
   Future<bool> savePost(Post post) async {
     //TODO düzenlenecek
 

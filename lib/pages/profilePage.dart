@@ -139,8 +139,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => ProfileEditPage(
-                                                  editingUser: gelenUser,
+                                                builder: (context) => BlocProvider(
+                                                  create: (context)=>DataBaseBloc(),
+                                                  child: ProfileEditPage(
+                                                    editingUser: gelenUser,
+                                                  ),
                                                 )));
                                       });
                                     },
