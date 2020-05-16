@@ -3,15 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_button/flutter_reactive_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:linear_gradient/linear_gradient.dart';
 import 'package:mucbirsebepler/bloc/authbloc/bloc.dart';
+import 'package:mucbirsebepler/bloc/databasebloc/data_base_bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
+import 'package:mucbirsebepler/pages/profilePage.dart';
 import 'package:mucbirsebepler/util/badgeNames.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
@@ -263,7 +266,20 @@ Widget detailContainer(
                 ),
               ),
             ),
-            profilePicturew(gelenPost.owner, context,linearGradient: linearGradientt),
+            GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MultiBlocProvider(
+                    providers: [
+                      BlocProvider<PostBloc>(create: (context)=>PostBloc(),),
+                      BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),)
+                    ],
+                    child: ProfilePage(
+                      gelenUser: gelenPost.owner ,
+                      tiklayanUser: gelenUser,
+                    ),
+                  )));
+                },
+                child: profilePicturew(gelenPost.owner, context,linearGradient: linearGradientt)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Container(

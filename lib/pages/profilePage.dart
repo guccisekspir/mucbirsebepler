@@ -16,8 +16,9 @@ import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
 
 class ProfilePage extends StatefulWidget {
   final User gelenUser;
+  final User tiklayanUser;
 
-  const ProfilePage({Key key, this.gelenUser}) : super(key: key);
+  const ProfilePage({Key key, this.gelenUser,this.tiklayanUser}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -28,9 +29,16 @@ class _ProfilePageState extends State<ProfilePage> {
   PostBloc _postBloc;
   ScrollController _fScrollController;
   ScrollController _sScrollController;
+  bool kendiMi=true;
+
 
   @override
   void initState() {
+    if(widget.tiklayanUser!=null&&widget.tiklayanUser!=widget.gelenUser){
+      setState(() {
+        kendiMi=false;
+      });
+    }
     _fScrollController = ScrollController();
     _sScrollController = ScrollController();
     _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
@@ -105,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
                                 child: Align(
                                   alignment: Alignment.centerRight,
-                                  child: RaisedButton(
+                                  child: kendiMi?RaisedButton(
                                     elevation: 15,
                                     onPressed: () {
                                       WidgetsBinding.instance
@@ -114,15 +122,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => ProfileEditPage(
-                                                      editingUser: gelenUser,
-                                                    )));
+                                                  editingUser: gelenUser,
+                                                )));
                                       });
                                     },
                                     child: Text("Profili düzenle"),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                  ),
+                                  ):SizedBox(width: 0,height: 0,),
                                 ),
                               ),
 
