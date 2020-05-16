@@ -33,9 +33,23 @@ class DbApiClient {
     return okunanUser;
   }
 
-  Future<void> changeUsername(String userID,String newUsername)async{
+  Future<bool> changeUsername(String userID,String newUsername)async{
 
-    await _firestore.collection("users").document(userID).updateData({'userName':newUsername});
+    var users = await _firestore
+        .collection("users")
+        .where("userName", isEqualTo: newUsername)
+        .getDocuments();
+    if (users.documents.length >= 1) {
+      return false;
+    } else {
+      await _firestore
+          .collection("users")
+          .document(userID)
+          .updateData({'userName': newUsername});
+      return true;
+    }
+
+
 
 
 
