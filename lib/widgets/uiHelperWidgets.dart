@@ -173,7 +173,7 @@ Widget postCoontainer(
     double height,
     BuildContext context,
     bloc,
-    User gelenUser}) {
+    User gelenUser,LinearGradient linearGradient}) {
   bool youtubeVarMi = false;
   bool linkVarMi = false;
   youtubeVarMi = post.youtubelink != "";
@@ -195,6 +195,9 @@ Widget postCoontainer(
     );
   }
   LinearGradient closedGradient = randomGradient();
+  if(linearGradient!=null){
+    closedGradient=linearGradient;
+  }
 
   return OpenContainer(
     transitionDuration: Duration(milliseconds: 800),
