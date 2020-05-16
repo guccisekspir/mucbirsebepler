@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/locator.dart';
 import 'package:mucbirsebepler/pages/splashScreen.dart';
@@ -8,6 +9,7 @@ import 'dart:io';
 
 void main() {
   setupLocator();
+  InAppPurchaseConnection.enablePendingPurchases();
   runApp(MyApp());
 }
 

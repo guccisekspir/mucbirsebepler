@@ -1,6 +1,10 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_text/gradient_text.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
 
 class ShopPage extends StatefulWidget {
@@ -9,6 +13,33 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+  bool isAvailable=true;
+  InAppPurchaseConnection _iap = InAppPurchaseConnection.instance;
+  List<ProductDetails> _products = [];
+  List<PurchaseDetails> _purchases = [];
+  StreamSubscription _subscription;
+
+  @override
+  void initState() {
+    _initialize();
+    _subscription = _iap.purchaseUpdatedStream.listen((data) => setState(() {
+      print('NEW PURCHASE');
+      _purchases.addAll(data);
+      _verifyPurchase();
+    }));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+
+    _subscription.cancel();
+    super.dispose();
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -101,7 +132,10 @@ class _ShopPageState extends State<ShopPage> {
                                           borderRadius: BorderRadius.all(Radius.circular(10))
                                         ),
                                         color: Colors.limeAccent,
-                                        onPressed: (){},
+                                        onPressed: (){
+
+                                          _buyProduct(_products[2]);
+                                        },
                                         child: Text("Satın Al 10 ₺",style: GoogleFonts.bangers(fontSize: 26),),
                                       )
                                     ],
@@ -352,4 +386,80 @@ class _ShopPageState extends State<ShopPage> {
           ),
         ));
   }
+
+  void _initialize() async{
+    isAvailable= await _iap.isAvailable();
+    if(isAvailable){
+      debugPrint("evet");
+      await _getProducts();
+      await _getPastPurchases();
+    }else debugPrint("hayır");
+  }
+
+  Future<void >_getProducts() async{
+    Set<String> ids=<String>['gradient_tik','mavi_tik','destek_badge','urun_yerlestirme'].toSet();
+    ProductDetailsResponse productDetailsResponse=await _iap.queryProductDetails(ids);
+
+    setState(() {
+
+      _products=productDetailsResponse.productDetails;
+      debugPrint(_products.toString());
+    });
+  }
+
+  Future<void>_getPastPurchases()async {
+    QueryPurchaseDetailsResponse queryPurchaseDetailsResponse= await _iap.queryPastPurchases();
+    for (PurchaseDetails purchase in queryPurchaseDetailsResponse.pastPurchases) {
+      if (Platform.isIOS) {
+        InAppPurchaseConnection.instance.completePurchase(purchase);
+      }
+    }
+
+    setState(() {
+      _purchases = queryPurchaseDetailsResponse.pastPurchases;
+    });
+
+
+  }
+
+  PurchaseDetails _hasPurchased(String productID) {
+    return _purchases.firstWhere( (purchase) => purchase.productID == productID, orElse: () => null);
+  }
+
+  void _verifyPurchase() {
+    PurchaseDetails purchase = _hasPurchased('gradient_tik');
+
+    // TODO serverside verification & record consumable in the database
+
+    if (purchase != null && purchase.status == PurchaseStatus.purchased) {
+      debugPrint("gradient aldi");
+    }
+  }
+
+  void _buyProduct(ProductDetails prod) {
+    final PurchaseParam purchaseParam = PurchaseParam(productDetails: prod);
+     _iap.buyNonConsumable(purchaseParam: purchaseParam);
+
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

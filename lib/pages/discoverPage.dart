@@ -93,7 +93,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                       child: Text(
                         "Popüler Haberler",
                         style: GoogleFonts.pressStart2p(
-                          fontSize: 20,
+                          fontSize: height/45,
                         ),
                       ),
                     ),

@@ -418,161 +418,160 @@ Widget postContainer(
     padding: const EdgeInsets.all(8.0),
     child: GestureDetector(
       onTap: voidCallback,
-      child: Stack(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.elliptical(200, 300),
-              topRight: Radius.circular(80),
-              bottomRight: Radius.circular(150.0),
-              bottomLeft: Radius.circular(20.0),
-            ),
-            child: Container(
-              decoration: BoxDecoration(gradient: linearGradient),
-              width: width,
-              height: height / 4,
-              child: Stack(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Row(
-                              children: badgeleriGetir(post.owner.roller),
-                            ),
-                            Column(
-                              children: <Widget>[
-                                Text(
-                                  post.owner.userName,
-                                  style: GoogleFonts.righteous(fontSize: 15),
-                                ),
-                                Text(
-                                  "Tarafından paylaşıldı",
-                                  style: GoogleFonts.roboto(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w300),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Align(
-                                alignment: Alignment.topRight,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    debugPrint("bas");
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                      post.owner.profilURL,
-                                    ),
-                                    backgroundColor: Colors.black,
+      child: Expanded(
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.elliptical(200, 300),
+            topRight: Radius.circular(80),
+            bottomRight: Radius.circular(150.0),
+            bottomLeft: Radius.circular(20.0),
+          ),
+          child: Container(
+            decoration: BoxDecoration(gradient: linearGradient),
+            width: width,
+            height: height / 4,
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Row(
+                            children: badgeleriGetir(post.owner.roller),
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                post.owner.userName,
+                                style: GoogleFonts.righteous(fontSize: 15),
+                              ),
+                              Text(
+                                "Tarafından paylaşıldı",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w300),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Align(
+                              alignment: Alignment.topRight,
+                              child: GestureDetector(
+                                onTap: () {
+                                  debugPrint("bas");
+                                },
+                                child: CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                    post.owner.profilURL,
                                   ),
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 80,
-                    left: 40,
-                    child: Container(
-                      child: Text(
-                        post.title,
-                        style: GoogleFonts.abrilFatface(fontSize: 16),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 100,
-                    left: 40,
-                    child: Container(
-                      width: width / 1.5,
-                      child: RichText(
-                        text: TextSpan(
-                          text: post.description.length > 60
-                              ? post.description.substring(0, 60) + "... "
-                              : post.description + "... ",
-                          style: GoogleFonts.roboto(
-                              fontSize: 14, color: Colors.black),
-                          children: <TextSpan>[
-                            TextSpan(
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {},
-                                text: 'Daha fazlasını gör',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.underline)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 5,
-                    left: 30,
-                    child: Row(
-                      children: <Widget>[
-                        ReactiveButton(
-                          containerAbove: false,
-                          child: CircleAvatar(
-                              backgroundColor: Colors.red,
-                              child: Icon(
-                                LineAwesomeIcons.heart_o,
-                                size: 30,
+                                  backgroundColor: Colors.black,
+                                ),
                               )),
-                          icons: _facebook,
-                          //_flags,
-                          onTap: () {
-                            Scaffold.of(gelenContext).showSnackBar(SnackBar(
-                              content: Text("Lütfen Basılı tutunuz"),
-                              backgroundColor: Colors.deepPurple,
-                              duration: Duration(milliseconds: 500),
-                            ));
-                          },
-                          onSelected: (ReactiveIconDefinition button) {
-                            gelenBloc.add(LikePost(
-                                postID: post.postID, userID: gelenUser.userID,ownerUserID: post.owner.userID));
-                          },
-                          iconWidth: 32.0,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        StreamBuilder(
-                          stream: Firestore.instance
-                              .collection("posts")
-                              .document(post.postID)
-                              .snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Text(
-                                snapshot.data["liked"].toString() +
-                                    " Kere Beğenildi",
-                                style: GoogleFonts.righteous(fontSize: 17),
-                              );
-                            } else
-                              return Text(
-                                "X Kere Beğenildi",
-                                style: GoogleFonts.righteous(fontSize: 17),
-                              );
-                          },
-                        )
-                      ],
+                        ],
+                      ),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+                Positioned(
+                  top: 60,
+                  left: 40,
+                  child: Container(
+                    child: Text(
+                      post.title,
+                      style: GoogleFonts.abrilFatface(fontSize: height/50),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 80,
+                  left: 40,
+                  child: Container(
+                    width: width / 1.5,
+                    child: RichText(
+                      text: TextSpan(
+                        text: post.description.length > 60
+                            ? post.description.substring(0, 60) + "... "
+                            : post.description + "... ",
+                        style: GoogleFonts.roboto(
+                            fontSize: height/55, color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {},
+                              text: 'Daha fazlasını gör',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 5,
+                  left: 30,
+                  child: Row(
+                    children: <Widget>[
+                      ReactiveButton(
+                        containerAbove: false,
+                        child: CircleAvatar(
+                          radius: height/50,
+                            backgroundColor: Colors.red,
+                            child: Icon(
+                              LineAwesomeIcons.heart_o,
+                              size: height/30,
+                            )),
+                        icons: _facebook,
+                        //_flags,
+                        onTap: () {
+                          Scaffold.of(gelenContext).showSnackBar(SnackBar(
+                            content: Text("Lütfen Basılı tutunuz"),
+                            backgroundColor: Colors.deepPurple,
+                            duration: Duration(milliseconds: 500),
+                          ));
+                        },
+                        onSelected: (ReactiveIconDefinition button) {
+                          gelenBloc.add(LikePost(
+                              postID: post.postID, userID: gelenUser.userID,ownerUserID: post.owner.userID));
+                        },
+                        iconWidth: 32.0,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      StreamBuilder(
+                        stream: Firestore.instance
+                            .collection("posts")
+                            .document(post.postID)
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Text(
+                              snapshot.data["liked"].toString() +
+                                  " Kere Beğenildi",
+                              style: GoogleFonts.righteous(fontSize: height/50),
+                            );
+                          } else
+                            return Text(
+                              "X Kere Beğenildi",
+                              style: GoogleFonts.righteous(fontSize: height/50),
+                            );
+                        },
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
-        ],
+        ),
       ),
     ),
   );
