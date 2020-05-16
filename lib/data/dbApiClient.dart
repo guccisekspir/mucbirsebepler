@@ -68,9 +68,7 @@ class DbApiClient {
           .collection("posts")
           .document(postID)
           .setData(userMap);
-      debugPrint("deniyo");
     } catch (_) {
-      debugPrint("bu dhata " + _.toString());
     }
   }
 
