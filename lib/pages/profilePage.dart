@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -43,6 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       resizeToAvoidBottomPadding: false,
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -51,193 +53,225 @@ class _ProfilePageState extends State<ProfilePage> {
         child: ConstrainedBox(
           constraints: BoxConstraints.tightFor(
               height: MediaQuery.of(context).size.height),
-          child: Container(
-            color: Colors.black,
-            child: BlocListener(
-              bloc: _dataBaseBloc,
-              listener: (context, state) {},
-              child: BlocBuilder(
+          child: Column(
+            children: [
+              BlocListener(
                 bloc: _dataBaseBloc,
-                // ignore: missing_return
-                builder: (context, state) {
-                  if (state is DataBaseLoadingState ||
-                      state is InitialDataBaseState) {
-                    return Center(
-                      child: LoadingBouncingGrid.square(
-                        borderColor: Colors.deepPurple,
-                        backgroundColor: Colors.deepPurple,
-                      ),
-                    );
-                  } else if (state is DataBaseErrorState) {
-                    final snackBar = SnackBar(
-                      content:
-                          Text("Tospik internetinde bi sıkıntı var galiba"),
-                      backgroundColor: Colors.red,
-                    );
-                    Scaffold.of(context).showSnackBar(snackBar);
-                  } else if (state is DataBaseLoadedState) {
-                    User gelenUser = state.user;
-                    return Column(
-                      children: [
-                        Center(
-                            child: SafeArea(
+                listener: (context, state) {},
+                child: BlocBuilder(
+                  bloc: _dataBaseBloc,
+                  // ignore: missing_return
+                  builder: (context, state) {
+                    if (state is DataBaseLoadingState ||
+                        state is InitialDataBaseState) {
+                      return Center(
+                        child: LoadingBouncingGrid.square(
+                          borderColor: Colors.deepPurple,
+                          backgroundColor: Colors.deepPurple,
+                        ),
+                      );
+                    } else if (state is DataBaseErrorState) {
+                      final snackBar = SnackBar(
+                        content:
+                            Text("Tospik internetinde bi sıkıntı var galiba"),
+                        backgroundColor: Colors.red,
+                      );
+                      Scaffold.of(context).showSnackBar(snackBar);
+                    } else if (state is DataBaseLoadedState) {
+                      User gelenUser = state.user;
+                      return Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 50),
                                 child: profilePicturew(
-                                    gelenUser, context))),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
+                                    gelenUser, context),
+                              )),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
 
-                            GradientText(
-                              gelenUser.liked.toString()+
-                              " Kere Beğenildi",
-                              gradient: randomGradient(),
-                              style: GoogleFonts.righteous(fontSize: 20,fontWeight: FontWeight.bold),
+                              GradientText(
+                                gelenUser.liked.toString()+
+                                " Kere Beğenildi",
+                                gradient: randomGradient(),
+                                style: GoogleFonts.righteous(fontSize: 20,fontWeight: FontWeight.bold),
 
-                            ),
-                            SizedBox(width: 6,),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-                              child: RaisedButton(
-                                elevation: 15,
-                                onPressed: () {
-                                  WidgetsBinding.instance
-                                      .addPostFrameCallback((_) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ProfileEditPage(
-                                                  editingUser: gelenUser,
-                                                )));
-                                  });
-                                },
-                                child: Text("Profili düzenle"),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                              ),
+                              SizedBox(width: 6,),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: RaisedButton(
+                                    elevation: 15,
+                                    onPressed: () {
+                                      WidgetsBinding.instance
+                                          .addPostFrameCallback((_) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => ProfileEditPage(
+                                                      editingUser: gelenUser,
+                                                    )));
+                                      });
+                                    },
+                                    child: Text("Profili düzenle"),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
 
-                          ],
-                        ),
-                        Center(
-                          child: Text(
-                            gelenUser.userName,
-                            style: GoogleFonts.righteous(
-                                fontSize: 25,
-                                color: Theme.of(context).accentColor),
+                            ],
                           ),
-                        ),
-                        SizedBox(height: 5,),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 60),
-                          child: Container(
-                            child: GridView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                itemCount:
-                                    getBadgeNumbers(gelenUser.roller).length,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        childAspectRatio: 3.2,
-                                        mainAxisSpacing: 4,
-                                        crossAxisSpacing: 5,
-                                        crossAxisCount: 2),
-                                itemBuilder: (context, index) {
-                                  List<String> roller =
-                                      getBadgeNumbers(gelenUser.roller);
-                                  return badgeMaker(
-                                      index, gelenUser, roller[index]);
-                                }),
-                          ),
-                        ),
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Text(
-                                "Popüler İddiaları",
-                                style: GoogleFonts.righteous(
-                                    color: Theme.of(context).accentColor,
-                                    fontSize: 25),
-                              ),
-                            )),
-                        lineDivider(),
-                        SingleChildScrollView(
-                          controller: _sScrollController,
-                          child: Container(
-                            height: MediaQuery.of(context).size.height / 3,
-                            child: BlocBuilder(
-                              bloc: _postBloc,
-                              // ignore: missing_return
-                              builder: (context, state) {
-                                if (state is PostLoadingState) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                } else if (state is PostErrorState) {
-                                  var snackbar = SnackBar(
-                                    content: Text(
-                                        "Bir hata oluştu tospik. Tekrar dener misin ?"),
-                                    backgroundColor: Colors.red,
-                                  );
-                                  Scaffold.of(context).showSnackBar(snackbar);
-                                } else if (state is PostLoadedState) {
-                                  List<Post> listPost = state.listPost;
-                                  if (listPost.length != 0) {
-                                    return AnimationLimiter(
-                                      child: ListView.builder(
-                                          padding: EdgeInsets.all(0),
-                                          itemCount: listPost.length,
-                                          shrinkWrap: true,
-                                          itemBuilder: (contex, index) {
-                                            return AnimationConfiguration
-                                                .staggeredList(
-                                                    position: index,
-                                                    duration: const Duration(
-                                                        milliseconds: 875),
-                                                    child: ScaleAnimation(
-                                                      child: FadeInAnimation(
-                                                        child: postCoontainer(
-                                                            gelenUser:
-                                                                gelenUser,
-                                                            bloc: _postBloc,
-                                                            post: listPost[index],
-                                                            width: MediaQuery.of(context).size.width,
-                                                            height: MediaQuery.of(context).size.height,
-                                                            context: context),
-                                                      ),
-                                                    ));
-                                          }),
-                                    );
-                                  } else
-                                    return Container(
-                                      color: Colors.black,
-                                      child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: Text(
-                                              "Henüz paylaştığın bi iddian yok tospik.",
-                                              style: GoogleFonts.righteous(
-                                                  color: Colors.redAccent,
-                                                  fontSize: 25),
-                                            ),
-                                          )),
-                                    );
-                                } else
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                              },
+                          Center(
+                            child: Text(
+                              gelenUser.userName,
+                              style: GoogleFonts.righteous(
+                                  fontSize: 25,
+                                  color: Theme.of(context).accentColor),
                             ),
                           ),
-                        )
-                      ],
-                    );
-                  }
-                },
+                          SizedBox(height: 5,),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 60),
+                            child: Container(
+                              child: GridView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  itemCount:
+                                      getBadgeNumbers(gelenUser.roller).length,
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          childAspectRatio: 3.2,
+                                          mainAxisSpacing: 4,
+                                          crossAxisSpacing: 5,
+                                          crossAxisCount: 2),
+                                  itemBuilder: (context, index) {
+                                    List<String> roller =
+                                        getBadgeNumbers(gelenUser.roller);
+                                    return badgeMaker(
+                                        index, gelenUser, roller[index]);
+                                  }),
+                            ),
+                          ),
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Popüler İddiaları",
+                                      style: GoogleFonts.righteous(
+                                          color: Theme.of(context).accentColor,
+                                          fontSize: 25),
+                                    ),
+                                    OpenContainer(
+
+
+                                      closedBuilder:(BuildContext buildContext,VoidCallback voidCallback){
+                                        return GestureDetector(
+                                          onTap: voidCallback,
+                                            child: CircleAvatar(child: Icon(Icons.arrow_forward),));
+                                      },
+                                      closedColor: Colors.transparent,
+                                      openColor: Colors.transparent,
+                                      transitionType: ContainerTransitionType.fade,
+                                      transitionDuration: Duration(milliseconds: 800),
+                                      openBuilder:(BuildContext buildContext,VoidCallback voidCallback){
+                                        return Container(
+                                          color: Colors.redAccent,
+                                          child: SingleChildScrollView(
+                                            controller: _sScrollController,
+                                            child: Container(
+                                              child: BlocBuilder(
+                                                bloc: _postBloc,
+                                                // ignore: missing_return
+                                                builder: (context, state) {
+                                                  if (state is PostLoadingState) {
+                                                    return Center(
+                                                      child: CircularProgressIndicator(),
+                                                    );
+                                                  } else if (state is PostErrorState) {
+                                                    var snackbar = SnackBar(
+                                                      content: Text(
+                                                          "Bir hata oluştu tospik. Tekrar dener misin ?"),
+                                                      backgroundColor: Colors.red,
+                                                    );
+                                                    Scaffold.of(context).showSnackBar(snackbar);
+                                                  } else if (state is PostLoadedState) {
+                                                    List<Post> listPost = state.listPost;
+                                                    if (listPost.length != 0) {
+                                                      return AnimationLimiter(
+                                                        child: ListView.builder(
+                                                            padding: EdgeInsets.all(0),
+                                                            itemCount: listPost.length,
+                                                            shrinkWrap: true,
+                                                            itemBuilder: (contex, index) {
+                                                              return AnimationConfiguration
+                                                                  .staggeredList(
+                                                                  position: index,
+                                                                  duration: const Duration(
+                                                                      milliseconds: 875),
+                                                                  child: ScaleAnimation(
+                                                                    child: FadeInAnimation(
+                                                                      child: postCoontainer(
+                                                                          gelenUser:
+                                                                          gelenUser,
+                                                                          bloc: _postBloc,
+                                                                          post: listPost[index],
+                                                                          width: MediaQuery.of(context).size.width,
+                                                                          height: MediaQuery.of(context).size.height,
+                                                                          context: context),
+                                                                    ),
+                                                                  ));
+                                                            }),
+                                                      );
+                                                    } else
+                                                      return Container(
+                                                        color: Colors.black,
+                                                        child: Align(
+                                                            alignment: Alignment.centerLeft,
+                                                            child: Padding(
+                                                              padding: const EdgeInsets.all(16.0),
+                                                              child: Text(
+                                                                "Henüz paylaştığın bi iddian yok tospik.",
+                                                                style: GoogleFonts.righteous(
+                                                                    color: Colors.redAccent,
+                                                                    fontSize: 25),
+                                                              ),
+                                                            )),
+                                                      );
+                                                  } else
+                                                    return Center(
+                                                      child: CircularProgressIndicator(),
+                                                    );
+                                                },
+                                              ),
+                                            ),
+                                          )
+                                        );
+                                      } ,
+
+
+                                    )
+
+                                  ],
+                                ),
+                              )),
+                          lineDivider(),
+
+                        ],
+                      );
+                    }
+                  },
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

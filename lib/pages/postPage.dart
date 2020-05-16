@@ -46,13 +46,13 @@ class _PostPageState extends State<PostPage> {
                 'Çalıştığınızı görüntülüyorum',
             maxLines: null,
             style: GoogleFonts.righteous(
-                fontSize: 13, color: Colors.deepPurpleAccent),
+                fontSize: 10, color: Colors.deepPurpleAccent),
           ),
           description: Text(
             "Şimdilik video veya fotoğraf yükleyemiyoruz.\n"
                 " Lütfen içerikleri youtube veya farklı yere yükleyip burada belirtiniz.",
             textAlign: TextAlign.center,
-            style: GoogleFonts.righteous(color: Colors.deepOrange),
+            style: GoogleFonts.righteous(color: Colors.deepOrange,fontSize: 8),
           ),
           entryAnimation: EntryAnimation.BOTTOM_LEFT,
           onOkButtonPressed: () {
@@ -76,18 +76,6 @@ class _PostPageState extends State<PostPage> {
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).accentColor,
-        title: Text(
-          "Mücbir İddia Paylaş",
-          style: GoogleFonts.pressStart2p(
-              fontSize: 15,
-              color: Colors.black,
-              wordSpacing: 1,
-              letterSpacing: 0,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
       body: MultiBlocListener(
         listeners: [
           BlocListener<PostBloc,PostState>(listener: (context,state){
@@ -170,6 +158,25 @@ class _PostPageState extends State<PostPage> {
                   key: formKey,
                   child: Column(
                     children: <Widget>[
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(100.0),
+                        ),
+                        child: Container(
+                          color: Theme.of(context).accentColor,
+                          width: screenWidth,
+                          height: screenHeight / 7,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Popüler Haberler",
+                              style: GoogleFonts.pressStart2p(
+                                fontSize: screenHeight/45,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 20,
                       ),
