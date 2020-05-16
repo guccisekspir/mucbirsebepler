@@ -1,15 +1,21 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/util/badgeNames.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
 
-Widget profilePicture(String url,BuildContext context){
+Widget profilePicture(String url,BuildContext context,{File gelenFoto}){
+  ImageProvider image=NetworkImage(url);
+  if(gelenFoto!=null){
+    image=FileImage(gelenFoto);
+  }
   return CircleAvatar(
     backgroundColor: Theme.of(context).accentColor,
     radius: 95,
     child: CircleAvatar(
-      backgroundImage: NetworkImage(url),
+      backgroundImage: image,
       radius: 80,  //TODO radiusları mediaquerye göre yap
       backgroundColor: Theme.of(context).accentColor,
     ),
