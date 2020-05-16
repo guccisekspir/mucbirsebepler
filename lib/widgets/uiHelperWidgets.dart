@@ -301,14 +301,46 @@ Widget detailContainer(
                     }),
               ),
             ),
+            Container(
+              width: MediaQuery.of(context).size.width/2,
+              child: RaisedButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MultiBlocProvider(
+                    providers: [
+                      BlocProvider<PostBloc>(create: (context)=>PostBloc(),),
+                      BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),)
+                    ],
+                    child: ProfilePage(
+                      gelenUser: gelenPost.owner ,
+                      tiklayanUser: gelenUser,
+                    ),
+                  )));
+
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                color: Colors.black,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Profiline git ",style: GoogleFonts.righteous(color: Colors.limeAccent),),
+                  CircleAvatar(
+                    backgroundColor: Colors.limeAccent,
+                    child: Icon(Icons.forward,color: Colors.black,),),
+                ],
+              ),),
+            ),
             Padding(
               padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
               child: Text(
-                gelenPost.owner.userName + " iddiası",
+                gelenPost.owner.userName.toUpperCase() + " iddiası",
                 style: GoogleFonts.righteous(
-                    fontSize: 17, fontWeight: FontWeight.normal),
+                    fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
+
+
             Padding(
               padding: const EdgeInsets.fromLTRB(50, 10, 0, 5),
               child: Column(

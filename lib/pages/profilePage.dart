@@ -91,6 +91,24 @@ class _ProfilePageState extends State<ProfilePage> {
                       return Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
+                          kendiMi?SizedBox(width: 0,height: 0,):SafeArea(
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: FlatButton(
+                                child: CircleAvatar(
+                                    radius: 25,
+                                    backgroundColor: Colors.black,
+                                    child: Icon(
+                                      Icons.arrow_back,
+                                      size: 30,
+                                      color: Colors.limeAccent,
+                                    )),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ),
+                          ),
                           Center(
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 50),
