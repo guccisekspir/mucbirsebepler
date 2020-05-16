@@ -44,43 +44,43 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Container(
-        color: Colors.black,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(100.0),
-                ),
-                child: Container(
-                  color: Theme.of(context).accentColor,
-                  width: width,
-                  height: height / 7,
-                  child: Align(
-                      alignment: Alignment.center,
-                      child: GradientText(
-                        "Mücbir Mağaza",
-                        gradient: LinearGradient(
-                            colors: [Colors.pinkAccent, Colors.red]),
-                        style: GoogleFonts.righteous(fontSize: 35),
-                      )),
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.elliptical(200, 300),
-                  topRight: Radius.circular(80),
-                  bottomRight: Radius.circular(150.0),
-                  bottomLeft: Radius.circular(20.0),
-                ),
-                child: Expanded(
+    return Scaffold(
+      body: Container(
+          color: Colors.black,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(100.0),
+                  ),
                   child: Container(
-                    height: height / 4,
+                    color: Theme.of(context).accentColor,
+                    width: width,
+                    height: height / 7,
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: GradientText(
+                          "Mücbir Mağaza",
+                          gradient: LinearGradient(
+                              colors: [Colors.pinkAccent, Colors.red]),
+                          style: GoogleFonts.righteous(fontSize: 35),
+                        )),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.elliptical(200, 300),
+                    topRight: Radius.circular(80),
+                    bottomRight: Radius.circular(150.0),
+                    bottomLeft: Radius.circular(20.0),
+                  ),
+                  child: Container(
+                    height: height / 3.5,
                     color: Colors.pinkAccent,
                     child: Column(
                       children: [
@@ -90,7 +90,7 @@ class _ShopPageState extends State<ShopPage> {
                               children: [
                                 Align(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 66,top: 8),
+                                    padding: const EdgeInsets.only(left: 70,top: 15),
                                     child: Text(
                                       "Gradient Tik",
                                       style: GoogleFonts.righteous(
@@ -119,7 +119,7 @@ class _ShopPageState extends State<ShopPage> {
                                       children: [
                                         Container(
                                           decoration: BoxDecoration(
-                                            border: Border.symmetric(vertical: BorderSide(color: Colors.cyan,width: 4.0),horizontal: BorderSide(color: Colors.deepPurpleAccent,width: 4.0))
+                                              border: Border.symmetric(vertical: BorderSide(color: Colors.cyan,width: 4.0),horizontal: BorderSide(color: Colors.deepPurpleAccent,width: 4.0))
                                           ),
                                           width: height / 10,
                                           height: height / 10,
@@ -129,7 +129,7 @@ class _ShopPageState extends State<ShopPage> {
                                         RaisedButton(
                                           elevation: 10,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(Radius.circular(10))
+                                              borderRadius: BorderRadius.all(Radius.circular(10))
                                           ),
                                           color: Colors.limeAccent,
                                           onPressed: (){
@@ -150,18 +150,16 @@ class _ShopPageState extends State<ShopPage> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 15,),
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.elliptical(200, 300),
-                  topRight: Radius.circular(80),
-                  bottomRight: Radius.circular(150.0),
-                  bottomLeft: Radius.circular(20.0),
-                ),
-                child: Expanded(
+                SizedBox(height: 15,),
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.elliptical(200, 300),
+                    topRight: Radius.circular(80),
+                    bottomRight: Radius.circular(150.0),
+                    bottomLeft: Radius.circular(20.0),
+                  ),
                   child: Container(
-                    height: height / 4,
+                    height: height / 3.5,
                     color: Colors.cyanAccent,
                     child: Column(
                       children: [
@@ -171,7 +169,7 @@ class _ShopPageState extends State<ShopPage> {
                               children: [
                                 Align(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 66,top: 8),
+                                    padding: const EdgeInsets.only(left: 80,top: 20),
                                     child: Text(
                                       "MaTik",
                                       style: GoogleFonts.righteous(
@@ -183,7 +181,7 @@ class _ShopPageState extends State<ShopPage> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 50,right: 10),
+                                  padding: const EdgeInsets.only(left: 70,right: 10),
                                   child: Text(
                                     "Yeter artık Instagram! MATİK'li olmak artık çok kolay",
                                     style: GoogleFonts.roboto(
@@ -206,7 +204,7 @@ class _ShopPageState extends State<ShopPage> {
                                           height: height / 10,
                                           child: Image.asset("assets/renksiz.gif",fit: BoxFit.fill,),
                                         ),
-                                        SizedBox(width: 30,),
+                                        SizedBox(width: 15,),
                                         RaisedButton(
                                           elevation: 10,
                                           shape: RoundedRectangleBorder(
@@ -231,18 +229,16 @@ class _ShopPageState extends State<ShopPage> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 15,),
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.elliptical(200, 300),
-                  topRight: Radius.circular(80),
-                  bottomRight: Radius.circular(150.0),
-                  bottomLeft: Radius.circular(20.0),
-                ),
-                child: Expanded(
+                SizedBox(height: 15,),
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.elliptical(200, 300),
+                    topRight: Radius.circular(80),
+                    bottomRight: Radius.circular(150.0),
+                    bottomLeft: Radius.circular(20.0),
+                  ),
                   child: Container(
-                    height: height / 4,
+                    height: height / 3.5,
                     color: Colors.orangeAccent,
                     child: Column(
                       children: [
@@ -252,7 +248,7 @@ class _ShopPageState extends State<ShopPage> {
                               children: [
                                 Align(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 66,top: 8),
+                                    padding: const EdgeInsets.only(left: 80,top: 10),
                                     child: Text(
                                       "Destekçi Rozeti",
                                       style: GoogleFonts.righteous(
@@ -264,7 +260,7 @@ class _ShopPageState extends State<ShopPage> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 50,right: 10),
+                                  padding: const EdgeInsets.only(left: 80,right: 10),
                                   child: Text(
                                     "Hem destekçi rozetine sahip olup hem de bana kahve ısmarlayabilirsiniz <3",
                                     style: GoogleFonts.roboto(
@@ -312,18 +308,16 @@ class _ShopPageState extends State<ShopPage> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 15,),
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.elliptical(200, 300),
-                  topRight: Radius.circular(80),
-                  bottomRight: Radius.circular(150.0),
-                  bottomLeft: Radius.circular(20.0),
-                ),
-                child: Expanded(
+                SizedBox(height: 15,),
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.elliptical(200, 300),
+                    topRight: Radius.circular(80),
+                    bottomRight: Radius.circular(150.0),
+                    bottomLeft: Radius.circular(20.0),
+                  ),
                   child: Container(
-                    height: height / 4,
+                    height: height / 3.5,
                     color: Colors.redAccent,
                     child: Column(
                       children: [
@@ -333,7 +327,7 @@ class _ShopPageState extends State<ShopPage> {
                               children: [
                                 Align(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 66,top: 8),
+                                    padding: const EdgeInsets.only(left: 80,top: 10),
                                     child: Text(
                                       "Ürün Yerleştirmecisi",
                                       style: GoogleFonts.righteous(
@@ -345,7 +339,7 @@ class _ShopPageState extends State<ShopPage> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 50,right: 10),
+                                  padding: const EdgeInsets.only(left: 80,right: 10),
                                   child: Text(
                                     "Hem yerleştirme rozetine sahip olup hem de ürün yerleştirebilirsiniz <3",
                                     style: GoogleFonts.roboto(
@@ -393,12 +387,12 @@ class _ShopPageState extends State<ShopPage> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 15,),
+                SizedBox(height: 15,),
 
-            ],
-          ),
-        ));
+              ],
+            ),
+          )),
+    );
   }
 
   void _initialize() async{
@@ -411,7 +405,7 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   Future<void >_getProducts() async{
-    Set<String> ids=<String>['gradient_tik','mavi_tik','destek_badge','urun_yerlestirme'].toSet();
+    Set<String> ids=<String>['gradient_tikk','mavi_tikk','destek_badgee','urun_yerlestirmee'].toSet();
     ProductDetailsResponse productDetailsResponse=await _iap.queryProductDetails(ids);
 
     setState(() {
@@ -441,10 +435,10 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   void _verifyPurchase() {
-    PurchaseDetails purchase = _hasPurchased('gradient_tik');
-    PurchaseDetails purchase2 = _hasPurchased('mavi_tik');
-    PurchaseDetails purchase3 = _hasPurchased('destek_badge');
-    PurchaseDetails purchase4 = _hasPurchased('urun_yerlestirme');
+    PurchaseDetails purchase = _hasPurchased('gradient_tikk');
+    PurchaseDetails purchase2 = _hasPurchased('mavi_tikk');
+    PurchaseDetails purchase3 = _hasPurchased('destek_badgee');
+    PurchaseDetails purchase4 = _hasPurchased('urun_yerlestirmee');
 
     // TODO serverside verification & record consumable in the database
 

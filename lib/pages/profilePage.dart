@@ -79,6 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Scaffold.of(context).showSnackBar(snackBar);
                     } else if (state is DataBaseLoadedState) {
                       User gelenUser = state.user;
+                      LinearGradient linearGradient=randomGradient();
                       return Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
