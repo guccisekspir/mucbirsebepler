@@ -73,7 +73,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
             ),
           ),
           Center(
-              child: _profilFoto!=null?CircleAvatar():profilePicturew(
+              child: _profilFoto!=null?profilePicturew(widget.editingUser, context,gelenFoto: _profilFoto):profilePicturew(
                   widget.editingUser, context)),
           Center(child: GestureDetector(
             onTap: (){
@@ -144,7 +144,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
           Center(child: RaisedButton(
             child: Text("username değiştir"),
             onPressed: (){
-              _dataBaseBloc.add(ChangeUsername(userID: widget.editingUser.userID,newUsername: _userNameController.text));
+
+
+              _dataBaseBloc.add(ChangeProfile(userID: widget.editingUser.userID,newUsername: _userNameController.text));
             },
 
           ),)

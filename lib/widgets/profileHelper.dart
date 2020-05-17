@@ -22,11 +22,15 @@ Widget profilePicture(String url,BuildContext context,{File gelenFoto}){
   );
 }
 
-Widget profilePicturew(User user,BuildContext context,{LinearGradient linearGradient}){
+Widget profilePicturew(User user,BuildContext context,{LinearGradient linearGradient,File gelenFoto}){
   LinearGradient gradient=randomGradient();
   if(linearGradient!=null){
     gradient=linearGradient;
 
+  }
+  ImageProvider image=NetworkImage(user.profilURL);
+  if(gelenFoto!=null){
+    image=FileImage(gelenFoto);
   }
 
   return Stack(
@@ -53,7 +57,7 @@ Widget profilePicturew(User user,BuildContext context,{LinearGradient linearGrad
             Align(
               alignment: Alignment.bottomCenter,
               child: CircleAvatar(
-                backgroundImage: NetworkImage(user.profilURL),
+                backgroundImage: image,
                 radius: 70,  //TODO radiusları mediaquerye göre yap
                 backgroundColor: Theme.of(context).accentColor,
               ),

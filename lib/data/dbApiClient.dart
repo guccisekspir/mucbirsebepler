@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mucbirsebepler/model/post.dart';
@@ -48,10 +50,9 @@ class DbApiClient {
           .updateData({'userName': newUsername});
       return true;
     }
+  }
 
-
-
-
+  Future<bool> changePhoto(String userID,File newPhoto){
 
   }
 

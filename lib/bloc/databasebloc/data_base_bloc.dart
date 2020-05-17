@@ -46,9 +46,21 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
       }
     }
 
-    if(event is ChangeUsername){
+    if(event is ChangeProfile){
       yield DataBaseLoadingState();
       try{
+        if(event.newUsername!=null){
+          if(event.newPP!=null){
+            bool isNameChanged=await dbRepository.changeUsername(event.userID, event.newUsername);
+            if(isNameChanged){
+              bool isPhotoChanged= await dbRepository.changePhoto(event.newUsername,event.newPP);
+            }
+          }else if(event.newPP!=null){
+            if(event.newUsername==null){
+              bool isPhotoChanged=await dbRepository.changePhoto(event.userID,event.newPP);
+            }
+          }
+        }
         bool isChanged=await dbRepository.changeUsername(event.userID, event.newUsername);
         yield DataBaseLoadedState(isChanged: isChanged);
       }catch(_){

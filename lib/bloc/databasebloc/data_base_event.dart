@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:mucbirsebepler/model/user.dart';
 
@@ -25,17 +27,19 @@ GetUserr({this.userID});
 List<Object> get props => [userID];
 }
 
-class ChangeUsername extends DataBaseEvent{
+class ChangeProfile extends DataBaseEvent{
   final String userID;
   final String newUsername;
+  final File newPP;
 
-  ChangeUsername({this.userID, this.newUsername});
+  ChangeProfile({this.userID, this.newUsername,this.newPP});
   @override
   // TODO: implement props
   List<Object> get props => [userID,newUsername];
 
 
 }
+
 
 
 

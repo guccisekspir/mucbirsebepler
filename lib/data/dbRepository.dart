@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:mucbirsebepler/data/dbApiClient.dart';
 import 'package:mucbirsebepler/locator.dart';
 import 'package:mucbirsebepler/model/post.dart';
@@ -73,5 +75,10 @@ class DbRepository {
   Future<bool> changeUsername(String userID,String newUsername)async{
 
     return await _dbApiClient.changeUsername(userID,newUsername);
+  }
+
+  Future<bool> changePhoto(String userID,File newPhoto)async{
+
+    return await  _dbApiClient.changePhoto(userID,newPhoto);
   }
 }
