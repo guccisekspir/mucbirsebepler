@@ -218,70 +218,93 @@ class _ProfilePageState extends State<ProfilePage> {
                                           child: SingleChildScrollView(
                                             controller: _sScrollController,
                                             child: Container(
-                                              child: BlocBuilder(
-                                                bloc: _postBloc,
-                                                // ignore: missing_return
-                                                builder: (context, state) {
-                                                  if (state is PostLoadingState) {
-                                                    return Center(
-                                                      child: CircularProgressIndicator(),
-                                                    );
-                                                  } else if (state is PostErrorState) {
-                                                    var snackbar = SnackBar(
-                                                      content: Text(
-                                                          "Bir hata oluştu tospik. Tekrar dener misin ?"),
-                                                      backgroundColor: Colors.red,
-                                                    );
-                                                    Scaffold.of(context).showSnackBar(snackbar);
-                                                  } else if (state is PostLoadedState) {
-                                                    List<Post> listPost = state.listPost;
-                                                    if (listPost.length != 0) {
-                                                      return AnimationLimiter(
-                                                        child: ListView.builder(
-                                                            padding: EdgeInsets.all(0),
-                                                            itemCount: listPost.length,
-                                                            shrinkWrap: true,
-                                                            itemBuilder: (contex, index) {
-                                                              return AnimationConfiguration
-                                                                  .staggeredList(
-                                                                  position: index,
-                                                                  duration: const Duration(
-                                                                      milliseconds: 875),
-                                                                  child: ScaleAnimation(
-                                                                    child: FadeInAnimation(
-                                                                      child: postCoontainer(
-                                                                        linearGradient: linearGradient,
-                                                                          gelenUser:
-                                                                          gelenUser,
-                                                                          bloc: _postBloc,
-                                                                          post: listPost[index],
-                                                                          width: MediaQuery.of(context).size.width,
-                                                                          height: MediaQuery.of(context).size.height,
-                                                                          context: context),
-                                                                    ),
-                                                                  ));
-                                                            }),
-                                                      );
-                                                    } else
-                                                      return Container(
-                                                        color: Colors.black,
-                                                        child: Align(
-                                                            alignment: Alignment.centerLeft,
-                                                            child: Padding(
-                                                              padding: const EdgeInsets.all(16.0),
-                                                              child: Text(
-                                                                "Henüz paylaştığın bi iddian yok tospik.",
-                                                                style: GoogleFonts.righteous(
-                                                                    color: Colors.redAccent,
-                                                                    fontSize: 25),
-                                                              ),
+                                              child: Column(
+                                                children: [
+                                                  SafeArea(
+                                                    child: Align(
+                                                      alignment: Alignment.topLeft,
+                                                      child: FlatButton(
+                                                        child: CircleAvatar(
+                                                            radius: 25,
+                                                            backgroundColor: Colors.black,
+                                                            child: Icon(
+                                                              Icons.arrow_back,
+                                                              size: 30,
+                                                              color: Colors.limeAccent,
                                                             )),
-                                                      );
-                                                  } else
-                                                    return Center(
-                                                      child: CircularProgressIndicator(),
-                                                    );
-                                                },
+                                                        onPressed: () {
+                                                          Navigator.pop(context);
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  BlocBuilder(
+                                                    bloc: _postBloc,
+                                                    // ignore: missing_return
+                                                    builder: (context, state) {
+
+                                                      if (state is PostLoadingState) {
+                                                        return Center(
+                                                          child: CircularProgressIndicator(),
+                                                        );
+                                                      } else if (state is PostErrorState) {
+                                                        var snackbar = SnackBar(
+                                                          content: Text(
+                                                              "Bir hata oluştu tospik. Tekrar dener misin ?"),
+                                                          backgroundColor: Colors.red,
+                                                        );
+                                                        Scaffold.of(context).showSnackBar(snackbar);
+                                                      } else if (state is PostLoadedState) {
+                                                        List<Post> listPost = state.listPost;
+                                                        if (listPost.length != 0) {
+                                                          return AnimationLimiter(
+                                                            child: ListView.builder(
+                                                                padding: EdgeInsets.all(0),
+                                                                itemCount: listPost.length,
+                                                                shrinkWrap: true,
+                                                                itemBuilder: (contex, index) {
+                                                                  return AnimationConfiguration
+                                                                      .staggeredList(
+                                                                      position: index,
+                                                                      duration: const Duration(
+                                                                          milliseconds: 875),
+                                                                      child: ScaleAnimation(
+                                                                        child: FadeInAnimation(
+                                                                          child: postCoontainer(
+                                                                            linearGradient: linearGradient,
+                                                                              gelenUser:
+                                                                              gelenUser,
+                                                                              bloc: _postBloc,
+                                                                              post: listPost[index],
+                                                                              width: MediaQuery.of(context).size.width,
+                                                                              height: MediaQuery.of(context).size.height,
+                                                                              context: context),
+                                                                        ),
+                                                                      ));
+                                                                }),
+                                                          );
+                                                        } else
+                                                          return Container(
+                                                            color: Colors.black,
+                                                            child: Align(
+                                                                alignment: Alignment.centerLeft,
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets.all(16.0),
+                                                                  child: Text(
+                                                                    "Henüz paylaştığın bi iddian yok tospik.",
+                                                                    style: GoogleFonts.righteous(
+                                                                        color: Colors.redAccent,
+                                                                        fontSize: 25),
+                                                                  ),
+                                                                )),
+                                                          );
+                                                      } else
+                                                        return Center(
+                                                          child: CircularProgressIndicator(),
+                                                        );
+                                                    },
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           )
