@@ -7,11 +7,13 @@ import 'package:gradient_text/gradient_text.dart';
 import 'package:loading_animations/loading_animations.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_event.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_state.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/profileEditPage.dart';
+import 'package:mucbirsebepler/pages/splashScreen.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
@@ -70,6 +72,9 @@ class _ProfilePageState extends State<ProfilePage> {
               BlocListener(
                 bloc: _authBloc,
                 listener: (context, state) {
+                  if(state is AuthLoadedState){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashScreen()));
+                  }
 
                 },
                 child: BlocBuilder(
@@ -111,6 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     )),
                                 onPressed: () {
                                   _authBloc.add(SignOut());
+
                                 },
                               ),
                             ),

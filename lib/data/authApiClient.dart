@@ -1,9 +1,8 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mucbirsebepler/model/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthApiClient{
   final FirebaseAuth _firebaseAuth= FirebaseAuth.instance;
@@ -58,12 +57,15 @@ class AuthApiClient{
   }
 
   Future<bool> signOut()async{
-
+    SharedPreferences preferences;
 
     try{
       final _googleSignIn = GoogleSignIn();
       await _googleSignIn.signOut();
       _firebaseAuth.signOut();
+      preferences = await SharedPreferences.getInstance();
+      preferences.clear();
+
       return true;
     }catch(_){
       debugPrint(_.toString());
