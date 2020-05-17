@@ -29,17 +29,27 @@ List<Object> get props => [userID];
 
 class ChangeProfile extends DataBaseEvent{
   final String userID;
-  final String newUsername;
   final File newPP;
+  final String newUserName;
 
-  ChangeProfile({this.userID, this.newUsername,this.newPP});
+  ChangeProfile({this.userID,this.newPP,this.newUserName});
   @override
   // TODO: implement props
-  List<Object> get props => [userID,newUsername];
+  List<Object> get props => [userID,newPP];
 
 
 }
+class ChangeUserName extends DataBaseEvent{
+  final String userID;
+  final String newUserName;
 
+  ChangeUserName({this.userID,this.newUserName});
+  @override
+  // TODO: implement props
+  List<Object> get props => [userID,newUserName];
+
+
+}
 
 
 

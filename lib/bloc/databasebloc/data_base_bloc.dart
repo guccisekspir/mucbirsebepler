@@ -47,22 +47,37 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
     }
 
     if(event is ChangeProfile){
+      bool isPhotoChanged=false;
+      bool isUserNameChanged=false;
+      debugPrint("Change profile geldi");
       yield DataBaseLoadingState();
       try{
-        if(event.newUsername!=null){
-          if(event.newPP!=null){
-            bool isNameChanged=await dbRepository.changeUsername(event.userID, event.newUsername);
-            if(isNameChanged){
-              bool isPhotoChanged= await dbRepository.changePhoto(event.newUsername,event.newPP);
-            }
-          }else if(event.newPP!=null){
-            if(event.newUsername==null){
-              bool isPhotoChanged=await dbRepository.changePhoto(event.userID,event.newPP);
+          if(event.newUserName==""){
+            isPhotoChanged=await dbRepository.changePhoto(userID: event.userID,newPhoto: event.newPP);
+
+          }else{
+            if(event.newPP!=null){
+              isPhotoChanged=await dbRepository.changePhoto(userID: event.userID,newPhoto: event.newPP);
+              isUserNameChanged=await dbRepository.changeUsername(userID: event.userID,newUsername: event.newUserName);
+            }else{
+              isUserNameChanged=await dbRepository.changeUsername(userID: event.userID,newUsername: event.newUserName);
             }
           }
-        }
-        bool isChanged=await dbRepository.changeUsername(event.userID, event.newUsername);
-        yield DataBaseLoadedState(isChanged: isChanged);
+
+        yield DataBaseLoadedState(isChangedPP: isPhotoChanged);
+      }catch(_){
+        debugPrint(_.toString());
+        yield DataBaseErrorState();
+      }
+    }
+
+    if(event is ChangeUserName){
+      bool isNameChanged=false;
+      debugPrint("Change profile geldi");
+      yield DataBaseLoadingState();
+      try{
+        isNameChanged=await dbRepository.changeUsername(userID: event.userID,newUsername: event.newUserName);
+        yield DataBaseLoadedState(isChangedUser: isNameChanged);
       }catch(_){
         debugPrint(_.toString());
         yield DataBaseErrorState();

@@ -17,9 +17,10 @@ class DataBaseLoadingState extends DataBaseState{
 }
 class DataBaseLoadedState extends DataBaseState{
   final User user;
-  final bool isChanged;
+  final bool isChangedUser;
+  final bool isChangedPP;
 
-  DataBaseLoadedState({this.user,this.isChanged});
+  DataBaseLoadedState({this.user,this.isChangedUser,this.isChangedPP});
   @override
 
   List<Object> get props => [user];

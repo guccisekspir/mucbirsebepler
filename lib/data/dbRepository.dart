@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:mucbirsebepler/data/dbApiClient.dart';
 import 'package:mucbirsebepler/locator.dart';
 import 'package:mucbirsebepler/model/post.dart';
@@ -72,13 +73,13 @@ class DbRepository {
     getAllPost(lastPost: _lastFetchedPost);
   }
 
-  Future<bool> changeUsername(String userID,String newUsername)async{
-
-    return await _dbApiClient.changeUsername(userID,newUsername);
+  Future<bool> changeUsername({String userID,String newUsername})async{
+    debugPrint("change user repo geldi");
+    return await _dbApiClient.changeUsername(userID: userID,newUsername: newUsername);
   }
 
-  Future<bool> changePhoto(String userID,File newPhoto)async{
-
-    return await  _dbApiClient.changePhoto(userID,newPhoto);
+  Future<bool> changePhoto({String userID,File newPhoto})async{
+    debugPrint("repoya geldi");
+    return await  _dbApiClient.changePhoto(userID: userID,newPhoto: newPhoto);
   }
 }

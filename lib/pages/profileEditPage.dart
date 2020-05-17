@@ -25,7 +25,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   @override
   void initState() {
     // TODO: implement initState
-    _userNameController=TextEditingController(text: "");
+    _userNameController=TextEditingController(text:"");
     _dataBaseBloc= BlocProvider.of<DataBaseBloc>(context);
     super.initState();
   }
@@ -146,7 +146,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
             onPressed: (){
 
 
-              _dataBaseBloc.add(ChangeProfile(userID: widget.editingUser.userID,newUsername: _userNameController.text));
+              _dataBaseBloc.add(ChangeProfile(userID: widget.editingUser.userID,newPP: _profilFoto,newUserName: _userNameController.text));
             },
 
           ),)
