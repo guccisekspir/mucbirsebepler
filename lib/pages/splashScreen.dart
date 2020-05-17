@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
-import 'package:mucbirsebepler/bloc/authbloc/auth_state.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/pages/homePage.dart';
 import 'package:mucbirsebepler/pages/loginPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -14,7 +12,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   bool isLogged = false;
 
   Future<Null> _function() async {
@@ -35,24 +32,31 @@ class _SplashScreenState extends State<SplashScreen> {
     _function();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-
-    if(isLogged){
+    if (isLogged) {
       return MultiBlocProvider(
           providers: [
-            BlocProvider<AuthBloc>(create: (context)=>AuthBloc(),),
-            BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),)
+            BlocProvider<AuthBloc>(
+              create: (context) => AuthBloc(),
+            ),
+            BlocProvider<DataBaseBloc>(
+              create: (context) => DataBaseBloc(),
+            )
           ],
-          child: HomePage(isLogged: true,));
-    }
-    else{
-      return MultiBlocProvider(
-          providers: [
-            BlocProvider<AuthBloc>(create: (context)=>AuthBloc(),),
-            BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),)
-          ],
-          child: LoginPage());
+          child: HomePage(
+            isLogged: true,
+          ));
+    } else {
+      return MultiBlocProvider(providers: [
+        BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc(),
+        ),
+        BlocProvider<DataBaseBloc>(
+          create: (context) => DataBaseBloc(),
+        )
+      ], child: LoginPage());
     }
   }
 }

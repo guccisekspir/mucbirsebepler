@@ -39,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     _emailController = TextEditingController(text: "");
     _passwordController = TextEditingController(text: "");
   }
+
   Widget _entryField(String title,
       {bool isPassword = false, double opacity = 1.0}) {
     return Opacity(
@@ -80,9 +81,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-
-
-
   Widget _submitButton(AuthBloc authBloc) {
     return GestureDetector(
       child: Container(
@@ -118,10 +116,6 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
-
-
-
-
 
   Widget _createAccountLabel() {
     return Container(
@@ -204,7 +198,6 @@ class _LoginPageState extends State<LoginPage> {
       height: 0,
     );
     return Scaffold(
-
       resizeToAvoidBottomInset: false,
       body: BlocListener(
         bloc: _authBloc,
@@ -232,7 +225,6 @@ class _LoginPageState extends State<LoginPage> {
               height: 0,
             );
             if (state.user != null) {
-
               sharedKaydet(state.user.userID);
               Navigator.pushAndRemoveUntil(
                   context,
@@ -285,102 +277,99 @@ class _LoginPageState extends State<LoginPage> {
           }
         },
         child: BlocBuilder(
-
           bloc: _authBloc,
           builder: (context, statee) {
-
             return SingleChildScrollView(
-              padding: EdgeInsets.all(0),
+                padding: EdgeInsets.all(0),
                 child: Container(
-              color: Colors.black,
-              height: MediaQuery.of(context).size.height,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 3,
-                          child: SizedBox(),
-                        ),
-                        _title(),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 80,
-                        ),
-                        _emailPasswordWidget(),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        _submitButton(_authBloc),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          alignment: Alignment.centerRight,
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                if (isReset) {
-                                  textfieldText = "Tekrar Emailiniz Giriniz";
-                                  butonText = "Şifreyi Sıfırla";
-                                  sifreniUnuttun = "Vazgeç";
-                                  oppacity = 0.0;
-                                  isReset = false;
-                                } else {
-                                  textfieldText = "Şifre";
-                                  butonText = "Giriş Yap";
-                                  sifreniUnuttun = "Şifrenizi mi unuttunuz?";
-                                  oppacity = 1.0;
-                                  isReset = true;
-                                }
-                              });
-                            },
-                            child: Container(
-                              child: Text(sifreniUnuttun,
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.deepPurpleAccent,
-                                      fontWeight: FontWeight.w500)),
+                  color: Colors.black,
+                  height: MediaQuery.of(context).size.height,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 3,
+                              child: SizedBox(),
                             ),
-                          ),
+                            _title(),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 80,
+                            ),
+                            _emailPasswordWidget(),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            _submitButton(_authBloc),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              alignment: Alignment.centerRight,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    if (isReset) {
+                                      textfieldText =
+                                          "Tekrar Emailiniz Giriniz";
+                                      butonText = "Şifreyi Sıfırla";
+                                      sifreniUnuttun = "Vazgeç";
+                                      oppacity = 0.0;
+                                      isReset = false;
+                                    } else {
+                                      textfieldText = "Şifre";
+                                      butonText = "Giriş Yap";
+                                      sifreniUnuttun =
+                                          "Şifrenizi mi unuttunuz?";
+                                      oppacity = 1.0;
+                                      isReset = true;
+                                    }
+                                  });
+                                },
+                                child: Container(
+                                  child: Text(sifreniUnuttun,
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.deepPurpleAccent,
+                                          fontWeight: FontWeight.w500)),
+                                ),
+                              ),
+                            ),
+                            divider(),
+                            facebookButton(_authBloc),
+                            Expanded(
+                              flex: 2,
+                              child: SizedBox(),
+                            ),
+                          ],
                         ),
-                        divider(),
-                        facebookButton(_authBloc),
-                        Expanded(
-                          flex: 2,
-                          child: SizedBox(),
-                        ),
-                      ],
-                    ),
+                      ),
+                      Center(child: widget),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: _createAccountLabel(),
+                      ),
+                      Positioned(top: 40, left: 0, child: backButton(context)),
+                      Positioned(
+                          top: -MediaQuery.of(context).size.height * .23,
+                          right: -MediaQuery.of(context).size.width * .4,
+                          child: BezierContainer(
+                            kayitMi: false,
+                          ))
+                    ],
                   ),
-                  Center(child: widget),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: _createAccountLabel(),
-                  ),
-                  Positioned(top: 40, left: 0, child: backButton(context)),
-                  Positioned(
-                      top: -MediaQuery.of(context).size.height * .23,
-                      right: -MediaQuery.of(context).size.width * .4,
-                      child: BezierContainer(
-                        kayitMi: false,
-                      ))
-                ],
-              ),
-            ));
+                ));
           },
         ),
       ),
     );
   }
 
-  Future<void> sharedKaydet(String userID)async{
+  Future<void> sharedKaydet(String userID) async {
     SharedPreferences prefs;
-    prefs= await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
     prefs.setString("userID", userID);
-
-
-
   }
 }

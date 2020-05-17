@@ -4,9 +4,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthApiClient{
-  final FirebaseAuth _firebaseAuth= FirebaseAuth.instance;
-
+class AuthApiClient {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   User _userFromFirebase(FirebaseUser user) {
     if (user == null) {
@@ -16,25 +15,22 @@ class AuthApiClient{
     }
   }
 
-  Future<void> forgetPassword(String email)async{
-
+  Future<void> forgetPassword(String email) async {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
-
-
   }
 
-
-
-
-  Future<User> createWithEmailPass(String email,String password)async{
-    AuthResult _authResult=await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+  Future<User> createWithEmailPass(String email, String password) async {
+    AuthResult _authResult = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
     return _userFromFirebase(_authResult.user);
   }
 
-  Future<User> loginWithEmailPass(String email,String password)async{
-    AuthResult _authResult=await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+  Future<User> loginWithEmailPass(String email, String password) async {
+    AuthResult _authResult = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
     return _userFromFirebase(_authResult.user);
   }
+
   Future<User> googleSign() async {
     GoogleSignIn _googleSignIn = GoogleSignIn();
     GoogleSignInAccount _googleUser = await _googleSignIn.signIn();
@@ -56,10 +52,10 @@ class AuthApiClient{
     }
   }
 
-  Future<bool> signOut()async{
+  Future<bool> signOut() async {
     SharedPreferences preferences;
 
-    try{
+    try {
       final _googleSignIn = GoogleSignIn();
       await _googleSignIn.signOut();
       _firebaseAuth.signOut();
@@ -67,17 +63,9 @@ class AuthApiClient{
       preferences.clear();
 
       return true;
-    }catch(_){
+    } catch (_) {
       debugPrint(_.toString());
       return false;
     }
-
   }
-
-
-
-
-
-
-
 }

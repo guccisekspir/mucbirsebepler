@@ -103,7 +103,6 @@ class _SignUpPageState extends State<SignUpPage> {
       onTap: () async {
         authBloc.add(EmailSign(
             email: _emailController.text, password: _passwordController.text));
-
       },
     );
   }
@@ -282,12 +281,9 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Future<void> sharedKaydet(String userID)async{
+  Future<void> sharedKaydet(String userID) async {
     SharedPreferences prefs;
-    prefs= await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
     prefs.setString("userID", userID);
-
-
-
   }
 }

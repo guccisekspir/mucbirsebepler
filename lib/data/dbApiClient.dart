@@ -1,14 +1,12 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 
 class DbApiClient {
   final Firestore _firestore = Firestore.instance;
-  final FirebaseStorage _firebaseStorage=FirebaseStorage.instance;
+  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
   StorageReference _storageReference;
   QuerySnapshot _querySnapshot;
   var lastDocument;
@@ -38,8 +36,7 @@ class DbApiClient {
     return okunanUser;
   }
 
-  Future<bool> changeUsername({String userID,String newUsername})async{
-
+  Future<bool> changeUsername({String userID, String newUsername}) async {
     var users = await _firestore
         .collection("users")
         .where("userName", isEqualTo: newUsername)
@@ -55,20 +52,19 @@ class DbApiClient {
     }
   }
 
-  Future<bool> changePhoto({String userID,File newPhoto})async{
-    _storageReference=_firebaseStorage.ref().child(userID);
-    StorageUploadTask uploadTask=_storageReference.putFile(newPhoto);
+  Future<bool> changePhoto({String userID, File newPhoto}) async {
+    _storageReference = _firebaseStorage.ref().child(userID);
+    StorageUploadTask uploadTask = _storageReference.putFile(newPhoto);
 
-    var url= await(await uploadTask.onComplete).ref.getDownloadURL();
-      if(url!=null){
-        await _firestore.collection("users").document(userID).updateData({'profilURL':url});
-        return true;
-
-      }else return false;
-
-
-
-
+    var url = await (await uploadTask.onComplete).ref.getDownloadURL();
+    if (url != null) {
+      await _firestore
+          .collection("users")
+          .document(userID)
+          .updateData({'profilURL': url});
+      return true;
+    } else
+      return false;
   }
 
   Future<bool> savePost(Post post) async {
@@ -84,8 +80,7 @@ class DbApiClient {
           .collection("posts")
           .document(postID)
           .setData(userMap);
-    } catch (_) {
-    }
+    } catch (_) {}
   }
 
   Future<void> likePost(

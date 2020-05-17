@@ -48,7 +48,7 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
 
     if(event is ChangeProfile){
       bool isPhotoChanged=false;
-      bool isUserNameChanged=false;
+      bool isUserNameChanged = false;
       debugPrint("Change profile geldi");
       yield DataBaseLoadingState();
       try{

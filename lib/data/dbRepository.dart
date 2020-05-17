@@ -41,12 +41,12 @@ class DbRepository {
     }
 
     List<Post> gelenList =
-    await _dbApiClient.getAllPost(_lastFetchedPost, postLimitNumber);
+        await _dbApiClient.getAllPost(_lastFetchedPost, postLimitNumber);
 
     _postList.addAll(gelenList);
     if (gelenList.length > postLimitNumber)
       hasMore =
-      false; //Burada çekilen son liste sayısı belirlediğimiz limitten küçükse bir daha çağırılmamasını sağlıyoruz
+          false; //Burada çekilen son liste sayısı belirlediğimiz limitten küçükse bir daha çağırılmamasını sağlıyoruz
 
     List<Post> _gideceklist = _postList;
     return _gideceklist;
@@ -57,13 +57,13 @@ class DbRepository {
     if (hasMore) return await getAllPost(lastPost: _lastFetchedPost);
   }
 
-  Future<List<Post>> getUserPosts(String userID)async{
-
+  Future<List<Post>> getUserPosts(String userID) async {
     return await _dbApiClient.getUserPopular(userID);
   }
 
-  Future<void> likePost(String postID,String userID,String ownerUserID) async {
-    return await _dbApiClient.likePost(postID,userID,ownerUserID);
+  Future<void> likePost(
+      String postID, String userID, String ownerUserID) async {
+    return await _dbApiClient.likePost(postID, userID, ownerUserID);
   }
 
   Future<Null> refresh() async {
@@ -73,13 +73,14 @@ class DbRepository {
     getAllPost(lastPost: _lastFetchedPost);
   }
 
-  Future<bool> changeUsername({String userID,String newUsername})async{
+  Future<bool> changeUsername({String userID, String newUsername}) async {
     debugPrint("change user repo geldi");
-    return await _dbApiClient.changeUsername(userID: userID,newUsername: newUsername);
+    return await _dbApiClient.changeUsername(
+        userID: userID, newUsername: newUsername);
   }
 
-  Future<bool> changePhoto({String userID,File newPhoto})async{
+  Future<bool> changePhoto({String userID, File newPhoto}) async {
     debugPrint("repoya geldi");
-    return await  _dbApiClient.changePhoto(userID: userID,newPhoto: newPhoto);
+    return await _dbApiClient.changePhoto(userID: userID, newPhoto: newPhoto);
   }
 }
