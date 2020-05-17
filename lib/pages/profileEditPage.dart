@@ -51,6 +51,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   Widget build(BuildContext context) {
     double _width=MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: Column(
         children: [
@@ -145,8 +146,15 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
             child: Text("username değiştir"),
             onPressed: (){
 
+              if(_profilFoto==null&& _userNameController.text=="" ){
+                Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text("Herhangi bir şeyi değiştirmediniz !"),
+                  backgroundColor: Colors.red,
+                ));
 
-              _dataBaseBloc.add(ChangeProfile(userID: widget.editingUser.userID,newPP: _profilFoto,newUserName: _userNameController.text));
+              }else{
+                _dataBaseBloc.add(ChangeProfile(userID: widget.editingUser.userID,newPP: _profilFoto,newUserName: _userNameController.text));
+              }
             },
 
           ),)
