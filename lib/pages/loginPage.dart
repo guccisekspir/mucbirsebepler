@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               title,
               style: TextStyle(
-                  color: Colors.deepPurpleAccent,
+                  color: Colors.limeAccent,
                   fontWeight: FontWeight.bold,
                   fontSize: 15),
             ),
@@ -99,10 +99,10 @@ class _LoginPageState extends State<LoginPage> {
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                colors: [Color(0xfffbb448), Color(0xfff7892b)])),
+                colors: [Colors.lime,Colors.limeAccent])),
         child: Text(
           butonText,
-          style: TextStyle(fontSize: 20, color: Colors.white),
+          style: GoogleFonts.righteous(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),
         ),
       ),
       onTap: () async {
@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Text(
               'Kaydol',
               style: TextStyle(
-                  color: Color(0xfff79c4f),
+                  color: Colors.limeAccent,
                   fontSize: 18,
                   fontWeight: FontWeight.bold),
             ),
@@ -170,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
             textStyle: Theme.of(context).textTheme.headline4,
             fontSize: 25,
             fontWeight: FontWeight.w700,
-            color: Color(0xffe46b10),
+            color: Colors.limeAccent,
           ),
           children: [
             TextSpan(
@@ -286,6 +286,12 @@ class _LoginPageState extends State<LoginPage> {
                   height: MediaQuery.of(context).size.height,
                   child: Stack(
                     children: <Widget>[
+                      Positioned(
+                          top: -MediaQuery.of(context).size.height * .23,
+                          right: -MediaQuery.of(context).size.width * .4,
+                          child: BezierContainer(
+                            kayitMi: false,
+                          )),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
@@ -293,7 +299,7 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Expanded(
-                              flex: 3,
+                              flex: 2,
                               child: SizedBox(),
                             ),
                             _title(),
@@ -352,12 +358,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: _createAccountLabel(),
                       ),
                       Positioned(top: 40, left: 0, child: backButton(context)),
-                      Positioned(
-                          top: -MediaQuery.of(context).size.height * .23,
-                          right: -MediaQuery.of(context).size.width * .4,
-                          child: BezierContainer(
-                            kayitMi: false,
-                          ))
+
                     ],
                   ),
                 ));
