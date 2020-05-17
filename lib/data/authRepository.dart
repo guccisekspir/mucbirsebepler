@@ -34,6 +34,11 @@ class AuthRepository{
 
   }
 
+  Future<bool> signOut()async{
+    return await _authApiClient.signOut();
+
+  }
+
 
 
 

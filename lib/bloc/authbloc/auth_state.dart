@@ -19,8 +19,9 @@ class AuthLoadingState extends AuthState{
 }
 class AuthLoadedState extends AuthState{
   final User user;
+  final bool isSignOut;
 
-  AuthLoadedState({this.user});
+  AuthLoadedState({this.user,this.isSignOut});
   @override
   List<Object> get props => [user];
 }

@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
@@ -46,7 +47,8 @@ class _HomePageState extends State<HomePage> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<PostBloc>(create: (context)=>PostBloc(),),
-        BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),)
+        BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),),
+        BlocProvider<AuthBloc>(create: (context)=>AuthBloc(),)
 
       ],
       child: Scaffold(

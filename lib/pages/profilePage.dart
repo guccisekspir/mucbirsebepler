@@ -5,6 +5,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_text/gradient_text.dart';
 import 'package:loading_animations/loading_animations.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_event.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
@@ -26,6 +28,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   DataBaseBloc _dataBaseBloc;
+  AuthBloc _authBloc;
   PostBloc _postBloc;
   ScrollController _fScrollController;
   ScrollController _sScrollController;
@@ -43,6 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
     _sScrollController = ScrollController();
     _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
     _postBloc = BlocProvider.of<PostBloc>(context);
+    _authBloc=BlocProvider.of<AuthBloc>(context);
     _postBloc.add(GetUserPopulars(widget.gelenUser.userID));
     _dataBaseBloc.add(GetUserr(userID: widget.gelenUser.userID));
 
@@ -64,8 +68,10 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             children: [
               BlocListener(
-                bloc: _dataBaseBloc,
-                listener: (context, state) {},
+                bloc: _authBloc,
+                listener: (context, state) {
+
+                },
                 child: BlocBuilder(
                   bloc: _dataBaseBloc,
                   // ignore: missing_return
@@ -104,7 +110,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       color: Colors.limeAccent,
                                     )),
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  _authBloc.add(SignOut());
                                 },
                               ),
                             ),

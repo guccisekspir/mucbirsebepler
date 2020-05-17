@@ -39,7 +39,15 @@ class ForgetPass extends AuthEvent{
   ForgetPass({this.email});
   @override
 
-  List<Object> get props => null;
+  List<Object> get props => [email];
+
+
+}
+
+class SignOut extends AuthEvent{
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
 
 
 }

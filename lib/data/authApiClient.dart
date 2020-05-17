@@ -1,6 +1,7 @@
 
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mucbirsebepler/model/user.dart';
 
@@ -54,6 +55,21 @@ class AuthApiClient{
     } else {
       return null;
     }
+  }
+
+  Future<bool> signOut()async{
+
+
+    try{
+      final _googleSignIn = GoogleSignIn();
+      await _googleSignIn.signOut();
+      _firebaseAuth.signOut();
+      return true;
+    }catch(_){
+      debugPrint(_.toString());
+      return false;
+    }
+
   }
 
 
