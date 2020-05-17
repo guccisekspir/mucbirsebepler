@@ -127,7 +127,7 @@ class _ShopPageState extends State<ShopPage> {
                                           height: height / 10,
                                           child: Image.asset("assets/renkli.gif",fit: BoxFit.fill,),
                                         ),
-                                        SizedBox(width: 30,),
+                                        SizedBox(width: 10,),
                                         RaisedButton(
                                           elevation: 10,
                                           shape: RoundedRectangleBorder(
@@ -206,7 +206,7 @@ class _ShopPageState extends State<ShopPage> {
                                           height: height / 10,
                                           child: Image.asset("assets/renksiz.gif",fit: BoxFit.fill,),
                                         ),
-                                        SizedBox(width: 15,),
+                                        SizedBox(width: 5,),
                                         RaisedButton(
                                           elevation: 10,
                                           shape: RoundedRectangleBorder(
@@ -285,7 +285,7 @@ class _ShopPageState extends State<ShopPage> {
                                           height: height / 10,
                                           child: Image.asset("assets/icon/destek.png",fit: BoxFit.fill,),
                                         ),
-                                        SizedBox(width: 30,),
+                                        SizedBox(width: 10,),
                                         RaisedButton(
                                           elevation: 10,
                                           shape: RoundedRectangleBorder(
@@ -364,7 +364,7 @@ class _ShopPageState extends State<ShopPage> {
                                           height: height / 10,
                                           child: Image.asset("assets/icon/yerles.png",fit: BoxFit.fill,),
                                         ),
-                                        SizedBox(width: 30,),
+                                        SizedBox(width: 10,),
                                         RaisedButton(
                                           elevation: 10,
                                           shape: RoundedRectangleBorder(

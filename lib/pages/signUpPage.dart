@@ -12,6 +12,7 @@ import 'package:mucbirsebepler/pages/homePage.dart';
 
 import 'package:mucbirsebepler/widgets/bezierContainer.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -205,6 +206,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 0,
             );
             if (state.user != null) {
+              sharedKaydet(state.user.userID);
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -278,5 +280,14 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  Future<void> sharedKaydet(String userID)async{
+    SharedPreferences prefs;
+    prefs= await SharedPreferences.getInstance();
+    prefs.setString("userID", userID);
+
+
+
   }
 }
