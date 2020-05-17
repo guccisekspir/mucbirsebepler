@@ -75,7 +75,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   if(state is AuthLoadedState){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashScreen()));
                   }
-
                 },
                 child: BlocBuilder(
                   bloc: _dataBaseBloc,
@@ -162,6 +161,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child: Align(
                                   alignment: Alignment.centerRight,
                                   child: kendiMi?RaisedButton(
+                                    color: Colors.lime,
+                                    highlightColor: Colors.deepPurpleAccent,
                                     elevation: 15,
                                     onPressed: () {
                                       WidgetsBinding.instance
@@ -179,7 +180,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     },
                                     child: Text("Profili düzenle"),
                                     shape: RoundedRectangleBorder(
+
                                       borderRadius: BorderRadius.circular(10),
+                                      side: BorderSide(color: Colors.limeAccent,width: 4.0)
                                     ),
                                   ):SizedBox(width: 0,height: 0,),
                                 ),
@@ -231,8 +234,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                           fontSize: 25),
                                     ),
                                     OpenContainer(
-
-
                                       closedBuilder:(BuildContext buildContext,VoidCallback voidCallback){
                                         return GestureDetector(
                                           onTap: voidCallback,
