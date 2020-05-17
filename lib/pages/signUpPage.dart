@@ -48,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
           Text(
             title,
             style: TextStyle(
-                color: Colors.deepPurpleAccent,
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 15),
           ),
@@ -145,17 +145,17 @@ class _SignUpPageState extends State<SignUpPage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Mücbir',
+          text: 'Mücbir ',
           style: GoogleFonts.pressStart2p(
             textStyle: Theme.of(context).textTheme.headline4,
-            fontSize: 18,
+            fontSize: 25,
             fontWeight: FontWeight.w700,
-            color: Colors.black,
+            color: Colors.deepPurpleAccent,
           ),
           children: [
             TextSpan(
               text: 'Sebepler',
-              style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 18),
+              style: TextStyle(color: Colors.black, fontSize: 25),
             ),
           ]),
     );
@@ -223,10 +223,16 @@ class _SignUpPageState extends State<SignUpPage> {
           builder: (context, statee) {
             return SingleChildScrollView(
                 child: Container(
-              color: Color(0xfffbb448),
+              color: Colors.limeAccent,
               height: MediaQuery.of(context).size.height,
               child: Stack(
                 children: <Widget>[
+                  Positioned(
+                      top: -MediaQuery.of(context).size.height * .18,
+                      right: -MediaQuery.of(context).size.width * .4,
+                      child: BezierContainer(
+                        kayitMi: true,
+                      )),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
@@ -234,7 +240,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Expanded(
-                          flex: 3,
+                          flex: 2,
                           child: SizedBox(),
                         ),
                         _title(),
@@ -266,12 +272,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     alignment: Alignment.topLeft,
                     child: backButton(context),
                   ),
-                  Positioned(
-                      top: -MediaQuery.of(context).size.height * .18,
-                      right: -MediaQuery.of(context).size.width * .4,
-                      child: BezierContainer(
-                        kayitMi: true,
-                      ))
+
                 ],
               ),
             ));

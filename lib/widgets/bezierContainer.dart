@@ -11,7 +11,7 @@ class BezierContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color color1=kayitMi?Colors.black87:Colors.limeAccent;
+    Color color1=kayitMi?Colors.black:Colors.limeAccent;
     Color color2=kayitMi?Colors.black:Colors.lime;
     return Container(
         child: Transform.rotate(
