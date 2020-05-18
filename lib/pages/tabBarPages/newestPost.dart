@@ -10,6 +10,8 @@ class NewestPost extends StatefulWidget {
 class _NewestPostState extends State<NewestPost> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      color: Colors.limeAccent,
+    );
   }
 }

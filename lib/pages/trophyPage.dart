@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/newestPost.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/winnerPage.dart';
 
@@ -18,20 +21,26 @@ class _TrophyPageState extends State<TrophyPage> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(MediaQuery.of(context).size.height/14),
           child: AppBar(
+
             bottom: TabBar(
+              indicatorWeight: 4,
+
               tabs: [
-                Tab(child: Text("Keşfet",style: TextStyle(color: Colors.limeAccent),),),
-                Tab(child: Text("Takiplerim",style: TextStyle(color: Colors.limeAccent)),),
+                Tab(child: Text("Son Haberler",style: GoogleFonts.righteous(color: Colors.limeAccent),),),
+                Tab(child: Text("Sıralama",style: GoogleFonts.righteous(color: Colors.limeAccent)),),
               ],
             ),
           ),
         ),
-        body: TabBarView(
-          children: [
-            NewestPost(),
-            WinnerPage(),
-          ],
+        body: BlocProvider(
+          create: (context)=>DataBaseBloc(),
+          child: TabBarView(
+            children: [
+              NewestPost(),
+              WinnerPage(),
+            ],
 
+          ),
         ),
       ),
     );
