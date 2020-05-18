@@ -22,7 +22,6 @@ class _ShopPageState extends State<ShopPage> {
   void initState() {
     _initialize();
     _subscription = _iap.purchaseUpdatedStream.listen((data) => setState(() {
-          print('NEW PURCHASE');
           _purchases.addAll(data);
           _verifyPurchase();
         }));
@@ -528,19 +527,22 @@ class _ShopPageState extends State<ShopPage> {
       Scaffold.of(context).showSnackBar(SnackBar(
         content: Text("Gradient aldın"),
       ));
-    } else if (purchase != null &&
+    }
+    if (purchase2 != null &&
         purchase2.status == PurchaseStatus.purchased) {
       debugPrint("aa");
       Scaffold.of(context).showSnackBar(SnackBar(
         content: Text("Mavi aldın"),
       ));
-    } else if (purchase != null &&
+    }
+    if (purchase3 != null &&
         purchase3.status == PurchaseStatus.purchased) {
       debugPrint("aa");
       Scaffold.of(context).showSnackBar(SnackBar(
         content: Text("Destek aldın"),
       ));
-    } else if (purchase != null &&
+    }
+    if (purchase4 != null &&
         purchase4.status == PurchaseStatus.purchased) {
       debugPrint("aa");
       Scaffold.of(context).showSnackBar(SnackBar(
