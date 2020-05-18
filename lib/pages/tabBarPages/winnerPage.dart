@@ -57,6 +57,7 @@ class _WinnerPageState extends State<WinnerPage> {
                       if(index==2)renk1=Colors.greenAccent;
                       if(index-2>0) renk1=Colors.grey;
                       return ListTile(
+                        subtitle: Text(winnerUsers[index].liked.toString()+" Puan",style: GoogleFonts.righteous(color: Colors.limeAccent),),
                         leading: CircleAvatar(
                           radius: 25,
                           backgroundColor: renk1,
@@ -74,7 +75,7 @@ class _WinnerPageState extends State<WinnerPage> {
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) =>
-                        Divider(color: Colors.limeAccent,),
+                        Divider(color: Colors.limeAccent,thickness: 2,),
                     itemCount: winnerUsers.length);
               }
             },
