@@ -92,7 +92,7 @@ class _ShopPageState extends State<ShopPage> {
                                       "Gradient Tik" + alindiMi,
                                       style: GoogleFonts.righteous(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: height / 35,
+                                          fontSize: height / 50,
                                           letterSpacing: 1.5),
                                     ),
                                   ),
@@ -102,10 +102,10 @@ class _ShopPageState extends State<ShopPage> {
                                   padding: const EdgeInsets.only(
                                       left: 75, right: 10),
                                   child: Text(
-                                    "Gradient Tikli olarak hem Bartu ve Melikşah'a öncelikli olarak gözüküp hem de bize destek verebilirsin",
+                                    "Bartu ve Melikşah'a öncelikli olarak gözüküp hem de bize destek verebilirsin",
                                     style: GoogleFonts.roboto(
                                       fontWeight: FontWeight.normal,
-                                      fontSize: height / 40,
+                                      fontSize: height / 50,
                                     ),
                                   ),
                                 ),
@@ -150,7 +150,7 @@ class _ShopPageState extends State<ShopPage> {
                                                 _products[1].price +
                                                 " ₺",
                                             style: GoogleFonts.bangers(
-                                                fontSize: 26),
+                                                fontSize: 22),
                                           ),
                                         )
                                       ],
@@ -190,7 +190,7 @@ class _ShopPageState extends State<ShopPage> {
                                       "MaTik",
                                       style: GoogleFonts.righteous(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: height / 35,
+                                          fontSize: height / 50,
                                           letterSpacing: 1.5),
                                     ),
                                   ),
@@ -203,7 +203,7 @@ class _ShopPageState extends State<ShopPage> {
                                     "Yeter artık Instagram! MATİK'li olmak artık çok kolay",
                                     style: GoogleFonts.roboto(
                                       fontWeight: FontWeight.normal,
-                                      fontSize: height / 40,
+                                      fontSize: height / 50,
                                     ),
                                   ),
                                 ),
@@ -248,7 +248,7 @@ class _ShopPageState extends State<ShopPage> {
                                                 _products[2].price +
                                                 " ₺",
                                             style: GoogleFonts.bangers(
-                                                fontSize: 26),
+                                                fontSize: 23),
                                           ),
                                         )
                                       ],
@@ -288,7 +288,7 @@ class _ShopPageState extends State<ShopPage> {
                                       "Destekçi Rozeti",
                                       style: GoogleFonts.righteous(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: height / 35,
+                                          fontSize: height / 45,
                                           letterSpacing: 1.5),
                                     ),
                                   ),
@@ -298,10 +298,10 @@ class _ShopPageState extends State<ShopPage> {
                                   padding: const EdgeInsets.only(
                                       left: 88, right: 10),
                                   child: Text(
-                                    "Hem destekçi rozetine sahip olup hem de bana kahve ısmarlayabilirsiniz <3",
+                                    "Destekçi rozetine sahip olup hem de bana kahve ısmarlayabilirsiniz<3",
                                     style: GoogleFonts.roboto(
                                       fontWeight: FontWeight.normal,
-                                      fontSize: height / 40,
+                                      fontSize: height / 50,
                                     ),
                                   ),
                                 ),
@@ -346,7 +346,7 @@ class _ShopPageState extends State<ShopPage> {
                                                 _products[0].price +
                                                 " ₺",
                                             style: GoogleFonts.bangers(
-                                                fontSize: 26),
+                                                fontSize: 23),
                                           ),
                                         )
                                       ],
@@ -386,7 +386,7 @@ class _ShopPageState extends State<ShopPage> {
                                       "Ürün Yerleştirmecisi",
                                       style: GoogleFonts.righteous(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: height / 35,
+                                          fontSize: height / 45,
                                           letterSpacing: 1.5),
                                     ),
                                   ),
@@ -396,10 +396,10 @@ class _ShopPageState extends State<ShopPage> {
                                   padding: const EdgeInsets.only(
                                       left: 83, right: 10),
                                   child: Text(
-                                    "Hem yerleştirme rozetine sahip olup hem de ürün yerleştirebilirsiniz <3",
+                                    "Yerleştirme rozetine sahip olup hem de ürün yerleştirebilirsiniz <3",
                                     style: GoogleFonts.roboto(
                                       fontWeight: FontWeight.normal,
-                                      fontSize: height / 40,
+                                      fontSize: height / 50,
                                     ),
                                   ),
                                 ),
@@ -444,7 +444,7 @@ class _ShopPageState extends State<ShopPage> {
                                                 _products[3].price +
                                                 " ₺",
                                             style: GoogleFonts.bangers(
-                                                fontSize: 26),
+                                                fontSize: 23),
                                           ),
                                         )
                                       ],
