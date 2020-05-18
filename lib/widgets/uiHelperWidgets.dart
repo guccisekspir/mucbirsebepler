@@ -261,17 +261,7 @@ Widget detailContainer(
                         color: Colors.limeAccent,
                       )),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MultiBlocProvider(
-                      providers: [
-                        BlocProvider<PostBloc>(create: (context)=>PostBloc(),),
-                        BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),),
-                        BlocProvider<AuthBloc>(create: (context)=>AuthBloc(),)
-                      ],
-                      child: ProfilePage(
-                        gelenUser: gelenPost.owner ,
-                        tiklayanUser: gelenUser,
-                      ),
-                    )));
+                    Navigator.pop(context);
                   },
                 ),
               ),
@@ -319,7 +309,8 @@ Widget detailContainer(
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>MultiBlocProvider(
                     providers: [
                       BlocProvider<PostBloc>(create: (context)=>PostBloc(),),
-                      BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),)
+                      BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),),
+                      BlocProvider<AuthBloc>(create: (context)=>AuthBloc(),)
                     ],
                     child: ProfilePage(
                       gelenUser: gelenPost.owner ,

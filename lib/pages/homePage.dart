@@ -12,6 +12,7 @@ import 'package:mucbirsebepler/pages/discoverPage.dart';
 import 'package:mucbirsebepler/pages/profilePage.dart';
 import 'package:mucbirsebepler/pages/shopPage.dart';
 import 'package:mucbirsebepler/pages/postPage.dart';
+import 'package:mucbirsebepler/pages/trophyPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -94,6 +95,8 @@ class _HomePageState extends State<HomePage> {
                             );
                           case NavBarItem.SHOP:
                             return ShopPage();
+                          case NavBarItem.TROPHY:
+                            return TrophyPage();
                           case NavBarItem.TICK:
                             return BlocProvider(
                                 create: (context) => PostBloc(),
@@ -121,6 +124,8 @@ class _HomePageState extends State<HomePage> {
                               items: <Widget>[
                                 Icon(LineAwesomeIcons.home,
                                     color: Theme.of(context).primaryColor,
+                                    size: 30),
+                                Icon(LineAwesomeIcons.trophy,color: Theme.of(context).primaryColor,
                                     size: 30),
                                 Icon(LineAwesomeIcons.newspaper_o,
                                     color: Theme.of(context).primaryColor,
@@ -168,8 +173,8 @@ class _HomePageState extends State<HomePage> {
                 //bloc yapımızı seçimlerden haberdar etmek
                 stream: _bottomNavBarBloc.itemStream,
                 initialData: _bottomNavBarBloc.defaultItem,
-                // ignore: missing_return
                 builder:
+                    // ignore: missing_return
                     (BuildContext context, AsyncSnapshot<NavBarItem> snapshot) {
                   switch (snapshot.data) {
                     case NavBarItem.PROFILE:
@@ -178,6 +183,8 @@ class _HomePageState extends State<HomePage> {
                       );
                     case NavBarItem.SHOP:
                       return ShopPage();
+                    case NavBarItem.TROPHY:
+                      return TrophyPage();
                     case NavBarItem.TICK:
                       return BlocProvider(
                           create: (context) => PostBloc(),
@@ -205,6 +212,7 @@ class _HomePageState extends State<HomePage> {
                         items: <Widget>[
                           Icon(LineAwesomeIcons.home,
                               color: Theme.of(context).primaryColor, size: 30),
+                          Icon(LineAwesomeIcons.trophy,color: Theme.of(context).primaryColor, size: 30),
                           Icon(LineAwesomeIcons.newspaper_o,
                               color: Theme.of(context).primaryColor, size: 30),
                           Icon(LineAwesomeIcons.cart_arrow_down,
