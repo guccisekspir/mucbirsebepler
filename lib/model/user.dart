@@ -18,7 +18,7 @@ class User {
 
   @override
   String toString() {
-    return 'User{userID: $userID, email: $email, userName: $userName, profilURL: $profilURL, createdAt: $createdAt, seviye: $seviye, isGmatik: $isGmatik, isMatik: $isMatik, isFirst: $isFirst, roller: $roller}';
+    return 'User{userID: $userID, email: $email, userName: $userName, profilURL: $profilURL, createdAt: $createdAt, seviye: $seviye, isGmatik: $isGmatik, isMatik: $isMatik, isFirst: $isFirst, liked: $liked, roller: $roller}';
   }
 
   User({@required this.userID, @required this.email});

@@ -84,6 +84,19 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
       }
     }
 
+    if(event is GetWinnerUsers){
+      yield DataBaseLoadingState();
+      try{
+        List<User> userList;
+        userList = await dbRepository.getWinnerUser();
+        yield DataBaseLoadedState(winnerUsers: userList);
+
+      }catch(_){
+        yield DataBaseErrorState();
+      }
+
+    }
+
 
   }
 }
