@@ -53,7 +53,7 @@ class DbApiClient {
   }
 
   Future<bool> changePhoto({String userID, File newPhoto}) async {
-    _storageReference = _firebaseStorage.ref().child(userID);
+    _storageReference = _firebaseStorage.ref().child(userID).child("profilPhoto.png");
     StorageUploadTask uploadTask = _storageReference.putFile(newPhoto);
 
     var url = await (await uploadTask.onComplete).ref.getDownloadURL();
