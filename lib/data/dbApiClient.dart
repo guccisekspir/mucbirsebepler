@@ -122,7 +122,6 @@ class DbApiClient {
     _userQuery= await Firestore.instance.collection("users").orderBy("liked",descending: true).limit(50).getDocuments();
     for(DocumentSnapshot documentSnapshot in _userQuery.documents){
       User tekUser = User.fromMap(documentSnapshot.data);
-      debugPrint(tekUser.toString());
       listWinner.add(tekUser);
     }
 
