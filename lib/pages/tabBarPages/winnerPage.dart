@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animations/loading_animations.dart';
+import 'package:mucbirsebepler/bloc/authbloc/auth_bloc.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
+import 'package:mucbirsebepler/bloc/postbloc/post_bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
+import 'package:mucbirsebepler/pages/profilePage.dart';
 
 class WinnerPage extends StatefulWidget {
   @override
@@ -57,6 +60,19 @@ class _WinnerPageState extends State<WinnerPage> {
                       if(index==2)renk1=Colors.greenAccent;
                       if(index-2>0) renk1=Colors.grey;
                       return ListTile(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>MultiBlocProvider(
+                            providers: [
+                              BlocProvider<PostBloc>(create: (context)=>PostBloc(),),
+                              BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),),
+                              BlocProvider<AuthBloc>(create: (context)=>AuthBloc(),)
+                            ],
+                            child: ProfilePage(
+                              gelenUser: winnerUsers[index] ,
+                              tiklayanUser: User(),
+                            ),
+                          )));
+                        },
                         subtitle: Text(winnerUsers[index].liked.toString()+" Puan",style: GoogleFonts.righteous(color: Colors.limeAccent),),
                         leading: CircleAvatar(
                           radius: 25,
