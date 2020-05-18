@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 
@@ -35,6 +36,8 @@ class DbApiClient {
     okunanUser.roller = gelenUser.data['roller'];
     return okunanUser;
   }
+
+
 
   Future<bool> changeUsername({String userID, String newUsername}) async {
     var users = await _firestore
@@ -111,6 +114,19 @@ class DbApiClient {
           .document(userID)
           .setData({"eben": true});
     }
+  }
+  Future<List<User>> getWinnerUser()async{
+    List<User> listWinner=[];
+    QuerySnapshot _userQuery;
+
+    _userQuery= await Firestore.instance.collection("users").orderBy("liked",descending: true).limit(50).getDocuments();
+    for(DocumentSnapshot documentSnapshot in _userQuery.documents){
+      User tekUser = User.fromMap(documentSnapshot.data);
+      debugPrint(tekUser.toString());
+      listWinner.add(tekUser);
+    }
+
+    return listWinner;
   }
 
   Future<List<Post>> getAllPost(Post lastFetched, int fetchLimit) async {

@@ -48,6 +48,12 @@ class ChangeUserName extends DataBaseEvent{
   // TODO: implement props
   List<Object> get props => [userID,newUserName];
 
+}
+
+class GetWinnerUsers extends DataBaseEvent{
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
 
 }
 

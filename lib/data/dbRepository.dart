@@ -61,6 +61,11 @@ class DbRepository {
     return await _dbApiClient.getUserPopular(userID);
   }
 
+  Future<List<User>>getWinnerUser()async{
+
+    return await _dbApiClient.getWinnerUser();
+  }
+
   Future<void> likePost(
       String postID, String userID, String ownerUserID) async {
     return await _dbApiClient.likePost(postID, userID, ownerUserID);
