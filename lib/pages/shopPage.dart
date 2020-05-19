@@ -60,7 +60,9 @@ class _ShopPageState extends State<ShopPage> {
                           "Mücbir Mağaza",
                           gradient: LinearGradient(
                               colors: [Colors.pinkAccent, Colors.red]),
-                          style: GoogleFonts.righteous(fontSize: MediaQuery.of(context).size.height/25),
+                          style: GoogleFonts.righteous(
+                              fontSize:
+                                  MediaQuery.of(context).size.height / 25),
                         )),
                   ),
                 ),
@@ -528,22 +530,19 @@ class _ShopPageState extends State<ShopPage> {
         content: Text("Gradient aldın"),
       ));
     }
-    if (purchase2 != null &&
-        purchase2.status == PurchaseStatus.purchased) {
+    if (purchase2 != null && purchase2.status == PurchaseStatus.purchased) {
       debugPrint("aa");
       Scaffold.of(context).showSnackBar(SnackBar(
         content: Text("Mavi aldın"),
       ));
     }
-    if (purchase3 != null &&
-        purchase3.status == PurchaseStatus.purchased) {
+    if (purchase3 != null && purchase3.status == PurchaseStatus.purchased) {
       debugPrint("aa");
       Scaffold.of(context).showSnackBar(SnackBar(
         content: Text("Destek aldın"),
       ));
     }
-    if (purchase4 != null &&
-        purchase4.status == PurchaseStatus.purchased) {
+    if (purchase4 != null && purchase4.status == PurchaseStatus.purchased) {
       debugPrint("aa");
       Scaffold.of(context).showSnackBar(SnackBar(
         content: Text("Urun aldın"),

@@ -7,38 +7,44 @@ import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/newestPost.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/winnerPage.dart';
 
-
 class TrophyPage extends StatefulWidget {
   final User user;
 
   const TrophyPage({Key key, this.user}) : super(key: key);
+
   @override
   _TrophyPageState createState() => _TrophyPageState();
 }
 
 class _TrophyPageState extends State<TrophyPage> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(MediaQuery.of(context).size.height/14),
+          preferredSize:
+              Size.fromHeight(MediaQuery.of(context).size.height / 14),
           child: AppBar(
-
             bottom: TabBar(
               indicatorWeight: 4,
-
               tabs: [
-                Tab(child: Text("Son Haberler",style: GoogleFonts.righteous(color: Colors.limeAccent),),),
-                Tab(child: Text("Sıralama",style: GoogleFonts.righteous(color: Colors.limeAccent)),),
+                Tab(
+                  child: Text(
+                    "Son Haberler",
+                    style: GoogleFonts.righteous(color: Colors.limeAccent),
+                  ),
+                ),
+                Tab(
+                  child: Text("Sıralama",
+                      style: GoogleFonts.righteous(color: Colors.limeAccent)),
+                ),
               ],
             ),
           ),
@@ -54,10 +60,11 @@ class _TrophyPageState extends State<TrophyPage> {
           ],
           child: TabBarView(
             children: [
-              NewestPost(user: widget.user,),
+              NewestPost(
+                user: widget.user,
+              ),
               WinnerPage(),
             ],
-
           ),
         ),
       ),

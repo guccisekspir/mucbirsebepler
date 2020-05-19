@@ -48,9 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
           Text(
             title,
             style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 15),
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
           ),
           SizedBox(
             height: 10,
@@ -272,7 +270,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     alignment: Alignment.topLeft,
                     child: backButton(context),
                   ),
-
                 ],
               ),
             ));

@@ -6,10 +6,9 @@ import 'package:flutter/material.dart';
 import 'user.dart';
 import 'package:mucbirsebepler/model/user.dart';
 
-class Post{
+class Post {
   final User owner;
   final String title;
-
 
   final String description;
   final String youtubelink;
@@ -18,25 +17,25 @@ class Post{
   int liked = 0;
   DateTime createdAt;
 
-
   Post(
-      {@required this.owner, @required this.title, @required this.description, this.youtubelink, this.otherLink}){
+      {@required this.owner,
+      @required this.title,
+      @required this.description,
+      this.youtubelink,
+      this.otherLink}) {
     debugPrint(owner.toString());
   }
-
-
-
 
   Map<String, dynamic> toMap() {
     return {
       'owner': owner.toMap(),
       'title': title,
       'description': description,
-      'youtubelink': youtubelink??"",
+      'youtubelink': youtubelink ?? "",
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
-      'otherLink': otherLink??"",
-      'postID': owner.userID+randomSayiUret(),
-      'liked': liked??0,
+      'otherLink': otherLink ?? "",
+      'postID': owner.userID + randomSayiUret(),
+      'liked': liked ?? 0,
     };
   }
 
@@ -46,10 +45,9 @@ class Post{
         description = map['description'],
         youtubelink = map['youtubelink'],
         createdAt = (map['createdAt'] as Timestamp).toDate(),
-        otherLink=map['otherLink'],
+        otherLink = map['otherLink'],
         postID = map['postID'],
         liked = map['liked'];
-
 
   @override
   String toString() {
@@ -60,6 +58,4 @@ class Post{
     int rastgeleSayi = Random().nextInt(999999);
     return rastgeleSayi.toString();
   }
-
-
 }

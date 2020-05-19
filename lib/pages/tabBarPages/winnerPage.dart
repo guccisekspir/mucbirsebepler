@@ -52,28 +52,41 @@ class _WinnerPageState extends State<WinnerPage> {
               }
               if (state is DataBaseLoadedState) {
                 List<User> winnerUsers = state.winnerUsers;
-                Color renk1=Colors.grey;
+                Color renk1 = Colors.grey;
                 return ListView.separated(
                     itemBuilder: (BuildContext context, int index) {
-                      if(index==0)renk1=Colors.orangeAccent;
-                      if(index==1) renk1=Colors.redAccent;
-                      if(index==2)renk1=Colors.green;
-                      if(index-2>0) renk1=Colors.grey;
+                      if (index == 0) renk1 = Colors.orangeAccent;
+                      if (index == 1) renk1 = Colors.redAccent;
+                      if (index == 2) renk1 = Colors.green;
+                      if (index - 2 > 0) renk1 = Colors.grey;
                       return ListTile(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>MultiBlocProvider(
-                            providers: [
-                              BlocProvider<PostBloc>(create: (context)=>PostBloc(),),
-                              BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),),
-                              BlocProvider<AuthBloc>(create: (context)=>AuthBloc(),)
-                            ],
-                            child: ProfilePage(
-                              gelenUser: winnerUsers[index] ,
-                              tiklayanUser: User(),
-                            ),
-                          )));
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MultiBlocProvider(
+                                        providers: [
+                                          BlocProvider<PostBloc>(
+                                            create: (context) => PostBloc(),
+                                          ),
+                                          BlocProvider<DataBaseBloc>(
+                                            create: (context) => DataBaseBloc(),
+                                          ),
+                                          BlocProvider<AuthBloc>(
+                                            create: (context) => AuthBloc(),
+                                          )
+                                        ],
+                                        child: ProfilePage(
+                                          gelenUser: winnerUsers[index],
+                                          tiklayanUser: User(),
+                                        ),
+                                      )));
                         },
-                        subtitle: Text(winnerUsers[index].liked.toString()+" Puan",style: GoogleFonts.righteous(color: Colors.limeAccent),),
+                        subtitle: Text(
+                          winnerUsers[index].liked.toString() + " Puan",
+                          style:
+                              GoogleFonts.righteous(color: Colors.limeAccent),
+                        ),
                         leading: CircleAvatar(
                           radius: 25,
                           backgroundColor: renk1,
@@ -81,17 +94,30 @@ class _WinnerPageState extends State<WinnerPage> {
                             radius: 20,
                             backgroundColor: Colors.blueGrey,
                             child: Text(
-                              (index+1).toString(),
-                              style: GoogleFonts.luckiestGuy(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 22),
+                              (index + 1).toString(),
+                              style: GoogleFonts.luckiestGuy(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22),
                             ),
                           ),
                         ),
-                        title: Text(winnerUsers[index].userName,style: GoogleFonts.righteous(color: Colors.cyanAccent),),
-                        trailing: Icon(Icons.keyboard_arrow_right,color: Colors.cyanAccent,),
+                        title: Text(
+                          winnerUsers[index].userName,
+                          style:
+                              GoogleFonts.righteous(color: Colors.cyanAccent),
+                        ),
+                        trailing: Icon(
+                          Icons.keyboard_arrow_right,
+                          color: Colors.cyanAccent,
+                        ),
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) =>
-                        Divider(color: Colors.limeAccent,thickness: 2,),
+                        Divider(
+                          color: Colors.limeAccent,
+                          thickness: 2,
+                        ),
                     itemCount: winnerUsers.length);
               }
             },

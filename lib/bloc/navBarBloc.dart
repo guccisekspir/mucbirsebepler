@@ -1,10 +1,10 @@
 import 'dart:async';
 
-enum NavBarItem { HOME,TROPHY, TICK, SHOP , PROFILE }
+enum NavBarItem { HOME, TROPHY, TICK, SHOP, PROFILE }
 
 class BottomNavBarBloc {
   final StreamController<NavBarItem> _navBarController =
-  StreamController<NavBarItem>.broadcast();
+      StreamController<NavBarItem>.broadcast();
 
   NavBarItem defaultItem = NavBarItem.HOME;
 
@@ -22,12 +22,11 @@ class BottomNavBarBloc {
         _navBarController.sink.add(NavBarItem.TICK);
         break;
       case 3:
-      _navBarController.sink.add(NavBarItem.SHOP);
-      break;
+        _navBarController.sink.add(NavBarItem.SHOP);
+        break;
       case 4:
         _navBarController.sink.add(NavBarItem.PROFILE);
         break;
-
     }
   }
 
