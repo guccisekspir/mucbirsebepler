@@ -60,7 +60,7 @@ class _ShopPageState extends State<ShopPage> {
                           "Mücbir Mağaza",
                           gradient: LinearGradient(
                               colors: [Colors.pinkAccent, Colors.red]),
-                          style: GoogleFonts.righteous(fontSize: 35),
+                          style: GoogleFonts.righteous(fontSize: MediaQuery.of(context).size.height/25),
                         )),
                   ),
                 ),
@@ -149,7 +149,7 @@ class _ShopPageState extends State<ShopPage> {
                                                 _products[1].price +
                                                 " ₺",
                                             style: GoogleFonts.bangers(
-                                                fontSize: 22),
+                                                fontSize: 19),
                                           ),
                                         )
                                       ],
@@ -247,7 +247,7 @@ class _ShopPageState extends State<ShopPage> {
                                                 _products[2].price +
                                                 " ₺",
                                             style: GoogleFonts.bangers(
-                                                fontSize: 23),
+                                                fontSize: 19),
                                           ),
                                         )
                                       ],
@@ -345,7 +345,7 @@ class _ShopPageState extends State<ShopPage> {
                                                 _products[0].price +
                                                 " ₺",
                                             style: GoogleFonts.bangers(
-                                                fontSize: 23),
+                                                fontSize: 19),
                                           ),
                                         )
                                       ],
@@ -443,7 +443,7 @@ class _ShopPageState extends State<ShopPage> {
                                                 _products[3].price +
                                                 " ₺",
                                             style: GoogleFonts.bangers(
-                                                fontSize: 23),
+                                                fontSize: 19),
                                           ),
                                         )
                                       ],

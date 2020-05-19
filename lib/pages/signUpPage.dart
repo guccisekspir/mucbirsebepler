@@ -155,7 +155,7 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             TextSpan(
               text: 'Sebepler',
-              style: TextStyle(color: Colors.black, fontSize: 25),
+              style: TextStyle(color: Colors.deepPurpleAccent, fontSize: 25),
             ),
           ]),
     );

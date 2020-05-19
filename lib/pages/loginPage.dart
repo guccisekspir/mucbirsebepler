@@ -170,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
             textStyle: Theme.of(context).textTheme.headline4,
             fontSize: 25,
             fontWeight: FontWeight.w700,
-            color: Colors.limeAccent,
+            color: Colors.deepPurpleAccent,
           ),
           children: [
             TextSpan(
