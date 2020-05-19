@@ -6,12 +6,11 @@ import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
 
-
-
 class NewestPost extends StatefulWidget {
   final User user;
 
   const NewestPost({Key key, this.user}) : super(key: key);
+
   @override
   _NewestPostState createState() => _NewestPostState();
 }
@@ -19,28 +18,31 @@ class NewestPost extends StatefulWidget {
 class _NewestPostState extends State<NewestPost> {
   PostBloc _postBloc;
   DataBaseBloc _dataBaseBloc;
-  bool _yuklendiMi=false;
+  bool _yuklendiMi = false;
+  bool hasGel = false;
   User finalUser;
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     // TODO: implement initState
-    _postBloc= BlocProvider.of<PostBloc>(context);
+    _postBloc = BlocProvider.of<PostBloc>(context);
     _postBloc.add(Refresh());
-    _dataBaseBloc=BlocProvider.of<DataBaseBloc>(context);
+    _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
     _dataBaseBloc.add(GetUserr(userID: widget.user.userID));
     _postBloc.add(GetNewPost());
 
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    double width=MediaQuery.of(context).size.width;
-    double height=MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.fast_forward),
-        onPressed: (){
+        onPressed: () {
           _postBloc.add(GetMoreNewPost());
         },
       ),
@@ -52,28 +54,24 @@ class _NewestPostState extends State<NewestPost> {
               listener: (context, state) {
                 if (state is DataBaseLoadedState) {
                   setState(() {
-                    _yuklendiMi=true;
+                    _yuklendiMi = true;
                     finalUser = state.user;
                   });
-
                 }
               },
             ),
-
           ],
           child: BlocBuilder(
             bloc: _postBloc,
             // ignore: missing_return
-            builder: (context,state){
-              if(state is PostLoadedState){
-                List<Post> postList=state.listPost;
-                if(_yuklendiMi){
-                  return ListView.builder(itemBuilder:
-
-                  // ignore: missing_return
-                      (context,index){
-                    if(state is MoreLoadingState) return _WaitingWidget();
-                    else{
+            builder: (context, state) {
+              if (state is PostLoadedState) {
+                List<Post> postList = state.listPost;
+                if (_yuklendiMi) {
+                  return ListView.builder(
+                    itemBuilder:
+                        // ignore: missing_return
+                        (context, index) {
                       return postCoontainer(
                           gelenUser: finalUser,
                           bloc: _postBloc,
@@ -81,30 +79,32 @@ class _NewestPostState extends State<NewestPost> {
                           width: width,
                           height: height,
                           context: context);
-                    }
-
-                  },
-                  itemCount: postList.length,
-
+                    },
+                    itemCount: postList.length,
+                    controller: _scrollController,
                   );
-
-                }
-                else return Center(child: CircularProgressIndicator(),);
-
-
+                } else
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+              } else if (state is PostLoadingState) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is PostErrorState) {
+                Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text("Bir hata oluştu tospik"),
+                  backgroundColor: Colors.limeAccent,
+                ));
+                return Container(
+                  color: Colors.redAccent,
+                );
               }
-              else if(state is PostLoadingState){
-                return Center(child: CircularProgressIndicator(),);
-              }
-             else if(state is PostErrorState){
-                Scaffold.of(context).showSnackBar(SnackBar(content: Text("Bir hata oluştu tospik"),backgroundColor: Colors.limeAccent,));
-                return Container(color: Colors.redAccent,);
-              }
-             return Center(child: CircularProgressIndicator(),);
-
-
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             },
-          ) ,
+          ),
         ),
       ),
     );
@@ -118,6 +118,4 @@ class _NewestPostState extends State<NewestPost> {
       ),
     );
   }
-
-  Widget yeniPostWidget(int index) {}
 }

@@ -61,12 +61,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield ForgetErrorState(_.toString());
         debugPrint(_.toString());
       }
-    }else if(event is SignOut){
+    } else if (event is SignOut) {
       yield AuthLoadingState();
-      try{
-        bool isSignOut=await _authRepository.signOut();
+      try {
+        bool isSignOut = await _authRepository.signOut();
         yield AuthLoadedState(isSignOut: isSignOut);
-      }catch(_){
+      } catch (_) {
         debugPrint(_.toString());
         yield AuthErrorState();
       }

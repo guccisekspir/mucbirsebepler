@@ -10,43 +10,41 @@ class InitialAuthState extends AuthState {
   List<Object> get props => [];
 }
 
-
-class AuthLoadingState extends AuthState{
-
-
+class AuthLoadingState extends AuthState {
   @override
   List<Object> get props => null;
 }
-class AuthLoadedState extends AuthState{
+
+class AuthLoadedState extends AuthState {
   final User user;
   final bool isSignOut;
 
-  AuthLoadedState({this.user,this.isSignOut});
+  AuthLoadedState({this.user, this.isSignOut});
+
   @override
   List<Object> get props => [user];
 }
-class AuthErrorState extends AuthState{
+
+class AuthErrorState extends AuthState {
   @override
   List<Object> get props => null;
 }
 
-class ForgetLoadingState extends AuthState{
+class ForgetLoadingState extends AuthState {
   @override
   List<Object> get props => null;
 }
 
-class ForgetLoadedState extends AuthState{
+class ForgetLoadedState extends AuthState {
   @override
   List<Object> get props => null;
 }
 
-
-class ForgetErrorState extends AuthState{
+class ForgetErrorState extends AuthState {
   final String errorMessage;
 
   ForgetErrorState(this.errorMessage);
 
   @override
   List<Object> get props => null;
-
 }

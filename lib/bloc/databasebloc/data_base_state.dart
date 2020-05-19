@@ -10,26 +10,25 @@ class InitialDataBaseState extends DataBaseState {
   List<Object> get props => [];
 }
 
-class DataBaseLoadingState extends DataBaseState{
+class DataBaseLoadingState extends DataBaseState {
   @override
-
   List<Object> get props => null;
 }
-class DataBaseLoadedState extends DataBaseState{
+
+class DataBaseLoadedState extends DataBaseState {
   final User user;
   final bool isChangedUser;
   final bool isChangedPP;
   final List<User> winnerUsers;
 
-  DataBaseLoadedState({this.user,this.isChangedUser,this.isChangedPP,this.winnerUsers});
-  @override
+  DataBaseLoadedState(
+      {this.user, this.isChangedUser, this.isChangedPP, this.winnerUsers});
 
+  @override
   List<Object> get props => [user];
 }
-class DataBaseErrorState extends DataBaseState{
-  @override
 
+class DataBaseErrorState extends DataBaseState {
+  @override
   List<Object> get props => null;
 }
-
-
