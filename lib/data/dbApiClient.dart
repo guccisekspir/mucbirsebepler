@@ -51,6 +51,17 @@ class DbApiClient {
           .collection("users")
           .document(userID)
           .updateData({'userName': newUsername});
+
+      QuerySnapshot eben=await _firestore.collection("posts").where("postID",isGreaterThanOrEqualTo: userID).where("postID",isLessThanOrEqualTo: userID+'\uf8ff').getDocuments();
+      for (DocumentSnapshot documentSnapshot in eben.documents) {
+        await _firestore.collection("posts").document(documentSnapshot.documentID).updateData({"ownerUserName":newUsername});
+      }
+
+
+
+
+
+
       return true;
     }
   }

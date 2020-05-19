@@ -361,7 +361,7 @@ Widget detailContainer(
             Padding(
               padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
               child: Text(
-                gelenPost.owner.userName.toUpperCase() + " iddiası",
+                gelenPost.ownerUserName.toUpperCase() + " iddiası",
                 style: GoogleFonts.righteous(
                     fontSize: 20, fontWeight: FontWeight.bold),
               ),
@@ -524,7 +524,7 @@ Widget postContainer(
                         Column(
                           children: <Widget>[
                             Text(
-                              post.owner.userName,
+                              post.ownerUserName,
                               style: GoogleFonts.righteous(fontSize: 15),
                             ),
                             Text(

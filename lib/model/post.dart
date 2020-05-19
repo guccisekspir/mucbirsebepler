@@ -13,6 +13,7 @@ class Post {
   final String description;
   final String youtubelink;
   final String otherLink;
+  final String ownerUserName;
   String postID;
   int liked = 0;
   DateTime createdAt;
@@ -21,7 +22,7 @@ class Post {
       {@required this.owner,
       @required this.title,
       @required this.description,
-      this.youtubelink,
+      this.youtubelink, this.ownerUserName,
       this.otherLink}) {
     debugPrint(owner.toString());
   }
@@ -35,6 +36,7 @@ class Post {
       'createdAt': createdAt ?? FieldValue.serverTimestamp(),
       'otherLink': otherLink ?? "",
       'postID': owner.userID + randomSayiUret(),
+      'ownerUserName':ownerUserName,
       'liked': liked ?? 0,
     };
   }
@@ -47,6 +49,7 @@ class Post {
         createdAt = (map['createdAt'] as Timestamp).toDate(),
         otherLink = map['otherLink'],
         postID = map['postID'],
+        ownerUserName=map['ownerUserName'],
         liked = map['liked'];
 
   @override
