@@ -21,7 +21,6 @@ class _TrophyPageState extends State<TrophyPage> {
   @override
   void initState() {
     // TODO: implement initState
-    debugPrint(widget.user.userID);
     super.initState();
   }
   @override

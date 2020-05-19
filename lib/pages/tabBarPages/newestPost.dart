@@ -25,7 +25,6 @@ class _NewestPostState extends State<NewestPost> {
   @override
   void initState() {
     // TODO: implement initState
-    debugPrint(widget.user.toString());
     _postBloc= BlocProvider.of<PostBloc>(context);
     _postBloc.add(Refresh());
     _dataBaseBloc=BlocProvider.of<DataBaseBloc>(context);

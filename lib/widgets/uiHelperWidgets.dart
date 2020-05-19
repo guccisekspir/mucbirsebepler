@@ -205,7 +205,7 @@ Widget postCoontainer(
   return OpenContainer(
     transitionDuration: Duration(milliseconds: 800),
     closedColor: Colors.transparent,
-    openColor: Colors.white12,
+    openColor: Colors.transparent,
     transitionType: ContainerTransitionType.fade,
     closedBuilder: (BuildContext context, VoidCallback voidCallBack) {
       return postContainer(
