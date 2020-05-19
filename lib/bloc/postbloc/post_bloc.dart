@@ -50,6 +50,27 @@ class PostBloc extends Bloc<PostEvent, PostState> {
       }
     }
 
+    if(event is GetNewPost){
+      List<Post> liste=[];
+      yield PostLoadingState();
+      try{
+        liste= await _dbRepository.getNewsPost();
+        yield PostLoadedState(listPost: liste);
+      }catch(_){
+        yield PostErrorState();
+      }
+    }
+    if(event is GetMoreNewPost){
+      List<Post> liste=[];
+      yield PostLoadingState();
+      try{
+        liste= await _dbRepository.getMoreNewsPost();
+        yield PostLoadedState(listPost: liste);
+      }catch(_){
+        yield PostErrorState();
+      }
+    }
+
     if(event is GetUserPopulars){
       yield PostLoadingState();
       try{

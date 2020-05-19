@@ -8,10 +8,12 @@ import 'package:mucbirsebepler/model/user.dart';
 
 class DbRepository {
   List<Post> _postList;
+  List<Post> _newPostList=[];
   Post _lastFetchedPost;
   static final postLimitNumber = 4;
   bool hasMore = true;
   bool istendiMi = true;
+  bool ilkMi=true;
 
   DbRepository() {
     _postList = [];
@@ -58,7 +60,21 @@ class DbRepository {
   }
 
   Future<List<Post>> getUserPosts(String userID) async {
-    return await _dbApiClient.getUserPopular(userID);
+      return await _dbApiClient.getUserPopular(userID);
+  }
+
+  Future<List<Post>>getNewsPost()async{
+
+    List<Post> gelenListe= await _dbApiClient.getNewsPost(ilkMi);
+    _newPostList.addAll(gelenListe);
+    List<Post> _gidecekkList=_newPostList;
+    return _gidecekkList;
+
+  }
+
+  Future<List<Post>>getMoreNewsPost()async{
+    ilkMi=false;
+    return await getNewsPost();
   }
 
   Future<List<User>>getWinnerUser()async{

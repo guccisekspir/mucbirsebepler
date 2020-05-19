@@ -11,6 +11,8 @@ class DbApiClient {
   StorageReference _storageReference;
   QuerySnapshot _querySnapshot;
   var lastDocument;
+  var newLastDocument;
+  QuerySnapshot _newQuerySnapshot;
 
   Future<User> saveUser(User user) async {
     DocumentSnapshot gelenUser =
@@ -155,6 +157,29 @@ class DbApiClient {
     }
     return _postList;
   }
+  
+  
+  Future<List<Post>> getNewsPost(bool ilkMi)async{
+    List<Post> _posttList=[];
+    if(ilkMi){
+      _newQuerySnapshot= await Firestore.instance.collection("posts").orderBy("createdAt",descending: true).limit(10).getDocuments();
+      
+    }else{
+      _newQuerySnapshot= await Firestore.instance.collection("posts").orderBy("createdAt",descending: true).startAfterDocument(lastDocument).limit(10).getDocuments();
+    }
+
+    if(_newQuerySnapshot.documents.length!=0){
+      newLastDocument=_newQuerySnapshot.documents[_newQuerySnapshot.documents.length-1];
+    }
+
+    for (DocumentSnapshot documentSnapshot in _newQuerySnapshot.documents) {
+      Post tekPost = Post.fromMap(documentSnapshot.data);
+      _posttList.add(tekPost);
+    }
+    return _posttList;
+    
+    
+  }
 
   Future<List<Post>> getUserPopular(String userID) async {
     QuerySnapshot _querySnapshotss;
@@ -173,4 +198,6 @@ class DbApiClient {
 
     return _mostPopular;
   }
+
+  
 }

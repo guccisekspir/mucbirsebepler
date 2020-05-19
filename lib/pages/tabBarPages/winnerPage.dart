@@ -57,7 +57,7 @@ class _WinnerPageState extends State<WinnerPage> {
                     itemBuilder: (BuildContext context, int index) {
                       if(index==0)renk1=Colors.orangeAccent;
                       if(index==1) renk1=Colors.redAccent;
-                      if(index==2)renk1=Colors.greenAccent;
+                      if(index==2)renk1=Colors.green;
                       if(index-2>0) renk1=Colors.grey;
                       return ListTile(
                         onTap: (){

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
+import 'package:mucbirsebepler/bloc/postbloc/post_bloc.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/newestPost.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/winnerPage.dart';
 
@@ -32,8 +33,15 @@ class _TrophyPageState extends State<TrophyPage> {
             ),
           ),
         ),
-        body: BlocProvider(
-          create: (context)=>DataBaseBloc(),
+        body: MultiBlocProvider(
+          providers: [
+            BlocProvider<PostBloc>(
+              create: (context) => PostBloc(),
+            ),
+            BlocProvider<DataBaseBloc>(
+              create: (context) => DataBaseBloc(),
+            ),
+          ],
           child: TabBarView(
             children: [
               NewestPost(),
