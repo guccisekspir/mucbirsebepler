@@ -176,13 +176,14 @@ Widget postCoontainer(
     double height,
     BuildContext context,
     bloc,
-    User gelenUser,LinearGradient linearGradient}) {
+    User gelenUser,
+    LinearGradient linearGradient}) {
   bool youtubeVarMi = false;
   bool linkVarMi = false;
   youtubeVarMi = post.youtubelink != "";
   linkVarMi = post.otherLink != "";
   YoutubePlayerController _controller;
-  LinearGradient openedGradient= randomGradient();
+  LinearGradient openedGradient = randomGradient();
   if (youtubeVarMi) {
     String videoID = YoutubePlayer.convertUrlToId(post.youtubelink);
     if (videoID == null) {
@@ -198,8 +199,8 @@ Widget postCoontainer(
     );
   }
   LinearGradient closedGradient = randomGradient();
-  if(linearGradient!=null){
-    closedGradient=linearGradient;
+  if (linearGradient != null) {
+    closedGradient = linearGradient;
   }
 
   return OpenContainer(
@@ -220,7 +221,7 @@ Widget postCoontainer(
     },
     openBuilder: (BuildContext context, VoidCallback voidCallBack) {
       return detailContainer(
-        linearGradientt: openedGradient,
+          linearGradientt: openedGradient,
           context: context,
           gelenUser: gelenUser,
           linearGradient: closedGradient,
@@ -236,7 +237,7 @@ Widget detailContainer(
     {BuildContext context,
     User gelenUser,
     LinearGradient linearGradient,
-      LinearGradient linearGradientt,
+    LinearGradient linearGradientt,
     Post gelenPost,
     bool youtubeVarMi,
     YoutubePlayerController controller,
@@ -267,20 +268,30 @@ Widget detailContainer(
               ),
             ),
             GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MultiBlocProvider(
-                    providers: [
-                      BlocProvider<PostBloc>(create: (context)=>PostBloc(),),
-                      BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),),
-                      BlocProvider<AuthBloc>(create: (context)=>AuthBloc(),)
-                    ],
-                    child: ProfilePage(
-                      gelenUser: gelenPost.owner ,
-                      tiklayanUser: gelenUser,
-                    ),
-                  )));
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MultiBlocProvider(
+                                providers: [
+                                  BlocProvider<PostBloc>(
+                                    create: (context) => PostBloc(),
+                                  ),
+                                  BlocProvider<DataBaseBloc>(
+                                    create: (context) => DataBaseBloc(),
+                                  ),
+                                  BlocProvider<AuthBloc>(
+                                    create: (context) => AuthBloc(),
+                                  )
+                                ],
+                                child: ProfilePage(
+                                  gelenUser: gelenPost.owner,
+                                  tiklayanUser: gelenUser,
+                                ),
+                              )));
                 },
-                child: profilePicturew(gelenPost.owner, context,linearGradient: linearGradientt)),
+                child: profilePicturew(gelenPost.owner, context,
+                    linearGradient: linearGradientt)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Container(
@@ -288,36 +299,42 @@ Widget detailContainer(
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
                     itemCount: getBadgeNumbers(gelenPost.owner.roller).length,
-                    gridDelegate:
-                    SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         childAspectRatio: 3.2,
                         mainAxisSpacing: 4,
                         crossAxisSpacing: 5,
                         crossAxisCount: 2),
                     itemBuilder: (context, index) {
                       List<String> roller =
-                      getBadgeNumbers(gelenPost.owner.roller);
-                      return badgeMaker(
-                          index, gelenPost.owner, roller[index]);
+                          getBadgeNumbers(gelenPost.owner.roller);
+                      return badgeMaker(index, gelenPost.owner, roller[index]);
                     }),
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width/2,
+              width: MediaQuery.of(context).size.width / 2,
               child: RaisedButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MultiBlocProvider(
-                    providers: [
-                      BlocProvider<PostBloc>(create: (context)=>PostBloc(),),
-                      BlocProvider<DataBaseBloc>(create: (context)=>DataBaseBloc(),),
-                      BlocProvider<AuthBloc>(create: (context)=>AuthBloc(),)
-                    ],
-                    child: ProfilePage(
-                      gelenUser: gelenPost.owner ,
-                      tiklayanUser: gelenUser,
-                    ),
-                  )));
-
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MultiBlocProvider(
+                                providers: [
+                                  BlocProvider<PostBloc>(
+                                    create: (context) => PostBloc(),
+                                  ),
+                                  BlocProvider<DataBaseBloc>(
+                                    create: (context) => DataBaseBloc(),
+                                  ),
+                                  BlocProvider<AuthBloc>(
+                                    create: (context) => AuthBloc(),
+                                  )
+                                ],
+                                child: ProfilePage(
+                                  gelenUser: gelenPost.owner,
+                                  tiklayanUser: gelenUser,
+                                ),
+                              )));
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),
@@ -325,13 +342,21 @@ Widget detailContainer(
                 color: Colors.black,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Profiline git ",style: GoogleFonts.righteous(color: Colors.limeAccent),),
-                  CircleAvatar(
-                    backgroundColor: Colors.limeAccent,
-                    child: Icon(Icons.forward,color: Colors.black,),),
-                ],
-              ),),
+                  children: [
+                    Text(
+                      "Profiline git ",
+                      style: GoogleFonts.righteous(color: Colors.limeAccent),
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.limeAccent,
+                      child: Icon(
+                        Icons.forward,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(50, 10, 50, 0),
@@ -341,8 +366,6 @@ Widget detailContainer(
                     fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-
-
             Padding(
               padding: const EdgeInsets.fromLTRB(50, 10, 0, 5),
               child: Column(
@@ -448,7 +471,9 @@ Widget detailContainer(
                     width: 0,
                     height: 0,
                   ),
-            SizedBox(height: 30,)
+            SizedBox(
+              height: 30,
+            )
           ],
         ),
       ));
@@ -505,8 +530,7 @@ Widget postContainer(
                             Text(
                               "Tarafından paylaşıldı",
                               style: GoogleFonts.roboto(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w300),
+                                  fontSize: 10, fontWeight: FontWeight.w300),
                             )
                           ],
                         ),
@@ -537,7 +561,7 @@ Widget postContainer(
                 child: Container(
                   child: Text(
                     post.title,
-                    style: GoogleFonts.abrilFatface(fontSize: height/50),
+                    style: GoogleFonts.abrilFatface(fontSize: height / 50),
                   ),
                 ),
               ),
@@ -552,11 +576,10 @@ Widget postContainer(
                           ? post.description.substring(0, 60) + "... "
                           : post.description + "... ",
                       style: GoogleFonts.roboto(
-                          fontSize: height/55, color: Colors.black),
+                          fontSize: height / 55, color: Colors.black),
                       children: <TextSpan>[
                         TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {},
+                            recognizer: TapGestureRecognizer()..onTap = () {},
                             text: 'Daha fazlasını gör',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -574,11 +597,11 @@ Widget postContainer(
                     ReactiveButton(
                       containerAbove: false,
                       child: CircleAvatar(
-                        radius: height/50,
+                          radius: height / 50,
                           backgroundColor: Colors.red,
                           child: Icon(
                             LineAwesomeIcons.heart_o,
-                            size: height/30,
+                            size: height / 30,
                           )),
                       icons: _facebook,
                       //_flags,
@@ -591,7 +614,9 @@ Widget postContainer(
                       },
                       onSelected: (ReactiveIconDefinition button) {
                         gelenBloc.add(LikePost(
-                            postID: post.postID, userID: gelenUser.userID,ownerUserID: post.owner.userID));
+                            postID: post.postID,
+                            userID: gelenUser.userID,
+                            ownerUserID: post.owner.userID));
                       },
                       iconWidth: 32.0,
                     ),
@@ -608,12 +633,12 @@ Widget postContainer(
                           return Text(
                             snapshot.data["liked"].toString() +
                                 " Kere Beğenildi",
-                            style: GoogleFonts.righteous(fontSize: height/50),
+                            style: GoogleFonts.righteous(fontSize: height / 50),
                           );
                         } else
                           return Text(
                             "X Kere Beğenildi",
-                            style: GoogleFonts.righteous(fontSize: height/50),
+                            style: GoogleFonts.righteous(fontSize: height / 50),
                           );
                       },
                     )
@@ -743,8 +768,6 @@ List<String> getBadgeNumbers(Map gelenMap) {
   }
   return rolleri;
 }
-
-
 
 List<ReactiveIconDefinition> _facebook = <ReactiveIconDefinition>[
   ReactiveIconDefinition(
