@@ -251,10 +251,10 @@ class _LoginPageState extends State<LoginPage> {
                       title: Text(
                         'Şifre Sıfırlama Maili Gönderildi',
                         style: TextStyle(
-                            fontSize: 22.0, fontWeight: FontWeight.w600),
+                            fontSize: 16.0, fontWeight: FontWeight.w600),
                       ),
                       description: Text(
-                        "Şifre sıfırlama linki mail hesabınıza göndirilmiştir.Lütfen postanızı kontrol ediniz",
+                        "Şifre sıfırlama linki mail hesabınıza gönderildi",
                         textAlign: TextAlign.center,
                         style: TextStyle(),
                       ),
