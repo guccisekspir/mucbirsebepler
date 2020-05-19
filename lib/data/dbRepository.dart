@@ -88,10 +88,12 @@ class DbRepository {
   }
 
   Future<Null> refresh() async {
+    _dbApiClient.refresh();
     hasMore = true;
     _lastFetchedPost = null;
+    ilkMi=true;
+    _newPostList=[];
     _postList = [];
-    getAllPost(lastPost: _lastFetchedPost);
   }
 
   Future<bool> changeUsername({String userID, String newUsername}) async {

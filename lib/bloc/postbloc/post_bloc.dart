@@ -81,6 +81,9 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         debugPrint("getuserda hata "+_.toString());
       }
     }
+    if(event is Refresh){
+      _dbRepository.refresh();
+    }
 
 
     if(event is LikePost){

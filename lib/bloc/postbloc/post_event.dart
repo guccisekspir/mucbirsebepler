@@ -21,6 +21,14 @@ class GetPost extends PostEvent{
 
 }
 
+class Refresh extends PostEvent{
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
+
+
+}
+
 
 class GetMorePost extends PostEvent{
   @override
