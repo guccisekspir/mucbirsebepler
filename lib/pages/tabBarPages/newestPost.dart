@@ -39,12 +39,13 @@ class _NewestPostState extends State<NewestPost> {
     double height=MediaQuery.of(context).size.height;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.fast_forward),
         onPressed: (){
           _postBloc.add(GetMoreNewPost());
         },
       ),
       body: Container(
-        color: Colors.limeAccent,
+        color: Colors.black,
         child: MultiBlocListener(
           listeners: [
             BlocListener<DataBaseBloc, DataBaseState>(

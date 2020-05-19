@@ -14,61 +14,50 @@ class SavePost extends PostEvent {
   List<Object> get props => [gelenPost];
 }
 
-class GetPost extends PostEvent{
+class GetPost extends PostEvent {
   @override
   List<Object> get props => null;
-
-
 }
 
-class Refresh extends PostEvent{
+class Refresh extends PostEvent {
   @override
   // TODO: implement props
   List<Object> get props => throw UnimplementedError();
-
-
 }
 
-
-class GetMorePost extends PostEvent{
+class GetMorePost extends PostEvent {
   @override
   List<Object> get props => null;
-
-
 }
 
-class GetNewPost extends PostEvent{
+class GetNewPost extends PostEvent {
   @override
   // TODO: implement props
   List<Object> get props => throw UnimplementedError();
-
 }
 
-class GetMoreNewPost extends PostEvent{
+class GetMoreNewPost extends PostEvent {
   @override
   // TODO: implement props
   List<Object> get props => throw UnimplementedError();
-
-
 }
 
-class LikePost extends PostEvent{
+class LikePost extends PostEvent {
   final String userID;
   final String postID;
   final String ownerUserID;
 
-  LikePost({this.postID,this.userID,this.ownerUserID});
+  LikePost({this.postID, this.userID, this.ownerUserID});
+
   @override
   List<Object> get props => throw UnimplementedError();
-
 }
 
-class GetUserPopulars extends  PostEvent{
+class GetUserPopulars extends PostEvent {
   final String userID;
 
   GetUserPopulars(this.userID);
+
   @override
   List<Object> get props => [userID];
-
-
 }

@@ -7,87 +7,86 @@ import 'package:mucbirsebepler/model/post.dart';
 import './bloc.dart';
 
 class PostBloc extends Bloc<PostEvent, PostState> {
-  List<Post> listPost=[];
+  List<Post> listPost = [];
+
   @override
   PostState get initialState => InitialPostState();
-  DbRepository _dbRepository=getIt<DbRepository>();
+  DbRepository _dbRepository = getIt<DbRepository>();
+
   @override
   Stream<PostState> mapEventToState(
     PostEvent event,
   ) async* {
-    if(event is SavePost){
+    if (event is SavePost) {
       yield PostSavingState();
-      try{
+      try {
         await _dbRepository.savePost(event.gelenPost);
         debugPrint("bloc denemeye geldi");
         yield PostSavedState();
-      }catch(_){
-        debugPrint("savede hata "+_.toString());
+      } catch (_) {
+        debugPrint("savede hata " + _.toString());
         yield PostSaveErrorState();
       }
-
     }
-    if(event is GetPost){
+    if (event is GetPost) {
       yield PostLoadingState();
-      try{
-        listPost=await _dbRepository.getAllPost();
+      try {
+        listPost = await _dbRepository.getAllPost();
         yield PostLoadedState(listPost: listPost);
-      }catch(_){
-        debugPrint("getpost "+_.toString());
+      } catch (_) {
+        debugPrint("getpost " + _.toString());
         yield PostErrorState();
       }
     }
 
-    if(event is GetMorePost){
+    if (event is GetMorePost) {
       yield PostLoadingState();
-      try{
-        listPost=await _dbRepository.getMorePost();
+      try {
+        listPost = await _dbRepository.getMorePost();
         yield PostLoadedState(listPost: listPost);
-
-      }catch(_){
+      } catch (_) {
         debugPrint(_.toString());
         yield PostErrorState();
       }
     }
 
-    if(event is GetNewPost){
-      List<Post> liste=[];
+    if (event is GetNewPost) {
+      List<Post> liste = [];
       yield PostLoadingState();
-      try{
-        liste= await _dbRepository.getNewsPost();
+      try {
+        liste = await _dbRepository.getNewsPost();
         yield PostLoadedState(listPost: liste);
-      }catch(_){
+      } catch (_) {
         yield PostErrorState();
       }
     }
-    if(event is GetMoreNewPost){
-      List<Post> liste=[];
+    if (event is GetMoreNewPost) {
+      List<Post> liste = [];
       yield MoreLoadingState();
-      try{
-        liste= await _dbRepository.getMoreNewsPost();
+      try {
+        liste = await _dbRepository.getMoreNewsPost();
         yield PostLoadedState(listPost: liste);
-      }catch(_){
+      } catch (_) {
         yield PostErrorState();
       }
     }
 
-    if(event is GetUserPopulars){
+    if (event is GetUserPopulars) {
       yield PostLoadingState();
-      try{
-        var listePost= await _dbRepository.getUserPosts(event.userID);
+      try {
+        var listePost = await _dbRepository.getUserPosts(event.userID);
         yield PostLoadedState(listPost: listePost);
-
-      }catch(_){
-        debugPrint("getuserda hata "+_.toString());
+      } catch (_) {
+        debugPrint("getuserda hata " + _.toString());
       }
     }
-    if(event is Refresh){
+    if (event is Refresh) {
       _dbRepository.refresh();
     }
 
-
-    if(event is LikePost){
-      await _dbRepository.likePost(event.postID,event.userID,event.ownerUserID);
+    if (event is LikePost) {
+      await _dbRepository.likePost(
+          event.postID, event.userID, event.ownerUserID);
     }
   }
 }

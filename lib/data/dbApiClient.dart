@@ -39,8 +39,6 @@ class DbApiClient {
     return okunanUser;
   }
 
-
-
   Future<bool> changeUsername({String userID, String newUsername}) async {
     var users = await _firestore
         .collection("users")
@@ -58,7 +56,8 @@ class DbApiClient {
   }
 
   Future<bool> changePhoto({String userID, File newPhoto}) async {
-    _storageReference = _firebaseStorage.ref().child(userID).child("profilPhoto.png");
+    _storageReference =
+        _firebaseStorage.ref().child(userID).child("profilPhoto.png");
     StorageUploadTask uploadTask = _storageReference.putFile(newPhoto);
 
     var url = await (await uploadTask.onComplete).ref.getDownloadURL();
@@ -117,12 +116,17 @@ class DbApiClient {
           .setData({"eben": true});
     }
   }
-  Future<List<User>> getWinnerUser()async{
-    List<User> listWinner=[];
+
+  Future<List<User>> getWinnerUser() async {
+    List<User> listWinner = [];
     QuerySnapshot _userQuery;
 
-    _userQuery= await Firestore.instance.collection("users").orderBy("liked",descending: true).limit(50).getDocuments();
-    for(DocumentSnapshot documentSnapshot in _userQuery.documents){
+    _userQuery = await Firestore.instance
+        .collection("users")
+        .orderBy("liked", descending: true)
+        .limit(50)
+        .getDocuments();
+    for (DocumentSnapshot documentSnapshot in _userQuery.documents) {
       User tekUser = User.fromMap(documentSnapshot.data);
       listWinner.add(tekUser);
     }
@@ -157,19 +161,27 @@ class DbApiClient {
     }
     return _postList;
   }
-  
-  
-  Future<List<Post>> getNewsPost(bool ilkMi)async{
-    List<Post> _posttList=[];
-    if(ilkMi){
-      _newQuerySnapshot= await Firestore.instance.collection("posts").orderBy("createdAt",descending: true).limit(10).getDocuments();
-      
-    }else{
-      _newQuerySnapshot= await Firestore.instance.collection("posts").orderBy("createdAt",descending: true).startAfterDocument(lastDocument).limit(10).getDocuments();
+
+  Future<List<Post>> getNewsPost(bool ilkMi) async {
+    List<Post> _posttList = [];
+    if (ilkMi) {
+      _newQuerySnapshot = await Firestore.instance
+          .collection("posts")
+          .orderBy("createdAt", descending: true)
+          .limit(5)
+          .getDocuments();
+    } else {
+      _newQuerySnapshot = await Firestore.instance
+          .collection("posts")
+          .orderBy("createdAt", descending: true)
+          .startAfterDocument(lastDocument)
+          .limit(5)
+          .getDocuments();
     }
 
-    if(_newQuerySnapshot.documents.length!=0){
-      newLastDocument=_newQuerySnapshot.documents[_newQuerySnapshot.documents.length-1];
+    if (_newQuerySnapshot.documents.length != 0) {
+      newLastDocument =
+          _newQuerySnapshot.documents[_newQuerySnapshot.documents.length - 1];
     }
 
     for (DocumentSnapshot documentSnapshot in _newQuerySnapshot.documents) {
@@ -177,12 +189,10 @@ class DbApiClient {
       _posttList.add(tekPost);
     }
     return _posttList;
-    
-    
   }
 
-  Future<Null> refresh(){
-    _newQuerySnapshot=null;
+  Future<Null> refresh() {
+    _newQuerySnapshot = null;
   }
 
   Future<List<Post>> getUserPopular(String userID) async {
@@ -202,6 +212,4 @@ class DbApiClient {
 
     return _mostPopular;
   }
-
-  
 }
