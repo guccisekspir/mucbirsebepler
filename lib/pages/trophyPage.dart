@@ -3,16 +3,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/post_bloc.dart';
+import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/newestPost.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/winnerPage.dart';
 
 
 class TrophyPage extends StatefulWidget {
+  final User user;
+
+  const TrophyPage({Key key, this.user}) : super(key: key);
   @override
   _TrophyPageState createState() => _TrophyPageState();
 }
 
 class _TrophyPageState extends State<TrophyPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    debugPrint(widget.user.userID);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -44,7 +55,7 @@ class _TrophyPageState extends State<TrophyPage> {
           ],
           child: TabBarView(
             children: [
-              NewestPost(),
+              NewestPost(user: widget.user,),
               WinnerPage(),
             ],
 

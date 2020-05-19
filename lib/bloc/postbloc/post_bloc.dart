@@ -62,7 +62,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     }
     if(event is GetMoreNewPost){
       List<Post> liste=[];
-      yield PostLoadingState();
+      yield MoreLoadingState();
       try{
         liste= await _dbRepository.getMoreNewsPost();
         yield PostLoadedState(listPost: liste);

@@ -162,10 +162,10 @@ class DbApiClient {
   Future<List<Post>> getNewsPost(bool ilkMi)async{
     List<Post> _posttList=[];
     if(ilkMi){
-      _newQuerySnapshot= await Firestore.instance.collection("posts").orderBy("createdAt",descending: true).limit(10).getDocuments();
+      _newQuerySnapshot= await Firestore.instance.collection("posts").orderBy("createdAt",descending: true).limit(2).getDocuments();
       
     }else{
-      _newQuerySnapshot= await Firestore.instance.collection("posts").orderBy("createdAt",descending: true).startAfterDocument(lastDocument).limit(10).getDocuments();
+      _newQuerySnapshot= await Firestore.instance.collection("posts").orderBy("createdAt",descending: true).startAfterDocument(lastDocument).limit(2).getDocuments();
     }
 
     if(_newQuerySnapshot.documents.length!=0){

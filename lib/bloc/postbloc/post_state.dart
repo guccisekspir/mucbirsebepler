@@ -15,6 +15,13 @@ class PostLoadingState extends PostState {
   List<Object> get props => null;
 }
 
+class MoreLoadingState extends PostState{
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
+
+}
+
 class PostLoadedState extends PostState {
   final List<Post> listPost;
 

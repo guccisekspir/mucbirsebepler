@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                           case NavBarItem.SHOP:
                             return ShopPage();
                           case NavBarItem.TROPHY:
-                            return TrophyPage();
+                            return TrophyPage(user: gelenUser,);
                           case NavBarItem.TICK:
                             return BlocProvider(
                                 create: (context) => PostBloc(),
@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                     case NavBarItem.SHOP:
                       return ShopPage();
                     case NavBarItem.TROPHY:
-                      return TrophyPage();
+                      return TrophyPage(user: _user,);
                     case NavBarItem.TICK:
                       return BlocProvider(
                           create: (context) => PostBloc(),
