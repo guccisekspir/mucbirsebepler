@@ -89,11 +89,10 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                         title: Text(
                           '   Profil bilgilerin '
                               'güncellendi tospik',
-                          style: TextStyle(
-                              fontSize: 18.0, fontWeight: FontWeight.w600),
+                          style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.limeAccent),
                         ),
 
-                        entryAnimation: EntryAnimation.TOP_RIGHT,
+                        entryAnimation: EntryAnimation.BOTTOM_RIGHT,
                         onOkButtonPressed: () {
                           Navigator.of(context).pop();
                         },

@@ -251,13 +251,11 @@ class _LoginPageState extends State<LoginPage> {
                       flareAnimation: 'jump',
                       title: Text(
                         'Şifre Sıfırlama Maili Gönderildi',
-                        style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.w600),
-                      ),
+                        style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.black)),
                       description: Text(
                         "Şifre sıfırlama linki mail hesabınıza gönderildi",
                         textAlign: TextAlign.center,
-                        style: TextStyle(),
+                        style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.black),
                       ),
                       entryAnimation: EntryAnimation.TOP_RIGHT,
                       onOkButtonPressed: () {

@@ -90,15 +90,14 @@ class _PostPageState extends State<PostPage> {
                     flareAnimation: 'jump',
                     title: Text(
                       'Postun uzayın derinliklerine gönderildi',
-                      style: TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.w600),
+                      style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.limeAccent),
                     ),
                     description: Text(
                       "Şaka şaka. Postun yayınlandı tospik",
                       textAlign: TextAlign.center,
-                      style: TextStyle(),
+                      style: GoogleFonts.righteous(fontSize: 14.0, fontWeight: FontWeight.w600,color: Colors.limeAccent),
                     ),
-                    entryAnimation: EntryAnimation.TOP_RIGHT,
+                    entryAnimation: EntryAnimation.BOTTOM,
                     onOkButtonPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -116,13 +115,12 @@ class _PostPageState extends State<PostPage> {
                     flareAnimation: 'jump',
                     title: Text(
                       'Bir şeyler ters gitti Tospik',
-                      style: TextStyle(
-                          fontSize: 22.0, fontWeight: FontWeight.w600),
+                      style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.limeAccent),
                     ),
                     description: Text(
                       "Daha sonra tekrar deneyebilir misin ? ",
                       textAlign: TextAlign.center,
-                      style: TextStyle(),
+                      style: GoogleFonts.righteous(fontSize: 14.0, fontWeight: FontWeight.w600,color: Colors.limeAccent),
                     ),
                     entryAnimation: EntryAnimation.TOP_RIGHT,
                     onOkButtonPressed: () {
