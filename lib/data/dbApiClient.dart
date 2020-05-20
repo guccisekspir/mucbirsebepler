@@ -52,15 +52,17 @@ class DbApiClient {
           .document(userID)
           .updateData({'userName': newUsername});
 
-      QuerySnapshot eben=await _firestore.collection("posts").where("postID",isGreaterThanOrEqualTo: userID).where("postID",isLessThanOrEqualTo: userID+'\uf8ff').getDocuments();
+      QuerySnapshot eben = await _firestore
+          .collection("posts")
+          .where("postID", isGreaterThanOrEqualTo: userID)
+          .where("postID", isLessThanOrEqualTo: userID + '\uf8ff')
+          .getDocuments();
       for (DocumentSnapshot documentSnapshot in eben.documents) {
-        await _firestore.collection("posts").document(documentSnapshot.documentID).updateData({"ownerUserName":newUsername});
+        await _firestore
+            .collection("posts")
+            .document(documentSnapshot.documentID)
+            .updateData({"ownerUserName": newUsername});
       }
-
-
-
-
-
 
       return true;
     }
@@ -77,6 +79,20 @@ class DbApiClient {
           .collection("users")
           .document(userID)
           .updateData({'profilURL': url});
+
+      QuerySnapshot eben = await _firestore
+          .collection("posts")
+          .where("postID", isGreaterThanOrEqualTo: userID)
+          .where("postID", isLessThanOrEqualTo: userID + '\uf8ff')
+          .getDocuments();
+      for (DocumentSnapshot documentSnapshot in eben.documents) {
+        await _firestore
+            .collection("posts")
+            .document(documentSnapshot.documentID)
+            .updateData({"ownerProfileURL": url});
+      }
+
+
       return true;
     } else
       return false;

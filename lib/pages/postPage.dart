@@ -239,6 +239,7 @@ class _PostPageState extends State<PostPage> {
                     onTap: () {
                       if (formKey.currentState.validate()) {
                         Post gidecekPost = Post(
+                          ownerProfileURL: cekilenUser.profilURL,
                           ownerUserName: cekilenUser.userName,
                             owner: cekilenUser,
                             title: headerController.text,

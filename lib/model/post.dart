@@ -9,11 +9,11 @@ import 'package:mucbirsebepler/model/user.dart';
 class Post {
   final User owner;
   final String title;
-
   final String description;
   final String youtubelink;
   final String otherLink;
   final String ownerUserName;
+  final String ownerProfileURL;
   String postID;
   int liked = 0;
   DateTime createdAt;
@@ -22,7 +22,7 @@ class Post {
       {@required this.owner,
       @required this.title,
       @required this.description,
-      this.youtubelink, this.ownerUserName,
+      this.youtubelink, this.ownerUserName,this.ownerProfileURL,
       this.otherLink}) {
     debugPrint(owner.toString());
   }
@@ -37,6 +37,7 @@ class Post {
       'otherLink': otherLink ?? "",
       'postID': owner.userID + randomSayiUret(),
       'ownerUserName':ownerUserName,
+      'ownerProfileURL':ownerProfileURL,
       'liked': liked ?? 0,
     };
   }
@@ -50,6 +51,7 @@ class Post {
         otherLink = map['otherLink'],
         postID = map['postID'],
         ownerUserName=map['ownerUserName'],
+        ownerProfileURL=map['ownerProfileURL'],
         liked = map['liked'];
 
   @override

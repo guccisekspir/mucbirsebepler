@@ -291,7 +291,7 @@ Widget detailContainer(
                               )));
                 },
                 child: profilePicturew(gelenPost.owner, context,
-                    linearGradient: linearGradientt)),
+                    linearGradient: linearGradientt,profileURL: gelenPost.ownerProfileURL)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Container(
@@ -545,7 +545,7 @@ Widget postContainer(
                               },
                               child: CircleAvatar(
                                 backgroundImage: NetworkImage(
-                                  post.owner.profilURL,
+                                  post.ownerProfileURL,
                                 ),
                                 backgroundColor: Colors.black,
                               ),
