@@ -44,7 +44,7 @@ Widget backButton(BuildContext context) {
 
 Widget divider() {
   return Container(
-    margin: EdgeInsets.symmetric(vertical: 10),
+    margin: EdgeInsets.symmetric(vertical: 1),
     child: Row(
       children: <Widget>[
         SizedBox(
