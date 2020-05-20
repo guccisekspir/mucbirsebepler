@@ -1,16 +1,23 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_text/gradient_text.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
+import 'package:mucbirsebepler/model/user.dart';
 
 class ShopPage extends StatefulWidget {
+  final User gelenUser;
+
+  const ShopPage({Key key, this.gelenUser}) : super(key: key);
   @override
   _ShopPageState createState() => _ShopPageState();
 }
 
 class _ShopPageState extends State<ShopPage> {
+  DataBaseBloc _dataBaseBloc;
   bool isAvailable = true;
   InAppPurchaseConnection _iap = InAppPurchaseConnection.instance;
   List<ProductDetails> _products = [];
@@ -20,6 +27,8 @@ class _ShopPageState extends State<ShopPage> {
 
   @override
   void initState() {
+    _dataBaseBloc=BlocProvider.of<DataBaseBloc>(context);
+    _dataBaseBloc.add(BecomeBadge(userID: widget.gelenUser.userID,whichBadge: "isMatik"));
     _initialize();
     _subscription = _iap.purchaseUpdatedStream.listen((data) => setState(() {
           _purchases.addAll(data);

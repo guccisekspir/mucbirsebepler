@@ -53,3 +53,15 @@ class GetWinnerUsers extends DataBaseEvent {
   // TODO: implement props
   List<Object> get props => throw UnimplementedError();
 }
+
+class BecomeBadge extends DataBaseEvent{
+  final String userID;
+  final String whichBadge;
+
+  BecomeBadge({this.userID, this.whichBadge});
+  @override
+  // TODO: implement props
+  List<Object> get props => throw UnimplementedError();
+
+
+}

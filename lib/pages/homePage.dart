@@ -94,7 +94,9 @@ class _HomePageState extends State<HomePage> {
                               gelenUser: gelenUser,
                             );
                           case NavBarItem.SHOP:
-                            return ShopPage();
+                            return ShopPage(
+                              gelenUser: gelenUser,
+                            );
                           case NavBarItem.TROPHY:
                             return TrophyPage(user: gelenUser,);
                           case NavBarItem.TICK:
@@ -182,7 +184,9 @@ class _HomePageState extends State<HomePage> {
                         gelenUser: _user,
                       );
                     case NavBarItem.SHOP:
-                      return ShopPage();
+                      return ShopPage(
+                        gelenUser: _user
+                      );
                     case NavBarItem.TROPHY:
                       return TrophyPage(user: _user,);
                     case NavBarItem.TICK:

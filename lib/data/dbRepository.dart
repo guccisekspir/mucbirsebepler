@@ -103,4 +103,9 @@ class DbRepository {
     debugPrint("repoya geldi");
     return await _dbApiClient.changePhoto(userID: userID, newPhoto: newPhoto);
   }
+
+  Future<bool> becomeBadges({String userID,String whichBadge})async{
+
+    return await _dbApiClient.becomeBadges(userID, whichBadge);
+  }
 }

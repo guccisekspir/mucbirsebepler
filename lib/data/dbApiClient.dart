@@ -39,6 +39,14 @@ class DbApiClient {
     return okunanUser;
   }
 
+  Future<bool> becomeBadges(String userID,String whichBadge)async{
+
+
+    await _firestore.collection("users").document(userID).updateData({whichBadge:true});
+
+
+  }
+
   Future<bool> changeUsername({String userID, String newUsername}) async {
     var users = await _firestore
         .collection("users")
@@ -263,4 +271,6 @@ class DbApiClient {
 
     return _mostPopular;
   }
+
+
 }

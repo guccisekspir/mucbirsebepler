@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
     return GestureDetector(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height/14,
+        height: MediaQuery.of(context).size.height/14.2,
         padding: EdgeInsets.symmetric(vertical: 15),
         alignment: Alignment.center,
         decoration: BoxDecoration(
