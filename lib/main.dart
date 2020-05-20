@@ -18,26 +18,20 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    BuildContext buildContext=context;
-    if(Platform.isIOS){
+    if (Platform.isIOS) {
       SystemChrome.setEnabledSystemUIOverlays([]);
     }
     return MaterialApp(
-
-
-      debugShowCheckedModeBanner: false,
-      title: 'Mücbir Sebepler',
-      theme: ThemeData(
-        accentColor: Colors.limeAccent,
-        primaryColor: Colors.black,
-      ),
-      home: DenemeApp()
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Mücbir Sebepler',
+        theme: ThemeData(
+          accentColor: Colors.limeAccent,
+          primaryColor: Colors.black,
+        ),
+        home: DenemeApp());
   }
 }
 
@@ -47,104 +41,69 @@ class DenemeApp extends StatefulWidget {
 }
 
 class _DenemeAppState extends State<DenemeApp> {
-  bool ilkMi=true;
-  final pageList=[
+  bool ilkMi = true;
+  final pageList = [
     PageModel(
-
         color: const Color(0xFF678FB4),
         heroAssetPath: 'assets/hslgnd.png',
         title: Text('GÜ-NAY-DIN',
-            style: GoogleFonts.righteous(
-                fontSize: 28,
-                color: Colors.black
-
-            )),
-        body: Text('Günaydın Tospikk\n'
+            style: GoogleFonts.righteous(fontSize: 28, color: Colors.black)),
+        body: Text(
+            'Günaydın Tospikk\n'
             'Uygulamama hoşgeldin',
             textAlign: TextAlign.center,
-            style: GoogleFonts.righteous(
-                fontSize: 17,
-                color: Colors.white
-
-            )),
-        iconAssetPath: 'assets/icon/tospik.png'
-    ),
+            style: GoogleFonts.righteous(fontSize: 17, color: Colors.white)),
+        iconAssetPath: 'assets/icon/tospik.png'),
     PageModel(
         color: const Color(0xFF65B0B4),
         heroAssetPath: 'assets/icon/acar.png',
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50),
           child: Text('Acar Muhabirler vardır',
-              style: GoogleFonts.righteous(
-                  fontSize: 25,
-                  color: Colors.black
-
-              )),
+              style: GoogleFonts.righteous(fontSize: 25, color: Colors.black)),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 45),
           child: Text(
               'Artık siz de mücbir sebeplere haber getiren acar muhabirlerden biri olabilirsiniz. Tek yapmanız gereken uygulamamızı kullanmak',
               textAlign: TextAlign.center,
-              style: GoogleFonts.righteous(
-                  fontSize: 17,
-                  color: Colors.white
-
-              )),
+              style: GoogleFonts.righteous(fontSize: 17, color: Colors.white)),
         ),
-        iconAssetPath: 'assets/icon/acar.png'
-    ),
+        iconAssetPath: 'assets/icon/acar.png'),
     PageModel(
         color: const Color(0xFF9B90BC),
         heroAssetPath: 'assets/mekik.png',
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50),
           child: Text('Unutma! .',
-              style: GoogleFonts.righteous(
-                  fontSize: 25,
-                  color: Colors.black
-
-              )),
+              style: GoogleFonts.righteous(fontSize: 25, color: Colors.black)),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 45),
           child: Text(
               'Matikli veya GradientTikli iseniz Bartu ve Melikşah İddialarınız daha önce görür !',
               textAlign: TextAlign.center,
-              style: GoogleFonts.righteous(
-                  fontSize: 17,
-                  color: Colors.white
-
-              )),
+              style: GoogleFonts.righteous(fontSize: 17, color: Colors.white)),
         ),
-        iconAssetPath: 'assets/icon/popular.png'
-    ),
+        iconAssetPath: 'assets/icon/popular.png'),
     PageModel(
         color: const Color(0xFF678FB4),
         heroAssetPath: 'assets/icon/destek.png',
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50),
           child: Text('Bi de şey...',
-              style: GoogleFonts.righteous(
-                  fontSize: 25,
-                  color: Colors.black
-
-              )),
+              style: GoogleFonts.righteous(fontSize: 25, color: Colors.black)),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 45),
           child: Text(
               'Deskteçi Tospik rozetini satın alarak bana destek olabilirsiniz. Şimdiden hepinize teşekkürler',
               textAlign: TextAlign.center,
-              style: GoogleFonts.righteous(
-                  fontSize: 17,
-                  color: Colors.white
-
-              )),
+              style: GoogleFonts.righteous(fontSize: 17, color: Colors.white)),
         ),
-        iconAssetPath: 'assets/icon/destek.png'
-    ),
+        iconAssetPath: 'assets/icon/destek.png'),
   ];
+
   Future<Null> _function() async {
     SharedPreferences prefs;
     prefs = await SharedPreferences.getInstance();
@@ -158,54 +117,42 @@ class _DenemeAppState extends State<DenemeApp> {
       }
     });
   }
+
   @override
   void initState() {
     _function();
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return ilkMi?Scaffold(
-      body: FancyOnBoarding(
-        doneButtonText: "Bitti",
-        skipButtonText: "Geç",
-        onDoneButtonPressed:(){
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => BlocProvider(
-                    create: (context) => AuthBloc(),
-                    child: SplashScreen(
-                    ))),
-          );
-
-        },
-        onSkipButtonPressed: (){
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => BlocProvider(
-                      create: (context) => AuthBloc(),
-                      child: SplashScreen(
-                      ))),
-                  (Route<dynamic> route) => false);
-
-
-        },
-        pageList: pageList,
-
-      ),
-    ):BlocProvider(
-        create: (context) => AuthBloc(),
-        child: SplashScreen(
-        ));
+    return ilkMi
+        ? Scaffold(
+            body: FancyOnBoarding(
+              doneButtonText: "Bitti",
+              skipButtonText: "Geç",
+              onDoneButtonPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                          create: (context) => AuthBloc(),
+                          child: SplashScreen())),
+                );
+              },
+              onSkipButtonPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BlocProvider(
+                            create: (context) => AuthBloc(),
+                            child: SplashScreen())),
+                    (Route<dynamic> route) => false);
+              },
+              pageList: pageList,
+            ),
+          )
+        : BlocProvider(create: (context) => AuthBloc(), child: SplashScreen());
   }
 }
-
-
-
-
-
-

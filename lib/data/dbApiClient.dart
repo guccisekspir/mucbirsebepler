@@ -42,7 +42,15 @@ class DbApiClient {
   Future<bool> becomeBadges(String userID,String whichBadge)async{
 
 
-    await _firestore.collection("users").document(userID).updateData({whichBadge:true});
+
+
+    try{
+      await _firestore.collection("users").document(userID).updateData({whichBadge:true});
+      return true;
+    }catch(_){
+      debugPrint(_.toString());
+      return false;
+    }
 
 
   }
@@ -143,7 +151,11 @@ class DbApiClient {
           .collection("posts")
           .document(postID)
           .setData(userMap);
-    } catch (_) {}
+      return true;
+    } catch (_) {
+      debugPrint(_.toString());
+      return false;
+    }
   }
 
   Future<void> likePost(

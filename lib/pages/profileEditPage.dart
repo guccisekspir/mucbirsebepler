@@ -23,9 +23,11 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   TextEditingController _userNameController;
   DataBaseBloc _dataBaseBloc;
   File _profilFoto;
-  Widget waitingWidget=Container(
+  Widget waitingWidget = Container(
     color: Colors.transparent,
-    height: 60,width: 60,);
+    height: 60,
+    width: 60,
+  );
 
   @override
   void initState() {
@@ -55,16 +57,15 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: BlocListener(
         bloc: _dataBaseBloc,
-        listener: (context,state){
-          if(state is DataBaseLoadingState){
+        listener: (context, state) {
+          if (state is DataBaseLoadingState) {
             setState(() {
-              waitingWidget=Container(
+              waitingWidget = Container(
                 width: 60,
                 height: 60,
                 child: LoadingBouncingGrid.square(
@@ -74,39 +75,55 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
               );
             });
           }
-          if(state is DataBaseLoadedState){
+          if (state is DataBaseLoadedState) {
             setState(() {
-              waitingWidget=SizedBox(width: 60,height: 60,);
+              waitingWidget = SizedBox(
+                width: 60,
+                height: 60,
+              );
             });
 
-                if(state.isChangedPP|| state.isChangedUser){
-                  showDialog( //TODO bunu uihelpera ekle
-                      context: context,
-                      builder: (_) => FlareGiffyDialog(
+            if (state.isChangedPP || state.isChangedUser) {
+              showDialog(
+                  //TODO bunu uihelpera ekle
+                  context: context,
+                  builder: (_) => FlareGiffyDialog(
                         onlyOkButton: true,
                         flarePath: 'assets/meditation.flr',
                         flareAnimation: 'idle',
                         title: Text(
                           '   Profil bilgilerin '
-                              'güncellendi tospik',
-                          style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.limeAccent),
+                          'güncellendi tospik',
+                          style: GoogleFonts.righteous(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.limeAccent),
                         ),
-
                         entryAnimation: EntryAnimation.BOTTOM_RIGHT,
                         onOkButtonPressed: () {
                           Navigator.of(context).pop();
                         },
                       ));
-                }else if(!state.isChangedUser){
-                  Scaffold.of(context).showSnackBar(SnackBar(content: Text("Bu nick kullanılmakta lütfen farklı nick seçiniz"),backgroundColor: Colors.redAccent,));
-                }else if(!state.isChangedPP){
-                  Scaffold.of(context).showSnackBar(SnackBar(content: Text("Profil fotoğrafınız yüklenirken 1 hata oluştu.Lütfen başka fotoğraf deneyiniz"),backgroundColor: Colors.redAccent,));
-                }
+            } else if (!state.isChangedUser) {
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content:
+                    Text("Bu nick kullanılmakta lütfen farklı nick seçiniz"),
+                backgroundColor: Colors.redAccent,
+              ));
+            } else if (!state.isChangedPP) {
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text(
+                    "Profil fotoğrafınız yüklenirken 1 hata oluştu.Lütfen başka fotoğraf deneyiniz"),
+                backgroundColor: Colors.redAccent,
+              ));
+            }
           }
-          if(state is DataBaseErrorState){
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text("İnternet bağlantınızda sıkıntı var :-/"),backgroundColor: Colors.redAccent,));
+          if (state is DataBaseErrorState) {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text("İnternet bağlantınızda sıkıntı var :-/"),
+              backgroundColor: Colors.redAccent,
+            ));
           }
-
         },
         child: Column(
           children: [
@@ -197,7 +214,8 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                 decoration: InputDecoration(
                     errorStyle: GoogleFonts.righteous(color: Colors.redAccent),
                     labelStyle: GoogleFonts.righteous(color: Colors.limeAccent),
-                    counterStyle: GoogleFonts.righteous(color: Colors.limeAccent),
+                    counterStyle:
+                        GoogleFonts.righteous(color: Colors.limeAccent),
                     fillColor: Colors.limeAccent,
                     focusColor: Colors.limeAccent,
                     hoverColor: Colors.limeAccent,

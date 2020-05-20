@@ -110,12 +110,4 @@ class _NewestPostState extends State<NewestPost> {
     );
   }
 
-  _WaitingWidget() {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
 }
