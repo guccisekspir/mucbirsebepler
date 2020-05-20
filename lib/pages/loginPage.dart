@@ -35,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
+    sharedBoard("evet");
     super.initState();
     _emailController = TextEditingController(text: "");
     _passwordController = TextEditingController(text: "");
@@ -371,5 +372,11 @@ class _LoginPageState extends State<LoginPage> {
     SharedPreferences prefs;
     prefs = await SharedPreferences.getInstance();
     prefs.setString("userID", userID);
+  }
+
+  Future<void> sharedBoard(String ilkMi) async {
+    SharedPreferences prefs;
+    prefs = await SharedPreferences.getInstance();
+    prefs.setString("ilkMi", ilkMi);
   }
 }

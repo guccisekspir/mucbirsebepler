@@ -9,6 +9,8 @@ import 'package:mucbirsebepler/locator.dart';
 import 'package:mucbirsebepler/pages/splashScreen.dart';
 import 'dart:io';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 void main() {
   setupLocator();
   InAppPurchaseConnection.enablePendingPurchases();
@@ -45,6 +47,7 @@ class DenemeApp extends StatefulWidget {
 }
 
 class _DenemeAppState extends State<DenemeApp> {
+  bool ilkMi=true;
   final pageList=[
     PageModel(
 
@@ -142,9 +145,28 @@ class _DenemeAppState extends State<DenemeApp> {
         iconAssetPath: 'assets/icon/destek.png'
     ),
   ];
+  Future<Null> _function() async {
+    SharedPreferences prefs;
+    prefs = await SharedPreferences.getInstance();
+    this.setState(() {
+      if (prefs.getString("ilkMi") != null) {
+        setState(() {
+          ilkMi = false;
+        });
+      } else {
+        ilkMi = true;
+      }
+    });
+  }
+  @override
+  void initState() {
+    _function();
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ilkMi?Scaffold(
       body: FancyOnBoarding(
         doneButtonText: "Bitti",
         skipButtonText: "Geç",
@@ -175,7 +197,10 @@ class _DenemeAppState extends State<DenemeApp> {
         pageList: pageList,
 
       ),
-    );
+    ):BlocProvider(
+        create: (context) => AuthBloc(),
+        child: SplashScreen(
+        ));
   }
 }
 
