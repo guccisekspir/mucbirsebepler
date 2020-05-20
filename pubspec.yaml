@@ -49,6 +49,7 @@ dependencies:
   in_app_purchase: ^0.3.3+1
   image_picker: ^0.6.6+1
   shared_preferences: ^0.5.7+2
+  awesome_dialog: ^0.1.4
 
 dev_dependencies:
   flutter_test:

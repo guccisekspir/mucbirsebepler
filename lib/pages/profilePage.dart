@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -114,7 +115,18 @@ class _ProfilePageState extends State<ProfilePage> {
                                       color: Colors.limeAccent,
                                     )),
                                 onPressed: () {
-                                  _authBloc.add(SignOut());
+                                  AwesomeDialog(
+                                    context: context,
+                                    animType: AnimType.SCALE,
+                                    dialogType: DialogType.INFO,
+                                    body: Center(child: Text(
+                                      'Hesaptan çıkmak üzeresin tospik?'
+                                          'Bizi unutmayacaaz...',
+                                      style: TextStyle(fontStyle: FontStyle.italic),
+                                    ),),
+                                    btnOkOnPress: () {_authBloc.add(SignOut());},
+                                  ).show();
+
 
                                 },
                               ),

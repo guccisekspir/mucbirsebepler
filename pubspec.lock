@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.1"
+  awesome_dialog:
+    dependency: "direct main"
+    description:
+      name: awesome_dialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   bloc:
     dependency: transitive
     description:
@@ -457,6 +464,34 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.21.0"
+  sa_anicoto:
+    dependency: transitive
+    description:
+      name: sa_anicoto
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
+  sa_multi_tween:
+    dependency: transitive
+    description:
+      name: sa_multi_tween
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.1"
+  sa_stateless_animation:
+    dependency: transitive
+    description:
+      name: sa_stateless_animation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
+  sa_v1_migration:
+    dependency: transitive
+    description:
+      name: sa_v1_migration
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.2"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -485,6 +520,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2+5"
+  simple_animations:
+    dependency: transitive
+    description:
+      name: simple_animations
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -518,6 +560,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  supercharged:
+    dependency: transitive
+    description:
+      name: supercharged
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.1"
   term_glyph:
     dependency: transitive
     description:
