@@ -83,6 +83,7 @@ flutter:
     - assets/renkli.gif
     - assets/renksiz.gif
     - assets/hslgnd.png
+    - assets/mekik.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

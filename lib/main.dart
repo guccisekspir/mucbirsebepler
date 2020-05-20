@@ -93,7 +93,7 @@ class _DenemeAppState extends State<DenemeApp> {
     ),
     PageModel(
         color: const Color(0xFF9B90BC),
-        heroAssetPath: 'assets/icon/acar.png',
+        heroAssetPath: 'assets/mekik.png',
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 50),
           child: Text('Unutma! .',
@@ -106,7 +106,7 @@ class _DenemeAppState extends State<DenemeApp> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 45),
           child: Text(
-              'Matikli veya GradientTikli iseniz Bartu ve Melikşah İddialarınızı daha önce görür !',
+              'Matikli veya GradientTikli iseniz Bartu ve Melikşah İddialarınız daha önce görür !',
               textAlign: TextAlign.center,
               style: GoogleFonts.righteous(
                   fontSize: 17,
