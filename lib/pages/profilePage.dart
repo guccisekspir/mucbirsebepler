@@ -73,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 bloc: _authBloc,
                 listener: (context, state) {
                   if(state is AuthLoadedState){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SplashScreen()));
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>SplashScreen()),(Route<dynamic> route) => false);
                   }
                 },
                 child: BlocBuilder(
