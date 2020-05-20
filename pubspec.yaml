@@ -50,6 +50,7 @@ dependencies:
   image_picker: ^0.6.6+1
   shared_preferences: ^0.5.7+2
   awesome_dialog: ^0.1.4
+  fancy_on_boarding: ^1.6.0
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +82,7 @@ flutter:
     - assets/icon/
     - assets/renkli.gif
     - assets/renksiz.gif
+    - assets/hslgnd.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
