@@ -65,7 +65,7 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
           }
         }
 
-        yield DataBaseLoadedState(isChangedPP: isPhotoChanged);
+        yield DataBaseLoadedState(isChangedPP: isPhotoChanged,isChangedUser: isUserNameChanged);
       } catch (_) {
         debugPrint(_.toString());
         yield DataBaseErrorState();

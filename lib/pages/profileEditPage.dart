@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
@@ -21,6 +23,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
   TextEditingController _userNameController;
   DataBaseBloc _dataBaseBloc;
   File _profilFoto;
+  Widget waitingWidget=Container(
+    color: Colors.transparent,
+    height: 60,width: 60,);
 
   @override
   void initState() {
@@ -54,137 +59,186 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
-      body: Column(
-        children: [
-          SafeArea(
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: FlatButton(
-                child: CircleAvatar(
-                    radius: 25,
-                    backgroundColor: Colors.limeAccent,
-                    child: Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                      color: Colors.black,
-                    )),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+      body: BlocListener(
+        bloc: _dataBaseBloc,
+        listener: (context,state){
+          if(state is DataBaseLoadingState){
+            setState(() {
+              waitingWidget=Container(
+                width: 60,
+                height: 60,
+                child: LoadingBouncingGrid.square(
+                  borderColor: Colors.limeAccent,
+                  backgroundColor: Colors.limeAccent,
+                ),
+              );
+            });
+          }
+          if(state is DataBaseLoadedState){
+            setState(() {
+              waitingWidget=SizedBox(width: 60,height: 60,);
+            });
+
+                if(state.isChangedPP|| state.isChangedUser){
+                  showDialog( //TODO bunu uihelpera ekle
+                      context: context,
+                      builder: (_) => FlareGiffyDialog(
+                        onlyOkButton: true,
+                        flarePath: 'assets/meditation.flr',
+                        flareAnimation: 'idle',
+                        title: Text(
+                          '   Profil bilgilerin '
+                              'güncellendi tospik',
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.w600),
+                        ),
+
+                        entryAnimation: EntryAnimation.TOP_RIGHT,
+                        onOkButtonPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ));
+                }else if(!state.isChangedUser){
+                  Scaffold.of(context).showSnackBar(SnackBar(content: Text("Bu nick kullanılmakta lütfen farklı nick seçiniz"),backgroundColor: Colors.redAccent,));
+                }else if(!state.isChangedPP){
+                  Scaffold.of(context).showSnackBar(SnackBar(content: Text("Profil fotoğrafınız yüklenirken 1 hata oluştu.Lütfen başka fotoğraf deneyiniz"),backgroundColor: Colors.redAccent,));
+                }
+          }
+          if(state is DataBaseErrorState){
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text("İnternet bağlantınızda sıkıntı var :-/"),backgroundColor: Colors.redAccent,));
+          }
+
+        },
+        child: Column(
+          children: [
+            SafeArea(
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: FlatButton(
+                  child: CircleAvatar(
+                      radius: 25,
+                      backgroundColor: Colors.limeAccent,
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 30,
+                        color: Colors.black,
+                      )),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ),
             ),
-          ),
-          Center(
-              child: _profilFoto != null
-                  ? profilePicturew(widget.editingUser, context,
-                      gelenFoto: _profilFoto)
-                  : profilePicturew(widget.editingUser, context)),
-          Center(
-            child: GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Container(
-                        color: Colors.limeAccent,
-                        height: 160,
-                        child: Column(
-                          children: <Widget>[
-                            ListTile(
-                              leading: Icon(
-                                Icons.camera,
-                                color: Colors.black,
+            Center(
+                child: _profilFoto != null
+                    ? profilePicturew(widget.editingUser, context,
+                        gelenFoto: _profilFoto)
+                    : profilePicturew(widget.editingUser, context)),
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                          color: Colors.limeAccent,
+                          height: 160,
+                          child: Column(
+                            children: <Widget>[
+                              ListTile(
+                                leading: Icon(
+                                  Icons.camera,
+                                  color: Colors.black,
+                                ),
+                                title: Text(
+                                  "Kameradan Çek",
+                                  style: GoogleFonts.righteous(),
+                                ),
+                                onTap: () {
+                                  _kameradanFotoCek();
+                                },
                               ),
-                              title: Text(
-                                "Kameradan Çek",
-                                style: GoogleFonts.righteous(),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.image,
+                                  color: Colors.black,
+                                ),
+                                title: Text(
+                                  "Galeriden Seç",
+                                  style: GoogleFonts.righteous(),
+                                ),
+                                onTap: () {
+                                  _galeridenFotoCek();
+                                },
                               ),
-                              onTap: () {
-                                _kameradanFotoCek();
-                              },
-                            ),
-                            ListTile(
-                              leading: Icon(
-                                Icons.image,
-                                color: Colors.black,
-                              ),
-                              title: Text(
-                                "Galeriden Seç",
-                                style: GoogleFonts.righteous(),
-                              ),
-                              onTap: () {
-                                _galeridenFotoCek();
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    });
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(left: 120),
-                child: CircleAvatar(
-                  backgroundColor: Colors.limeAccent,
-                  child: Icon(
-                    Icons.add_a_photo,
-                    color: Colors.black,
+                            ],
+                          ),
+                        );
+                      });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 120),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.limeAccent,
+                    child: Icon(
+                      Icons.add_a_photo,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 60,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: TextField(
-              maxLength: 15,
-              cursorColor: Colors.limeAccent,
-              style: GoogleFonts.righteous(color: Colors.limeAccent),
-              decoration: InputDecoration(
-                  errorStyle: GoogleFonts.righteous(color: Colors.redAccent),
-                  labelStyle: GoogleFonts.righteous(color: Colors.limeAccent),
-                  counterStyle: GoogleFonts.righteous(color: Colors.limeAccent),
-                  fillColor: Colors.limeAccent,
-                  focusColor: Colors.limeAccent,
-                  hoverColor: Colors.limeAccent,
-                  labelText: "Yeni Kullanıcı Adı",
-                  disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.limeAccent)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.limeAccent)),
-                  errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.redAccent)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.limeAccent)),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.limeAccent))),
-              controller: _userNameController,
+            waitingWidget,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: TextField(
+                maxLength: 15,
+                cursorColor: Colors.limeAccent,
+                style: GoogleFonts.righteous(color: Colors.limeAccent),
+                decoration: InputDecoration(
+                    errorStyle: GoogleFonts.righteous(color: Colors.redAccent),
+                    labelStyle: GoogleFonts.righteous(color: Colors.limeAccent),
+                    counterStyle: GoogleFonts.righteous(color: Colors.limeAccent),
+                    fillColor: Colors.limeAccent,
+                    focusColor: Colors.limeAccent,
+                    hoverColor: Colors.limeAccent,
+                    labelText: "Yeni Kullanıcı Adı",
+                    disabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.limeAccent)),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.limeAccent)),
+                    errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.redAccent)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.limeAccent)),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.limeAccent))),
+                controller: _userNameController,
+              ),
             ),
-          ),
-          SizedBox(
-            width: 30,
-          ),
-          Center(
-            child: RaisedButton(
-              child: Text("username değiştir"),
-              onPressed: () {
-                if (_profilFoto == null && _userNameController.text == "") {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text("Herhangi bir şeyi değiştirmediniz !"),
-                    backgroundColor: Colors.red,
-                  ));
-                } else {
-                  _dataBaseBloc.add(ChangeProfile(
-                      userID: widget.editingUser.userID,
-                      newPP: _profilFoto,
-                      newUserName: _userNameController.text));
-                }
-              },
+            SizedBox(
+              width: 30,
             ),
-          )
-        ],
+            Center(
+              child: RaisedButton(
+                child: Text("username değiştir"),
+                onPressed: () {
+                  if (_profilFoto == null && _userNameController.text == "") {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text("Herhangi bir şeyi değiştirmediniz !"),
+                      backgroundColor: Colors.red,
+                    ));
+                  } else {
+                    _dataBaseBloc.add(ChangeProfile(
+                        userID: widget.editingUser.userID,
+                        newPP: _profilFoto,
+                        newUserName: _userNameController.text));
+                  }
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
