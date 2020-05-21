@@ -264,6 +264,7 @@ class DbApiClient {
 
   Future<Null> refresh() {
     _newQuerySnapshot = null;
+    _querySnapshot=null;
   }
 
   Future<List<Post>> getUserPopular(String userID) async {

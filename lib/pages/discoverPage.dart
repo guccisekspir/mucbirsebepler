@@ -39,6 +39,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
     _scrollController.addListener(_listeScrollListener);
     _postBloc = BlocProvider.of<PostBloc>(context);
     _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
+    _postBloc.add(Refresh());
     _dataBaseBloc.add(GetUserr(userID: widget.user.userID));
 
     super.initState();
