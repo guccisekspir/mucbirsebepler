@@ -9,6 +9,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:loading_animations/loading_animations.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ShopPage extends StatefulWidget {
@@ -29,7 +30,6 @@ class _ShopPageState extends State<ShopPage> {
   SharedPreferences pref;
   bool isGmatik=false;
   bool isMatik=false;
-  Widget waitingWidget=SizedBox(width: 0,height: 0,);
 
   Future<Null> _function() async {
     SharedPreferences prefs;
@@ -73,19 +73,18 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    final ProgressDialog pr = ProgressDialog(context,isDismissible: false);
+    pr.style(backgroundColor: Colors.lime,messageTextStyle: TextStyle(color: Colors.black),message: "Satın alım işlemi yapılıyor...",borderRadius: 30);
 
     return Scaffold(
       body: BlocListener(
         bloc: _dataBaseBloc,
         listener: (context,state){
           if(state is DataBaseLoadingState){
-            waitingWidget=LoadingBouncingGrid.square(
-              borderColor: Colors.limeAccent,
-              backgroundColor: Colors.limeAccent,
-            );
+            pr.show();
           }
           if(state is DataBaseLoadedState){
-            waitingWidget=SizedBox(width: 0,height: 0,);
+            pr.hide();
             FlareGiffyDialog(
               onlyOkButton: true,
               flarePath: 'assets/game.flr',
@@ -105,7 +104,7 @@ class _ShopPageState extends State<ShopPage> {
             );
           }
           if(state is DataBaseErrorState){
-            waitingWidget=SizedBox(height: 0,width: 0,);
+            pr.hide();
             Scaffold.of(context).showSnackBar(SnackBar(content: Text("Hata oluştu,Sonra tekrar deneyiniz..."),backgroundColor: Colors.redAccent,));
           }
         },
@@ -233,7 +232,6 @@ class _ShopPageState extends State<ShopPage> {
                       ),
                     ),
                   ),
-                  waitingWidget,
                   SizedBox(
                     height: 15,
                   ),
