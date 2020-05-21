@@ -65,7 +65,7 @@ class _DenemeAppState extends State<DenemeApp> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 45),
           child: Text(
-              'Artık siz de mücbir sebeplere haber getiren acar muhabirlerden biri olabilirsiniz. Tek yapmanız gereken uygulamamızı kullanmak',
+              'Artık siz de mücbir sebeplere haber getiren acar muhabirlerden biri olabilirsiniz. Tek yapmanız gereken uygulamayı kullanmak',
               textAlign: TextAlign.center,
               style: GoogleFonts.righteous(fontSize: 17, color: Colors.white)),
         ),
@@ -81,7 +81,7 @@ class _DenemeAppState extends State<DenemeApp> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 45),
           child: Text(
-              'Matikli veya GradientTikli iseniz Bartu ve Melikşah İddialarınız daha önce görür !',
+              'Matikli veya GradientTikli iseniz Bartu ve Melikşah iddialarınızı daha önce görür !',
               textAlign: TextAlign.center,
               style: GoogleFonts.righteous(fontSize: 17, color: Colors.white)),
         ),

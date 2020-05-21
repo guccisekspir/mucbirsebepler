@@ -167,7 +167,7 @@ class _PostPageState extends State<PostPage> {
                           child: Align(
                             alignment: Alignment.center,
                             child: Text(
-                              "Popüler Haberler",
+                              "İddia Paylaşım Yeri",
                               style: GoogleFonts.pressStart2p(
                                 fontSize: screenHeight/45,
                               ),

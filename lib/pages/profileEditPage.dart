@@ -238,7 +238,15 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
             ),
             Center(
               child: RaisedButton(
-                child: Text("username değiştir"),
+                child: Text("Değişiklikleri Kaydet",style: GoogleFonts.righteous(fontWeight: FontWeight.bold),),
+                shape: RoundedRectangleBorder(
+
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(color: Colors.limeAccent,width: 4.0)
+                ),
+                color: Colors.lime,
+                highlightColor: Colors.deepPurpleAccent,
+                elevation: 15,
                 onPressed: () {
                   if (_profilFoto == null && _userNameController.text == "") {
                     Scaffold.of(context).showSnackBar(SnackBar(
