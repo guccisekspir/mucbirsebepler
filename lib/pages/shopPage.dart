@@ -6,7 +6,6 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_text/gradient_text.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:loading_animations/loading_animations.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:progress_dialog/progress_dialog.dart';
