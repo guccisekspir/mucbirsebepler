@@ -51,6 +51,7 @@ dependencies:
   shared_preferences: ^0.5.7+2
   awesome_dialog: ^0.1.4
   fancy_on_boarding: ^1.6.0
+  regexpattern: ^0.2.3
 
 dev_dependencies:
   flutter_test:

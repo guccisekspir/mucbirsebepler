@@ -18,6 +18,7 @@ import 'package:mucbirsebepler/pages/profilePage.dart';
 import 'package:mucbirsebepler/util/badgeNames.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
+import 'package:regexpattern/regexpattern.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -682,6 +683,15 @@ Widget entryField(
               if (title == "Haber İçeriği(Zorunlu)") {
                 if (e.isEmpty) yazilacak = "Lütfen içeriği giriniz";
               }
+              if(title =="Diğer Linkler"){
+                if(e!=""){
+                  if(!RegexValidation.hasMatch(e, RegexPattern.url)){
+                    yazilacak="Lütfen https / http sahip link paylaşınız.(Güvenlik için tospik) ";
+                  }
+
+
+                }
+              }
               if (title == "Youtube Linki") {
                 if (e != "" && !e.contains("youtube")) {
                   if (!e.contains("youtu.be")) if (!e.contains("https"))
@@ -691,6 +701,7 @@ Widget entryField(
                     yazilacak = "Lütfen https:// ekleyin";
                 }
               }
+
               return yazilacak;
             },
             maxLines: null,
