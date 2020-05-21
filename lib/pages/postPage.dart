@@ -8,6 +8,7 @@ import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 class PostPage extends StatefulWidget {
   final User user;
@@ -72,6 +73,8 @@ class _PostPageState extends State<PostPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    final ProgressDialog pr = ProgressDialog(context,isDismissible: false);
+    pr.style(backgroundColor: Colors.lime,messageTextStyle: TextStyle(color: Colors.black),message: "Gönderiliyor ..",borderRadius: 30);
 
 
     return Scaffold(
@@ -81,7 +84,7 @@ class _PostPageState extends State<PostPage> {
           BlocListener<PostBloc,PostState>(listener: (context,state){
 
             if(state is PostSavedState){
-
+              pr.hide();
               showDialog( //TODO bunu uihelpera ekle
                   context: context,
                   builder: (_) => FlareGiffyDialog(
@@ -90,12 +93,12 @@ class _PostPageState extends State<PostPage> {
                     flareAnimation: 'jump',
                     title: Text(
                       'Postun uzayın derinliklerine gönderildi',
-                      style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.limeAccent),
+                      style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.black),
                     ),
                     description: Text(
                       "Şaka şaka. Postun yayınlandı tospik",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.righteous(fontSize: 14.0, fontWeight: FontWeight.w600,color: Colors.limeAccent),
+                      style: GoogleFonts.righteous(fontSize: 14.0, fontWeight: FontWeight.w600,color: Colors.black),
                     ),
                     entryAnimation: EntryAnimation.BOTTOM,
                     onOkButtonPressed: () {
@@ -106,7 +109,7 @@ class _PostPageState extends State<PostPage> {
             }
 
             if(state is PostSaveErrorState){
-
+              pr.hide();
               showDialog(
                   context: context,
                   builder: (_) => FlareGiffyDialog(
@@ -115,12 +118,12 @@ class _PostPageState extends State<PostPage> {
                     flareAnimation: 'jump',
                     title: Text(
                       'Bir şeyler ters gitti Tospik',
-                      style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.limeAccent),
+                      style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.black),
                     ),
                     description: Text(
                       "Daha sonra tekrar deneyebilir misin ? ",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.righteous(fontSize: 14.0, fontWeight: FontWeight.w600,color: Colors.limeAccent),
+                      style: GoogleFonts.righteous(fontSize: 14.0, fontWeight: FontWeight.w600,color: Colors.black),
                     ),
                     entryAnimation: EntryAnimation.TOP_RIGHT,
                     onOkButtonPressed: () {
@@ -128,6 +131,10 @@ class _PostPageState extends State<PostPage> {
                     },
                   ));
 
+            }
+            if(state is PostSavingState){
+
+              pr.show();
             }
 
 
@@ -201,6 +208,7 @@ class _PostPageState extends State<PostPage> {
                               size: 30,
                             )),
                       ),
+
                       lineDivider(),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),

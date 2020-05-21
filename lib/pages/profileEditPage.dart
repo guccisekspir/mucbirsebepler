@@ -9,6 +9,7 @@ import 'package:loading_animations/loading_animations.dart';
 import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 class ProfileEditPage extends StatefulWidget {
   final User editingUser;
@@ -57,6 +58,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
 
   @override
   Widget build(BuildContext context) {
+    final ProgressDialog pr = ProgressDialog(context,isDismissible: false);
+    pr.style(backgroundColor: Colors.lime,messageTextStyle: TextStyle(color: Colors.black),message: "Güncelleniyor ..",borderRadius: 30);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -64,26 +68,13 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
         bloc: _dataBaseBloc,
         listener: (context, state) {
           if (state is DataBaseLoadingState) {
-            setState(() {
-              waitingWidget = Container(
-                width: 60,
-                height: 60,
-                child: LoadingBouncingGrid.square(
-                  borderColor: Colors.limeAccent,
-                  backgroundColor: Colors.limeAccent,
-                ),
-              );
-            });
+            pr.show();
           }
           if (state is DataBaseLoadedState) {
-            setState(() {
-              waitingWidget = SizedBox(
-                width: 60,
-                height: 60,
-              );
-            });
+            pr.hide();
 
             if (state.isChangedPP || state.isChangedUser) {
+              pr.hide();
               showDialog(
                   //TODO bunu uihelpera ekle
                   context: context,
@@ -97,7 +88,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
                           style: GoogleFonts.righteous(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,
-                              color: Colors.limeAccent),
+                              color: Colors.black),
                         ),
                         entryAnimation: EntryAnimation.BOTTOM_RIGHT,
                         onOkButtonPressed: () {
