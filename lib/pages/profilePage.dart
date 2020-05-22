@@ -15,6 +15,7 @@ import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/profileEditPage.dart';
 import 'package:mucbirsebepler/pages/splashScreen.dart';
+import 'package:mucbirsebepler/util/badgeNames.dart';
 import 'package:mucbirsebepler/widgets/profileHelper.dart';
 import 'package:mucbirsebepler/widgets/randomGradient.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
@@ -167,6 +168,50 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ),
                                 ),
+                          OpenContainer(
+                            closedBuilder: (BuildContext buildContext,
+                                VoidCallback voidCallback) {
+                              return GestureDetector(
+                                  onTap: voidCallback,
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.lime,
+                                    child: Icon(Icons.info,color: Colors.black,),
+                                  ));
+                            },
+                            openBuilder: (BuildContext buildContext,VoidCallback voidCallback){
+                              return SingleChildScrollView(
+                                child: Container(
+                                  child: Column(
+                                    children: [
+                                  SafeArea(child: Align(
+                                  alignment:Alignment.topLeft,
+                                    child: FlatButton(
+                                      child: CircleAvatar(
+                                          radius: 25,
+                                          backgroundColor:
+                                          Colors.black,
+                                          child: Icon(
+                                            Icons.arrow_back,
+                                            size: 30,
+                                            color: Colors.limeAccent,
+                                          )),
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                      Text("Privacy Policy"),
+                                      Text(myPrivacyPolicy),
+                                    ],
+                                  )
+
+                                ),
+                              );
+                            },
+
+                          ),
                           Center(
                               child: Padding(
                             padding: const EdgeInsets.only(top: 5),
@@ -322,17 +367,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     ),
                                                     BlocBuilder(
                                                       bloc: _postBloc,
-                                                      // ignore: missing_return
+
                                                       builder:
+                                                          // ignore: missing_return
                                                           (context, state) {
-                                                        if (state
-                                                            is PostLoadingState) {
+                                                        if (state is PostLoadingState) {
                                                           return Center(
                                                             child:
                                                                 CircularProgressIndicator(),
                                                           );
-                                                        } else if (state
-                                                            is PostErrorState) {
+                                                        } else if (state is PostErrorState) {
                                                           var snackbar =
                                                               SnackBar(
                                                             content: Text(
@@ -343,8 +387,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                           Scaffold.of(context)
                                                               .showSnackBar(
                                                                   snackbar);
-                                                        } else if (state
-                                                            is PostLoadedState) {
+                                                        } else if (state is PostLoadedState) {
                                                           List<Post> listPost =
                                                               state.listPost;
                                                           if (listPost.length !=
