@@ -169,18 +169,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                           OpenContainer(
+
                             closedBuilder: (BuildContext buildContext,
                                 VoidCallback voidCallback) {
-                              return GestureDetector(
-                                  onTap: voidCallback,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.lime,
-                                    child: Icon(Icons.info,color: Colors.black,),
-                                  ));
+                              return Align(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 25),
+                                  child: GestureDetector(
+                                      onTap: voidCallback,
+                                      child: Icon(Icons.info_outline,color: Colors.limeAccent,)),
+                                ),
+                              );
                             },
                             openBuilder: (BuildContext buildContext,VoidCallback voidCallback){
                               return SingleChildScrollView(
                                 child: Container(
+                                  color: Colors.black,
                                   child: Column(
                                     children: [
                                   SafeArea(child: Align(
@@ -203,13 +208,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                       Text("Privacy Policy"),
-                                      Text(myPrivacyPolicy),
+                                      Text(myPrivacyPolicy,style: TextStyle(color: Colors.limeAccent),),
                                     ],
                                   )
 
                                 ),
                               );
                             },
+                            closedColor: Colors.transparent,
 
                           ),
                           Center(
