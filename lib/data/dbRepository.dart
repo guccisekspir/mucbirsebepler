@@ -43,12 +43,12 @@ class DbRepository {
     }
 
     List<Post> gelenList =
-        await _dbApiClient.getAllPost(_lastFetchedPost, postLimitNumber);
+    await _dbApiClient.getAllPost(_lastFetchedPost, postLimitNumber);
 
     _postList.addAll(gelenList);
     if (gelenList.length > postLimitNumber)
       hasMore =
-          false; //Burada çekilen son liste sayısı belirlediğimiz limitten küçükse bir daha çağırılmamasını sağlıyoruz
+      false; //Burada çekilen son liste sayısı belirlediğimiz limitten küçükse bir daha çağırılmamasını sağlıyoruz
 
     List<Post> _gideceklist = _postList;
     return _gideceklist;
@@ -74,6 +74,7 @@ class DbRepository {
     ilkMi = false;
     return await getNewsPost();
   }
+  
 
   Future<List<User>> getWinnerUser() async {
     return await _dbApiClient.getWinnerUser();

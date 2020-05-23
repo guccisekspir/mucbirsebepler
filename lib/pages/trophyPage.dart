@@ -6,6 +6,7 @@ import 'package:mucbirsebepler/bloc/postbloc/post_bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/newestPost.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/popularPost.dart';
+import 'package:mucbirsebepler/pages/tabBarPages/weeklyPost.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/winnerPage.dart';
 
 class TrophyPage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _TrophyPageState extends State<TrophyPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize:
@@ -38,6 +39,10 @@ class _TrophyPageState extends State<TrophyPage> {
               tabs: [
                 Tab(
                   child: Text("Popüler Haberler",
+                      style: GoogleFonts.righteous(color: Colors.limeAccent)),
+                ),
+                Tab(
+                  child: Text("Haftanın Popülerleri",
                       style: GoogleFonts.righteous(color: Colors.limeAccent)),
                 ),
                 Tab(
@@ -68,7 +73,9 @@ class _TrophyPageState extends State<TrophyPage> {
           child: TabBarView(
             children: [
               PopularPost(user: widget.user,),
+              WeeklyPost(user: widget.user,),
               NewestPost(
+                haftaMi: false,
                 user: widget.user,
               ),
               WinnerPage(),

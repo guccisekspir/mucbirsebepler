@@ -15,8 +15,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
 
   @override
   Stream<PostState> mapEventToState(
-    PostEvent event,
-  ) async* {
+      PostEvent event,
+      ) async* {
     if (event is SavePost) {
       yield PostSavingState();
       try {

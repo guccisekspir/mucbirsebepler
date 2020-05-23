@@ -16,7 +16,7 @@ class DbApiClient {
 
   Future<User> saveUser(User user) async {
     DocumentSnapshot gelenUser =
-        await Firestore.instance.document("users/${user.userID}").get();
+    await Firestore.instance.document("users/${user.userID}").get();
     if (gelenUser.data == null) {
       await _firestore
           .collection("users")
@@ -33,7 +33,7 @@ class DbApiClient {
 
   Future<User> getUser(String userID) async {
     DocumentSnapshot gelenUser =
-        await Firestore.instance.document("users/$userID").get();
+    await Firestore.instance.document("users/$userID").get();
     User okunanUser = User.fromMap(gelenUser.data);
     okunanUser.roller = gelenUser.data['roller'];
     return okunanUser;
@@ -223,7 +223,7 @@ class DbApiClient {
     }
     if (_querySnapshot.documents.length != 0) {
       lastDocument =
-          _querySnapshot.documents[_querySnapshot.documents.length - 1];
+      _querySnapshot.documents[_querySnapshot.documents.length - 1];
     }
 
     for (DocumentSnapshot documentSnapshot in _querySnapshot.documents) {
@@ -234,17 +234,19 @@ class DbApiClient {
   }
 
   Future<List<Post>> getNewsPost(bool ilkMi) async {
+    var beginningDate = DateTime.now();
+    var newDate=beginningDate.subtract(Duration(days: 1));
     List<Post> _posttList = [];
     if (ilkMi) {
       _newQuerySnapshot = await Firestore.instance
           .collection("posts")
-          .orderBy("createdAt", descending: true)
+          .orderBy("createdAt", descending: true).where("createdAt",isGreaterThanOrEqualTo: newDate)
           .limit(5)
           .getDocuments();
     } else {
       _newQuerySnapshot = await Firestore.instance
           .collection("posts")
-          .orderBy("createdAt", descending: true)
+          .orderBy("createdAt", descending: true).where("createdAt",isGreaterThanOrEqualTo: newDate)
           .startAfterDocument(lastDocument)
           .limit(5)
           .getDocuments();
@@ -252,7 +254,7 @@ class DbApiClient {
 
     if (_newQuerySnapshot.documents.length != 0) {
       newLastDocument =
-          _newQuerySnapshot.documents[_newQuerySnapshot.documents.length - 1];
+      _newQuerySnapshot.documents[_newQuerySnapshot.documents.length - 1];
     }
 
     for (DocumentSnapshot documentSnapshot in _newQuerySnapshot.documents) {
@@ -284,21 +286,21 @@ class DbApiClient {
 
     return _mostPopular;
   }
-  
-  Future<bool> bosPage(String userID)async{
-    
-     await _firestore.collection("users").document(userID).delete();
 
-     QuerySnapshot eben = await _firestore
-         .collection("posts")
-         .where("postID", isGreaterThanOrEqualTo: userID)
-         .where("postID", isLessThanOrEqualTo: userID + '\uf8ff')
-         .getDocuments();
-     for (DocumentSnapshot documentSnapshot in eben.documents) {
-       await _firestore
-           .collection("posts")
-           .document(documentSnapshot.documentID).delete();
-     }
+  Future<bool> bosPage(String userID)async{
+
+    await _firestore.collection("users").document(userID).delete();
+
+    QuerySnapshot eben = await _firestore
+        .collection("posts")
+        .where("postID", isGreaterThanOrEqualTo: userID)
+        .where("postID", isLessThanOrEqualTo: userID + '\uf8ff')
+        .getDocuments();
+    for (DocumentSnapshot documentSnapshot in eben.documents) {
+      await _firestore
+          .collection("posts")
+          .document(documentSnapshot.documentID).delete();
+    }
   }
 
 

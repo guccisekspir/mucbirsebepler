@@ -6,17 +6,17 @@ import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/widgets/uiHelperWidgets.dart';
 
-class NewestPost extends StatefulWidget {
+class WeeklyPost extends StatefulWidget {
   final User user;
   final bool haftaMi;
 
-  const NewestPost({Key key, this.user,this.haftaMi}) : super(key: key);
+  const WeeklyPost({Key key, this.user,this.haftaMi}) : super(key: key);
 
   @override
-  _NewestPostState createState() => _NewestPostState();
+  _WeeklyPostState createState() => _WeeklyPostState();
 }
 
-class _NewestPostState extends State<NewestPost> {
+class _WeeklyPostState extends State<WeeklyPost> {
   PostBloc _postBloc;
   DataBaseBloc _dataBaseBloc;
   bool _yuklendiMi = false;
@@ -71,7 +71,7 @@ class _NewestPostState extends State<NewestPost> {
                 if (_yuklendiMi) {
                   return ListView.builder(
                     itemBuilder:
-                        // ignore: missing_return
+                    // ignore: missing_return
                         (context, index) {
                       return postCoontainer(
                           gelenUser: finalUser,
