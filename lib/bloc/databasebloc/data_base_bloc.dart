@@ -108,5 +108,13 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
       }
 
     }
+
+    if(event is BosPage){
+      try{
+        dbRepository.bosPage(event.userID);
+      }catch(_){
+        debugPrint(_.toString());
+      }
+    }
   }
 }

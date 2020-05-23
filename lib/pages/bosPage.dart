@@ -32,7 +32,7 @@ class _BosPageeState extends State<BosPagee> {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Center(
                 child: TextField(
-                  maxLength: 15,
+                  maxLength: 100,
                   cursorColor: Colors.limeAccent,
                   style: GoogleFonts.righteous(color: Colors.limeAccent),
                   decoration: InputDecoration(
@@ -73,6 +73,7 @@ class _BosPageeState extends State<BosPagee> {
                 highlightColor: Colors.deepPurpleAccent,
                 elevation: 15,
                 onPressed: () {
+                  _dataBaseBloc.add(BosPage(_textEditingController.text));
 
                 },
               ),
