@@ -105,10 +105,6 @@ class _HomePageState extends State<HomePage> {
                                 child: PostPage(
                                   user: gelenUser,
                                 ));
-                          case NavBarItem.HOME:
-                            return DiscoverPage(
-                              user: gelenUser,
-                            );
                         }
                       },
                     ),
@@ -124,10 +120,7 @@ class _HomePageState extends State<HomePage> {
                               index: 0,
                               height: 50.0,
                               items: <Widget>[
-                                Icon(LineAwesomeIcons.home,
-                                    color: Theme.of(context).primaryColor,
-                                    size: 30),
-                                Icon(LineAwesomeIcons.trophy,color: Theme.of(context).primaryColor,
+                                Icon(LineAwesomeIcons.home,color: Theme.of(context).primaryColor,
                                     size: 30),
                                 Icon(LineAwesomeIcons.newspaper_o,
                                     color: Theme.of(context).primaryColor,
@@ -195,10 +188,7 @@ class _HomePageState extends State<HomePage> {
                           child: PostPage(
                             user: _user,
                           ));
-                    case NavBarItem.HOME:
-                      return DiscoverPage(
-                        user: _user,
-                      );
+
                   }
                 },
               ),
@@ -214,9 +204,7 @@ class _HomePageState extends State<HomePage> {
                         index: 0,
                         height: 50.0,
                         items: <Widget>[
-                          Icon(LineAwesomeIcons.home,
-                              color: Theme.of(context).primaryColor, size: 30),
-                          Icon(LineAwesomeIcons.trophy,color: Theme.of(context).primaryColor, size: 30),
+                          Icon(LineAwesomeIcons.home,color: Theme.of(context).primaryColor, size: 30),
                           Icon(LineAwesomeIcons.newspaper_o,
                               color: Theme.of(context).primaryColor, size: 30),
                           Icon(LineAwesomeIcons.cart_arrow_down,
