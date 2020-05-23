@@ -15,6 +15,10 @@ class DbRepository {
   bool istendiMi = true;
   bool ilkMi = true;
 
+
+  List<Post> _weekPostList=[];
+
+
   DbRepository() {
     _postList = [];
     _lastFetchedPost = null;
@@ -73,6 +77,11 @@ class DbRepository {
   Future<List<Post>> getMoreNewsPost() async {
     ilkMi = false;
     return await getNewsPost();
+  }
+
+  Future<List<Post>> getWeekPost()async{
+    return  await _dbApiClient.getWeekPost();
+
   }
   
 

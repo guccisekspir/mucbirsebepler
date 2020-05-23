@@ -42,7 +42,7 @@ class _TrophyPageState extends State<TrophyPage> {
                       style: GoogleFonts.righteous(color: Colors.limeAccent)),
                 ),
                 Tab(
-                  child: Text("Haftanın Popülerleri",
+                  child: Text("Haftanın Haberleri",
                       style: GoogleFonts.righteous(color: Colors.limeAccent)),
                 ),
                 Tab(

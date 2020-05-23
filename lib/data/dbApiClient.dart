@@ -264,6 +264,10 @@ class DbApiClient {
     return _posttList;
   }
 
+  Future<List<Post>> getWeekPost()async{
+    List<Post> listeWeek=[];
+  }
+
   Future<Null> refresh() {
     _newQuerySnapshot = null;
     _querySnapshot=null;

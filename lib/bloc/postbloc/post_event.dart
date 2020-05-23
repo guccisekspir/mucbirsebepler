@@ -49,12 +49,7 @@ class GetWeekPost extends PostEvent{
 
 }
 
-class GetMoreWeek extends PostEvent{
-  @override
-  // TODO: implement props
-  List<Object> get props => throw UnimplementedError();
 
-}
 
 class LikePost extends PostEvent {
   final String userID;

@@ -32,7 +32,6 @@ class _WeeklyPostState extends State<WeeklyPost> {
     _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
     _dataBaseBloc.add(GetUserr(userID: widget.user.userID));
     _postBloc.add(GetNewPost());
-
     super.initState();
   }
 
