@@ -8,7 +8,6 @@ import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/bloc/navBarBloc.dart';
-import 'package:mucbirsebepler/pages/discoverPage.dart';
 import 'package:mucbirsebepler/pages/profilePage.dart';
 import 'package:mucbirsebepler/pages/shopPage.dart';
 import 'package:mucbirsebepler/pages/postPage.dart';
