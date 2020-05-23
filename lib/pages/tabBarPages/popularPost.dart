@@ -40,6 +40,7 @@ class _PopularPostState extends State<PopularPost> {
     _postBloc = BlocProvider.of<PostBloc>(context);
     _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
     _postBloc.add(Refresh());
+    _postBloc.add(GetPost());
     _dataBaseBloc.add(GetUserr(userID: widget.user.userID));
 
     super.initState();
@@ -131,12 +132,6 @@ class _PopularPostState extends State<PopularPost> {
                   child: BlocBuilder<PostBloc, PostState>(
                     // ignore: missing_return
                       builder: (context, state) {
-                        if (state is InitialPostState) {
-                          _postBloc.add(GetPost());
-                          return CircularProgressIndicator(
-                            backgroundColor: Colors.blue,
-                          );
-                        }
                         if (state is PostLoadingState) {
                           return Center(child: waitingWidget);
                         }

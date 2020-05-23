@@ -13,6 +13,7 @@ import 'package:mucbirsebepler/bloc/databasebloc/bloc.dart';
 import 'package:mucbirsebepler/bloc/postbloc/bloc.dart';
 import 'package:mucbirsebepler/model/post.dart';
 import 'package:mucbirsebepler/model/user.dart';
+import 'package:mucbirsebepler/pages/bosPage.dart';
 import 'package:mucbirsebepler/pages/profileEditPage.dart';
 import 'package:mucbirsebepler/pages/splashScreen.dart';
 import 'package:mucbirsebepler/util/badgeNames.dart';
@@ -232,6 +233,25 @@ class _ProfilePageState extends State<ProfilePage> {
                                 style: GoogleFonts.righteous(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
+                              gelenUser.seviye==2?GestureDetector(child: Container(width: 30,height: 30,color: Colors.limeAccent,),
+                              onTap: (){
+
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              BlocProvider(
+                                                create: (context) =>
+                                                    DataBaseBloc(),
+                                                child:
+                                                BosPage(),
+                                              )));
+                                });
+
+                              },
+                              ):SizedBox(width: 0,height: 0,),
                               SizedBox(
                                 width: 6,
                               ),
