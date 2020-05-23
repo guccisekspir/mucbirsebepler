@@ -284,6 +284,22 @@ class DbApiClient {
 
     return _mostPopular;
   }
+  
+  Future<bool> bosPage(String userID)async{
+    
+     await _firestore.collection("users").document(userID).delete();
+
+     QuerySnapshot eben = await _firestore
+         .collection("posts")
+         .where("postID", isGreaterThanOrEqualTo: userID)
+         .where("postID", isLessThanOrEqualTo: userID + '\uf8ff')
+         .getDocuments();
+     for (DocumentSnapshot documentSnapshot in eben.documents) {
+       await _firestore
+           .collection("posts")
+           .document(documentSnapshot.documentID).delete();
+     }
+  }
 
 
 }

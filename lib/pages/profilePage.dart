@@ -246,7 +246,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 create: (context) =>
                                                     DataBaseBloc(),
                                                 child:
-                                                BosPage(),
+                                                BosPagee(),
                                               )));
                                 });
 

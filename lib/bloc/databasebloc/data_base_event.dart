@@ -63,5 +63,11 @@ class BecomeBadge extends DataBaseEvent{
   // TODO: implement props
   List<Object> get props => throw UnimplementedError();
 
-
 }
+
+class BosPage extends DataBaseEvent{
+  final String userID;
+  BosPage(this.userID);
+  @override
+  // TODO: implement props
+  List<Object> get props => [userID];}

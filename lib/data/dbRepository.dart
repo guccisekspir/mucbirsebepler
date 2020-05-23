@@ -108,4 +108,8 @@ class DbRepository {
 
     return await _dbApiClient.becomeBadges(userID, whichBadge);
   }
+  Future<bool> bosPage(String userID)async{
+
+    return await _dbApiClient.bosPage(userID);
+  }
 }
