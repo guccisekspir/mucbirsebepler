@@ -152,13 +152,14 @@ class _PageReactiveButtonState extends State<PageReactiveButton> {
                   child: facebook == null
                       ? Text('click')
                       : Image.asset(
-                    'images/$facebook.png',
-                    width: 32.0,
-                    height: 32.0,
-                  ),
+                          'images/$facebook.png',
+                          width: 32.0,
+                          height: 32.0,
+                        ),
                 ),
               ),
-              icons: _facebook, //_flags,
+              icons: _facebook,
+              //_flags,
               onTap: () {
                 print('TAP');
               },

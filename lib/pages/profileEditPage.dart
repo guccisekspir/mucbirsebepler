@@ -57,8 +57,12 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    final ProgressDialog pr = ProgressDialog(context,isDismissible: false);
-    pr.style(backgroundColor: Colors.lime,messageTextStyle: TextStyle(color: Colors.black),message: "Güncelleniyor ..",borderRadius: 30);
+    final ProgressDialog pr = ProgressDialog(context, isDismissible: false);
+    pr.style(
+        backgroundColor: Colors.lime,
+        messageTextStyle: TextStyle(color: Colors.black),
+        message: "Güncelleniyor ..",
+        borderRadius: 30);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -228,12 +232,13 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
             ),
             Center(
               child: RaisedButton(
-                child: Text("Değişiklikleri Kaydet",style: GoogleFonts.righteous(fontWeight: FontWeight.bold),),
-                shape: RoundedRectangleBorder(
-
-                    borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(color: Colors.limeAccent,width: 4.0)
+                child: Text(
+                  "Değişiklikleri Kaydet",
+                  style: GoogleFonts.righteous(fontWeight: FontWeight.bold),
                 ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    side: BorderSide(color: Colors.limeAccent, width: 4.0)),
                 color: Colors.lime,
                 highlightColor: Colors.deepPurpleAccent,
                 elevation: 15,

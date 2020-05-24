@@ -18,7 +18,7 @@ List<List<Color>> gradientColorsList = [
   [Color(0xFF78ffd6), Color(0xff007991)],
   [Color(0xFFee0979), Color(0xffff6a00)],
   [Color(0xFFfc00ff), Color(0xff00dbde)],
-  [Color(0xFF833ab4), Color(0xfffd1d1d),Color(0xfffcb045)],
+  [Color(0xFF833ab4), Color(0xfffd1d1d), Color(0xfffcb045)],
   [Color(0xFFfdfc47), Color(0xff24fe41)],
   [Color(0xFF12c2e9), Color(0xffc471ed), Color(0xfff64f59)],
   [Color(0xFFf12711), Color(0xfff5af19)],

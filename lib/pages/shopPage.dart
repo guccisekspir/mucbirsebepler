@@ -15,6 +15,7 @@ class ShopPage extends StatefulWidget {
   final User gelenUser;
 
   const ShopPage({Key key, this.gelenUser}) : super(key: key);
+
   @override
   _ShopPageState createState() => _ShopPageState();
 }
@@ -27,31 +28,29 @@ class _ShopPageState extends State<ShopPage> {
   List<PurchaseDetails> _purchases = [];
   StreamSubscription _subscription;
   SharedPreferences pref;
-  bool isGmatik=false;
-  bool isMatik=false;
+  bool isGmatik = false;
+  bool isMatik = false;
 
   Future<Null> _function() async {
     SharedPreferences prefs;
     prefs = await SharedPreferences.getInstance();
     this.setState(() {
-      if (prefs.getString("badges")=="isGmatik") {
-       setState(() {
-         isGmatik = true;
-       });
-      }
-      if(prefs.getString("badges")=="isMatik"){
+      if (prefs.getString("badges") == "isGmatik") {
         setState(() {
-          isMatik=true;
+          isGmatik = true;
+        });
+      }
+      if (prefs.getString("badges") == "isMatik") {
+        setState(() {
+          isMatik = true;
         });
       }
     });
   }
 
-
-
   @override
   void initState() {
-    _dataBaseBloc=BlocProvider.of<DataBaseBloc>(context);
+    _dataBaseBloc = BlocProvider.of<DataBaseBloc>(context);
     _function();
 
     _initialize();
@@ -72,17 +71,21 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    final ProgressDialog pr = ProgressDialog(context,isDismissible: false);
-    pr.style(backgroundColor: Colors.lime,messageTextStyle: TextStyle(color: Colors.black),message: "Satın alım işlemi yapılıyor...",borderRadius: 30);
+    final ProgressDialog pr = ProgressDialog(context, isDismissible: false);
+    pr.style(
+        backgroundColor: Colors.lime,
+        messageTextStyle: TextStyle(color: Colors.black),
+        message: "Satın alım işlemi yapılıyor...",
+        borderRadius: 30);
 
     return Scaffold(
       body: BlocListener(
         bloc: _dataBaseBloc,
-        listener: (context,state){
-          if(state is DataBaseLoadingState){
+        listener: (context, state) {
+          if (state is DataBaseLoadingState) {
             pr.show();
           }
-          if(state is DataBaseLoadedState){
+          if (state is DataBaseLoadedState) {
             pr.hide();
             FlareGiffyDialog(
               onlyOkButton: true,
@@ -90,21 +93,22 @@ class _ShopPageState extends State<ShopPage> {
               flareAnimation: 'standby2',
               title: Text(
                 '   Desteğin için  '
-                    'teşekkürler tospik',
-                style: TextStyle(
-                    fontSize: 18.0, fontWeight: FontWeight.w600),
+                'teşekkürler tospik',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
               ),
               description: Text("Bizi unutmayacağız !"),
-
               entryAnimation: EntryAnimation.BOTTOM_LEFT,
               onOkButtonPressed: () {
                 Navigator.of(context).pop();
               },
             );
           }
-          if(state is DataBaseErrorState){
+          if (state is DataBaseErrorState) {
             pr.hide();
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text("Hata oluştu,Sonra tekrar deneyiniz..."),backgroundColor: Colors.redAccent,));
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text("Hata oluştu,Sonra tekrar deneyiniz..."),
+              backgroundColor: Colors.redAccent,
+            ));
           }
         },
         child: Container(
@@ -180,8 +184,8 @@ class _ShopPageState extends State<ShopPage> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 50, top: 5),
+                                      padding: const EdgeInsets.only(
+                                          left: 50, top: 5),
                                       child: Row(
                                         children: [
                                           Container(
@@ -278,8 +282,8 @@ class _ShopPageState extends State<ShopPage> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 50, top: 5),
+                                      padding: const EdgeInsets.only(
+                                          left: 50, top: 5),
                                       child: Row(
                                         children: [
                                           Container(
@@ -376,8 +380,8 @@ class _ShopPageState extends State<ShopPage> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 50, top: 5),
+                                      padding: const EdgeInsets.only(
+                                          left: 50, top: 5),
                                       child: Row(
                                         children: [
                                           Container(
@@ -474,8 +478,8 @@ class _ShopPageState extends State<ShopPage> {
                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 50, top: 5),
+                                      padding: const EdgeInsets.only(
+                                          left: 50, top: 5),
                                       child: Row(
                                         children: [
                                           Container(
@@ -590,29 +594,30 @@ class _ShopPageState extends State<ShopPage> {
     // TODO serverside verification & record consumable in the database
 
     if (purchase != null && purchase.status == PurchaseStatus.purchased) {
-      if(!isGmatik){
-        _dataBaseBloc.add(BecomeBadge(userID: widget.gelenUser.userID,whichBadge: "isGmatik"));
+      if (!isGmatik) {
+        _dataBaseBloc.add(BecomeBadge(
+            userID: widget.gelenUser.userID, whichBadge: "isGmatik"));
         sharedKaydet("isGmatik");
       }
-
-
     }
     if (purchase2 != null && purchase2.status == PurchaseStatus.purchased) {
-      if(!isMatik){
-        _dataBaseBloc.add(BecomeBadge(userID: widget.gelenUser.userID,whichBadge: "isMatik"));
+      if (!isMatik) {
+        _dataBaseBloc.add(BecomeBadge(
+            userID: widget.gelenUser.userID, whichBadge: "isMatik"));
         sharedKaydet("isMatik");
       }
-
-
     }
     if (purchase3 != null && purchase3.status == PurchaseStatus.purchased) {
       Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("Destekçi olduğunuz için çok çok teşekkür ederim. Badge'in en kısa zamanda hesabına yüklenecek"),
+        content: Text(
+            "Destekçi olduğunuz için çok çok teşekkür ederim. Badge'in en kısa zamanda hesabına yüklenecek"),
       ));
     }
     if (purchase4 != null && purchase4.status == PurchaseStatus.purchased) {
       Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("Ürün yerleştirme için lütfen sekspirdev@gmail.com mail adresime ayrıntıları belirtiniz"),duration: Duration(milliseconds: 1000),
+        content: Text(
+            "Ürün yerleştirme için lütfen sekspirdev@gmail.com mail adresime ayrıntıları belirtiniz"),
+        duration: Duration(milliseconds: 1000),
       ));
     }
   }
@@ -627,5 +632,4 @@ class _ShopPageState extends State<ShopPage> {
     prefs = await SharedPreferences.getInstance();
     prefs.setString("badges", badgeNames);
   }
-
 }

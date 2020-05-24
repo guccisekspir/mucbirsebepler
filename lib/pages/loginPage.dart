@@ -100,10 +100,11 @@ class _LoginPageState extends State<LoginPage> {
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                colors: [Colors.lime,Colors.limeAccent])),
+                colors: [Colors.lime, Colors.limeAccent])),
         child: Text(
           butonText,
-          style: GoogleFonts.righteous(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),
+          style: GoogleFonts.righteous(
+              fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
       onTap: () async {
@@ -249,13 +250,18 @@ class _LoginPageState extends State<LoginPage> {
                       onlyOkButton: true,
                       flarePath: 'assets/dialog.flr',
                       flareAnimation: 'jump',
-                      title: Text(
-                        'Şifre Sıfırlama Maili Gönderildi',
-                        style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.black)),
+                      title: Text('Şifre Sıfırlama Maili Gönderildi',
+                          style: GoogleFonts.righteous(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black)),
                       description: Text(
                         "Şifre sıfırlama linki mail hesabınıza gönderildi",
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.righteous(fontSize: 16.0, fontWeight: FontWeight.w600,color: Colors.black),
+                        style: GoogleFonts.righteous(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
                       ),
                       entryAnimation: EntryAnimation.TOP_RIGHT,
                       onOkButtonPressed: () {
@@ -357,7 +363,6 @@ class _LoginPageState extends State<LoginPage> {
                         child: _createAccountLabel(),
                       ),
                       Positioned(top: 40, left: 0, child: backButton(context)),
-
                     ],
                   ),
                 ));

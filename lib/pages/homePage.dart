@@ -97,7 +97,9 @@ class _HomePageState extends State<HomePage> {
                               gelenUser: gelenUser,
                             );
                           case NavBarItem.TROPHY:
-                            return TrophyPage(user: gelenUser,);
+                            return TrophyPage(
+                              user: gelenUser,
+                            );
                           case NavBarItem.TICK:
                             return BlocProvider(
                                 create: (context) => PostBloc(),
@@ -119,7 +121,8 @@ class _HomePageState extends State<HomePage> {
                               index: 0,
                               height: 50.0,
                               items: <Widget>[
-                                Icon(LineAwesomeIcons.home,color: Theme.of(context).primaryColor,
+                                Icon(LineAwesomeIcons.home,
+                                    color: Theme.of(context).primaryColor,
                                     size: 30),
                                 Icon(LineAwesomeIcons.newspaper_o,
                                     color: Theme.of(context).primaryColor,
@@ -176,18 +179,17 @@ class _HomePageState extends State<HomePage> {
                         gelenUser: _user,
                       );
                     case NavBarItem.SHOP:
-                      return ShopPage(
-                        gelenUser: _user
-                      );
+                      return ShopPage(gelenUser: _user);
                     case NavBarItem.TROPHY:
-                      return TrophyPage(user: _user,);
+                      return TrophyPage(
+                        user: _user,
+                      );
                     case NavBarItem.TICK:
                       return BlocProvider(
                           create: (context) => PostBloc(),
                           child: PostPage(
                             user: _user,
                           ));
-
                   }
                 },
               ),
@@ -203,7 +205,8 @@ class _HomePageState extends State<HomePage> {
                         index: 0,
                         height: 50.0,
                         items: <Widget>[
-                          Icon(LineAwesomeIcons.home,color: Theme.of(context).primaryColor, size: 30),
+                          Icon(LineAwesomeIcons.home,
+                              color: Theme.of(context).primaryColor, size: 30),
                           Icon(LineAwesomeIcons.newspaper_o,
                               color: Theme.of(context).primaryColor, size: 30),
                           Icon(LineAwesomeIcons.cart_arrow_down,

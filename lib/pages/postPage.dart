@@ -73,8 +73,11 @@ class _PostPageState extends State<PostPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    final ProgressDialog pr = ProgressDialog(context,isDismissible: false);
-    pr.style(backgroundColor: Colors.lime,messageTextStyle: TextStyle(color: Colors.black),message: "Gönderiliyor ..",borderRadius: 30);
+    final ProgressDialog pr = ProgressDialog(context, isDismissible: false);
+    pr.style(backgroundColor: Colors.lime,
+        messageTextStyle: TextStyle(color: Colors.black),
+        message: "Gönderiliyor ..",
+        borderRadius: 30);
 
 
     return Scaffold(

@@ -23,7 +23,7 @@ Widget profilePicture(String url, BuildContext context, {File gelenFoto}) {
 }
 
 Widget profilePicturew(User user, BuildContext context,
-    {LinearGradient linearGradient, File gelenFoto,String profileURL}) {
+    {LinearGradient linearGradient, File gelenFoto, String profileURL}) {
   LinearGradient gradient = randomGradient();
   if (linearGradient != null) {
     gradient = linearGradient;
