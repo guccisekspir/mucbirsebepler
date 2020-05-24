@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:mucbirsebepler/data/dbApiClient.dart';
 import 'package:mucbirsebepler/locator.dart';
@@ -14,10 +13,6 @@ class DbRepository {
   bool hasMore = true;
   bool istendiMi = true;
   bool ilkMi = true;
-
-
-  List<Post> _weekPostList=[];
-
 
   DbRepository() {
     _postList = [];
@@ -47,12 +42,12 @@ class DbRepository {
     }
 
     List<Post> gelenList =
-    await _dbApiClient.getAllPost(_lastFetchedPost, postLimitNumber);
+        await _dbApiClient.getAllPost(_lastFetchedPost, postLimitNumber);
 
     _postList.addAll(gelenList);
     if (gelenList.length > postLimitNumber)
       hasMore =
-      false; //Burada çekilen son liste sayısı belirlediğimiz limitten küçükse bir daha çağırılmamasını sağlıyoruz
+          false; //Burada çekilen son liste sayısı belirlediğimiz limitten küçükse bir daha çağırılmamasını sağlıyoruz
 
     List<Post> _gideceklist = _postList;
     return _gideceklist;
@@ -78,9 +73,6 @@ class DbRepository {
     ilkMi = false;
     return await getNewsPost();
   }
-
-
-  
 
   Future<List<User>> getWinnerUser() async {
     return await _dbApiClient.getWinnerUser();
@@ -111,12 +103,11 @@ class DbRepository {
     return await _dbApiClient.changePhoto(userID: userID, newPhoto: newPhoto);
   }
 
-  Future<bool> becomeBadges({String userID,String whichBadge})async{
-
+  Future<bool> becomeBadges({String userID, String whichBadge}) async {
     return await _dbApiClient.becomeBadges(userID, whichBadge);
   }
-  Future<bool> bosPage(String userID)async{
 
+  Future<bool> bosPage(String userID) async {
     return await _dbApiClient.bosPage(userID);
   }
 }

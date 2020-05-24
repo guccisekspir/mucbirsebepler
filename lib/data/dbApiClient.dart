@@ -270,8 +270,6 @@ class DbApiClient {
     return _posttList;
   }
 
-
-
   Future<Null> refresh() {
     _newQuerySnapshot = null;
     _querySnapshot = null;

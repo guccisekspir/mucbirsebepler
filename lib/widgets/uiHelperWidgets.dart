@@ -292,7 +292,8 @@ Widget detailContainer(
                               )));
                 },
                 child: profilePicturew(gelenPost.owner, context,
-                    linearGradient: linearGradientt,profileURL: gelenPost.ownerProfileURL)),
+                    linearGradient: linearGradientt,
+                    profileURL: gelenPost.ownerProfileURL)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 60),
               child: Container(
@@ -683,13 +684,12 @@ Widget entryField(
               if (title == "Haber İçeriği(Zorunlu)") {
                 if (e.isEmpty) yazilacak = "Lütfen içeriği giriniz";
               }
-              if(title =="Diğer Linkler"){
-                if(e!=""){
-                  if(!RegexValidation.hasMatch(e, RegexPattern.url)){
-                    yazilacak="Lütfen https / http sahip link paylaşınız.(Güvenlik için tospik) ";
+              if (title == "Diğer Linkler") {
+                if (e != "") {
+                  if (!RegexValidation.hasMatch(e, RegexPattern.url)) {
+                    yazilacak =
+                        "Lütfen https / http sahip link paylaşınız.(Güvenlik için tospik) ";
                   }
-
-
                 }
               }
               if (title == "Youtube Linki") {

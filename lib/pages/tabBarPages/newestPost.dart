@@ -10,7 +10,7 @@ class NewestPost extends StatefulWidget {
   final User user;
   final bool haftaMi;
 
-  const NewestPost({Key key, this.user,this.haftaMi}) : super(key: key);
+  const NewestPost({Key key, this.user, this.haftaMi}) : super(key: key);
 
   @override
   _NewestPostState createState() => _NewestPostState();
@@ -110,5 +110,4 @@ class _NewestPostState extends State<NewestPost> {
       ),
     );
   }
-
 }

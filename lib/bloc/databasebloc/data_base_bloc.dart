@@ -65,7 +65,8 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
           }
         }
 
-        yield DataBaseLoadedState(isChangedPP: isPhotoChanged,isChangedUser: isUserNameChanged);
+        yield DataBaseLoadedState(
+            isChangedPP: isPhotoChanged, isChangedUser: isUserNameChanged);
       } catch (_) {
         debugPrint(_.toString());
         yield DataBaseErrorState();
@@ -97,22 +98,20 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
       }
     }
 
-    if(event is BecomeBadge){
+    if (event is BecomeBadge) {
       yield DataBaseLoadingState();
-      try{
-        dbRepository.becomeBadges(userID: event.userID,whichBadge: event.whichBadge);
-
-      }catch(_){
+      try {
+        dbRepository.becomeBadges(
+            userID: event.userID, whichBadge: event.whichBadge);
+      } catch (_) {
         yield DataBaseErrorState();
-
       }
-
     }
 
-    if(event is BosPage){
-      try{
+    if (event is BosPage) {
+      try {
         dbRepository.bosPage(event.userID);
-      }catch(_){
+      } catch (_) {
         debugPrint(_.toString());
       }
     }

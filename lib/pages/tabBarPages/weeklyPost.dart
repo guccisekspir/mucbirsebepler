@@ -10,7 +10,7 @@ class WeeklyPost extends StatefulWidget {
   final User user;
   final bool haftaMi;
 
-  const WeeklyPost({Key key, this.user,this.haftaMi}) : super(key: key);
+  const WeeklyPost({Key key, this.user, this.haftaMi}) : super(key: key);
 
   @override
   _WeeklyPostState createState() => _WeeklyPostState();
@@ -64,7 +64,7 @@ class _WeeklyPostState extends State<WeeklyPost> {
                 if (_yuklendiMi) {
                   return ListView.builder(
                     itemBuilder:
-                    // ignore: missing_return
+                        // ignore: missing_return
                         (context, index) {
                       return postCoontainer(
                           gelenUser: finalUser,
@@ -103,5 +103,4 @@ class _WeeklyPostState extends State<WeeklyPost> {
       ),
     );
   }
-
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-enum NavBarItem {TROPHY, TICK, SHOP, PROFILE }
+enum NavBarItem { TROPHY, TICK, SHOP, PROFILE }
 
 class BottomNavBarBloc {
   final StreamController<NavBarItem> _navBarController =

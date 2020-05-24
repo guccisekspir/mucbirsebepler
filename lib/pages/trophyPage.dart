@@ -6,7 +6,6 @@ import 'package:mucbirsebepler/bloc/postbloc/post_bloc.dart';
 import 'package:mucbirsebepler/model/user.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/newestPost.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/popularPost.dart';
-import 'package:mucbirsebepler/pages/tabBarPages/weeklyPost.dart';
 import 'package:mucbirsebepler/pages/tabBarPages/winnerPage.dart';
 
 class TrophyPage extends StatefulWidget {
@@ -41,9 +40,7 @@ class _TrophyPageState extends State<TrophyPage> {
                   child: Text("Popüler Haberler",
                       style: GoogleFonts.righteous(color: Colors.limeAccent)),
                 ),
-
                 Tab(
-
                   child: Text(
                     "Son Haberler",
                     style: GoogleFonts.righteous(color: Colors.limeAccent),
@@ -53,7 +50,6 @@ class _TrophyPageState extends State<TrophyPage> {
                   child: Text("Sıralama",
                       style: GoogleFonts.righteous(color: Colors.limeAccent)),
                 ),
-
               ],
             ),
           ),
@@ -69,7 +65,9 @@ class _TrophyPageState extends State<TrophyPage> {
           ],
           child: TabBarView(
             children: [
-              PopularPost(user: widget.user,),
+              PopularPost(
+                user: widget.user,
+              ),
               NewestPost(
                 haftaMi: false,
                 user: widget.user,
