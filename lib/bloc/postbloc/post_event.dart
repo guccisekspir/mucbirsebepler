@@ -42,15 +42,6 @@ class GetMoreNewPost extends PostEvent {
   List<Object> get props => throw UnimplementedError();
 }
 
-class GetWeekPost extends PostEvent{
-  @override
-  // TODO: implement props
-  List<Object> get props => throw UnimplementedError();
-
-}
-
-
-
 class LikePost extends PostEvent {
   final String userID;
   final String postID;

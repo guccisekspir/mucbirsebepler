@@ -79,10 +79,7 @@ class DbRepository {
     return await getNewsPost();
   }
 
-  Future<List<Post>> getWeekPost()async{
-    return  await _dbApiClient.getWeekPost();
 
-  }
   
 
   Future<List<User>> getWinnerUser() async {

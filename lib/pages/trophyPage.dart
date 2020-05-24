@@ -28,7 +28,7 @@ class _TrophyPageState extends State<TrophyPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize:
@@ -41,10 +41,7 @@ class _TrophyPageState extends State<TrophyPage> {
                   child: Text("Popüler Haberler",
                       style: GoogleFonts.righteous(color: Colors.limeAccent)),
                 ),
-                Tab(
-                  child: Text("Haftanın Haberleri",
-                      style: GoogleFonts.righteous(color: Colors.limeAccent)),
-                ),
+
                 Tab(
 
                   child: Text(
@@ -73,7 +70,6 @@ class _TrophyPageState extends State<TrophyPage> {
           child: TabBarView(
             children: [
               PopularPost(user: widget.user,),
-              WeeklyPost(user: widget.user,),
               NewestPost(
                 haftaMi: false,
                 user: widget.user,
