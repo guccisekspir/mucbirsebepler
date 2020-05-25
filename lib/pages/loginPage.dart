@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,9 +34,13 @@ class _LoginPageState extends State<LoginPage> {
   String sifreniUnuttun = "Şifrenizi mi unuttunuz ?";
   bool isReset = true;
   double oppacity = 1.0;
+  bool isIos=false;
 
   @override
   void initState() {
+    if(Platform.isIOS){
+      isIos=true;
+    }
     sharedBoard("evet");
     super.initState();
     _emailController = TextEditingController(text: "");
@@ -349,7 +355,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             divider(),
-                            facebookButton(_authBloc),
+                            isIos?SizedBox(width: 0,height: 0,):facebookButton(_authBloc),
                             Expanded(
                               flex: 2,
                               child: SizedBox(),

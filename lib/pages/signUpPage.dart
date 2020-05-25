@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,9 +28,13 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _emailController;
   TextEditingController _passwordController;
+  bool isIos=false;
 
   @override
   void initState() {
+    if(Platform.isIOS){
+      isIos=true;
+    }
     super.initState();
     _emailController = TextEditingController(text: "");
     _passwordController = TextEditingController(text: "");
@@ -251,7 +257,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         _submitButton(_authBloc, statee),
                         divider(),
-                        facebookButton(_authBloc),
+                        isIos?SizedBox(width: 0,height: 0,):facebookButton(_authBloc),
                         Expanded(
                           flex: 2,
                           child: SizedBox(),

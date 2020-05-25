@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "533871631782-r4l1anfrsuokvdpuja5f2o5c5ec27lks.apps.googleusercontent.com",
+          "client_id": "533871631782-i2ojd3dpt3ld6hlscuu2jf4d8c560o8o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.sekspirdev.mucbirsebepler.mucbirsebepler",
-            "certificate_hash": "2290affa6c256ba00c9973ab10fc8e9b49442d31"
+            "certificate_hash": "22d28cf0288666880bbca371822da1d17c1d75ea"
           }
         },
         {
@@ -40,10 +40,11 @@
               "client_type": 3
             },
             {
-              "client_id": "533871631782-dqcr4em7c4frsgv60i1ba5noijsco90k.apps.googleusercontent.com",
+              "client_id": "533871631782-6qebsstbkb3t460vauknt9bmgpmvrltt.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.sekspirdev.mucbirsebepler.mucbirsebepler"
+                "bundle_id": "com.sekspir.mucbirsebepler",
+                "app_store_id": "1513673409"
               }
             }
           ]

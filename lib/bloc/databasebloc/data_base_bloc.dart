@@ -103,6 +103,7 @@ class DataBaseBloc extends Bloc<DataBaseEvent, DataBaseState> {
       try {
         dbRepository.becomeBadges(
             userID: event.userID, whichBadge: event.whichBadge);
+        yield DataBaseLoadedState();
       } catch (_) {
         yield DataBaseErrorState();
       }
